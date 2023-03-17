@@ -30,8 +30,8 @@ A gamificação é uma técnica que usa elementos de jogos para engajar as pesso
 
 Para ambientes de trabalho, a aplicação pode incluir um sistema de customização de recompensas, permitindo aos gerentes de equipe definir quais recompensas serão disponibilizadas aos usuários. Isso pode incluir benefícios como prazos estendidos, dias de folga e outros incentivos que seriam valiosos para os funcionários.
 
-## Nome dos Colaboradores
+##### Nome dos Colaboradores
 
-João Vitor Damaceno
-Gabriel dos Santos de Castro
-Matheus Dutra
+* João Vitor Damaceno
+* Gabriel dos Santos de Castro
+* Matheus Dutra
