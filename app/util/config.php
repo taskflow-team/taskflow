@@ -3,7 +3,7 @@
 #Objetivo: define constantes para serem utilizadas no projeto
 
 //Banco de dados: conexão MySQL
-define('DB_HOST', 'mysql-server');
+define('DB_HOST', 'localhost');
 define('DB_NAME', 'taskflow');
 define('DB_USER', 'root');
 define('DB_PASSWORD', '@Kekkei2003');
