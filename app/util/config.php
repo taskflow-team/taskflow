@@ -4,16 +4,16 @@
 
 //Banco de dados: conexão MySQL
 define('DB_HOST', 'mysql-server');
-define('DB_NAME', 'proj_integrador');
+define('DB_NAME', 'taskflow');
 define('DB_USER', 'root');
-define('DB_PASSWORD', 'root');
+define('DB_PASSWORD', '@Kekkei2003');
 
 //Caminho para adionar imagens, scripts e chamar páginas no sistema
 //Deve ter o nome da pasta do projeto no servidor APACHE
-define('BASEURL', '/crud_pi_aula/app');
+define('BASEURL', '/taskflow/app');
 
 //Nome do sistema
-define('APP_NAME', 'Template do Projeto Integrador');
+define('APP_NAME', 'Taskflow');
 
 //Página inicial do sistema
 define('HOME_PAGE', BASEURL . '/controller/HomeController.php?action=home');
