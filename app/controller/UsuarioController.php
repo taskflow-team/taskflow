@@ -12,9 +12,6 @@ class UsuarioController extends Controller {
     private UsuarioService $usuarioService;
 
     public function __construct() {
-        if(! $this->usuarioLogado())
-            exit;
-
         $this->usuarioDao = new UsuarioDAO();
         $this->usuarioService = new UsuarioService();
 
@@ -29,7 +26,15 @@ class UsuarioController extends Controller {
         $this->loadView("usuario/list.php", $dados,  $msgErro, $msgSucesso);
     }
 
+    protected function create() {
+        $dados["id"] = 0;
+        $this->loadView("usuario/form.php", $dados);
+    }
+
     protected function edit() {
+        if(! $this->usuarioLogado())
+        exit;
+
         $usuario = $this->findUsuarioById();
         if($usuario) {
             $dados["id"] = $usuario->getId();
@@ -80,10 +85,10 @@ class UsuarioController extends Controller {
 
                 //TODO - Enviar mensagem de sucesso
                 $msg = "Usuário salvo com sucesso.";
-                $this->list("", $msg);
+                $this->loadView("login/login.php", []);
                 exit;
             } catch (PDOException $e) {
-                $erros = "[Erro ao salvar o usuário na base de dados.]";                
+                $erros = array("[Erro ao salvar o usuário na base de dados.]"); //erro deve ser um array para ser validado no método implode()               
             }
         }
 

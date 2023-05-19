@@ -39,7 +39,7 @@ class LoginController extends Controller {
                 header("location: " . HOME_PAGE);
                 exit;
             } else {
-                $erros = ["Login ou senha informados são inválidos!"];
+                $erros = ["Invalid Login or Password!"];
             }
         }
 
@@ -55,7 +55,7 @@ class LoginController extends Controller {
     protected function logout() {
         $this->removerUsuarioSessao();
 
-        $this->loadView("login/login.php", [], "", "Usuário deslogado com suscesso!");
+        $this->loadView("login/login.php", [], "", "Loged out successfully");
     }
 
     private function salvarUsuarioSessao(Usuario $usuario) {

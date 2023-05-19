@@ -4,7 +4,7 @@
 
 require_once(__DIR__ . "/../include/header.php");
 ?>
-<link rel="stylesheet" type="text/css" href="../view/css/login.css">
+<link rel="stylesheet" type="text/css" href="<?php echo BASEURL; ?>/view/login/login.css">
 
 <div class="login-image">
     <img src="../view/img/login.jpg" alt="Image">
@@ -31,14 +31,18 @@ require_once(__DIR__ . "/../include/header.php");
                            maxlength="15" placeholder="password"
                            value="<?php echo isset($dados['senha']) ? $dados['senha'] : '' ?>" />
                 </div>
+                <div class="col-6 p-0">
+                    <?php include_once(__DIR__ . "/../include/msg.php") ?>
+                </div>
                 <div>
                     <a href="#">Forget your password?</a>
                 </div>
                 <button type="submit" class="btn btn-success">Sign in</button>
                 <div>
-                    <p>Don´t have an account? <a href="#">Sign up?</a></p>
+                    <p>Don´t have an account? <a href="<?= BASEURL . '/controller/UsuarioController.php?action=create' ?>">Sign up?</a></p>
                 </div>
             </form>
         </div>
+        
     </div>
 </div>
