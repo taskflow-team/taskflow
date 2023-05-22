@@ -9,7 +9,7 @@
     font-size: 20px;
 }
 
-.sidebar img{
+.sidebar .logo{
     max-width: 70%;
     margin-top: 50px;
 }
@@ -30,6 +30,12 @@
 
 .sidebar a{
     color: #FFFFFF;
+    display: flex;
+    align-items: center;
+}
+
+.sidebar .icon{
+    margin-right: 25px;
 }
 
 .sidebar .logout-btn{
