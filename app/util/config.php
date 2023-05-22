@@ -13,7 +13,7 @@ define('DB_PASSWORD', '@Kekkei2003');
 define('BASEURL', '/taskflow/app'); //NÃO MUDA ESSA ROTA JOAO FILHO DA PUTA
 
 //Nome do sistema
-define('APP_NAME', 'Template do Projeto Integrador');
+define('APP_NAME', 'Taskflow');
 
 //Página inicial do sistema
 define('HOME_PAGE', BASEURL . '/controller/HomeController.php?action=home');
