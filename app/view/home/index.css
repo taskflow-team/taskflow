@@ -1,0 +1,35 @@
+.pseudo-body{
+    padding: 0 80px;
+    position: absolute;
+    right: 0;
+    top: 0;
+    left: 350px;
+    color: #FFFFFF;
+}
+
+.pseudo-body form{
+    width: 100%;
+    height: 240px;
+    padding: 50px 0;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+}
+
+.pseudo-body input{
+    width: 100%;
+    padding: 20px;
+    background-color: #1D1D1D;
+    border: none;
+    border-radius: 8px;
+    color: #FFFFFF;
+    font-weight: 600;
+}
+
+.pseudo-body form button{
+    /* position: absolute;
+    bottom: 0;
+    left: 0; */
+    width: 100px;
+}
