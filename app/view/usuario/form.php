@@ -51,7 +51,12 @@
             </div>
 
             <input type="hidden" id="hddId" name="id"
-                value="<?= $dados['id']; ?>" />
+                value="<?= $dados['id']; ?>" 
+            />
+
+            <div class="col-6">
+                <?php require_once(__DIR__ . "/../include/msg.php"); ?>
+            </div>
 
             <button type="submit" class="btn btn-success">Create</button>
             <div>

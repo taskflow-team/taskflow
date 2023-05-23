@@ -88,7 +88,7 @@ class UsuarioController extends Controller {
                 $this->loadView("login/login.php", []);
                 exit;
             } catch (PDOException $e) {
-                $erros = array("[Erro ao salvar o usuário na base de dados.]"); //erro deve ser um array para ser validado no método implode()               
+                $erros = array("An error occurred while saving the user on our database."); //erro deve ser um array para ser validado no método implode()               
             }
         }
 

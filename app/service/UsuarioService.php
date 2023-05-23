@@ -10,7 +10,7 @@ class UsuarioService {
 
         //Validar campos vazios
         if(! $usuario->getNome())
-            array_push($erros, "'Name' is required");
+            array_push($erros, "'Full Name' is required");
 
         if(! $usuario->getLogin())
             array_push($erros, "'Login' is required");
