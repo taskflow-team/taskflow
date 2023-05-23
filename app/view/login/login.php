@@ -22,7 +22,7 @@ require_once(__DIR__ . "/../include/header.php");
             <form id="frmLogin" action="./LoginController.php?action=logon" method="POST">
                 <div class="form-group">
                     <input type="text" class="form-control" name="login" id="txtLogin"
-                           maxlength="15" placeholder="e-mail"
+                           maxlength="15" placeholder="login (nickname)"
                            value="<?php echo isset($dados['login']) ? $dados['login'] : '' ?>" />
                 </div>
 
