@@ -1,6 +1,7 @@
 <?php
 #Nome do arquivo: usuario/list.php
 #Objetivo: interface para listagem dos usuários do sistema
+require_once(__DIR__ . "/../include/header.php");
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?php echo BASEURL; ?>/view/usuario/form.css">
@@ -14,7 +15,7 @@
         <div class="login-logo">
             <img src="../view/img/logo.png" alt="Logo">
         </div>
-         <h3 class="text-center">
+         <h3 class="text-left">
              <!-- <?php if($dados['id'] == 0) echo "Inserir"; else echo "Alterar"; ?> 
              Usuário -->
              Create your account

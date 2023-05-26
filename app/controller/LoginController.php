@@ -13,6 +13,7 @@ class LoginController extends Controller {
     public function __construct() {
         $this->loginService = new LoginService();
         $this->usuarioDao = new UsuarioDAO();
+        $this->setActionDefault("login");
         $this->handleAction();
     }
 

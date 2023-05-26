@@ -1,16 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 
-* {
-    font-family: 'Outfit', sans-serif;
-    background-color: #1D1D1D; /* Adjust the background color as needed */
-    margin: 0;
-    padding: 0;
-}
-
 .container {
     display: flex;
     align-items: center;
     height: 100vh;
+    background-color: transparent;
 }
 
 .login-image {
@@ -26,12 +20,10 @@
 }
 
 .login-form {
-    background-color: #1D1D1D; /* Adjust the transparency and color as needed */
     color: #fff;
     padding: 20px;
     width: 50%;
-    /* make form align to right */
-    margin-left: 65rem;
+    margin-left: 65%;
     position: relative;
 }
 
@@ -41,7 +33,7 @@
     padding: 10px 20px;
     font-size: 16px;
     font-weight: 500;
-    width: 65%;
+    width: 100%;
     margin-bottom: 20px;
     border-radius: 5px;
     height: 50px;

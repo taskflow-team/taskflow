@@ -15,15 +15,9 @@ class UsuarioController extends Controller {
         $this->usuarioDao = new UsuarioDAO();
         $this->usuarioService = new UsuarioService();
 
+        $this->setActionDefault("edit");
+
         $this->handleAction();
-    }
-
-    protected function list(string $msgErro = "", string $msgSucesso = "") {
-        $usuarios = $this->usuarioDao->list();
-        $dados["lista"] = $usuarios;
-        //print_r($usuarios);
-
-        $this->loadView("usuario/list.php", $dados,  $msgErro, $msgSucesso);
     }
 
     protected function create() {
@@ -36,15 +30,9 @@ class UsuarioController extends Controller {
         exit;
 
         $usuario = $this->findUsuarioById();
-        if($usuario) {
-            $dados["id"] = $usuario->getId();
-            $usuario->setSenha("");
-            $dados["usuario"] = $usuario;
-            //$dados["confSenha"] = $usuario->getSenha();
+        $dados["usuario"] = $usuario;
+        $this->loadView("/include/profile/profile.php", $dados);
 
-            $this->loadView("usuario/form.php", $dados);
-        } else
-            $this->list("Usuário não encontrado.");
     }
 
     protected function save() {
@@ -106,9 +94,7 @@ class UsuarioController extends Controller {
         $usuario = $this->findUsuarioById();
         if($usuario) {
             $this->usuarioDao->deleteById($usuario->getId());
-            $this->list("", "Usuário excluído com sucesso!");
-        } else
-            $this->list("Usuario não econtrado!");
+        }
     }
 
     private function findUsuarioById() {
@@ -120,6 +106,30 @@ class UsuarioController extends Controller {
         return $usuario;
     }
 
+
+        /**
+         * Set the value of dados
+         *
+         * @return  self
+         */ 
+        public function setDados($dados)
+        {
+                $this->$dados = $dados;
+
+                return $this;
+        }
+
+        /**
+         * Set the value of usuario
+         *
+         * @return  self
+         */ 
+        public function setUsuario($usuario)
+        {
+                $this->$usuario = $usuario;
+
+                return $this;
+        }
 }
 
 

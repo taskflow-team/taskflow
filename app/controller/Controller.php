@@ -6,6 +6,8 @@ require_once(__DIR__ . "/../util/config.php");
 
 class Controller {
 
+    private string $actionDefault = "";
+
     protected function handleAction() {
         //Captura a ação do parâmetro GET
         $action = NULL;
@@ -18,9 +20,13 @@ class Controller {
 
     protected function callAction($methodName) {
         $methodNoAction = "noAction";
-
+        if( ( (! $methodName) || empty(trim($methodName)) ) && 
+                method_exists($this, $this->actionDefault) ) {
+            $method = $this->actionDefault;
+            $this->$method();
+        }
         //Verifica se o método existe na classe
-        if($methodName && method_exists($this, $methodName))
+        elseif($methodName && method_exists($this, $methodName))
             $this->$methodName();
         
         elseif(method_exists($this, $methodNoAction))
@@ -42,6 +48,9 @@ class Controller {
         //echo $caminho;
         if(file_exists($caminho)) {
             require $caminho;
+
+            $url_parts = parse_url($_SERVER['REQUEST_URI']); //Divide a URL em 'path' e 'query'
+            echo "<script>window.history.replaceState({}, '', '{$url_parts['path']}');</script>"; 
         } else {
             echo "Erro ao carrega a view solicitada<br>";
             echo "Caminho: " . $caminho;
@@ -80,6 +89,10 @@ class Controller {
         }
 
         return false;
+    }
+
+    public function setActionDefault($action){
+        $this->actionDefault = $action;
     }
 
 }

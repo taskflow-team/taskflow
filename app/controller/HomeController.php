@@ -8,6 +8,8 @@ class HomeController extends Controller {
         if(! $this->usuarioLogado())
             exit;
 
+        $this->setActionDefault("home");
+
         $this->handleAction();
     }
 
