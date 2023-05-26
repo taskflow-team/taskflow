@@ -31,7 +31,7 @@ class UsuarioController extends Controller {
 
         $usuario = $this->findUsuarioById();
         $dados["usuario"] = $usuario;
-        $this->loadView("/include/profile/profile.php", $dados);
+        $this->loadView("/usuario/profile/profile.php", $dados);
 
     }
 
@@ -107,29 +107,29 @@ class UsuarioController extends Controller {
     }
 
 
-        /**
-         * Set the value of dados
-         *
-         * @return  self
-         */ 
-        public function setDados($dados)
-        {
-                $this->$dados = $dados;
+        // /**
+        //  * Set the value of dados
+        //  *
+        //  * @return  self
+        //  */ 
+        // public function setDados($dados)
+        // {
+        //         $this->dados = $dados;
 
-                return $this;
-        }
+        //         return $this;
+        // }
 
-        /**
-         * Set the value of usuario
-         *
-         * @return  self
-         */ 
-        public function setUsuario($usuario)
-        {
-                $this->$usuario = $usuario;
+        // /**
+        //  * Set the value of usuario
+        //  *
+        //  * @return  self
+        //  */ 
+        // public function setUsuario($usuario)
+        // {
+        //         $this->usuario = $usuario;
 
-                return $this;
-        }
+        //         return $this;
+        // }
 }
 
 
