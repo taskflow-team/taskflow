@@ -23,31 +23,31 @@ require_once(__DIR__ . "/../include/header.php");
         <form id="frmUsuario" method="POST" action="<?= BASEURL ?>/controller/UsuarioController.php?action=save">
             <div class="form-group">
                 <input class="form-control" type="text" id="txtNome" name="nome"
-                    maxlength="70" placeholder="Full name"
+                    placeholder="Full name"
                     value="<?php echo (isset($dados["usuario"]) ? $dados["usuario"]->getNome() : ''); ?>" />
             </div>
 
             <div class="form-group">
                 <input class="form-control" type="email" id="txtEmail" name="email"
-                    maxlength="15" placeholder="Your email"
+                    placeholder="Your email"
                     value="<?php echo (isset($dados["usuario"]) ? $dados["usuario"]->getEmail() : ''); ?>"/>
             </div>
 
             <div class="form-group">
                 <input class="form-control" type="text" id="txtLogin" name="login"
-                    maxlength="15" placeholder="Your login nickname"
+                    placeholder="Your login nickname"
                     value="<?php echo (isset($dados["usuario"]) ? $dados["usuario"]->getLogin() : ''); ?>"/>
             </div>
 
             <div class="form-group">
                 <input class="form-control" type="password" id="txtPassword" name="senha"
-                    maxlength="15" placeholder="Password"
+                    placeholder="Password"
                     value="<?php echo (isset($dados["usuario"]) ? $dados["usuario"]->getSenha() : ''); ?>"/>
             </div>
 
             <div class="form-group">
                 <input class="form-control" type="password" id="txtConfSenha" name="conf_senha"
-                    maxlength="15" placeholder="Password confirmation"
+                    placeholder="Password confirmation"
                     value="<?php echo isset($dados['confSenha']) ? $dados['confSenha'] : '';?>"/>
             </div>
 

@@ -15,7 +15,7 @@ class UsuarioController extends Controller {
         $this->usuarioDao = new UsuarioDAO();
         $this->usuarioService = new UsuarioService();
 
-        $this->setActionDefault("profile");
+        $this->setActionDefault("showProfile");
 
         $this->handleAction();
     }
