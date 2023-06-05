@@ -16,7 +16,7 @@ require_once(__DIR__ . "/../../controller/AcessoController.php");
             <img class="icon" src="<?= BASEURL . '/view/icons/groups.png'?>" alt="groups icon">
             Groups
         </a>
-        <a href="<?= BASEURL . '/controller/UsuarioController.php?action=edit'?>">
+        <a href="<?= BASEURL . '/controller/UsuarioController.php?action=showProfile'?>">
             <img class="icon" src="<?= BASEURL . '/view/icons/profile.png'?>" alt="profile icon">
             Profile
         </a>

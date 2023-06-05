@@ -15,7 +15,7 @@ class UsuarioController extends Controller {
         $this->usuarioDao = new UsuarioDAO();
         $this->usuarioService = new UsuarioService();
 
-        $this->setActionDefault("edit");
+        $this->setActionDefault("profile");
 
         $this->handleAction();
     }
@@ -25,13 +25,20 @@ class UsuarioController extends Controller {
         $this->loadView("usuario/form.php", $dados);
     }
 
-    protected function edit() {
+    protected function showProfile() {
         if(! $this->usuarioLogado())
         exit;
 
         $usuario = $this->findUsuarioById();
         $dados["usuario"] = $usuario;
         $this->loadView("/usuario/profile/profile.php", $dados);
+    }
+
+    protected function edit(){
+        $dados["id"] = isset($_POST['id']) ? $_POST['id'] : 0;
+        $senha = isset($_POST['senha']) ? trim($_POST['senha']) : NULL;
+        $email = isset($_POST['email']) ? trim($_POST['email']) : NULL;
+        
 
     }
 
@@ -99,8 +106,11 @@ class UsuarioController extends Controller {
 
     private function findUsuarioById() {
         $id = 0;
-        if(isset($_GET['id']))
-            $id = $_GET['id'];
+
+        if(isset($_SESSION[SESSAO_USUARIO_ID])) {
+            $id = $_SESSION[SESSAO_USUARIO_ID];
+        }
+
 
         $usuario = $this->usuarioDao->findById($id);
         return $usuario;
