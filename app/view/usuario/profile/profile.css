@@ -55,8 +55,13 @@
     color: #FFF;
 }
 
+.edit:hover{
+    background-color: #4DD96C;
+}
+
 #btnSubmit{
     height: 50px;
     margin-top: 20px;
+    background-color: #4DD96C;
 }
 
