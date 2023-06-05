@@ -5,7 +5,7 @@
 }
 
 .pseudo-body .profile-holder{
-    width: 500px;
+    width: 600px;
     height: 700px;
     margin: 50px;
     display: flex;
@@ -23,7 +23,7 @@
 }
 
 .profile-holder form, .profile-holder form div{
-    width: 500px;
+    width: 600px;
 }
 
 .profile-holder form{
