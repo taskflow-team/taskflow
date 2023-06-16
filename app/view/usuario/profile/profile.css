@@ -27,41 +27,62 @@
 }
 
 .profile-holder form{
-    height: 300px;
+    width: 100%;
+    height: 400px;
 }
 
-.profile-holder form label{
-    margin-top: 20px;
+.profile-holder form label, .profile-holder form .alert-success{
+    margin-top: 25px;
+}
+
+.profile-holder form .alert-success{
+    margin-bottom: 0;
 }
 
 .profile-holder form div{
+    width: 100%;
     height: 50px;
     display: flex;
     align-items: center;
 }
 
 .profile-holder form div input{
-    width: 84%;
+    width: 85%;
     height: 100%;
     padding: 0 10px;
     border-radius: 5px;
     border: none;
 }
 
-.edit{
-    height: 100%;
-    margin-left: 20px;
-    background-color: #898C8D;
-    color: #FFF;
+.profile-holder form div{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 }
 
-.edit:hover{
+.btn:hover{
     background-color: #4DD96C;
 }
 
+.eyeIcon{
+    height: 100%;
+    margin-left: -90px;
+    cursor: pointer;
+}
+
 #btnSubmit{
-    height: 50px;
     margin-top: 20px;
     background-color: #4DD96C;
 }
 
+.btn{
+    padding-top: 0;
+    padding-bottom: 0;
+    height: 50px;
+    background-color: #898C8D;
+    color: #FFF;
+}
+
+.profile-holder form div .eyeIcon{
+    height: 30px;
+}

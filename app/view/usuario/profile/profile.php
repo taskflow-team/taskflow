@@ -8,7 +8,7 @@
 
 <div class="pseudo-body">
         <div class="profile-holder">
-            <img src="../view/img/profile.png" alt="">
+            <img src="../view/img/profile.png" alt="profile picture">
             <h1><?php echo $dados["usuario"]->getLogin() ?></h1>
             <h2><?php echo $dados["usuario"]->getNome() ?></h2>
             <h2><?php echo $dados["usuario"]->getNivel() ?></h2>
@@ -19,6 +19,7 @@
                 <div>
                     <input type="email" id="txtEmail" name="email"
                         placeholder="Your email" readonly
+                        required
                         value="<?php echo $dados["usuario"]->getEmail(); ?>"
                     />
                     <button class="btn edit" id="btnEmail">Edit</button>
@@ -28,10 +29,20 @@
                 <div>
                     <input type="password" id="txtPassword" name="senha"
                         placeholder="Password" readonly
+                        required
                         value="<?php echo $dados["usuario"]->getSenha(); ?>"
                     />
+                    <img src="../view/icons/eye.png" alt="eye icon" class="eyeIcon">
                     <button class="btn edit" id="btnPassword">Edit</button>
                 </div>
+
+                <input type="hidden" name="id" value="<?php echo $dados["usuario"]->getId(); ?>" />
+                
+                <?php
+                    if (isset($msgSucesso) && trim($msgSucesso) != "") {
+                        echo "<div class='alert alert-success'>" . $msgSucesso . "</div>";
+                    }
+                ?>
 
                 <button type="submit" class="btn btn-success" id="btnSubmit">Update Profile</button>
             </form>
@@ -40,18 +51,28 @@
 
 <script>
     const btnEmail = document.querySelector('#btnEmail');
-    const EmailInput = document.querySelector('#txtEmail');
+    const emailInput = document.querySelector('#txtEmail');
     const btnPassword = document.querySelector('#btnPassword');
-    const PasswordInput = document.querySelector('#txtPassword');
-    
+    const passwordInput = document.querySelector('#txtPassword');
+    const btnShowPassword = document.querySelector('.eyeIcon');
     
     btnPassword.addEventListener("click", (event) => {
         event.preventDefault();
-        PasswordInput.removeAttribute('readonly');
+        passwordInput.removeAttribute('readonly');
     });
 
     btnEmail.addEventListener('click', (event) => {
         event.preventDefault();
-        EmailInput.removeAttribute('readonly');
+        emailInput.removeAttribute('readonly');
     }); 
+
+    btnShowPassword.addEventListener('click', (event) => {
+        event.preventDefault();
+
+        if(passwordInput.getAttribute('type')){
+            passwordInput.removeAttribute('type');
+        } else {
+            passwordInput.setAttribute('type', 'password');
+        }
+    })
 </script>

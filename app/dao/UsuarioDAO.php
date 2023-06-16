@@ -84,15 +84,13 @@ class UsuarioDAO {
     public function update(Usuario $usuario) {
         $conn = Connection::getConn();
 
-        $sql = "UPDATE tb_usuarios SET nome_usuario = :nome, login = :login," . 
+        $sql = "UPDATE tb_usuarios SET email = :email," . 
                " senha = :senha" .   
                " WHERE id_usuario = :id";
         
         $stm = $conn->prepare($sql);
-        $stm->bindValue("nome", $usuario->getNome());
-        $stm->bindValue("login", $usuario->getLogin());
         $stm->bindValue("senha", $usuario->getSenha());
-
+        $stm->bindValue("email", $usuario->getEmail());
         $stm->bindValue("id", $usuario->getId());
         $stm->execute();
     }

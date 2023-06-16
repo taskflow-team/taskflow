@@ -25,21 +25,28 @@ class UsuarioController extends Controller {
         $this->loadView("usuario/form.php", $dados);
     }
 
-    protected function showProfile() {
+    protected function showProfile($msgSucesso = '') {
         if(! $this->usuarioLogado())
-        exit;
+            exit;
 
         $usuario = $this->findUsuarioById();
         $dados["usuario"] = $usuario;
-        $this->loadView("/usuario/profile/profile.php", $dados);
+        $this->loadView("/usuario/profile/profile.php", $dados, "", $msgSucesso);
     }
 
     protected function edit(){
-        $dados["id"] = isset($_POST['id']) ? $_POST['id'] : 0;
+        $id = isset($_POST['id']) ? trim($_POST['id']) : NULL;
         $senha = isset($_POST['senha']) ? trim($_POST['senha']) : NULL;
         $email = isset($_POST['email']) ? trim($_POST['email']) : NULL;
         
+        $usuario = new Usuario();
+        $usuario->setId($id);
+        $usuario->setSenha($senha);
+        $usuario->setEmail($email);
 
+        $this->usuarioDao->update($usuario);
+        $msg = "Usuário atualizado com sucesso.";
+        $this->showProfile($msg);
     }
 
     protected function save() {
@@ -109,6 +116,8 @@ class UsuarioController extends Controller {
 
         if(isset($_SESSION[SESSAO_USUARIO_ID])) {
             $id = $_SESSION[SESSAO_USUARIO_ID];
+
+            echo $id;
         }
 
 
