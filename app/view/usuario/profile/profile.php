@@ -25,7 +25,7 @@
                     <button class="btn edit" id="btnEmail">Edit</button>
                 </div>
 
-                <label for="senha">Senha:</label>
+                <label for="senha">Password:</label>
                 <div>
                     <input type="password" id="txtPassword" name="senha"
                         placeholder="Password" readonly
