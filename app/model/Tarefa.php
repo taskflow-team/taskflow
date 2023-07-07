@@ -8,6 +8,7 @@ Class Tarefa {
     private $dificuldade;
     private $prioridade;
     private $valor_pontos;
+    private $concluida;
 
     /**
      * Get the value of valor_pontos
@@ -125,6 +126,26 @@ Class Tarefa {
     public function setDificuldade($dificuldade)
     {
         $this->dificuldade = $dificuldade;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of concluida
+     */ 
+    public function getConcluida()
+    {
+        return $this->concluida;
+    }
+
+    /**
+     * Set the value of concluida
+     *
+     * @return  self
+     */ 
+    public function setConcluida($concluida)
+    {
+        $this->concluida = $concluida;
 
         return $this;
     }

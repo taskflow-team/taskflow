@@ -38,7 +38,7 @@ class Controller {
 
     }
 
-    protected function loadView(string $path, array $dados, string $msgErro = "", string $msgSucesso = "") {
+    protected function loadView(string $path, array $dados, string $msgErro = "", string $msgSucesso = "", bool $limparUrl = true) {
         
         //Verificar os dados que estão sendo recebidos na função
         //print_r($dados);
@@ -48,9 +48,12 @@ class Controller {
         //echo $caminho;
         if(file_exists($caminho)) {
             require $caminho;
-
-            $url_parts = parse_url($_SERVER['REQUEST_URI']); //Divide a URL em 'path' e 'query'
-            echo "<script>window.history.replaceState({}, '', '{$url_parts['path']}');</script>"; 
+            //Limpa a UR
+            if($limparUrl) {
+                $url_parts = parse_url($_SERVER['REQUEST_URI']); //Divide a URL em 'path' e 'query'
+                echo "<script>window.history.replaceState({}, '', '{$url_parts['path']}');</script>"; 
+            }
+  
         } else {
             echo "Erro ao carrega a view solicitada<br>";
             echo "Caminho: " . $caminho;

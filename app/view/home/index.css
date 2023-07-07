@@ -1,6 +1,6 @@
 .pseudo-body form{
     width: 100%;
-    height: 240px;
+    height: fit-content;
     padding: 50px 0;
     display: flex;
     flex-direction: column;
@@ -8,14 +8,23 @@
     justify-content: space-between;
 }
 
-.pseudo-body input{
+.pseudo-body #showMore:hover{
+    cursor: pointer;
+    color: #4DD167;
+}
+
+
+.pseudo-body .dark-input{
     width: 100%;
+    height: 65px;
     padding: 20px;
     background-color: #1D1D1D;
     border: none;
     border-radius: 8px;
     color: #FFFFFF;
     font-weight: 600;
+    margin-bottom: 15px;
+
 }
 
 .pseudo-body form button{

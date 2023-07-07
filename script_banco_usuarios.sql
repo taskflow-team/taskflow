@@ -15,13 +15,14 @@ INSERT INTO tb_usuarios (nome_usuario, login, email, senha) VALUES ('Sr. Root', 
 
 
 CREATE TABLE tb_tarefas(
-	id_tarefa INT AUTO_INCREMENT,
+	id_tarefa INT AUTO_INCREMENT PRIMARY KEY,
 	nome_tarefa VARCHAR(45) NOT NULL,
+	descricao varchar(150),
+	concluida BOOLEAN, 
 	dificuldade VARCHAR(45),
+	prioridade INT,
 	valor_pontos INT,
-	id_usuario INT,
-	-- id_lista INT,
-  PRIMARY KEY (id_tarefa)
+	id_usuario INT
 );
 
 ALTER TABLE tb_tarefas ADD CONSTRAINT fk_usuarios FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario);

@@ -16,3 +16,47 @@ body{
     left: 350px;
     color: #FFFFFF;
 }
+
+.task-list{
+    list-style: none;
+}
+
+.task-list .task{
+    width: 100%;
+    height: fit-content;
+    padding: 15px 115px 15px 15px;
+    margin: 30px 0;
+    border-radius: 13px;
+    background: #1D1D1D;
+    box-shadow: 0px 18px 41px -23px rgba(0, 0, 0, 0.25);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+}
+
+.task-list .task p{
+    margin-bottom: 0px;
+}
+
+.difficulty{
+    width: 100px;
+    height: 100%;
+    border-top-right-radius: 13px;
+    border-bottom-right-radius: 13px;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.easy{
+    background-color: #4DD167;
+}
+
+.medium{
+    background-color: #FFD361;
+}
+
+.hard{
+    background-color: #FF6161;
+}
