@@ -7,8 +7,11 @@ require_once(__DIR__ . "/../include/sidebar.php");
 // Instanciar o DAO de tarefas
 $tarefaDAO = new TarefaDAO();
 
+// Pegando o id do usuário
+$id_usuario = $_SESSION[SESSAO_USUARIO_ID];
+
 // Obter todas as tarefas do banco de dados
-$tarefas = $tarefaDAO->listTarefas();
+$tarefas = $tarefaDAO->listTarefas($id_usuario);
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/home/index.css">
@@ -19,6 +22,7 @@ $tarefas = $tarefaDAO->listTarefas();
         // Form para adicionar tarefas
         require_once(__DIR__ . "/form.php");
     ?>
+    
     <h2>Pending Tasks</h2>
     <ul class="task-list">
         <?php
@@ -36,7 +40,7 @@ $tarefas = $tarefaDAO->listTarefas();
                     echo "</li>";
                 }
             } else {
-                echo "<p>Não há tarefas para exibir.</p>";
+                echo "<p>No pending tasks.</p>";
             }
         ?>
     </ul>

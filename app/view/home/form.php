@@ -51,6 +51,8 @@
         </div>
     </div>
 
+    <input name="idUsuario" type="hidden" value="<?php echo $_SESSION[SESSAO_USUARIO_ID]; ?>" />
+
     <button type="submit" class="btn btn-success" id="submitTaskButton">Add Task</button>
     <div class="col-6 p-0">
         <?php include_once(__DIR__ . "/../include/msg.php") ?>

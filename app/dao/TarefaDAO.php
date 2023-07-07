@@ -12,10 +12,10 @@ include_once(__DIR__ . "/../model/Tarefa.php");
 class TarefaDAO {
 
     //Método para listar as tarefas a partir da base de dados
-    public function listTarefas() {
+    public function listTarefas($id_usuario) {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM tb_tarefas ORDER BY id_tarefa DESC";
+        $sql = "SELECT * FROM tb_tarefas WHERE id_usuario = ". $id_usuario ." ORDER BY id_tarefa DESC";
         $stm = $conn->prepare($sql);    
         $stm->execute();
         $result = $stm->fetchAll();
@@ -81,8 +81,8 @@ class TarefaDAO {
     public function insertTarefa(Tarefa $tarefa) {
         $conn = Connection::getConn();
     
-        $sql = "INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, concluida, valor_pontos)" . 
-               " VALUES (:nome_tarefa, :descricao, :dificuldade, :prioridade, :concluida, :valor_pontos)";
+        $sql = "INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, concluida, valor_pontos, id_usuario)" . 
+               " VALUES (:nome_tarefa, :descricao, :dificuldade, :prioridade, :concluida, :valor_pontos, :id_usuario)";
        
         $stm = $conn->prepare($sql);
         $stm->bindValue(":nome_tarefa", $tarefa->getNome_tarefa());
@@ -91,6 +91,7 @@ class TarefaDAO {
         $stm->bindValue(":prioridade", $tarefa->getPrioridade());
         $stm->bindValue(":concluida", $tarefa->getConcluida());
         $stm->bindValue(":valor_pontos", $tarefa->getValor_pontos(), PDO::PARAM_INT);
+        $stm->bindValue(":id_usuario", $tarefa->getId_usuario());
         $stm->execute();
     }
 

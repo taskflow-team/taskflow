@@ -86,7 +86,8 @@ class TarefaController extends Controller {
         $prioridade = isset($_POST['prioridade']) ? trim($_POST['prioridade']) : NULL;
         $valor_pontos = isset($_POST['valor_pontos']) ? trim($_POST['valor_pontos']) : NULL;
         $concluida = isset($_POST['concluida']) ? trim($_POST['concluida']) : NULL;
-    
+        $id_usuario = isset($_POST['idUsuario']) ? trim($_POST['idUsuario']) : NULL;
+
         // Cria objeto Tarefa
         $tarefa = new Tarefa();
         $tarefa->setNome_tarefa($nome);
@@ -95,6 +96,7 @@ class TarefaController extends Controller {
         $tarefa->setPrioridade($prioridade);
         $tarefa->setValor_pontos($valor_pontos);
         $tarefa->setConcluida($concluida);
+        $tarefa->setId_usuario($id_usuario);
 
         // Validar os dados
         $erros = $this->tarefaService->validarDados($tarefa);
