@@ -19,7 +19,7 @@ $tarefas = $tarefaDAO->listTarefas();
         // Form para adicionar tarefas
         require_once(__DIR__ . "/form.php");
     ?>
-    <h2>Tarefas Pendentes</h2>
+    <h2>Pending Tasks</h2>
     <ul class="task-list">
         <?php
             if (!empty($tarefas)) {

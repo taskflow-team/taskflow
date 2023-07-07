@@ -15,7 +15,7 @@ class TarefaDAO {
     public function listTarefas() {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM tb_tarefas t ORDER BY t.nome_tarefa";
+        $sql = "SELECT * FROM tb_tarefas ORDER BY id_tarefa DESC";
         $stm = $conn->prepare($sql);    
         $stm->execute();
         $result = $stm->fetchAll();
