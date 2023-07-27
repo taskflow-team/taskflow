@@ -45,3 +45,5 @@ $tarefas = $tarefaDAO->listTarefas($id_usuario);
         ?>
     </ul>
 </div>
+
+<script src="../view/home/formAsync.js"  ></script>

@@ -16,31 +16,31 @@ class TarefaDAO {
         $conn = Connection::getConn();
 
         $sql = "SELECT * FROM tb_tarefas WHERE id_usuario = ". $id_usuario ." ORDER BY id_tarefa DESC";
-        $stm = $conn->prepare($sql);    
+        $stm = $conn->prepare($sql);
         $stm->execute();
         $result = $stm->fetchAll();
-        
+
         return $this->mapTarefas($result);
     }
 
     public function findAllTarefas($idUsuario) {
         $conn = Connection::getConn();
-    
+
         $sql = "SELECT * FROM tb_tarefas t WHERE t.id_usuario = ?";
         $stm = $conn->prepare($sql);
         $stm->execute([$idUsuario]);
         $result = $stm->fetchAll();
-    
+
         return $this->mapTarefas($result);
     }
-    
+
     //Método para buscar uma tarefa por seu ID
     public function findByIdTarefa(int $id) {
         $conn = Connection::getConn();
 
         $sql = "SELECT * FROM tb_tarefas t" .
                " WHERE t.id_tarefa = ?";
-        $stm = $conn->prepare($sql);    
+        $stm = $conn->prepare($sql);
         $stm->execute([$id]);
         $result = $stm->fetchAll();
 
@@ -51,7 +51,7 @@ class TarefaDAO {
         elseif(count($tarefas) == 0)
             return null;
 
-        die("TarefaDAO.findByIdTarefa()" . 
+        die("TarefaDAO.findByIdTarefa()" .
             " - Erro: mais de uma tarefa encontrada.");
     }
 
@@ -62,7 +62,7 @@ class TarefaDAO {
 
         $sql = "SELECT * FROM tb_tarefas t" .
                " WHERE t.nome_tarefa = ?";
-        $stm = $conn->prepare($sql);    
+        $stm = $conn->prepare($sql);
         $stm->execute([$nome]);
         $result = $stm->fetchAll();
 
@@ -73,23 +73,22 @@ class TarefaDAO {
         elseif(count($tarefas) == 0)
             return null;
 
-        die("TarefaDAO.findByNomeTarefa()" . 
+        die("TarefaDAO.findByNomeTarefa()" .
             " - Erro: mais de uma tarefa encontrada.");
     }
 
     //Método para inserir uma Tarefa
     public function insertTarefa(Tarefa $tarefa) {
         $conn = Connection::getConn();
-    
-        $sql = "INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, concluida, valor_pontos, id_usuario)" . 
-               " VALUES (:nome_tarefa, :descricao, :dificuldade, :prioridade, :concluida, :valor_pontos, :id_usuario)";
-       
+
+        $sql = "INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, id_usuario)" .
+               " VALUES (:nome_tarefa, :descricao, :dificuldade, :prioridade, :valor_pontos, :id_usuario)";
+
         $stm = $conn->prepare($sql);
         $stm->bindValue(":nome_tarefa", $tarefa->getNome_tarefa());
         $stm->bindValue(":descricao", $tarefa->getDescricao_tarefa());
         $stm->bindValue(":dificuldade", $tarefa->getDificuldade());
         $stm->bindValue(":prioridade", $tarefa->getPrioridade());
-        $stm->bindValue(":concluida", $tarefa->getConcluida());
         $stm->bindValue(":valor_pontos", $tarefa->getValor_pontos(), PDO::PARAM_INT);
         $stm->bindValue(":id_usuario", $tarefa->getId_usuario());
         $stm->execute();
@@ -116,13 +115,13 @@ class TarefaDAO {
 
     public function deleteTarefa(int $id) {
         $conn = Connection::getConn();
-    
+
         $sql = "DELETE FROM tb_tarefas WHERE id_tarefa = ?";
         $stm = $conn->prepare($sql);
         $stm->bindValue(1, $id);
         $stm->execute();
     }
-    
+
 
     //Método para mapear os dados de Tarefa para um array
 

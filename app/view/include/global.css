@@ -49,14 +49,14 @@ body{
     top: 0;
 }
 
-.easy{
+.easy, .facil{
     background-color: #4DD167;
 }
 
-.medium{
+.medium, .medio{
     background-color: #FFD361;
 }
 
-.hard{
+.hard, .dificil{
     background-color: #FF6161;
 }

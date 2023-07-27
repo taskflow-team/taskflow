@@ -1,15 +1,21 @@
-<form id="frmTarefa" method="POST" action="<?= BASEURL ?>/controller/TarefaController.php?action=save">
-   
+<form id="frmTarefa" method="POST">
+
     <label for="nome">Task Name</label>
-    <input class="form-control dark-input" type="text" id="nome" name="nome" placeholder="Enter task name" 
-    value="<?php echo (isset($dados["tarefa"]) ? $dados["tarefa"]->getNome_tarefa() : ''); ?>"   >
+    <input
+        required
+        class="form-control dark-input"
+        type="text" id="nome"
+        name="nome"
+        placeholder="Enter task name"
+        value="<?php echo (isset($dados["tarefa"]) ? $dados["tarefa"]->getNome_tarefa() : ''); ?>"
+    >
 
     <p id="showMore" >Show more</p>
 
     <div style="display: none" id="formDiv">
         <label for="descricao">Task Description</label>
         <textarea class="form-control dark-input" id="descricao" name="descricao" placeholder="Enter task description"   ><?php echo (isset($dados["tarefa"]) ? $dados["tarefa"]->getDescricao() : ''); ?></textarea>
-        
+
         <fieldset>
             <label>Task Difficulty:</label>
             <div>
@@ -33,7 +39,7 @@
                 <label for="high">High</label>
             </div>
         </fieldset>
-        
+
         <label for="valor_pontos">Task Points</label>
         <input class="form-control dark-input" type="number" id="valor_pontos" name="valor_pontos" placeholder="Enter task points"
         value="<?php echo (isset($dados["tarefa"]) ? $dados["tarefa"]->getValor_Pontos() : ''); ?>" />
@@ -51,25 +57,12 @@
         </div>
     </div>
 
-    <input name="idUsuario" type="hidden" value="<?php echo $_SESSION[SESSAO_USUARIO_ID]; ?>" />
+    <input id="idUsuario" name="idUsuario" type="hidden" value="<?php echo $_SESSION[SESSAO_USUARIO_ID]; ?>" />
 
     <button type="submit" class="btn btn-success" id="submitTaskButton">Add Task</button>
+
     <div class="col-6 p-0">
         <?php include_once(__DIR__ . "/../include/msg.php") ?>
     </div>
 </form>
 
-<script>
-    const showMore = document.querySelector("#showMore");
-    const formDiv = document.querySelector("#formDiv");
-
-    showMore.addEventListener("click", () => {
-    if (formDiv.style.display === 'none') {
-        formDiv.style.display = 'block';
-        showMore.innerText = 'Show less';
-    } else {
-        formDiv.style.display = 'none';
-        showMore.innerText = 'Show more';
-    }
-    });
-</script>
