@@ -77,51 +77,70 @@ class TarefaController extends Controller {
    }
 
 
-    protected function save() {
-        // Get the raw JSON data from the request body
-        $jsonString = file_get_contents('php://input');
-        $requestData = json_decode($jsonString, true); // Convert JSON to associative array
+   protected function save() {
+    // Get the raw JSON data from the request body
+    $jsonString = file_get_contents('php://input');
+    $requestData = json_decode($jsonString, true); // Convert JSON to associative array
 
-        $formData = json_decode($requestData['formData'], true);
-        $userID = $requestData['userID'];
+    // Check if JSON parsing was successful
+    if ($requestData === null) {
+        $response = array(
+            'message' => 'Invalid JSON data',
+        );
 
-        // Assuming the Tarefa class has the appropriate setter methods for the properties
-        $tarefa = new Tarefa();
-        $tarefa->setNome_tarefa($formData['nome']);
-        $tarefa->setDescricao_tarefa($formData['descricao']);
-        $tarefa->setDificuldade($formData['dificuldade']);
-        $tarefa->setPrioridade($formData['prioridade']);
-        $tarefa->setValor_pontos($formData['valor_pontos']);
-        $tarefa->setId_usuario($userID);
-
-        print_r($tarefa);
-
-        // Validar os dados
-        $erros = $this->tarefaService->validarDados($tarefa);
-        if (empty($erros)) {
-            try {
-                $this->tarefaDao->insertTarefa($tarefa);
-
-                // TODO - Enviar mensagem de sucesso
-                $msg = "Tarefa salva com sucesso.";
-                $this->loadView("home/index.php", [], "", $msg);
-                exit;
-            } catch (PDOException $e) {
-                $response = array(
-                    'message' => 'Request recieved successfully',
-                    'error' => $e
-                );
-
-                // Output the response as JSON
-                header('Content-Type: application/json');
-                echo json_encode($response);
-            }
-        }
-
-        // // $msgsErro = implode("<br>", $erros);
-        // // $this->loadView("/home/index.php", [], $msgsErro);
-        // header('location:HomeController.php');
+        // Output the response as JSON
+        header('Content-Type: application/json');
+        echo json_encode($response);
+        exit;
     }
+
+    // Extract data from the JSON array
+    $formData = $requestData['formData'];
+    $userID = $requestData['userID'];
+
+    // Assuming the Tarefa class has the appropriate setter methods for the properties
+    $tarefa = new Tarefa();
+    $tarefa->setNome_tarefa($formData['nome']);
+    $tarefa->setDescricao_tarefa($formData['descricao']);
+    $tarefa->setDificuldade($formData['dificuldade']);
+    $tarefa->setPrioridade($formData['prioridade']);
+    $tarefa->setValor_pontos($formData['valor_pontos']);
+    $tarefa->setId_usuario($userID);
+
+    print_r($tarefa);
+
+    // Validar os dados
+    $erros = $this->tarefaService->validarDados($tarefa);
+    if (empty($erros)) {
+        try {
+            $this->tarefaDao->insertTarefa($tarefa);
+
+            // TODO - Enviar mensagem de sucesso
+            $msg = "Tarefa salva com sucesso.";
+            $this->loadView("home/index.php", [], "", $msg);
+            exit;
+        } catch (PDOException $e) {
+            $response = array(
+                'message' => 'your matheus is gay',
+                'error' => $e->getMessage() // Use the error message from the exception
+            );
+
+            // Output the response as JSON
+            header('Content-Type: application/json');
+            echo $response;
+        }
+    } else {
+        $response = array(
+            'message' => 'Validation errors occurred',
+            'errors' => $erros // Include the validation errors in the response
+        );
+
+        // Output the response as JSON
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+}
+
 
     protected function delete() {
         if (!$this->usuarioLogado()) {

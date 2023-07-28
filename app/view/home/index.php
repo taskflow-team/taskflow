@@ -18,11 +18,11 @@ $tarefas = $tarefaDAO->listTarefas($id_usuario);
 
 <!-- Exibir as tarefas -->
 <div class="pseudo-body">
-    <?php 
+    <?php
         // Form para adicionar tarefas
         require_once(__DIR__ . "/form.php");
     ?>
-    
+
     <h2>Pending Tasks</h2>
     <ul class="task-list">
         <?php

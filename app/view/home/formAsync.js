@@ -1,7 +1,6 @@
 const showMore = document.querySelector("#showMore");
 const formDiv = document.querySelector("#formDiv");
 const taskForm = document.querySelector('#frmTarefa');
-const userID = document.querySelector('#idUsuario').value;
 
 function showForm(){
     if (formDiv.style.display === 'none') {
@@ -17,6 +16,9 @@ showMore.addEventListener("click", showForm);
 
 async function createTask(event){
     event.preventDefault();
+
+    // Move the userID assignment here
+    const userID = document.querySelector('#idUsuario').value;
 
     // Get form content, turns it into an object and clears the form
     const rawFormContent = new FormData(taskForm);
@@ -38,7 +40,7 @@ async function createTask(event){
 
         const response = await fetch('TarefaController.php?action=save', reqConfigs);
 
-        // Validates if req has succeded
+        // Validates if req has succeeded
         if(!response.ok){
             console.log('The request to the server has failed');
         }
@@ -48,7 +50,7 @@ async function createTask(event){
         console.log(responseData);
 
     } catch (error) {
-        console.log(`An error occured during the request: ${error}`);
+        console.log(`An error occurred during the request: ${error}`);
     }
 }
 
