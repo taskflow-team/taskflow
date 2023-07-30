@@ -24,17 +24,51 @@ class TarefaController extends Controller {
         $this->handleAction();
     }
 
-    protected function list() {
-
-        $this->loadView("home/index.php", []);
-    }
-
     protected function create() {
         $dados["id"] = 0;
         $this->loadView("home/form.php", $dados, "", "");
     }
 
-
+    protected function list() {
+        // Verifica se o usuário está logado
+        if (!$this->usuarioLogado()) {
+            exit; // Se não estiver logado, encerra a execução
+        }
+    
+        // Obtém o ID do usuário da sessão
+        $userID = $_SESSION[SESSAO_USUARIO_ID];
+    
+        // Obtém as tarefas do usuário do banco de dados
+        $tarefas = $this->tarefaDao->listTarefas($userID);
+    
+        // Cria um array de resposta contendo a mensagem de sucesso e os dados das tarefas
+        $response = array(
+            'message' => 'Success',
+            'data' => array_map(function($tarefa) {
+                // Converte o objeto tarefa em um objeto anônimo contendo apenas as propriedades necessárias
+                return (object) array(
+                    'id_tarefa' => $tarefa->getId_tarefa(),
+                    'nome_tarefa' => $tarefa->getNome_tarefa(),
+                    'descricao_tarefa' => $tarefa->getDescricao_tarefa(),
+                    'dificuldade' => $tarefa->getDificuldade(),
+                    'prioridade' => $tarefa->getPrioridade(),
+                    'valor_pontos' => $tarefa->getValor_pontos(),
+                    'concluida' => $tarefa->getConcluida(),
+                    'id_usuario' => $tarefa->getId_usuario(),
+                );
+            }, $tarefas)
+        );
+    
+        // Limpa qualquer saída anterior antes de definir os cabeçalhos JSON
+        ob_clean();
+    
+        // Define o cabeçalho para indicar que a resposta é um JSON
+        header('Content-Type: application/json');
+    
+        // Imprime a resposta em formato JSON
+        echo json_encode($response);
+    }
+    
     protected function edit() {
         $tarefaId = isset($_POST['id']) ? $_POST['id'] : NULL;
         $nome = isset($_POST['nome']) ? trim($_POST['nome']) : NULL;
@@ -58,100 +92,119 @@ class TarefaController extends Controller {
         $this->loadView("/home/form.php", [], "", $msg);
     }
 
-
-    function testBaseUrl() {
-        $baseUrl = "http://localhost/taskflow";
-
-        $url = $baseUrl . "/controller/TarefaController.php?action=save";
-
-        $ch = curl_init($url);
-        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-        $response = curl_exec($ch);
-        curl_close($ch);
-
-        echo $response;
-    }
-
-   protected function test(){
-        $this->testBaseUrl();
-   }
-
-
-   protected function save() {
-    // Get the raw JSON data from the request body
-    $jsonString = file_get_contents('php://input');
-    $requestData = json_decode($jsonString, true); // Convert JSON to associative array
-
-    // Check if JSON parsing was successful
-    if ($requestData === null) {
-        $response = array(
-            'message' => 'Invalid JSON data',
-        );
-
-        // Output the response as JSON
-        header('Content-Type: application/json');
-        echo json_encode($response);
-        exit;
-    }
-
-    // Extract data from the JSON array
-    $formData = $requestData['formData'];
-    $userID = $requestData['userID'];
-
-    // Assuming the Tarefa class has the appropriate setter methods for the properties
-    $tarefa = new Tarefa();
-    $tarefa->setNome_tarefa($formData['nome']);
-    $tarefa->setDescricao_tarefa($formData['descricao']);
-    $tarefa->setDificuldade($formData['dificuldade']);
-    $tarefa->setPrioridade($formData['prioridade']);
-    $tarefa->setValor_pontos($formData['valor_pontos']);
-    $tarefa->setId_usuario($userID);
-
-    print_r($tarefa);
-
-    // Validar os dados
-    $erros = $this->tarefaService->validarDados($tarefa);
-    if (empty($erros)) {
-        try {
-            $this->tarefaDao->insertTarefa($tarefa);
-
-            // TODO - Enviar mensagem de sucesso
-            $msg = "Tarefa salva com sucesso.";
-            $this->loadView("home/index.php", [], "", $msg);
-            exit;
-        } catch (PDOException $e) {
+    protected function save() {
+        // Obter os dados JSON brutos do corpo da requisição
+        $jsonString = file_get_contents('php://input');
+        $requestData = json_decode($jsonString, true); // Converter JSON para um array associativo
+    
+        // Verificar se a análise do JSON foi bem-sucedida
+        if ($requestData === null) {
             $response = array(
-                'message' => 'your matheus is gay',
-                'error' => $e->getMessage() // Use the error message from the exception
+                'message' => 'Dados JSON inválidos',
             );
-
-            // Output the response as JSON
+    
+            // Enviar a resposta como JSON
             header('Content-Type: application/json');
-            echo $response;
+            echo json_encode($response);
+            exit;
         }
-    } else {
-        $response = array(
-            'message' => 'Validation errors occurred',
-            'errors' => $erros // Include the validation errors in the response
-        );
-
-        // Output the response as JSON
-        header('Content-Type: application/json');
-        echo json_encode($response);
+    
+        // Extrair os dados do array JSON
+        $formData = $requestData['formData'];
+        $userID = $requestData['userID'];
+    
+        // Supondo que a classe Tarefa tenha os métodos setters apropriados para as propriedades
+        $tarefa = new Tarefa();
+        $tarefa->setNome_tarefa($formData['nome']);
+        $tarefa->setDescricao_tarefa($formData['descricao']);
+        $tarefa->setDificuldade($formData['dificuldade']);
+        $tarefa->setPrioridade($formData['prioridade']);
+        $tarefa->setValor_pontos($formData['valor_pontos']);
+        $tarefa->setId_usuario($userID);
+    
+        // Validar os dados da tarefa
+        $erros = $this->tarefaService->validarDados($tarefa);
+        if (empty($erros)) {
+            try {
+                // Inserir a tarefa no banco de dados
+                $this->tarefaDao->insertTarefa($tarefa);
+    
+                // Enviar mensagem de sucesso como JSON
+                $response = array(
+                    'message' => 'Tarefa salva com sucesso.'
+                );
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                exit;
+            } catch (PDOException $e) {
+                // Se ocorrer um erro durante a inserção, enviar mensagem de erro como JSON
+                $response = array(
+                    'message' => 'Ocorreu um erro durante a requisição',
+                    'error' => $e->getMessage() // Usar a mensagem de erro da exceção
+                );
+    
+                // Enviar a resposta como JSON
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                exit;
+            }
+        } else {
+            // Se houver erros de validação, enviar a resposta com os erros como JSON
+            $response = array(
+                'message' => 'Ocorreram erros de validação',
+                'errors' => $erros // Incluir os erros de validação na resposta
+            );
+    
+            // Enviar a resposta como JSON
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit;
+    
+             // Obter a lista de tarefas atualizada após a inserção
+            $userID = $_SESSION[SESSAO_USUARIO_ID];
+            $tarefas = $this->tarefaDao->listTarefas($userID);
+    
+            $response = array(
+                'message' => 'Tarefa salva com sucesso.',
+                'data' => array_map(function($tarefa) {
+                    // Converte o objeto tarefa em um objeto anônimo contendo apenas as propriedades necessárias
+                    return (object) array(
+                        'id_tarefa' => $tarefa->getId_tarefa(),
+                        'nome_tarefa' => $tarefa->getNome_tarefa(),
+                        'descricao_tarefa' => $tarefa->getDescricao_tarefa(),
+                        'dificuldade' => $tarefa->getDificuldade(),
+                        'prioridade' => $tarefa->getPrioridade(),
+                        'valor_pontos' => $tarefa->getValor_pontos(),
+                        'concluida' => $tarefa->getConcluida(),
+                        'id_usuario' => $tarefa->getId_usuario(),
+                    );
+                }, $tarefas)
+            );
+    
+            // Enviar a resposta como JSON
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit;
+        }
     }
-}
-
-
+    
     protected function delete() {
         if (!$this->usuarioLogado()) {
             exit;
         }
-
+    
         $tarefaId = $_GET['id'];
-
+    
         // Deleta a tarefa
         $this->tarefaDao->deleteTarefa($tarefaId);
-        $this->loadView("/home/index.php", []);
+    
+        // Envia a resposta como JSON
+        $response = array(
+            'message' => 'Tarefa deletada com sucesso.',
+        );
+    
+        header('Content-Type: application/json');
+        echo json_encode($response);
         exit;
     }
 
@@ -160,7 +213,6 @@ class TarefaController extends Controller {
             'message' => 'Request recieved successfully',
         );
 
-        // Output the response as JSON
         header('Content-Type: application/json');
         echo json_encode($response);
     }

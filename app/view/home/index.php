@@ -18,32 +18,17 @@ $tarefas = $tarefaDAO->listTarefas($id_usuario);
 
 <!-- Exibir as tarefas -->
 <div class="pseudo-body">
-    <?php
+    <?php 
         // Form para adicionar tarefas
         require_once(__DIR__ . "/form.php");
     ?>
-
+    
     <h2>Pending Tasks</h2>
-    <ul class="task-list">
-        <?php
-            if (!empty($tarefas)) {
-                foreach ($tarefas as $tarefa) {
-                    echo "<li class='task' >";
-                    echo "<div>";
-                        echo "<p><strong>". $tarefa->getNome_tarefa() . "</strong></p>";
-                        echo "<p>" . $tarefa->getDescricao_tarefa() . "</p>";
-                    echo "</div>";
-                    // echo "<p><strong>Prioridade:</strong> " . $tarefa->getPrioridade() . "</p>";
-                    // echo "<p><strong>Pontos:</strong> " . $tarefa->getValor_pontos() . "</p>";
-                    echo "<a href=\"../controller/TarefaController.php?action=delete&id=" . $tarefa->getId_tarefa() . "\">Delete</a>";
-                    echo "<div class='difficulty ". $tarefa->getDificuldade()  ."' />";
-                    echo "</li>";
-                }
-            } else {
-                echo "<p>No pending tasks.</p>";
-            }
-        ?>
-    </ul>
+    <ul id="taskList" class="task-list"></ul>
 </div>
 
-<script src="../view/home/formAsync.js"  ></script>
+<!-- Incluir jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Incluir formAsync.js -->
+<script src="../view/home/formAsync.js"></script>

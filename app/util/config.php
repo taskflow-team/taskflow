@@ -6,11 +6,11 @@
 define('DB_HOST', 'localhost');
 define('DB_NAME', 'taskflow');
 define('DB_USER', 'root');
-define('DB_PASSWORD', '@Kekkei2003');
+define('DB_PASSWORD', '');
 
 //Caminho para adionar imagens, scripts e chamar páginas no sistema
 //Deve ter o nome da pasta do projeto no servidor APACHE
-define('BASEURL', '/taskflow/app'); //NÃO MUDA ESSA ROTA JOAO FILHO DA PUTA
+define('BASEURL', '/taskflow/app'); 
 
 //Nome do sistema
 define('APP_NAME', 'Taskflow');

@@ -26,5 +26,5 @@ CREATE TABLE tb_tarefas(
 
 ALTER TABLE tb_tarefas ADD CONSTRAINT fk_usuarios FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario);
 
-INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, id_usuario) VALUES ('Tarefa 1', 'Descrição da tarefa 1', 'Fácil', 1, 10, 1);
-INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, id_usuario) VALUES ('Tarefa 2', 'Descrição da tarefa 2', 'Médio', 2, 20, 1);
+INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, id_usuario) VALUES ('Tarefa 1', 'Descrição da tarefa 1', 'easy', 1, 10, 1);
+INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, id_usuario) VALUES ('Tarefa 2', 'Descrição da tarefa 2', 'medium', 2, 20, 1);
