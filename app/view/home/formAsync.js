@@ -19,6 +19,18 @@ function updateTaskList(tasks) {
     // Limpa a lista de tarefas existente
     $("#taskList").empty();
 
+    const difficultyMap = {
+        easy: 'Easy',
+        medium: 'Medium',
+        hard: 'Hard'
+    };
+
+    const priorityMap = {
+        1: 'Low',
+        2: 'Medium',
+        3: 'High'
+    };
+
     // Adiciona cada tarefa à lista de tarefas
     tasks.forEach(function (task) {
         $("#taskList").append(
@@ -35,8 +47,8 @@ function updateTaskList(tasks) {
             "</div>" +
             "<div id='moreInfo_" + task.id_tarefa + "' class='moreInfoDiv' style='display: none;'>" +
             "<p>Points: " + task.valor_pontos + "</p>" +
-            "<p>Priority: " + task.prioridade + "</p>" +
-            "<p>Difficulty: " + task.dificuldade + "</p>" +
+            "<p>Priority: " + priorityMap[task.prioridade] + "</p>" +
+            "<p>Difficulty: " + difficultyMap[task.dificuldade] + "</p>" +
             "</div>" +
             "</li>"
         );
