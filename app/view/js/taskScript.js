@@ -15,7 +15,7 @@ function showForm() {
 
 showMore.addEventListener("click", showForm);
 
-// Task functions 
+// Task functions
 function toggleShowMore(taskId) {
     const arrowIcon = $(`[data-task-id="${taskId}"] i`);
     const moreInfoDiv = $(`#moreInfo_${taskId}`);
@@ -58,11 +58,12 @@ function updateTaskList(tasks) {
                     "<p><strong>" + task.nome_tarefa + "</strong></p>" +
                     "<p>" + task.descricao_tarefa + "</p>" +
                 "</div>" +
-                "<i class='fa-regular fa-trash deleteBtn' href='#' data-id='" + task.id_tarefa + "'></i>" +
+                "<i class='fa-regular fa-pen-to-square task-icon editBtn'></i>" +
+                "<i class='fa-solid fa-trash task-icon deleteBtn' data-id='" + task.id_tarefa + "'></i>" +
                 "<div class='difficulty top " + task.dificuldade + "'></div>" +
-                    // Adiciona botão para exibir mais informações sobre a tarefa
-                    "<div class='showMoreBtn' data-task-id='" + task.id_tarefa + "'>" +     
-                    "<i class='fas fa-chevron-down arrowIcon'></i>" +
+                // Adiciona botão para exibir mais informações sobre a tarefa
+                "<div class='showMoreBtn' data-task-id='" + task.id_tarefa + "'>" +
+                    "<i class='fas fa-chevron-down arrowIcon task-icon'></i>" +
                 "</div>" +
                 "<div id='moreInfo_" + task.id_tarefa + "' class='moreInfoDiv' style='display: none;'>" +
                     "<p>Points: " + task.valor_pontos + "</p>" +

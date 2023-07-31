@@ -1,29 +1,7 @@
-.pseudo-body .deleteBtn {
-    width: 100px;
-    height: fit-content;
-    border: none;
-    border-radius: 8px;
-    color: #FFFFFF;
-    font-weight: 600;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    position: absolute;
-    right: 150px;
-    top: 50%;
-    transform: translateY(-50%);
-}
-
-.pseudo-body .deleteBtn:hover {
-    cursor: pointer;
-    color: #FF6161;
-    font-size: 40px;
-}
-
 .task-list{
     list-style: none;
-    max-width: 100%; 
-    margin: 0 auto; 
+    max-width: 100%;
+    margin: 0 auto;
     position: relative;
 }
 
@@ -44,11 +22,40 @@
     justify-content: space-between;
 }
 
-.task-list .task p{
+.task p{
     margin-bottom: 0px;
 }
 
-.difficulty{
+.task .task-icon{
+    width: 20px;
+    color: #FFFFFF;
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    position: absolute;
+    transition: all 0.8s ease;
+    cursor: pointer;
+}
+
+.task .editBtn{
+    right: 220px;
+}
+
+.task .editBtn:hover{
+    color: #579dff;
+    font-size: 22px;
+}
+
+.task .deleteBtn {
+    right: 167px;
+}
+
+.task .deleteBtn:hover {
+    color: #FF6161;
+    font-size: 22px;
+}
+
+.task .difficulty{
     width: 100px;
     height: 100%;
     border-top-right-radius: 13px;
@@ -58,19 +65,19 @@
     top: 0;
 }
 
-.easy, .facil{
+.task .easy, .task .facil{
     background-color: #4DD167;
 }
 
-.medium, .medio{
+.task .medium, .task .medio{
     background-color: #FFD361;
 }
 
-.hard, .dificil{
+.task .hard, .task .dificil{
     background-color: #FF6161;
 }
 
-.showMoreBtn {
+.task .showMoreBtn {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -79,19 +86,19 @@
     cursor: pointer;
 }
 
-.showMoreBtn i {
+.task .showMoreBtn i {
     transform: rotate(0deg);
     color: #FFFFFF;
     transition: transform 0.3s ease;
 }
 
-.showMoreBtn i.rotated {
+.task .showMoreBtn i.rotated {
     transform: rotate(180deg);
     color: #FFFFFF;
     transition: transform 0.3s ease;
 }
 
-.moreInfoDiv {
+.task .moreInfoDiv {
     padding: 10px;
     padding-top: 25px;
     background-color: #1D1D1D;
@@ -101,7 +108,7 @@
     top: 80%;
     left: 0;
     width: 100%;
-    border-top-left-radius: 0; 
-    border-top-right-radius: 0; 
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
     z-index: -1;
 }
