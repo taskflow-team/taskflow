@@ -1,4 +1,4 @@
-.pseudo-body form{
+.pseudo-body .task-form{
     width: 100%;
     height: fit-content;
     padding: 50px 0;
@@ -8,24 +8,92 @@
     justify-content: space-between;
 }
 
-.pseudo-body #showMore:hover{
+.pseudo-body .task-form #showMore:hover{
     cursor: pointer;
     color: #4DD167;
 }
 
-.pseudo-body .dark-input{
-    width: 100%;
-    height: 65px;
-    padding: 20px;
-    background-color: #1D1D1D;
-    border: none;
-    border-radius: 8px;
-    color: #FFFFFF;
-    font-weight: 600;
-    margin-bottom: 15px;
-
+.pseudo-body .task-form button{
+    width: 100px;
 }
 
-.pseudo-body form button{
-    width: 100px;
+.task-form .last-row{
+    height: 80px;
+    display: flex;
+    align-items: flex-start;
+}
+
+.task-form .last-row .element{
+    margin-right: 40px;
+}
+
+.radios{
+    display: flex;
+    align-items: center;
+}
+
+.task-form input[type='radio']{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+}
+
+.task-form .radio-square::before {
+    content: '';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    margin-right: 15px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.task-form .radio-square.green::before {
+    background-color: #4DD167;
+}
+
+.task-form .radio-square.yellow::before {
+    background-color: #FFD361;
+}
+
+.task-form .radio-square.red::before {
+    background-color: #FF6161;
+}
+
+.task-form .radio-square:checked::before {
+    content: "✔️";
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number] {
+    -moz-appearance:textfield;
+}
+
+.task-form .points-holder{
+    display: flex;
+    flex-direction: column;
+}
+
+.task-form .points-holder input{
+    width: 60px;
+    height: 40px;
+    margin: 0;
+    padding: 0;
+    border-radius: 20px;
+    text-align: center;
+}
+
+.task-form #submitTaskButton{
+    font-weight: 600;
 }

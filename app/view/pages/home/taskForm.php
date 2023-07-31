@@ -1,4 +1,4 @@
-<form id="frmTarefa" method="POST">
+<form class="task-form" id="frmTarefa" method="POST">
 
     <label for="nome">Task Name</label>
     <input
@@ -16,33 +16,36 @@
         <label for="descricao">Task Description</label>
         <textarea class="form-control dark-input" id="descricao" name="descricao" placeholder="Enter task description"   ><?php echo (isset($dados["tarefa"]) ? $dados["tarefa"]->getDescricao() : ''); ?></textarea>
 
-        <fieldset>
-            <label>Task Difficulty:</label>
-            <div>
-                <input name="dificuldade" type="radio" value="easy" checked/>
-                <label for="easy">Easy</label>
-                <input name="dificuldade" type="radio" value="medium"/>
-                <label for="medium">Medium</label>
-                <input name="dificuldade" type="radio" value="hard"/>
-                <label for="hard">Hard</label>
-            </div>
-        </fieldset>
+        <div class="last-row" >
+            <fieldset class="element" >
+                <label>Task Difficulty</label>
+                <div class="radios" >
+                    <input class="radio-square green" name="dificuldade" type="radio" value="easy" checked/>
+                    <input class="radio-square yellow" name="dificuldade" type="radio" value="medium"/>
+                    <input class="radio-square red" name="dificuldade" type="radio" value="hard"/>
+                </div>
+            </fieldset>
+            <fieldset class="element" >
+                <label>Task Priority</label>
+                <div class="radios" >
+                    <input class="radio-square green" name="prioridade" type="radio" value="1" checked/>
+                    <input class="radio-square yellow" name="prioridade" type="radio" value="2"/>
+                    <input class="radio-square red" name="prioridade" type="radio" value="3"/>
+                </div>
+            </fieldset>
 
-        <fieldset>
-            <label>Task Priority:</label>
-            <div>
-                <input name="prioridade" type="radio" value="1" checked/>
-                <label for="low">Low</label>
-                <input name="prioridade" type="radio" value="2"/>
-                <label for="medium">Medium</label>
-                <input name="prioridade" type="radio" value="3"/>
-                <label for="high">High</label>
-            </div>
-        </fieldset>
+            <fieldset class="points-holder" >
+                <label for="valor_pontos">Task Points</label>
+                <input
+                    class="dark-input"
+                    type="number" id="valor_pontos"
+                    name="valor_pontos"
+                    value="0"
+                />
+            </fieldset>
+        </div>
 
-        <label for="valor_pontos">Task Points</label>
-        <input class="form-control dark-input" type="number" id="valor_pontos" name="valor_pontos" placeholder="Enter task points"
-        value="<?php echo (isset($dados["tarefa"]) ? $dados["tarefa"]->getValor_Pontos() : ''); ?>" />
+
 
         <div class="col-6">
             <?php
