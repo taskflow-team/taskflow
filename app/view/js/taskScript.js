@@ -1,3 +1,21 @@
+// Form view
+const showMore = document.querySelector("#showMore");
+const formDiv = document.querySelector("#formDiv");
+const taskForm = document.querySelector('#frmTarefa');
+
+function showForm() {
+    if (formDiv.style.display === 'none') {
+        formDiv.style.display = 'block';
+        showMore.innerText = 'Show less';
+    } else {
+        formDiv.style.display = 'none';
+        showMore.innerText = 'Show more';
+    }
+}
+
+showMore.addEventListener("click", showForm);
+
+// Task functions 
 function toggleShowMore(taskId) {
     const arrowIcon = $(`[data-task-id="${taskId}"] i`);
     const moreInfoDiv = $(`#moreInfo_${taskId}`);
@@ -13,6 +31,7 @@ function toggleShowMore(taskId) {
     // Faz o ícone da seta girar 180 graus
     arrowIcon.toggleClass("rotated");
 }
+
 
 
 function updateTaskList(tasks) {
@@ -35,21 +54,21 @@ function updateTaskList(tasks) {
     tasks.forEach(function (task) {
         $("#taskList").append(
             "<li class='task' id='task_" + task.id_tarefa + "'>" +
-            "<div>" +
-            "<p><strong>" + task.nome_tarefa + "</strong></p>" +
-            "<p>" + task.descricao_tarefa + "</p>" +
-            "</div>" +
-            "<a class='deleteBtn' href='#' data-id='" + task.id_tarefa + "'>Delete</a>" +
-            "<div class='difficulty " + task.dificuldade + "'></div>" +
-            // Adiciona botão para exibir mais informações sobre a tarefa
-            "<div class='showMoreBtn' data-task-id='" + task.id_tarefa + "'>" +
-            "<i class='fas fa-chevron-down arrowIcon'></i>" +
-            "</div>" +
-            "<div id='moreInfo_" + task.id_tarefa + "' class='moreInfoDiv' style='display: none;'>" +
-            "<p>Points: " + task.valor_pontos + "</p>" +
-            "<p>Priority: " + priorityMap[task.prioridade] + "</p>" +
-            "<p>Difficulty: " + difficultyMap[task.dificuldade] + "</p>" +
-            "</div>" +
+                "<div>" +
+                    "<p><strong>" + task.nome_tarefa + "</strong></p>" +
+                    "<p>" + task.descricao_tarefa + "</p>" +
+                "</div>" +
+                "<i class='fa-regular fa-trash deleteBtn' href='#' data-id='" + task.id_tarefa + "'></i>" +
+                "<div class='difficulty top " + task.dificuldade + "'></div>" +
+                    // Adiciona botão para exibir mais informações sobre a tarefa
+                    "<div class='showMoreBtn' data-task-id='" + task.id_tarefa + "'>" +     
+                    "<i class='fas fa-chevron-down arrowIcon'></i>" +
+                "</div>" +
+                "<div id='moreInfo_" + task.id_tarefa + "' class='moreInfoDiv' style='display: none;'>" +
+                    "<p>Points: " + task.valor_pontos + "</p>" +
+                    "<p>Priority: " + priorityMap[task.prioridade] + "</p>" +
+                    "<p>Difficulty: " + difficultyMap[task.dificuldade] + "</p>" +
+                "</div>" +
             "</li>"
         );
     });
@@ -113,22 +132,6 @@ function fetchTaskList() {
 
 // Chama a função fetchTaskList para carregar a lista de tarefas inicial na carga da página
 fetchTaskList();
-
-const showMore = document.querySelector("#showMore");
-const formDiv = document.querySelector("#formDiv");
-const taskForm = document.querySelector('#frmTarefa');
-
-function showForm() {
-    if (formDiv.style.display === 'none') {
-        formDiv.style.display = 'block';
-        showMore.innerText = 'Show less';
-    } else {
-        formDiv.style.display = 'none';
-        showMore.innerText = 'Show more';
-    }
-}
-
-showMore.addEventListener("click", showForm);
 
 async function createTask(event) {
     event.preventDefault();

@@ -1,19 +1,19 @@
 <?php
 #Nome do arquivo: usuario/list.php
 #Objetivo: interface para listagem dos usuários do sistema
-require_once(__DIR__ . "/../include/header.php");
+require_once(__DIR__ . "/../../include/header.php");
 ?>
 
-<link rel="stylesheet" type="text/css" href="<?php echo BASEURL; ?>/view/usuario/form.css">
+<link rel="stylesheet" type="text/css" href="<?php echo BASEURL; ?>/view/pages/register/form.css">
 
 <div class="login-image">
-    <img src="../view/img/register.jpg" alt="Image">
+    <img src="../view/assets/img/register.jpg" alt="Image">
 </div>
 
 <div class="container">
     <div class="login-form">
         <div class="login-logo">
-            <img src="../view/img/logo.png" alt="Logo">
+            <img src="../view/assets/img/logo.png" alt="Logo">
         </div>
          <h3 class="text-left">
              <!-- <?php if($dados['id'] == 0) echo "Inserir"; else echo "Alterar"; ?> 
@@ -56,7 +56,7 @@ require_once(__DIR__ . "/../include/header.php");
             />
 
             <div class="col-6">
-                <?php require_once(__DIR__ . "/../include/msg.php"); ?>
+                <?php require_once(__DIR__ . "/../../include/msg.php"); ?>
             </div>
 
             <button type="submit" class="btn btn-success">Create</button>

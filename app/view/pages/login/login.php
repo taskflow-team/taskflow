@@ -2,18 +2,18 @@
 #Nome do arquivo: login/login.php
 #Objetivo: interface para logar no sistema
 
-require_once(__DIR__ . "/../include/header.php");
+require_once(__DIR__ . "/../../include/header.php");
 ?>
-<link rel="stylesheet" type="text/css" href="<?php echo BASEURL; ?>/view/login/login.css">
+<link rel="stylesheet" type="text/css" href="<?php echo BASEURL; ?>/view/pages/login/login.css">
 
 <div class="login-image">
-    <img src="../view/img/login.jpg" alt="Image">
+    <img src="../view/assets/img/login.jpg" alt="Image">
 </div>
 
 <div class="container">
     <div class="login-form">
         <div class="login-logo">
-            <img src="../view/img/logo.png" alt="Logo">
+            <img src="../view/assets/img/logo.png" alt="Logo">
         </div>
             <h4>Sign in:</h4>
             <br>
@@ -32,7 +32,7 @@ require_once(__DIR__ . "/../include/header.php");
                            value="<?php echo isset($dados['senha']) ? $dados['senha'] : '' ?>" />
                 </div>
                 <div class="col-6 p-0">
-                    <?php include_once(__DIR__ . "/../include/msg.php") ?>
+                    <?php include_once(__DIR__ . "/../../include/msg.php") ?>
                 </div>
                 <div>
                     <a href="#">Forget your password?</a>

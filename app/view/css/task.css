@@ -1,43 +1,23 @@
-*{
-    font-family: 'Outfit', sans-serif;
-    margin: 0;
-    padding: 0;
-}
-
-body{
-    background-color: #2D2D2D;
-}
-
-.pseudo-body{
-    padding: 0 80px;
-    position: absolute;
-    right: 0;
-    top: 0;
-    left: 350px;
-    color: #FFFFFF;
-}
-
 .pseudo-body .deleteBtn {
     width: 100px;
     height: fit-content;
-    padding: 10px 20px;
     border: none;
     border-radius: 8px;
-    background-color: #FF6161; 
     color: #FFFFFF;
     font-weight: 600;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     position: absolute;
-    right: 175px;
+    right: 150px;
     top: 50%;
     transform: translateY(-50%);
 }
 
 .pseudo-body .deleteBtn:hover {
     cursor: pointer;
-    background-color: #FF4040; 
+    color: #FF6161;
+    font-size: 40px;
 }
 
 .task-list{
@@ -94,6 +74,9 @@ body{
     display: flex;
     align-items: center;
     justify-content: center;
+    position: absolute;
+    right: 130px;
+    cursor: pointer;
 }
 
 .showMoreBtn i {

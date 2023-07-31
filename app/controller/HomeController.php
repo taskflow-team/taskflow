@@ -14,7 +14,7 @@ class HomeController extends Controller {
     }
 
     protected function home() {
-        $this->loadView("home/index.php", []);
+        $this->loadView("/pages/home/index.php", []);
     }
 }
 

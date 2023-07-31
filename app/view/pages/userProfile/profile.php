@@ -3,12 +3,12 @@
     require_once(__DIR__ . "/../../include/sidebar.php");
 ?>
 
-<link rel="stylesheet" type="text/css" href="<?php echo BASEURL; ?>/view/include/global.css">
-<link rel="stylesheet" type="text/css" href="<?php echo BASEURL; ?>/view/usuario/profile/profile.css">
+<link rel="stylesheet" type="text/css" href="<?php echo BASEURL; ?>/view/css/global.css">
+<link rel="stylesheet" type="text/css" href="<?php echo BASEURL; ?>/view/pages/userProfile/profile.css">
 
 <div class="pseudo-body">
         <div class="profile-holder">
-            <img src="../view/img/profile.png" alt="profile picture">
+            <img src="../view/assets/img/profile.png" alt="profile picture">
             <h1><?php echo $dados["usuario"]->getLogin() ?></h1>
             <h2><?php echo $dados["usuario"]->getNome() ?></h2>
             <h2><?php echo $dados["usuario"]->getNivel() ?></h2>
@@ -32,7 +32,7 @@
                         required
                         value="<?php echo $dados["usuario"]->getSenha(); ?>"
                     />
-                    <img src="../view/icons/eye.png" alt="eye icon" class="eyeIcon">
+                    <img src="../view/assets/icons/eye.png" alt="eye icon" class="eyeIcon">
                     <button class="btn edit" id="btnPassword">Edit</button>
                 </div>
 

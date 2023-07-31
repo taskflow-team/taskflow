@@ -22,7 +22,7 @@ class UsuarioController extends Controller {
 
     protected function create() {
         $dados["id"] = 0;
-        $this->loadView("usuario/form.php", $dados);
+        $this->loadView("pages/register/form.php", $dados);
     }
 
     protected function showProfile($msgSucesso = '') {
@@ -31,7 +31,7 @@ class UsuarioController extends Controller {
 
         $usuario = $this->findUsuarioById();
         $dados["usuario"] = $usuario;
-        $this->loadView("/usuario/profile/profile.php", $dados, "", $msgSucesso);
+        $this->loadView("/pages/userProfile/profile.php", $dados, "", $msgSucesso);
     }
 
     protected function edit(){
@@ -87,7 +87,7 @@ class UsuarioController extends Controller {
 
                 //TODO - Enviar mensagem de sucesso
                 $msg = "Usuário salvo com sucesso.";
-                $this->loadView("login/login.php", []);
+                $this->loadView("/pages/login/login.php", []);
                 exit;
             } catch (PDOException $e) {
                 $erros = array("An error occurred while saving the user on our database."); //erro deve ser um array para ser validado no método implode()               
@@ -101,7 +101,7 @@ class UsuarioController extends Controller {
         $dados["confSenha"] = $confSenha;
 
         $msgsErro = implode("<br>", $erros);
-        $this->loadView("usuario/form.php", $dados, $msgsErro);
+        $this->loadView("pages/register/form.php", $dados, $msgsErro);
     }
 
     protected function delete() {

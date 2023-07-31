@@ -2,7 +2,7 @@
 #Classe controller padrão
 ini_set('error_reporting', E_ALL); // mesmo resultado de: error_reporting(E_ALL);
 ini_set('display_errors', 1);
-require_once(__DIR__ . "/../util/config.php");
+require_once(__DIR__ . "/../configs/config.php");
 
 class Controller {
 
