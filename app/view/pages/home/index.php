@@ -14,16 +14,16 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 $tarefas = $tarefaDAO->listTarefas($id_usuario);
 ?>
 
-<link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/pages/home/index.css">
+<link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/pages/home/taskForm.css">
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/css/task.css">
 
 <!-- Exibir as tarefas -->
 <div class="pseudo-body">
-    <?php 
+    <?php
         // Form para adicionar tarefas
         require_once(__DIR__ . "/taskForm.php");
     ?>
-    
+
     <h2>Pending Tasks</h2>
     <ul id="taskList" class="task-list"></ul>
 </div>

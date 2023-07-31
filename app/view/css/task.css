@@ -7,26 +7,29 @@
 
 .task-list .task{
     width: 100%;
-    height: 80px;
+    height: fit-content;
     padding: 15px 115px 15px 15px;
     margin: 15px 0;
     border-radius: 13px;
     background: #1D1D1D;
     box-shadow: 0px 18px 41px -23px rgba(0, 0, 0, 0.25);
     display: flex;
-    align-items: center;
-    justify-content: space-between;
+    flex-direction: column;
     position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
 }
 
 .task p{
     margin-bottom: 0px;
 }
 
-.task .task-icon{
+.top-content{
+    width: 100%;
+    height: 50\px;
+    display: flex;
+    align-items: center;
+}
+
+.task .top-content .task-icon{
     width: 20px;
     color: #FFFFFF;
     font-size: 18px;
@@ -37,20 +40,20 @@
     cursor: pointer;
 }
 
-.task .editBtn{
-    right: 220px;
+.task .top-content .editBtn{
+    right: 250px;
 }
 
-.task .editBtn:hover{
+.task .top-content .editBtn:hover{
     color: #579dff;
     font-size: 22px;
 }
 
-.task .deleteBtn {
-    right: 167px;
+.task .top-content .deleteBtn {
+    right: 190px;
 }
 
-.task .deleteBtn:hover {
+.task .top-content .deleteBtn:hover {
     color: #FF6161;
     font-size: 22px;
 }
@@ -77,38 +80,28 @@
     background-color: #FF6161;
 }
 
-.task .showMoreBtn {
+.task .top-content .showMoreBtn {
     display: flex;
     align-items: center;
     justify-content: center;
     position: absolute;
-    right: 130px;
+    right: 145px;
     cursor: pointer;
 }
 
-.task .showMoreBtn i {
+.task .top-content .showMoreBtn i {
     transform: rotate(0deg);
     color: #FFFFFF;
     transition: transform 0.3s ease;
 }
 
-.task .showMoreBtn i.rotated {
+.task .top-content .showMoreBtn i.rotated {
     transform: rotate(180deg);
     color: #FFFFFF;
     transition: transform 0.3s ease;
 }
 
 .task .moreInfoDiv {
-    padding: 10px;
-    padding-top: 25px;
-    background-color: #1D1D1D;
-    border-radius: 8px;
-    max-width: 100%;
-    position: absolute;
-    top: 80%;
-    left: 0;
     width: 100%;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
-    z-index: -1;
+    padding: 25px 0 10px 0;
 }

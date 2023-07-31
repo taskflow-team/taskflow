@@ -25,8 +25,9 @@ function toggleShowMore(taskId) {
     moreInfoDiv.toggle();
 
     // Calcula a margem inferior do elemento da tarefa
-    const margin = moreInfoDiv.is(":visible") ? moreInfoDiv.outerHeight() : 0;
-    task.css("margin-bottom", margin + "px");
+    // const margin = moreInfoDiv.is(":visible") ? moreInfoDiv.outerHeight() : 0;
+    // task.css("margin-bottom", margin + "px");
+    task.css("height: fit-content;");
 
     // Faz o ícone da seta girar 180 graus
     arrowIcon.toggleClass("rotated");
@@ -54,22 +55,32 @@ function updateTaskList(tasks) {
     tasks.forEach(function (task) {
         $("#taskList").append(
             "<li class='task' id='task_" + task.id_tarefa + "'>" +
-                "<div>" +
-                    "<p><strong>" + task.nome_tarefa + "</strong></p>" +
-                    "<p>" + task.descricao_tarefa + "</p>" +
+                // Conteúdo principal
+                "<div class='top-content' >" +
+                    "<div>" +
+                        "<p><strong>" + task.nome_tarefa + "</strong></p>" +
+                        "<p>" + task.descricao_tarefa + "</p>" +
+                    "</div>" +
+
+                    // Icones
+                    "<i class='fa-regular fa-pen-to-square task-icon editBtn'></i>" +
+                    "<i class='fa-solid fa-trash task-icon deleteBtn' data-id='" + task.id_tarefa + "'></i>" +
+
+                    // Adiciona botão para exibir mais informações sobre a tarefa
+                    "<div class='showMoreBtn' data-task-id='" + task.id_tarefa + "'>" +
+                        "<i class='fas fa-chevron-down arrowIcon task-icon'></i>" +
+                    "</div>" +
                 "</div>" +
-                "<i class='fa-regular fa-pen-to-square task-icon editBtn'></i>" +
-                "<i class='fa-solid fa-trash task-icon deleteBtn' data-id='" + task.id_tarefa + "'></i>" +
-                "<div class='difficulty top " + task.dificuldade + "'></div>" +
-                // Adiciona botão para exibir mais informações sobre a tarefa
-                "<div class='showMoreBtn' data-task-id='" + task.id_tarefa + "'>" +
-                    "<i class='fas fa-chevron-down arrowIcon task-icon'></i>" +
-                "</div>" +
+
+                // Div escondida
                 "<div id='moreInfo_" + task.id_tarefa + "' class='moreInfoDiv' style='display: none;'>" +
                     "<p>Points: " + task.valor_pontos + "</p>" +
                     "<p>Priority: " + priorityMap[task.prioridade] + "</p>" +
                     "<p>Difficulty: " + difficultyMap[task.dificuldade] + "</p>" +
                 "</div>" +
+
+                // Etiqueta de dificuldade
+                "<div class='difficulty " + task.dificuldade + "'></div>" +
             "</li>"
         );
     });
