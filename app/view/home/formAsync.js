@@ -1,3 +1,20 @@
+function toggleShowMore(taskId) {
+    const arrowIcon = $(`[data-task-id="${taskId}"] i`);
+    const moreInfoDiv = $(`#moreInfo_${taskId}`);
+    const task = $(`#task_${taskId}`);
+
+    // Fazer o div de informações adicionais aparecer ou desaparecer
+    moreInfoDiv.toggle();
+
+    // Calcula a margem inferior do elemento da tarefa
+    const margin = moreInfoDiv.is(":visible") ? moreInfoDiv.outerHeight() : 0;
+    task.css("margin-bottom", margin + "px");
+
+    // Faz o ícone da seta girar 180 graus
+    arrowIcon.toggleClass("rotated");
+}
+
+
 function updateTaskList(tasks) {
     // Limpa a lista de tarefas existente
     $("#taskList").empty();
@@ -5,13 +22,22 @@ function updateTaskList(tasks) {
     // Adiciona cada tarefa à lista de tarefas
     tasks.forEach(function (task) {
         $("#taskList").append(
-            "<li class='task' >" +
+            "<li class='task' id='task_" + task.id_tarefa + "'>" +
             "<div>" +
             "<p><strong>" + task.nome_tarefa + "</strong></p>" +
             "<p>" + task.descricao_tarefa + "</p>" +
             "</div>" +
             "<a class='deleteBtn' href='#' data-id='" + task.id_tarefa + "'>Delete</a>" +
             "<div class='difficulty " + task.dificuldade + "'></div>" +
+            // Adiciona botão para exibir mais informações sobre a tarefa
+            "<div class='showMoreBtn' data-task-id='" + task.id_tarefa + "'>" +
+            "<i class='fas fa-chevron-down arrowIcon'></i>" +
+            "</div>" +
+            "<div id='moreInfo_" + task.id_tarefa + "' class='moreInfoDiv' style='display: none;'>" +
+            "<p>Points: " + task.valor_pontos + "</p>" +
+            "<p>Priority: " + task.prioridade + "</p>" +
+            "<p>Difficulty: " + task.dificuldade + "</p>" +
+            "</div>" +
             "</li>"
         );
     });
@@ -24,6 +50,12 @@ function updateTaskList(tasks) {
     // Anexa um evento de clique ao botão de exclusão de tarefa
     $(".deleteBtn").click(deleteTask);
 }
+
+// Anexa um evento de clique ao botão de exibição de mais informações
+$(document).on("click", ".showMoreBtn", function () {
+    const taskId = $(this).data("task-id");
+    toggleShowMore(taskId);
+});
 
 async function deleteTask() {
     const taskId = $(this).data("id");

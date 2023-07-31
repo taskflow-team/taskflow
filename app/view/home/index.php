@@ -30,5 +30,8 @@ $tarefas = $tarefaDAO->listTarefas($id_usuario);
 <!-- Incluir jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
+<!-- Incluir Icones -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+
 <!-- Incluir formAsync.js -->
 <script src="../view/home/formAsync.js"></script>
