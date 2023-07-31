@@ -20,17 +20,17 @@
             <fieldset class="element" >
                 <label>Task Difficulty</label>
                 <div class="radios" >
-                    <input class="radio-square green" name="dificuldade" type="radio" value="easy" checked/>
-                    <input class="radio-square yellow" name="dificuldade" type="radio" value="medium"/>
-                    <input class="radio-square red" name="dificuldade" type="radio" value="hard"/>
+                    <input title="easy" class="radio-square green" name="dificuldade" type="radio" value="easy" checked/>
+                    <input title="medium" class="radio-square yellow" name="dificuldade" type="radio" value="medium"/>
+                    <input title="hard" class="radio-square red" name="dificuldade" type="radio" value="hard"/>
                 </div>
             </fieldset>
             <fieldset class="element" >
                 <label>Task Priority</label>
                 <div class="radios" >
-                    <input class="radio-square green" name="prioridade" type="radio" value="1" checked/>
-                    <input class="radio-square yellow" name="prioridade" type="radio" value="2"/>
-                    <input class="radio-square red" name="prioridade" type="radio" value="3"/>
+                    <input title="low" class="radio-square green" name="prioridade" type="radio" value="1" checked/>
+                    <input title="medium" class="radio-square yellow" name="prioridade" type="radio" value="2"/>
+                    <input title="high" class="radio-square red" name="prioridade" type="radio" value="3"/>
                 </div>
             </fieldset>
 
