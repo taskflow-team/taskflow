@@ -25,6 +25,4 @@ function notificate(type, title, content){
     document.body.appendChild(notification);
 }
 
-export {
-    notificate
-}
+export default notificate;

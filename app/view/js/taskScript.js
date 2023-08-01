@@ -1,4 +1,4 @@
-import { notificate } from './notification.js';
+import notificate from './notification.js';
 
 // Form view
 const showMore = document.querySelector("#showMore");
@@ -177,8 +177,6 @@ async function createTask(event) {
                 'Erro',
                 responseData.error
             );
-        } else {
-            notificate('success', 'Success', responseData.message);
         }
 
         // Obtém a lista de tarefas atualizada após criar a tarefa
