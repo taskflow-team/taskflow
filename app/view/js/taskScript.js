@@ -17,25 +17,68 @@ function showForm() {
 
 showMore.addEventListener("click", showForm);
 
-// Task functions
-function toggleShowMore(taskId) {
-    const arrowIcon = $(`[data-task-id="${taskId}"] i`);
-    const moreInfoDiv = $(`#moreInfo_${taskId}`);
-    const task = $(`#task_${taskId}`);
-
-    // Fazer o div de informações adicionais aparecer ou desaparecer
-    moreInfoDiv.toggle();
-
-    // Calcula a margem inferior do elemento da tarefa
-    // const margin = moreInfoDiv.is(":visible") ? moreInfoDiv.outerHeight() : 0;
-    // task.css("margin-bottom", margin + "px");
-    task.css("height: fit-content;");
-
-    // Faz o ícone da seta girar 180 graus
-    arrowIcon.toggleClass("rotated");
+// Função para obter a lista de tarefas atualizada do servidor
+function fetchTaskList() {
+    $.ajax({
+        type: "GET",
+        url: "/taskflow/app/controller/TarefaController.php?action=list",
+        success: function (response) {
+            if (response.message === "Success") {
+                // Atualiza a lista de tarefas na página
+                updateTaskList(response.data);
+            } else {
+                notificate('error', 'Error', 'There was an error while updating the task list');
+            }
+        },
+        error: function (xhr, status, error) {
+            notificate('error', 'Error', error);
+        }
+    });
 }
 
+// Chama a função fetchTaskList para carregar a lista de tarefas inicial na carga da página
+fetchTaskList();
 
+async function createTask(event) {
+    event.preventDefault();
+
+    const userID = Number(document.querySelector('#idUsuario').value);
+
+    const rawFormContent = new FormData(taskForm);
+    const formData = Object.fromEntries(rawFormContent);
+    taskForm.reset();
+
+    try {
+        const reqConfigs = {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                formData: formData,
+                userID: userID
+            })
+        };
+
+        const response = await fetch('TarefaController.php?action=save', reqConfigs);
+        const responseData = await response.json();
+
+        if (!response.ok || response.status == 404 || !responseData.ok) {
+            notificate(
+                'error',
+                'Erro',
+                responseData.error
+            );
+        }
+
+        // Obtém a lista de tarefas atualizada após criar a tarefa
+        fetchTaskList();
+    } catch (error) {
+        notificate('error', 'Error', error);
+    }
+}
+
+taskForm.addEventListener('submit', createTask);
 
 function updateTaskList(tasks) {
     // Limpa a lista de tarefas existente
@@ -96,6 +139,18 @@ function updateTaskList(tasks) {
     $(".deleteBtn").click(deleteTask);
 }
 
+function toggleShowMore(taskId) {
+    const arrowIcon = $(`[data-task-id="${taskId}"] i`);
+    const moreInfoDiv = $(`#moreInfo_${taskId}`);
+    const task = $(`#task_${taskId}`);
+
+    // Fazer o div de informações adicionais aparecer ou desaparecer
+    moreInfoDiv.toggle();
+
+    // Faz o ícone da seta girar 180 graus
+    arrowIcon.toggleClass("rotated");
+}
+
 // Anexa um evento de clique ao botão de exibição de mais informações
 $(document).on("click", ".showMoreBtn", function () {
     const taskId = $(this).data("task-id");
@@ -111,11 +166,8 @@ async function deleteTask() {
         });
 
         if (!response.ok) {
-            console.log("A requisição ao servidor falhou");
+            notificate('error', 'Error', 'The request to the server has failed');
         } else {
-            const responseData = await response.json();
-            console.log(responseData);
-
             // Realiza um fetch da lista de tarefas atualizada após excluir a tarefa
             fetchTaskList();
         }
@@ -123,67 +175,3 @@ async function deleteTask() {
         notificate('error', 'Error', error);
     }
 }
-
-// Função para obter a lista de tarefas atualizada do servidor
-function fetchTaskList() {
-    $.ajax({
-        type: "GET",
-        url: "/taskflow/app/controller/TarefaController.php?action=list",
-        dataType: "json",
-        success: function (response) {
-            if (response.message === "Success") {
-                // Atualiza a lista de tarefas na página
-                updateTaskList(response.data);
-            } else {
-                console.error("Ocorreu um erro ao obter a lista de tarefas.");
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error("Erro: " + status + " - " + error);
-        }
-    });
-}
-
-// Chama a função fetchTaskList para carregar a lista de tarefas inicial na carga da página
-fetchTaskList();
-
-async function createTask(event) {
-    event.preventDefault();
-
-    const userID = Number(document.querySelector('#idUsuario').value);
-
-    const rawFormContent = new FormData(taskForm);
-    const formData = Object.fromEntries(rawFormContent);
-    taskForm.reset();
-
-    try {
-        const reqConfigs = {
-            method: "POST",
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                formData: formData,
-                userID: userID
-            })
-        };
-
-        const response = await fetch('TarefaController.php?action=save', reqConfigs);
-        const responseData = await response.json();
-
-        if (!response.ok || response.status == 404 || !responseData.ok) {
-            notificate(
-                'error',
-                'Erro',
-                responseData.error
-            );
-        }
-
-        // Obtém a lista de tarefas atualizada após criar a tarefa
-        fetchTaskList();
-    } catch (error) {
-        notificate('error', 'Error', error);
-    }
-}
-
-taskForm.addEventListener('submit', createTask);
