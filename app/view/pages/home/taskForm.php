@@ -10,7 +10,9 @@
         value="<?php echo (isset($dados["tarefa"]) ? $dados["tarefa"]->getNome_tarefa() : ''); ?>"
     >
 
-    <p id="showMore" >Show more</p>
+    <div class="showMoreBtn" data-task-id="form">
+        <p id="showMoreText">Show more <i class="fas fa-chevron-down arrowIcon task-icon"></i></p>
+    </div>
 
     <div style="display: none" id="formDiv">
         <label for="descricao">Task Description</label>

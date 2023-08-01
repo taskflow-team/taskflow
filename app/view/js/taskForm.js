@@ -1,15 +1,10 @@
-// Form view
-const showMore = document.querySelector("#showMore");
-const formDiv = document.querySelector("#formDiv");
+const showMoreBtn = document.querySelector('.showMoreBtn');
+const arrowIcon = document.querySelector('.showMoreBtn i');
+const formDiv = document.querySelector('#formDiv');
 
-function showForm() {
-    if (formDiv.style.display === 'none') {
-        formDiv.style.display = 'block';
-        showMore.innerText = 'Show less';
-    } else {
-        formDiv.style.display = 'none';
-        showMore.innerText = 'Show more';
-    }
+showMoreBtn.addEventListener('click', toggleShowForm);
+
+function toggleShowForm() {
+    formDiv.style.display = formDiv.style.display === 'none' ? 'block' : 'none';
+    showMoreBtn.classList.toggle('rotated');
 }
-
-showMore.addEventListener("click", showForm);
