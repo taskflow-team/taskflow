@@ -66,16 +66,27 @@ async function createTask(event) {
 
 taskForm.addEventListener('submit', createTask);
 
+// Formata a data para o formato dd/mm/aaaa
+function formatDate(dateString) {
+    const date = new Date(dateString);
+    const day = date.getDate().toString().padStart(2, '0');
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  }
+
 function updateTaskList(tasks) {
     // Limpa a lista de tarefas existente
     $("#taskList").empty();
 
+    // Mapeia os valores de dificuldade
     const difficultyMap = {
         easy: 'Easy',
         medium: 'Medium',
         hard: 'Hard'
     };
 
+    // Mapeia os valores de prioridade
     const priorityMap = {
         1: 'Low',
         2: 'Medium',
@@ -84,6 +95,9 @@ function updateTaskList(tasks) {
 
     // Adiciona cada tarefa à lista de tarefas
     tasks.forEach(function (task) {
+        // Formata a data de criação da tarefa
+        const formattedDate = formatDate(task.data_criacao);
+
         $("#taskList").append(
             "<li class='task' id='task_" + task.id_tarefa + "'>" +
                 // Conteúdo principal
@@ -105,7 +119,7 @@ function updateTaskList(tasks) {
 
                 // Div escondida
                 "<div id='moreInfo_" + task.id_tarefa + "' class='moreInfoDiv' style='display: none;'>" +
-                    "<p>Points: " + task.valor_pontos + "</p>" +
+                    "<p>Creation Date: " + formattedDate + "</p>" +
                     "<p>Priority: " + priorityMap[task.prioridade] + "</p>" +
                     "<p>Difficulty: " + difficultyMap[task.dificuldade] + "</p>" +
                 "</div>" +

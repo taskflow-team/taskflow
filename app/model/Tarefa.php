@@ -9,7 +9,36 @@ Class Tarefa {
     private $prioridade;
     private $valor_pontos;
     private $concluida;
+    private $data_criacao;
     private $id_usuario;
+
+    public function getData_criacaoFormatted()
+    {
+        if ($this->data_criacao instanceof DateTime) {
+            return $this->data_criacao->format('Y-m-d H:i:s');
+        }
+        return null;
+    }
+
+    /**
+     * Get the value of data_criacao
+     */
+    public function getData_criacao()
+    {
+        return $this->data_criacao->format('Y-m-d H:i:s');
+    }
+
+    /**
+     * Set the value of data_criacao
+     *
+     * @return  self
+     */
+    public function setData_criacao($data_criacao) 
+    {
+        $this->data_criacao = $data_criacao;
+
+        return $this;
+    }
 
     /**
      * Get the value of valor_pontos

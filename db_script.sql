@@ -44,6 +44,7 @@ CREATE TABLE tb_tarefas (
     dificuldade VARCHAR(45),
     prioridade INT,
     valor_pontos INT,
+    data_criacao TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
     id_usuario INT,
     idtb_listas INT,
     FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario),

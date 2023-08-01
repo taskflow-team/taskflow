@@ -53,6 +53,7 @@ class TarefaController extends Controller {
                     'dificuldade' => $tarefa->getDificuldade(),
                     'prioridade' => $tarefa->getPrioridade(),
                     'valor_pontos' => $tarefa->getValor_pontos(),
+                    'data_criacao' => $tarefa->getData_criacao(),
                     'concluida' => $tarefa->getConcluida(),
                     'id_usuario' => $tarefa->getId_usuario(),
                 );
@@ -76,6 +77,7 @@ class TarefaController extends Controller {
         $dificuldade = isset($_POST['dificuldade']) ? trim($_POST['dificuldade']) : NULL;
         $prioridade = isset($_POST['prioridade']) ? trim($_POST['prioridade']) : NULL;
         $valor_pontos = isset($_POST['valor_pontos']) ? trim($_POST['valor_pontos']) : NULL;
+        $data_criacao = isset($_POST['data_criacao']) ? trim($_POST['data_criacao']) : NULL;
         $concluida = isset($_POST['concluida']) ? trim($_POST['concluida']) : NULL;
 
         $tarefa = new Tarefa();
@@ -85,6 +87,7 @@ class TarefaController extends Controller {
         $tarefa->setDificuldade($dificuldade);
         $tarefa->setPrioridade($prioridade);
         $tarefa->setValor_pontos($valor_pontos);
+        $tarefa->setData_criacao($data_criacao);
         $tarefa->setConcluida($concluida);
 
         $this->tarefaDao->updateTarefa($tarefa);
@@ -120,6 +123,7 @@ class TarefaController extends Controller {
         $tarefa->setDificuldade($formData['dificuldade']);
         $tarefa->setPrioridade($formData['prioridade']);
         $tarefa->setValor_pontos($formData['valor_pontos']);
+        $tarefa->setData_criacao(date('Y-m-d H:i:s'));
         $tarefa->setId_usuario($userID);
 
         // Validar os dados da tarefa

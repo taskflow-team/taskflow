@@ -81,8 +81,8 @@ class TarefaDAO {
     public function insertTarefa(Tarefa $tarefa) {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, id_usuario)" .
-               " VALUES (:nome_tarefa, :descricao, :dificuldade, :prioridade, :valor_pontos, :id_usuario)";
+        $sql = "INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, data_criacao, id_usuario)" .
+               " VALUES (:nome_tarefa, :descricao, :dificuldade, :prioridade, :valor_pontos, :data_criacao, :id_usuario)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue(":nome_tarefa", $tarefa->getNome_tarefa());
@@ -90,6 +90,7 @@ class TarefaDAO {
         $stm->bindValue(":dificuldade", $tarefa->getDificuldade());
         $stm->bindValue(":prioridade", $tarefa->getPrioridade());
         $stm->bindValue(":valor_pontos", $tarefa->getValor_pontos(), PDO::PARAM_INT);
+        $stm->bindValue(":data_criacao", $tarefa->getData_criacaoFormatted());
         $stm->bindValue(":id_usuario", $tarefa->getId_usuario());
         $stm->execute();
     }
@@ -99,14 +100,15 @@ class TarefaDAO {
     public function updateTarefa(Tarefa $tarefa) {
         $conn = Connection::getConn();
 
-        $sql = "UPDATE tb_tarefas SET nome_tarefa = ?, descricao = ?, dificuldade = ?, prioridade = ?, valor_pontos = ? WHERE id_tarefa = ?";
+        $sql = "UPDATE tb_tarefas SET nome_tarefa = ?, descricao = ?, dificuldade = ?, prioridade = ?, valor_pontos = ?, data_criacao = ? WHERE id_tarefa = ?";
         $stm = $conn->prepare($sql);
         $stm->bindValue(1, $tarefa->getNome_tarefa());
         $stm->bindValue(2, $tarefa->getDescricao_tarefa());
         $stm->bindValue(3, $tarefa->getDificuldade());
         $stm->bindValue(4, $tarefa->getPrioridade());
         $stm->bindValue(5, $tarefa->getValor_pontos());
-        $stm->bindValue(6, $tarefa->getId_tarefa());
+        $stm->bindValue(6, $tarefa->getData_criacao());
+        $stm->bindValue(7, $tarefa->getId_tarefa());
         $stm->execute();
 
     }
@@ -136,6 +138,8 @@ class TarefaDAO {
             $tarefa->setDificuldade($row["dificuldade"]);
             $tarefa->setPrioridade($row["prioridade"]);
             $tarefa->setValor_pontos($row["valor_pontos"]);
+            $date_criacao = new DateTime($row["data_criacao"]);
+            $tarefa->setData_criacao($date_criacao);
             array_push($tarefas, $tarefa);
         }
 
