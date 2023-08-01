@@ -14,12 +14,6 @@ CREATE TABLE tb_usuarios (
 INSERT INTO tb_usuarios (nome_usuario, login, email, senha) VALUES ('Sr. Administrador', 'admin', 'admin@admin', 'admin');
 INSERT INTO tb_usuarios (nome_usuario, login, email, senha) VALUES ('Sr. Root', 'root','root@root', 'root');
 
--- Cria a tabela de níveis
-CREATE TABLE tb_niveis (
-    idtb_niveis INT PRIMARY KEY AUTO_INCREMENT,
-    nome_nivel VARCHAR(45)
-);
-
 -- Cria a tabela de grupos
 CREATE TABLE tb_grupos (
     idtb_grupos INT PRIMARY KEY AUTO_INCREMENT,
