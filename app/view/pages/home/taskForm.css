@@ -77,9 +77,25 @@
     content: "✔️";
 }
 
-.task-form .showMoreBtn p {
+.showMoreBtn {
     display: flex;
     align-items: center;
+    justify-content: center;
+    margin-left: 10px; 
+}
+
+.btn-wrapper {
+    display: flex;
+    align-items: center;
+}
+
+.btn-wrapper .btn {
+    margin-right: 10px;
+}
+
+.showMoreBtn p {
+    font-weight: 600;
+    margin-bottom: 0px;
 }
 
 .showMoreBtn i {
@@ -90,6 +106,7 @@
 .showMoreBtn.rotated i {
     transform: rotate(180deg);
 }
+
 
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
