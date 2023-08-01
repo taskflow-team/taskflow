@@ -7,7 +7,7 @@
 .pseudo-body .profile-holder{
     width: 600px;
     height: 700px;
-    margin: 50px;
+    margin: 100px 50px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -61,7 +61,7 @@
 }
 
 .btn:hover{
-    background-color: #4DD96C;
+    background-color: #218838;
 }
 
 .eyeIcon{
@@ -72,7 +72,8 @@
 
 #btnSubmit{
     margin-top: 20px;
-    background-color: #4DD96C;
+    background-color: #218838;
+    border-color: #218838;
 }
 
 .btn{
