@@ -43,7 +43,7 @@ class UsuarioController extends Controller {
         $response = array(
             'ok' => true,
             'message' => 'Success',
-            'content' => $usuario
+            'user' => $usuario
         );
 
         // Limpa qualquer saída anterior antes de definir os cabeçalhos JSON
