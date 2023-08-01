@@ -45,8 +45,6 @@
             </fieldset>
         </div>
 
-
-
         <div class="col-6">
             <?php
             // Exibir erros, se houver
@@ -63,11 +61,11 @@
     <input id="idUsuario" name="idUsuario" type="hidden" value="<?php echo $_SESSION[SESSAO_USUARIO_ID]; ?>" />
 
     <div class="btn-wrapper">
-        <button type="submit" class="btn btn-success" id="submitTaskButton">Add Task</button>
-
         <div class="showMoreBtn btn btn-success">
             <p id="showMoreText">Show more <i class="fas fa-chevron-down arrowIcon task-icon"></i></p>
         </div>
+
+        <button type="submit" class="btn btn-success" id="submitTaskButton">Add Task</button>
     </div>
 
 
