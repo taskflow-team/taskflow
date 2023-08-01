@@ -1,3 +1,5 @@
+import { notificate } from './notification.js';
+
 // Form view
 const showMore = document.querySelector("#showMore");
 const formDiv = document.querySelector("#formDiv");
@@ -118,7 +120,7 @@ async function deleteTask() {
             fetchTaskList();
         }
     } catch (error) {
-        console.log(`Ocorreu um erro durante a requisição: ${error}`);
+        notificate('error', 'Error', error);
     }
 }
 
@@ -167,18 +169,22 @@ async function createTask(event) {
         };
 
         const response = await fetch('TarefaController.php?action=save', reqConfigs);
-
-        if (!response.ok) {
-            console.log('A requisição ao servidor falhou');
-        }
-
         const responseData = await response.json();
-        console.log(responseData);
+
+        if (!response.ok || response.status == 404 || !responseData.ok) {
+            notificate(
+                'error',
+                'Erro',
+                responseData.error
+            );
+        } else {
+            notificate('success', 'Success', responseData.message);
+        }
 
         // Obtém a lista de tarefas atualizada após criar a tarefa
         fetchTaskList();
     } catch (error) {
-        console.log(`Ocorreu um erro durante a requisição: ${error}`);
+        notificate('error', 'Error', error);
     }
 }
 

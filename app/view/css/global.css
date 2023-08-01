@@ -29,3 +29,43 @@ body{
     margin-bottom: 15px;
 
 }
+
+.notification{
+    width: 290px;
+    height: 150px;
+    padding: 12px;
+    background-color: #d0d0d0;
+    border: 3px solid #7d7b7b;
+    border-radius: 7px;
+    color: #FFF;
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    z-index: 1;
+}
+
+.notification h3{
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.error{
+    background-color: #f86f6f;
+    border-color: #f64242;
+}
+
+.success{
+    background-color: #4DD167;
+    border-color: #22b13e;
+}
+
+.notification .closeBtn{
+    background-color: transparent;
+    border: none;
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    cursor: pointer;
+    color: #FFF;
+}

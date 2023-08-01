@@ -32,4 +32,4 @@ $tarefas = $tarefaDAO->listTarefas($id_usuario);
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- Incluir formAsync.js -->
-<script src="../view/js/taskScript.js"></script>
+<script type="module" src="../view/js/taskScript.js"></script>
