@@ -1,21 +1,7 @@
 import notificate from './notification.js';
 
-// Form view
-const showMore = document.querySelector("#showMore");
-const formDiv = document.querySelector("#formDiv");
+// Referenciando o form
 const taskForm = document.querySelector('#frmTarefa');
-
-function showForm() {
-    if (formDiv.style.display === 'none') {
-        formDiv.style.display = 'block';
-        showMore.innerText = 'Show less';
-    } else {
-        formDiv.style.display = 'none';
-        showMore.innerText = 'Show more';
-    }
-}
-
-showMore.addEventListener("click", showForm);
 
 // Função para obter a lista de tarefas atualizada do servidor
 function fetchTaskList() {
