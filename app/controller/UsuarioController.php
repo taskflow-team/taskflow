@@ -38,7 +38,7 @@ class UsuarioController extends Controller {
             exit;
         }
 
-        $usuario = $this->findUsuarioById();
+        $usuario = $this->usuarioDao->findById(11);
 
         $response = array(
             'ok' => true,
@@ -134,8 +134,6 @@ class UsuarioController extends Controller {
 
         if(isset($_SESSION[SESSAO_USUARIO_ID])) {
             $id = $_SESSION[SESSAO_USUARIO_ID];
-
-            echo $id;
         }
 
         $usuario = $this->usuarioDao->findById($id);

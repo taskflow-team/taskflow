@@ -12,10 +12,10 @@ class UsuarioDAO {
         $conn = Connection::getConn();
 
         $sql = "SELECT * FROM tb_usuarios u ORDER BY u.nome_usuario";
-        $stm = $conn->prepare($sql);    
+        $stm = $conn->prepare($sql);
         $stm->execute();
         $result = $stm->fetchAll();
-        
+
         return $this->mapUsuarios($result);
     }
 
@@ -25,7 +25,7 @@ class UsuarioDAO {
 
         $sql = "SELECT * FROM tb_usuarios u" .
                " WHERE u.id_usuario = ?";
-        $stm = $conn->prepare($sql);    
+        $stm = $conn->prepare($sql);
         $stm->execute([$id]);
         $result = $stm->fetchAll();
 
@@ -36,7 +36,7 @@ class UsuarioDAO {
         elseif(count($usuarios) == 0)
             return null;
 
-        die("UsuarioDAO.findById()" . 
+        die("UsuarioDAO.findById()" .
             " - Erro: mais de um usuário encontrado.");
     }
 
@@ -47,7 +47,7 @@ class UsuarioDAO {
 
         $sql = "SELECT * FROM tb_usuarios u" .
                " WHERE u.login = ? AND u.senha = ?";
-        $stm = $conn->prepare($sql);    
+        $stm = $conn->prepare($sql);
         $stm->execute([$login, $senha]);
         $result = $stm->fetchAll();
 
@@ -58,7 +58,7 @@ class UsuarioDAO {
         elseif(count($usuarios) == 0)
             return null;
 
-        die("UsuarioDAO.findByLoginSenha()" . 
+        die("UsuarioDAO.findByLoginSenha()" .
             " - Erro: mais de um usuário encontrado.");
     }
 
@@ -68,7 +68,7 @@ class UsuarioDAO {
 
         $sql = "INSERT INTO tb_usuarios (nome_usuario, login, senha, email, nivel, pontos, tarefas_concluidas)" .
                " VALUES (:nome, :login, :senha, :email, :nivel, :pontos, :tarefas_concluidas)";
-        
+
         $stm = $conn->prepare($sql);
         $stm->bindValue("nome", $usuario->getNome());
         $stm->bindValue("login", $usuario->getLogin());
@@ -84,10 +84,10 @@ class UsuarioDAO {
     public function update(Usuario $usuario) {
         $conn = Connection::getConn();
 
-        $sql = "UPDATE tb_usuarios SET email = :email," . 
-               " senha = :senha" .   
+        $sql = "UPDATE tb_usuarios SET email = :email," .
+               " senha = :senha" .
                " WHERE id_usuario = :id";
-        
+
         $stm = $conn->prepare($sql);
         $stm->bindValue("senha", $usuario->getSenha());
         $stm->bindValue("email", $usuario->getEmail());
@@ -100,7 +100,7 @@ class UsuarioDAO {
         $conn = Connection::getConn();
 
         $sql = "DELETE FROM tb_usuarios WHERE id_usuario = :id";
-        
+
         $stm = $conn->prepare($sql);
         $stm->bindValue("id", $id);
         $stm->execute();
