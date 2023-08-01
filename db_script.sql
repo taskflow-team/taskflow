@@ -38,7 +38,7 @@ CREATE TABLE tb_listas (
 -- Cria a tabela de tarefas
 CREATE TABLE tb_tarefas (
     id_tarefa INT AUTO_INCREMENT PRIMARY KEY,
-    nome_tarefa VARCHAR(45) NOT NULL,
+    nome_tarefa VARCHAR(150) NOT NULL,
     descricao VARCHAR(150),
     concluida BOOLEAN DEFAULT false,
     dificuldade VARCHAR(45),
