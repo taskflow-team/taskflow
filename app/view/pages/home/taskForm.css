@@ -13,6 +13,14 @@
     color: #4DD167;
 }
 
+.task-form .dark-input{
+    width: 100%;
+    height: 65px;
+    padding: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
 .pseudo-body .task-form button{
     width: 100px;
 }
