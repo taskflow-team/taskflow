@@ -2,7 +2,7 @@
 
 body {
     font-family: 'Outfit', sans-serif;
-    background-color: #1D1D1D; /* Adjust the background color as needed */
+    background-color: #1D1D1D; 
     margin: 0;
     padding: 0;
 }
@@ -10,20 +10,63 @@ body {
 .container {
     display: flex;
     align-items: center;
+    justify-content: center; 
     height: 100vh;
+    max-width: 80%;
 }
 
 .login-form {
-    background-color: #1D1D1D; /* Adjust the transparency and color as needed */
+    background-color: #1D1D1D; 
     color: #fff;
     padding: 20px;
     width: 50%;
-    /* make form align to left */
-    margin-left: -16rem;
+    max-width: 500px; 
+    margin-right: auto; 
     position: relative;
 }
+
+/* Media Query for larger screens */
+@media only screen and (max-width: 1024px) {
+    .container {
+        justify-content: flex-start; 
+    }
+
+    .login-form {
+        width: 100%;
+        margin: 80px auto;
+    }
+
+    .login-logo img {
+        margin-top: -100px;
+    }
+
+    .login-image {
+        display: none;
+    }
+
+    .login-logo {
+        text-align: center !important; 
+        margin-left: auto;
+        margin-bottom: 64px;
+    }
+
+    .login-form button {
+        background-color: #4DD96C;
+        color: #fff;
+        padding: 10px 20px;
+        font-size: 16px;
+        font-weight: 600;
+        border-radius: 10px;
+        width: 100% !important;
+        margin-top: 48px; 
+        height: 50px;
+        border: none;
+        cursor: pointer;
+    }
+}
+
 .login-form input {
-    background-color: #fff; /* Adjust the transparency and color as needed */
+    background-color: #fff; 
     color: #1D1D1D;
     padding: 10px 20px;
     font-size: 16px;
@@ -37,10 +80,10 @@ body {
 .login-form input::placeholder {
     color: #1D1D1D;
     font-weight: 500;
-  }
+}
 
 .login-logo {
-    text-align: left;
+    text-align: left; 
     margin-bottom: 64px;
 }
 
@@ -65,8 +108,8 @@ body {
     font-weight: 600;
     border-radius: 10px;
     width: 30%;
-    margin-top: 128px;
-    margin-bottom: 20px;
+    max-width: 200px; /* Limit button width for larger screens */
+    margin-top: 48px; /* Reduce margin on small devices */
     height: 50px;
     border: none;
     cursor: pointer;
@@ -75,14 +118,13 @@ body {
 .login-form h4 {
     margin: 0;
     font-weight: 400;
-    font-size: 52px;
+    font-size: 32px; /* Decrease font size for small devices */
     color: #4DD96C;
-    margin-bottom: 2rem;
+    margin-bottom: 1rem; /* Reduce margin for small devices */
 }
 
 .login-logo img {
     width: 120px;
-    margin-top: -10rem;
 }
 
 .login-form .form-group {
@@ -93,12 +135,11 @@ body {
     margin-bottom: -16px;
 }
 
-
 .login-image {
     background-repeat: no-repeat;
     width: 50%;
     position: absolute;
-    right: 0px;
+    right: 0;
     height: 100%;
 }
 
