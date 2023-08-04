@@ -38,8 +38,8 @@ class UsuarioController extends Controller {
             exit;
         }
 
-        $usuario = $this->usuarioDao->findById(11);
-
+        $usuario = $this->usuarioDao->findById(1);
+        
         $response = array(
             'ok' => true,
             'message' => 'Success',
@@ -52,19 +52,40 @@ class UsuarioController extends Controller {
         echo json_encode($response);
     }
 
-    protected function edit(){
-        $id = isset($_POST['id']) ? trim($_POST['id']) : NULL;
-        $senha = isset($_POST['senha']) ? trim($_POST['senha']) : NULL;
-        $email = isset($_POST['email']) ? trim($_POST['email']) : NULL;
+    protected function edit() {
+        $jsonString = file_get_contents('php://input');
+        $requestData = json_decode($jsonString, true);
+    
+        // Check if the JSON data was successfully decoded
+        if ($requestData === null) {
+            $response = array(
+                'ok' => false,
+                'message' => 'Invalid JSON data',
+            );
+    
+            ob_clean();
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit;
+        }
+    
+        $formData = $requestData['formData'];
 
         $usuario = new Usuario();
-        $usuario->setId($id);
-        $usuario->setSenha($senha);
-        $usuario->setEmail($email);
+        $usuario->setId($formData['id']);
+        $usuario->setSenha($formData['senha']);
+        $usuario->setEmail($formData['email']);
 
         $this->usuarioDao->update($usuario);
-        $msg = "Usuário atualizado com sucesso.";
-        $this->showProfile($msg);
+        
+        $response = array(
+            'ok' => true,
+            'message' => 'Success',
+        );
+
+        ob_clean();
+        header('Content-Type: application/json');
+        echo json_encode($response);
     }
 
     protected function save() {

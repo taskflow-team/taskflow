@@ -42,6 +42,8 @@
                     <button class="btn edit" id="btnPassword">Edit</button>
                 </div>
 
+                <input type="hidden" id="userId" name="id" >
+
                 <button type="submit" class="btn btn-success" id="btnSubmit">Update Profile</button>
             </form>
         </div>

@@ -2,7 +2,7 @@
 #Nome do arquivo: Usuario.php
 #Objetivo: classe Model para Usuario
 
-class Usuario {
+class Usuario implements JsonSerializable {
 
     private $id;
     private $nome;
@@ -13,6 +13,19 @@ class Usuario {
     private $nivel;
     private $tarefas_concluidas;
 
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize() {
+        return [
+                "id" => $this->id,
+                "nome" => $this->nome,
+                "login" => $this->login,
+                "senha" => $this->senha,
+                "email" => $this->email,
+                "pontos" => $this->pontos,
+                "nivel" => $this->nivel,
+                "tarefas_concluidas" => $this->tarefas_concluidas
+            ];
+    }
 
     /**
      * Get the value of id
