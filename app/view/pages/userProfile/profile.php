@@ -9,10 +9,10 @@
 <div class="pseudo-body">
         <div class="profile-holder">
             <img src="../view/assets/img/profile.png" alt="profile picture">
-            <h1><?php echo $dados["usuario"]->getLogin() ?></h1>
-            <h2><?php echo $dados["usuario"]->getNome() ?></h2>
-            <h2><?php echo $dados["usuario"]->getNivel() ?></h2>
-            <p>Finished tasks: <?php echo $dados["usuario"]->getTarefas_Concluidas() ?></p>
+            <h1 id="user-name" ></h1>
+            <h2 id="user-login" ></h2>
+            <h2 id="user-nivel" ></h2>
+            <p  id="finished-tasks" ></p>
 
             <form id="frmEditUsuario" method="POST" action="<?= BASEURL ?>/controller/UsuarioController.php?action=edit">
                 <label for="email">Email:</label>
@@ -20,11 +20,10 @@
                     <input
                         class="dark-input"
                         type="email"
-                        id="txtEmail"
+                        id="user-email"
                         name="email"
                         placeholder="Your email" readonly
                         required
-                        value="<?php echo $dados["usuario"]->getEmail(); ?>"
                     />
                     <button class="btn edit" id="btnEmail">Edit</button>
                 </div>
@@ -34,27 +33,24 @@
                     <input
                         class="dark-input"
                         type="password"
-                        id="txtPassword"
+                        id="user-password"
                         name="senha"
                         placeholder="Password" readonly
                         required
-                        value="<?php echo $dados["usuario"]->getSenha(); ?>"
                     />
                     <img src="../view/assets/icons/eye.png" alt="eye icon" class="eyeIcon">
                     <button class="btn edit" id="btnPassword">Edit</button>
                 </div>
 
-                <input type="hidden" name="id" value="<?php echo $dados["usuario"]->getId(); ?>" />
-
-                <?php
-                    if (isset($msgSucesso) && trim($msgSucesso) != "") {
-                        echo "<div class='alert alert-success'>" . $msgSucesso . "</div>";
-                    }
-                ?>
+                <input type="hidden" id="userId" name="id" >
 
                 <button type="submit" class="btn btn-success" id="btnSubmit">Update Profile</button>
             </form>
         </div>
 </div>
 
+<!-- Incluir jQuery -->
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<!-- Incluir Scripts do profile -->
 <script type="module" src="../view/js/profile.js"></script>
