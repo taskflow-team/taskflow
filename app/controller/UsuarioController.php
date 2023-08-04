@@ -38,8 +38,8 @@ class UsuarioController extends Controller {
             exit;
         }
 
-        $usuario = $this->usuarioDao->findById(1);
-        
+        $usuario = $this->findUsuarioById();
+
         $response = array(
             'ok' => true,
             'message' => 'Success',
@@ -55,20 +55,20 @@ class UsuarioController extends Controller {
     protected function edit() {
         $jsonString = file_get_contents('php://input');
         $requestData = json_decode($jsonString, true);
-    
+
         // Check if the JSON data was successfully decoded
         if ($requestData === null) {
             $response = array(
                 'ok' => false,
                 'message' => 'Invalid JSON data',
             );
-    
+
             ob_clean();
             header('Content-Type: application/json');
             echo json_encode($response);
             exit;
         }
-    
+
         $formData = $requestData['formData'];
 
         $usuario = new Usuario();
@@ -77,7 +77,7 @@ class UsuarioController extends Controller {
         $usuario->setEmail($formData['email']);
 
         $this->usuarioDao->update($usuario);
-        
+
         $response = array(
             'ok' => true,
             'message' => 'Success',
