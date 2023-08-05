@@ -65,7 +65,7 @@ async function createTask(event) {
 }
 
 taskForm.addEventListener('submit', createTask);
-
+    
 // Formata a data para o formato dd/mm/aaaa
 function formatDate(dateString) {
     const date = new Date(dateString);
@@ -97,12 +97,14 @@ function updateTaskList(tasks) {
     tasks.forEach(function (task) {
         // Formata a data de criação da tarefa
         const formattedDate = formatDate(task.data_criacao);
+        const taskCompleted = task.concluida == 1 ? 'checked' : '';
 
         $("#taskList").append(
             "<li class='task' id='task_" + task.id_tarefa + "'>" +
                 // Conteúdo principal
                 "<div class='top-content' >" +
                     "<div>" +
+                    "<input type='checkbox' class='completedBtn' data-id='" + task.id_tarefa + "' " + taskCompleted + ">" + 
                         "<p><strong>" + task.nome_tarefa + "</strong></p>" +
                         "<p>" + task.descricao_tarefa + "</p>" +
                     "</div>" +
@@ -135,8 +137,52 @@ function updateTaskList(tasks) {
         $("#taskList").append("<p>No pending tasks</p>");
     }
 
+    // Anexa um evento de clique ao botão de conclusão de tarefa
+    $(".completedBtn").change(completeTask);
+
     // Anexa um evento de clique ao botão de exclusão de tarefa
     $(".deleteBtn").click(deleteTask);
+}
+
+async function completeTask() {
+    const taskId = $(this).data("id");
+
+    const rawFormContent = new FormData(taskForm);
+    const formData = Object.fromEntries(rawFormContent);
+    taskForm.reset();
+    
+    const taskCompleted = $(this).prop("checked");
+
+    try {
+        const reqConfigs = {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                taskId: taskId,
+                formData: formData,
+                taskCompleted: taskCompleted
+            })
+        };
+
+        const response = await fetch('TarefaController.php?action=edit', reqConfigs);
+
+        const responseData = await response.json();
+
+        if (!response.ok || response.status == 404 || !responseData.ok) {
+            notificate(
+                'error',
+                'Erro',
+                responseData.error
+            );
+        }
+
+        // Obtém a lista de tarefas atualizada após completar a tarefa
+        fetchTaskList();
+    } catch (error) {
+        notificate('error', 'Error', error);
+    }
 }
 
 function toggleShowMore(taskId) {

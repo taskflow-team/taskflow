@@ -71,29 +71,49 @@ class TarefaController extends Controller {
     }
 
     protected function edit() {
-        $tarefaId = isset($_POST['id']) ? $_POST['id'] : NULL;
-        $nome = isset($_POST['nome']) ? trim($_POST['nome']) : NULL;
-        $descricao = isset($_POST['descricao']) ? trim($_POST['descricao']) : NULL;
-        $dificuldade = isset($_POST['dificuldade']) ? trim($_POST['dificuldade']) : NULL;
-        $prioridade = isset($_POST['prioridade']) ? trim($_POST['prioridade']) : NULL;
-        $valor_pontos = isset($_POST['valor_pontos']) ? trim($_POST['valor_pontos']) : NULL;
-        $data_criacao = isset($_POST['data_criacao']) ? trim($_POST['data_criacao']) : NULL;
-        $concluida = isset($_POST['concluida']) ? trim($_POST['concluida']) : NULL;
-
-        $tarefa = new Tarefa();
-        $tarefa->setId_tarefa($tarefaId);
-        $tarefa->setNome_tarefa($nome);
-        $tarefa->setDescricao_tarefa($descricao);
-        $tarefa->setDificuldade($dificuldade);
-        $tarefa->setPrioridade($prioridade);
-        $tarefa->setValor_pontos($valor_pontos);
-        $tarefa->setData_criacao($data_criacao);
-        $tarefa->setConcluida($concluida);
-
-        $this->tarefaDao->updateTarefa($tarefa);
-        $msg = "Tarefa atualizada com sucesso.";
-        $this->loadView("/home/form.php", [], "", $msg);
-    }
+        $jsonString = file_get_contents('php://input');
+        $requestData = json_decode($jsonString, true);
+    
+        if ($requestData === null) {
+            $response = array(
+                'message' => 'Dados JSON inválidos',
+            );
+    
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit;
+        }
+    
+        $tarefaId = $requestData['taskId'];
+        $taskCompleted = $requestData['taskCompleted'];
+    
+        // Fetch the existing task
+        $tarefa = $this->tarefaDao->findByIdTarefa($tarefaId);
+    
+        // Apply the changes
+        $tarefa->setConcluida($taskCompleted ? 1 : 0);
+    
+        try {
+            $this->tarefaDao->updateTarefa($tarefa);
+    
+            $response = array(
+                'ok' => true,
+                'message' => 'Tarefa atualizada com sucesso.'
+            );
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit;
+        } catch (PDOException $e) {
+            $response = array(
+                'ok' => false,
+                'message' => 'Ocorreu um erro durante a requisição',
+                'error' => $e->getMessage()
+            );
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit;
+        }
+    }    
 
     protected function save() {
         // Obter os dados JSON brutos do corpo da requisição

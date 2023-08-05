@@ -99,8 +99,8 @@ class TarefaDAO {
 
     public function updateTarefa(Tarefa $tarefa) {
         $conn = Connection::getConn();
-
-        $sql = "UPDATE tb_tarefas SET nome_tarefa = ?, descricao = ?, dificuldade = ?, prioridade = ?, valor_pontos = ?, data_criacao = ? WHERE id_tarefa = ?";
+    
+        $sql = "UPDATE tb_tarefas SET nome_tarefa = ?, descricao = ?, dificuldade = ?, prioridade = ?, valor_pontos = ?, data_criacao = ?, concluida = ? WHERE id_tarefa = ?";
         $stm = $conn->prepare($sql);
         $stm->bindValue(1, $tarefa->getNome_tarefa());
         $stm->bindValue(2, $tarefa->getDescricao_tarefa());
@@ -108,10 +108,11 @@ class TarefaDAO {
         $stm->bindValue(4, $tarefa->getPrioridade());
         $stm->bindValue(5, $tarefa->getValor_pontos());
         $stm->bindValue(6, $tarefa->getData_criacao());
-        $stm->bindValue(7, $tarefa->getId_tarefa());
+        $stm->bindValue(7, $tarefa->getConcluida());
+        $stm->bindValue(8, $tarefa->getId_tarefa());
         $stm->execute();
-
     }
+    
 
     //Método para excluir uma Tarefa pelo seu ID
 
@@ -130,16 +131,17 @@ class TarefaDAO {
     private function mapTarefas($result) {
         $tarefas = array();
 
-        foreach($result as $row) {
-            $tarefa = new Tarefa();
-            $tarefa->setId_tarefa($row["id_tarefa"]);
-            $tarefa->setNome_tarefa($row["nome_tarefa"]);
-            $tarefa->setDescricao_tarefa($row["descricao"]);
-            $tarefa->setDificuldade($row["dificuldade"]);
-            $tarefa->setPrioridade($row["prioridade"]);
-            $tarefa->setValor_pontos($row["valor_pontos"]);
-            $date_criacao = new DateTime($row["data_criacao"]);
-            $tarefa->setData_criacao($date_criacao);
+foreach($result as $row) {
+        $tarefa = new Tarefa();
+        $tarefa->setId_tarefa($row["id_tarefa"]);
+        $tarefa->setNome_tarefa($row["nome_tarefa"]);
+        $tarefa->setDescricao_tarefa($row["descricao"]);
+        $tarefa->setDificuldade($row["dificuldade"]);
+        $tarefa->setPrioridade($row["prioridade"]);
+        $tarefa->setValor_pontos($row["valor_pontos"]);
+        $date_criacao = new DateTime($row["data_criacao"]);
+        $tarefa->setData_criacao($date_criacao);
+        $tarefa->setConcluida($row["concluida"]);
             array_push($tarefas, $tarefa);
         }
 
