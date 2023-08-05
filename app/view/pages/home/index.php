@@ -25,6 +25,8 @@ $tarefas = $tarefaDAO->listTarefas($id_usuario);
     ?>
 
     <h2>Pending Tasks</h2>
+    <button class="filterCompletedTasks" id="completedTasks">Completed Tasks</button>
+    <button class="filterCompletedTasks" id="incompletedTasks">Incompleted Tasks</button>
     <ul id="taskList" class="task-list"></ul>
 </div>
 

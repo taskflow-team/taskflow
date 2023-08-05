@@ -3,6 +3,44 @@ import notificate from './notification.js';
 // Referenciando o form
 const taskForm = document.querySelector('#frmTarefa');
 
+// Referencing the buttons for filtering completed and incompleted tasks
+const completedTasksButton = document.querySelector('#completedTasks');
+const incompletedTasksButton = document.querySelector('#incompletedTasks');
+
+// Função para filtrar as tarefas concluídas e não concluídas
+function handleTasksVisibility() {
+    const tasks = document.querySelectorAll('.task');
+    const isCompletedButton = this.id === 'completedTasks';
+    const isIncompletedButton = this.id === 'incompletedTasks';
+
+    this.classList.toggle('button-active');
+
+    // Gerencia qual botão está ativo
+    if (isCompletedButton) {
+        incompletedTasksButton.classList.remove('button-active');
+    } else {
+        completedTasksButton.classList.remove('button-active');
+    }
+
+    // Exibe as tarefas concluídas ou não concluídas de acordo com o botão clicado
+    tasks.forEach(task => {
+        const isTaskChecked = task.classList.contains('checked');
+
+        if ((isCompletedButton && isTaskChecked) || (isIncompletedButton && !isTaskChecked)) {
+            task.style.display = 'block';
+        } else if (!completedTasksButton.classList.contains('button-active') && 
+                   !incompletedTasksButton.classList.contains('button-active')) {
+            task.style.display = 'block';
+        } else {
+            task.style.display = 'none';
+        }
+    });
+}
+
+// Adiciona o evento de clique aos botões de filtro de conclusão de tarefas
+completedTasksButton.addEventListener('click', handleTasksVisibility);
+incompletedTasksButton.addEventListener('click', handleTasksVisibility);
+
 // Função para obter a lista de tarefas atualizada do servidor
 function fetchTaskList() {
     $.ajax({

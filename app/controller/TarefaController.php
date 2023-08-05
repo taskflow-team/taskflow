@@ -87,10 +87,8 @@ class TarefaController extends Controller {
         $tarefaId = $requestData['taskId'];
         $taskCompleted = $requestData['taskCompleted'];
     
-        // Fetch the existing task
         $tarefa = $this->tarefaDao->findByIdTarefa($tarefaId);
     
-        // Apply the changes
         $tarefa->setConcluida($taskCompleted ? 1 : 0);
     
         try {
