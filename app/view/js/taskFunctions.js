@@ -100,11 +100,13 @@ function updateTaskList(tasks) {
         const taskCompleted = task.concluida == 1 ? 'checked' : '';
 
         $("#taskList").append(
-            "<li class='task' id='task_" + task.id_tarefa + "'>" +
+            "<li class='task "+taskCompleted+"' id='task_" + task.id_tarefa + "'>" +
                 // Conteúdo principal
                 "<div class='top-content' >" +
+
+                "<input type='checkbox' class='completedBtn' data-id='" + task.id_tarefa + "' " + taskCompleted + ">" + 
+                
                     "<div>" +
-                    "<input type='checkbox' class='completedBtn' data-id='" + task.id_tarefa + "' " + taskCompleted + ">" + 
                         "<p><strong>" + task.nome_tarefa + "</strong></p>" +
                         "<p>" + task.descricao_tarefa + "</p>" +
                     "</div>" +
