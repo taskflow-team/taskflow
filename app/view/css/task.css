@@ -107,13 +107,12 @@
 }
 
 .completedBtn {
-    border: none;
-    border-radius: 8px;
-    font-size: 16px;
-    font-weight: 600;
-    text-align: center;
+    width: 16px;
+    height: 16px;
+    border-radius: 13px;
     margin-right: 20px;
     margin-left: 10px;
+    accent-color: #4DD167;
     transition: transform 0.3s ease;
 }
 
@@ -123,5 +122,5 @@
 }
 
 .task-list .task.checked{
-    opacity: 0.5;
+    text-decoration: line-through;
 }
