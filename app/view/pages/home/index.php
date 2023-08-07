@@ -24,13 +24,18 @@ $tarefas = $tarefaDAO->listTarefas($id_usuario);
         require_once(__DIR__ . "/taskForm.php");
     ?>
 
-    <button class="filterCompletedTasks button-active" id="incompletedTasks">Incompleted Tasks</button>
-    <button class="filterCompletedTasks" id="completedTasks">Completed Tasks</button>
+    <div class="filter-section" >
+        <button class="filterCompletedTasks button-active" id="incompletedTasks">Incompleted Tasks</button>
+        <button class="filterCompletedTasks" id="completedTasks">Completed Tasks</button>
+        
+        <select name="subFilter" id="subFilter">
+            <option value="date" selected>Date</option>
+            <option value="priority">Priority</option>
+        </select>
 
-    <select name="subFilter" id="subFilter">
-        <option value="date" selected>Date</option>
-        <option value="priority">Priority</option>
-    </select>
+        <input type="text" id="taskNameSearch" class="dark-input" placeholder="Search task by name" >
+        <button class="btn success" id="searchBtn" >Search</button>
+    </div>
 
     <ul id="taskList" class="task-list"></ul>
 </div>

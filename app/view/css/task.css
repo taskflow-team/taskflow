@@ -1,5 +1,11 @@
+.filter-section{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
 .task-list{
-    list-style: none;
+    list-style: none;;
     max-width: 100%;
     margin: 0 auto;
     position: relative;
@@ -16,6 +22,25 @@
     display: flex;
     flex-direction: column;
     position: relative;
+}
+
+.task input[type="checkbox"]{
+    -webkit-appearance: none;
+    background-color: #FFF;
+    border-radius: 3px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8px;
+}
+
+.task input[type="checkbox"]:checked::before{
+    content: '✔️';
+    text-decoration: none !important;
+}
+
+.task input[type="checkbox"]:checked{
+    background-color: #4DD167;
 }
 
 .task p{
@@ -121,20 +146,20 @@
     transition: transform 0.3s ease;
 }
 
-.task-list .task.checked{
+.task-list .task.checked p{
     text-decoration: line-through;
-    opacity: 0.5;
+    opacity: 0.3;
 }
 
 .filterCompletedTasks {
-    width: auto;
-    height: 35px;
+    width: 250px;
+    height: 45px;
     background-color: transparent;
     border: 1px solid #FFFFFF;
     border-radius: 5px;
-    padding: 0 20px;
+    padding: 0 10px;
     color: #FFFFFF;
-    margin-right: 8px;
+    margin-right: 10px;
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 14px;
@@ -158,10 +183,24 @@
 }
 
 #subFilter{
-    height: 35px;
+    height: 45px;
     padding: 0 20px;
     border: 1px solid #FFF;
     border-radius: 5px;
     background-color: transparent;
     color: #FFF;
+}
+
+#taskNameSearch{
+    width: 100%;
+    height: 45px;
+    padding: 0 20px;
+    margin-left: 10px;
+}
+
+#searchBtn{
+    height: 45px;
+    margin-left: 10px;
+    padding: 5px 22px;
+    border-radius: 5px;
 }
