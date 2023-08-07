@@ -1,7 +1,6 @@
 const completedBtn = document.querySelector('#completedTasks');
 const incompletedBtn = document.querySelector('#incompletedTasks');
 const subFilter = document.querySelector('#subFilter');
-const taskList = document.querySelector('#taskList');
 const searchBtn = document.querySelector('#searchBtn');
 
 // Função para filtrar as tarefas concluídas e não concluídas

@@ -1,5 +1,5 @@
 import notificate from '../notification.js';
-import { handleTasksVisibility, filterTasks } from './tasksFilter.js';
+import { filterTasks } from './tasksFilter.js';
 import formatDate from '../formatDate.js';
 
 const taskForm = document.querySelector('#frmTarefa');
