@@ -3,7 +3,6 @@ const incompletedBtn = document.querySelector('#incompletedTasks');
 const subFilter = document.querySelector('#subFilter');
 const searchBtn = document.querySelector('#searchBtn');
 
-// Função para filtrar as tarefas concluídas e não concluídas
 function handleTasksVisibility(element) {
     const tasks = document.querySelectorAll('.task');
     const target = element.target;
@@ -38,9 +37,10 @@ function filterTasks(filter){
     });
 }
 
-// Adiciona o evento de clique aos botões de filtro de conclusão de tarefas
 completedBtn.addEventListener('click', handleTasksVisibility);
 incompletedBtn.addEventListener('click', handleTasksVisibility);
+
+
 
 function searchByName(){
     let currentTasks = document.querySelectorAll('.task');
