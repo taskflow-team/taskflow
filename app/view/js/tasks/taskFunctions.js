@@ -98,10 +98,10 @@ function updateTaskList(tasks) {
                 // Conteúdo principal
                 "<div class='top-content' >" +
 
-                "<input type='checkbox' class='completedBtn' data-id='" + task.id_tarefa + "' " + taskCompleted + ">" + 
-                
+                "<input type='checkbox' class='completedBtn' data-id='" + task.id_tarefa + "' " + taskCompleted + ">" +
+
                     "<div>" +
-                        "<p><strong>" + task.nome_tarefa + "</strong></p>" +
+                        "<p class='task-name'><strong>" + task.nome_tarefa + "</strong></p>" +
                         "<p>" + task.descricao_tarefa + "</p>" +
                     "</div>" +
 
@@ -154,7 +154,7 @@ async function completeTask(element) {
     const rawFormContent = new FormData(taskForm);
     const formData = Object.fromEntries(rawFormContent);
     taskForm.reset();
-    
+
     const taskCompleted = $(this).prop("checked");
 
     try {
