@@ -1,5 +1,6 @@
 const completedBtn = document.querySelector('#completedTasks');
 const incompletedBtn = document.querySelector('#incompletedTasks');
+const subFilter = document.querySelector('#subFilter');
 
 // Função para filtrar as tarefas concluídas e não concluídas
 function handleTasksVisibility(element) {
@@ -20,6 +21,7 @@ function handleTasksVisibility(element) {
 
 function filterTasks(filter){
     const tasks = document.querySelectorAll('.task');
+    let activeTasks = [];
 
     tasks.forEach(task => {
         switch (filter) {

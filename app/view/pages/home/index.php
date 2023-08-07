@@ -26,6 +26,12 @@ $tarefas = $tarefaDAO->listTarefas($id_usuario);
 
     <button class="filterCompletedTasks button-active" id="incompletedTasks">Incompleted Tasks</button>
     <button class="filterCompletedTasks" id="completedTasks">Completed Tasks</button>
+
+    <select name="subFilter" id="subFilter">
+        <option value="date" selected>Date</option>
+        <option value="priority">Priority</option>
+    </select>
+
     <ul id="taskList" class="task-list"></ul>
 </div>
 
