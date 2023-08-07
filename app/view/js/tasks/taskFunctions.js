@@ -1,45 +1,10 @@
-import notificate from './notification.js';
+import notificate from '../notification.js';
+import { handleTasksVisibility, filterTasks } from './tasksFilter.js';
+import formatDate from '../formatDate.js';
 
-// Referenciando o form
 const taskForm = document.querySelector('#frmTarefa');
-
-// Referencing the buttons for filtering completed and incompleted tasks
-const completedTasksButton = document.querySelector('#completedTasks');
-const incompletedTasksButton = document.querySelector('#incompletedTasks');
-
-// Função para filtrar as tarefas concluídas e não concluídas
-function handleTasksVisibility() {
-    const tasks = document.querySelectorAll('.task');
-    const isCompletedButton = this.id === 'completedTasks';
-    const isIncompletedButton = this.id === 'incompletedTasks';
-
-    this.classList.toggle('button-active');
-
-    // Gerencia qual botão está ativo
-    if (isCompletedButton) {
-        incompletedTasksButton.classList.remove('button-active');
-    } else {
-        completedTasksButton.classList.remove('button-active');
-    }
-
-    // Exibe as tarefas concluídas ou não concluídas de acordo com o botão clicado
-    tasks.forEach(task => {
-        const isTaskChecked = task.classList.contains('checked');
-
-        if ((isCompletedButton && isTaskChecked) || (isIncompletedButton && !isTaskChecked)) {
-            task.style.display = 'block';
-        } else if (!completedTasksButton.classList.contains('button-active') && 
-                   !incompletedTasksButton.classList.contains('button-active')) {
-            task.style.display = 'block';
-        } else {
-            task.style.display = 'none';
-        }
-    });
-}
-
-// Adiciona o evento de clique aos botões de filtro de conclusão de tarefas
-completedTasksButton.addEventListener('click', handleTasksVisibility);
-incompletedTasksButton.addEventListener('click', handleTasksVisibility);
+const completedBtn = document.querySelector('#completedTasks');
+const incompletedBtn = document.querySelector('#incompletedTasks');
 
 // Função para obter a lista de tarefas atualizada do servidor
 function fetchTaskList() {
@@ -103,15 +68,6 @@ async function createTask(event) {
 }
 
 taskForm.addEventListener('submit', createTask);
-    
-// Formata a data para o formato dd/mm/aaaa
-function formatDate(dateString) {
-    const date = new Date(dateString);
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}/${month}/${year}`;
-  }
 
 function updateTaskList(tasks) {
     // Limpa a lista de tarefas existente
@@ -138,7 +94,7 @@ function updateTaskList(tasks) {
         const taskCompleted = task.concluida == 1 ? 'checked' : '';
 
         $("#taskList").append(
-            "<li class='task "+taskCompleted+"' id='task_" + task.id_tarefa + "'>" +
+            "<li class='task "+taskCompleted+"' id='" + task.id_tarefa + "'>" +
                 // Conteúdo principal
                 "<div class='top-content' >" +
 
@@ -182,10 +138,18 @@ function updateTaskList(tasks) {
 
     // Anexa um evento de clique ao botão de exclusão de tarefa
     $(".deleteBtn").click(deleteTask);
+
+    if(completedBtn.classList.contains('button-active')){
+        filterTasks('completed', tasks);
+    } else if(incompletedBtn.classList.contains('button-active')){
+        filterTasks('incompleted', tasks);
+    } else {
+        filterTasks('', tasks);
+    }
 }
 
-async function completeTask() {
-    const taskId = $(this).data("id");
+async function completeTask(element) {
+    const taskId = element.target.parentElement.parentElement.id; // checkbox is grandchild of the task
 
     const rawFormContent = new FormData(taskForm);
     const formData = Object.fromEntries(rawFormContent);
@@ -228,7 +192,6 @@ async function completeTask() {
 function toggleShowMore(taskId) {
     const arrowIcon = $(`[data-task-id="${taskId}"] i`);
     const moreInfoDiv = $(`#moreInfo_${taskId}`);
-    const task = $(`#task_${taskId}`);
 
     // Fazer o div de informações adicionais aparecer ou desaparecer
     moreInfoDiv.toggle();
@@ -237,7 +200,6 @@ function toggleShowMore(taskId) {
     arrowIcon.toggleClass("rotated");
 }
 
-// Anexa um evento de clique ao botão de exibição de mais informações
 $(document).on("click", ".showMoreBtn", function () {
     const taskId = $(this).data("task-id");
     toggleShowMore(taskId);

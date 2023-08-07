@@ -24,9 +24,8 @@ $tarefas = $tarefaDAO->listTarefas($id_usuario);
         require_once(__DIR__ . "/taskForm.php");
     ?>
 
-    <h2>Pending Tasks</h2>
+    <button class="filterCompletedTasks button-active" id="incompletedTasks">Incompleted Tasks</button>
     <button class="filterCompletedTasks" id="completedTasks">Completed Tasks</button>
-    <button class="filterCompletedTasks" id="incompletedTasks">Incompleted Tasks</button>
     <ul id="taskList" class="task-list"></ul>
 </div>
 
@@ -34,5 +33,5 @@ $tarefas = $tarefaDAO->listTarefas($id_usuario);
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- Incluir formAsync.js -->
-<script type="module" src="../view/js/taskFunctions.js"></script>
-<script type="module" src="../view/js/taskForm.js"></script>
+<script type="module" src="../view/js/tasks/taskFunctions.js"></script>
+<script type="module" src="../view/js/tasks/taskForm.js"></script>
