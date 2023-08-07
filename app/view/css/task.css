@@ -131,7 +131,7 @@
     height: 35px;
     background-color: transparent;
     border: 1px solid #FFFFFF;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 0 20px;
     color: #FFFFFF;
     margin-right: 8px;
@@ -155,4 +155,12 @@
     background-color: #4DD167;
     color: #1D1D1D;
     border-color: transparent;
+}
+
+#subFilter{
+    height: 35px;
+    padding: 0 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #FFF;
 }
