@@ -12,12 +12,12 @@ function handleTasksVisibility(element) {
 
     if(target.id === 'incompletedTasks' && target.classList.contains('button-active')){
         completedBtn.classList.remove('button-active');
-        filterTasks('incompleted', tasks);
+        filterTasks('incompleted');
     } else if(target.id === 'completedTasks' && target.classList.contains('button-active')){
         incompletedBtn.classList.remove('button-active');
-        filterTasks('completed', tasks);
+        filterTasks('completed');
     } else {
-        filterTasks('', tasks);
+        filterTasks();
     }
 }
 
@@ -53,7 +53,7 @@ function searchByName(){
         } else if(nameForSearch == '' && incompletedBtn.classList.contains('button-active')){
             filterTasks('incompleted');
         } else {
-            filterTasks('');
+            filterTasks();
         }
     } else {
         currentTasks.forEach(task => {
