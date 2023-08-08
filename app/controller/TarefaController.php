@@ -193,32 +193,6 @@ class TarefaController extends Controller {
             header('Content-Type: application/json');
             echo json_encode($response);
             exit;
-
-            //  // Obter a lista de tarefas atualizada após a inserção
-            // $userID = $_SESSION[SESSAO_USUARIO_ID];
-            // $tarefas = $this->tarefaDao->listTarefas($userID);
-
-            // $response = array(
-            //     'message' => 'Tarefa salva com sucesso.',
-            //     'data' => array_map(function($tarefa) {
-            //         // Converte o objeto tarefa em um objeto anônimo contendo apenas as propriedades necessárias
-            //         return (object) array(
-            //             'id_tarefa' => $tarefa->getId_tarefa(),
-            //             'nome_tarefa' => $tarefa->getNome_tarefa(),
-            //             'descricao_tarefa' => $tarefa->getDescricao_tarefa(),
-            //             'dificuldade' => $tarefa->getDificuldade(),
-            //             'prioridade' => $tarefa->getPrioridade(),
-            //             'valor_pontos' => $tarefa->getValor_pontos(),
-            //             'concluida' => $tarefa->getConcluida(),
-            //             'id_usuario' => $tarefa->getId_usuario(),
-            //         );
-            //     }, $tarefas)
-            // );
-
-            // // Enviar a resposta como JSON
-            // header('Content-Type: application/json');
-            // echo json_encode($response);
-            // exit;
         }
     }
 

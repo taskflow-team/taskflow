@@ -1,3 +1,6 @@
+// Esse arquivo armazena todo o código que diz respeito a
+// Buscar tarefas no banco de dados e filtra-las
+
 import notificate from "../notification.js";
 import formatDate from '../formatDate.js';
 import { completeTask, deleteTask } from "./taskFunctions.js";

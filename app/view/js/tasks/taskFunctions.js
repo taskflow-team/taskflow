@@ -1,3 +1,6 @@
+// Esse arquivo armazena as funções que podem
+// ser desempenhadas dentro de uma tarefa
+
 import notificate from '../notification.js';
 import { fetchTaskList, filterTasks } from './tasksFilter.js';
 
