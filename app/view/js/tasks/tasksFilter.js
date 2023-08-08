@@ -105,7 +105,7 @@ function updateTaskList(tasks) {
                 "</div>" +
 
                 // Etiqueta de dificuldade
-                "<div class='difficulty " + task.dificuldade + "'></div>" +
+                "<div class='difficulty " + difficultyMap[task.dificuldade] + "'></div>" +
             "</li>"
         );
     });

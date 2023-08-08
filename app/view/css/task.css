@@ -93,15 +93,15 @@
     top: 0;
 }
 
-.task .easy, .task .facil{
+.task .Easy, .task .facil{
     background-color: #4DD167;
 }
 
-.task .medium, .task .medio{
+.task .Medium, .task .medio{
     background-color: #FFD361;
 }
 
-.task .hard, .task .dificil{
+.task .Hard, .task .dificil{
     background-color: #FF6161;
 }
 
