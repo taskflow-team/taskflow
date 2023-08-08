@@ -38,12 +38,24 @@ class TarefaController extends Controller {
         // Obtém o ID do usuário da sessão
         $userID = $_SESSION[SESSAO_USUARIO_ID];
 
-        // Obtém as tarefas do usuário do banco de dados
-        $tarefas = $this->tarefaDao->listTarefas($userID);
+        // Get user's request body
+        $jsonString = file_get_contents('php://input');
+        $requestData = json_decode($jsonString, true);
+
+        $rule = $requestData['rule'];
+
+        if ($rule === 'priority') {
+            // Obtém as tarefas do usuário do banco de dados
+            $tarefas = $this->tarefaDao->listByPriority($userID);
+        } else {
+            // Obtém as tarefas do usuário do banco de dados
+            $tarefas = $this->tarefaDao->listTarefas($userID);
+        }
 
         // Cria um array de resposta contendo a mensagem de sucesso e os dados das tarefas
         $response = array(
             'message' => 'Success',
+            'rule' => $requestData,
             'data' => array_map(function($tarefa) {
                 // Converte o objeto tarefa em um objeto anônimo contendo apenas as propriedades necessárias
                 return (object) array(
@@ -73,27 +85,27 @@ class TarefaController extends Controller {
     protected function edit() {
         $jsonString = file_get_contents('php://input');
         $requestData = json_decode($jsonString, true);
-    
+
         if ($requestData === null) {
             $response = array(
                 'message' => 'Dados JSON inválidos',
             );
-    
+
             header('Content-Type: application/json');
             echo json_encode($response);
             exit;
         }
-    
+
         $tarefaId = $requestData['taskId'];
         $taskCompleted = $requestData['taskCompleted'];
-    
+
         $tarefa = $this->tarefaDao->findByIdTarefa($tarefaId);
-    
+
         $tarefa->setConcluida($taskCompleted ? 1 : 0);
-    
+
         try {
             $this->tarefaDao->updateTarefa($tarefa);
-    
+
             $response = array(
                 'ok' => true,
                 'message' => 'Tarefa atualizada com sucesso.'
@@ -111,7 +123,7 @@ class TarefaController extends Controller {
             echo json_encode($response);
             exit;
         }
-    }    
+    }
 
     protected function save() {
         // Obter os dados JSON brutos do corpo da requisição

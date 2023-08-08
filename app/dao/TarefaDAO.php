@@ -23,6 +23,17 @@ class TarefaDAO {
         return $this->mapTarefas($result);
     }
 
+    public function listByPriority($id_usuario){
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM tb_tarefas WHERE id_usuario = ". $id_usuario ." ORDER BY prioridade DESC";
+        $stm = $conn->prepare($sql);
+        $stm->execute();
+        $result = $stm->fetchAll();
+
+        return $this->mapTarefas($result);
+    }
+
     public function findAllTarefas($idUsuario) {
         $conn = Connection::getConn();
 
@@ -99,7 +110,7 @@ class TarefaDAO {
 
     public function updateTarefa(Tarefa $tarefa) {
         $conn = Connection::getConn();
-    
+
         $sql = "UPDATE tb_tarefas SET nome_tarefa = ?, descricao = ?, dificuldade = ?, prioridade = ?, valor_pontos = ?, data_criacao = ?, concluida = ? WHERE id_tarefa = ?";
         $stm = $conn->prepare($sql);
         $stm->bindValue(1, $tarefa->getNome_tarefa());
@@ -112,7 +123,7 @@ class TarefaDAO {
         $stm->bindValue(8, $tarefa->getId_tarefa());
         $stm->execute();
     }
-    
+
 
     //Método para excluir uma Tarefa pelo seu ID
 

@@ -1,32 +1,7 @@
 import notificate from '../notification.js';
-import { filterTasks } from './tasksFilter.js';
-import formatDate from '../formatDate.js';
+import { fetchTaskList, filterTasks } from './tasksFilter.js';
 
 const taskForm = document.querySelector('#frmTarefa');
-const completedBtn = document.querySelector('#completedTasks');
-const incompletedBtn = document.querySelector('#incompletedTasks');
-
-// Função para obter a lista de tarefas atualizada do servidor
-function fetchTaskList() {
-    $.ajax({
-        type: "GET",
-        url: "/taskflow/app/controller/TarefaController.php?action=list",
-        success: function (response) {
-            if (response.message === "Success") {
-                // Atualiza a lista de tarefas na página
-                updateTaskList(response.data);
-            } else {
-                notificate('error', 'Error', 'There was an error while updating the task list');
-            }
-        },
-        error: function (xhr, status, error) {
-            notificate('error', 'Error', error);
-        }
-    });
-}
-
-// Chama a função fetchTaskList para carregar a lista de tarefas inicial na carga da página
-fetchTaskList();
 
 async function createTask(event) {
     event.preventDefault();
@@ -68,85 +43,6 @@ async function createTask(event) {
 }
 
 taskForm.addEventListener('submit', createTask);
-
-function updateTaskList(tasks) {
-    // Limpa a lista de tarefas existente
-    $("#taskList").empty();
-
-    // Mapeia os valores de dificuldade
-    const difficultyMap = {
-        easy: 'Easy',
-        medium: 'Medium',
-        hard: 'Hard'
-    };
-
-    // Mapeia os valores de prioridade
-    const priorityMap = {
-        1: 'Low',
-        2: 'Medium',
-        3: 'High'
-    };
-
-    // Adiciona cada tarefa à lista de tarefas
-    tasks.forEach(function (task) {
-        // Formata a data de criação da tarefa
-        const formattedDate = formatDate(task.data_criacao);
-        const taskCompleted = task.concluida == 1 ? 'checked' : '';
-
-        $("#taskList").append(
-            "<li class='task "+taskCompleted+"' id='" + task.id_tarefa + "'>" +
-                // Conteúdo principal
-                "<div class='top-content' >" +
-
-                "<input type='checkbox' class='completedBtn' data-id='" + task.id_tarefa + "' " + taskCompleted + ">" +
-
-                    "<div>" +
-                        "<p class='task-name'><strong>" + task.nome_tarefa + "</strong></p>" +
-                        "<p>" + task.descricao_tarefa + "</p>" +
-                    "</div>" +
-
-                    // Icones
-                    "<i class='fa-regular fa-pen-to-square task-icon editBtn'></i>" +
-                    "<i class='fa-solid fa-trash task-icon deleteBtn' data-id='" + task.id_tarefa + "'></i>" +
-
-                    // Adiciona botão para exibir mais informações sobre a tarefa
-                    "<div class='showMoreBtn' data-task-id='" + task.id_tarefa + "'>" +
-                        "<i class='fas fa-chevron-down arrowIcon task-icon'></i>" +
-                    "</div>" +
-                "</div>" +
-
-                // Div escondida
-                "<div id='moreInfo_" + task.id_tarefa + "' class='moreInfoDiv' style='display: none;'>" +
-                    "<p>Creation Date: " + formattedDate + "</p>" +
-                    "<p>Priority: " + priorityMap[task.prioridade] + "</p>" +
-                    "<p>Difficulty: " + difficultyMap[task.dificuldade] + "</p>" +
-                "</div>" +
-
-                // Etiqueta de dificuldade
-                "<div class='difficulty " + task.dificuldade + "'></div>" +
-            "</li>"
-        );
-    });
-
-    // Verifica se a lista de tarefas está vazia e exibe uma mensagem apropriada
-    if (tasks.length === 0) {
-        $("#taskList").append("<p>No pending tasks</p>");
-    }
-
-    // Anexa um evento de clique ao botão de conclusão de tarefa
-    $(".completedBtn").change(completeTask);
-
-    // Anexa um evento de clique ao botão de exclusão de tarefa
-    $(".deleteBtn").click(deleteTask);
-
-    if(completedBtn.classList.contains('button-active')){
-        filterTasks('completed', tasks);
-    } else if(incompletedBtn.classList.contains('button-active')){
-        filterTasks('incompleted', tasks);
-    } else {
-        filterTasks('', tasks);
-    }
-}
 
 async function completeTask(element) {
     const taskId = element.target.parentElement.parentElement.id; // checkbox is grandchild of the task
@@ -222,4 +118,9 @@ async function deleteTask() {
     } catch (error) {
         notificate('error', 'Error', error);
     }
+}
+
+export {
+    completeTask,
+    deleteTask
 }

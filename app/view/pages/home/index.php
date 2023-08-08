@@ -9,9 +9,6 @@ $tarefaDAO = new TarefaDAO();
 
 // Pegando o id do usuário
 $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
-
-// Obter todas as tarefas do banco de dados
-$tarefas = $tarefaDAO->listTarefas($id_usuario);
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/pages/home/taskForm.css">
