@@ -20,9 +20,9 @@
             <fieldset class="element" >
                 <label>Task Difficulty</label>
                 <div class="radios" >
-                    <input title="easy" class="radio-square green" name="dificuldade" type="radio" value="easy" checked/>
-                    <input title="medium" class="radio-square yellow" name="dificuldade" type="radio" value="medium"/>
-                    <input title="hard" class="radio-square red" name="dificuldade" type="radio" value="hard"/>
+                    <input title="easy" class="radio-square green" name="dificuldade" type="radio" value="1" checked/>
+                    <input title="medium" class="radio-square yellow" name="dificuldade" type="radio" value="2"/>
+                    <input title="hard" class="radio-square red" name="dificuldade" type="radio" value="3"/>
                 </div>
             </fieldset>
             <fieldset class="element" >

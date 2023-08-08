@@ -57,9 +57,9 @@ function updateTaskList(tasks) {
 
     // Mapeia os valores de dificuldade
     const difficultyMap = {
-        easy: 'Easy',
-        medium: 'Medium',
-        hard: 'Hard'
+        1: 'Easy',
+        2: 'Medium',
+        3: 'Hard'
     };
 
     // Mapeia os valores de prioridade

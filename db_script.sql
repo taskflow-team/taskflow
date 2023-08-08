@@ -35,7 +35,7 @@ CREATE TABLE tb_tarefas (
     nome_tarefa VARCHAR(150) NOT NULL,
     descricao VARCHAR(150),
     concluida BOOLEAN DEFAULT false,
-    dificuldade VARCHAR(45),
+    dificuldade INT,
     prioridade INT,
     valor_pontos INT,
     data_criacao TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
