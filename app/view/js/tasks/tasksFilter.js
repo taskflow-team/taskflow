@@ -14,15 +14,24 @@ const searchBtn = document.querySelector('#searchBtn');
 async function fetchTaskList() {
     let dataPrioritySelector = document.querySelector('#subFilter');
     let selectedRule = dataPrioritySelector.selectedIndex;
+    let rule = '';
 
-    const ruleObject = selectedRule === 1 ? { rule: 'priority' } : { rule: '' };
+    if (selectedRule == 1 ) {
+        rule =  'priority';
+    } else if(selectedRule == 2) {
+        rule = 'difficulty';
+    } else {
+        rule = '';
+    }
 
     const reqConfigs = {
         method: "POST",
         headers: {
             'Content-type': 'application/json'
         },
-        body: JSON.stringify(ruleObject)
+        body: JSON.stringify({
+            rule: rule
+        })
     };
 
     try {
@@ -50,6 +59,7 @@ fetchTaskList();
 // Filtra as tarefas por data ou prioridade
 subFilter.options[0].addEventListener('click', fetchTaskList);
 subFilter.options[1].addEventListener('click', fetchTaskList);
+subFilter.options[2].addEventListener('click', fetchTaskList);
 
 function updateTaskList(tasks) {
     // Limpa a lista de tarefas existente

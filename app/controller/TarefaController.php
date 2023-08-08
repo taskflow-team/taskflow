@@ -44,7 +44,13 @@ class TarefaController extends Controller {
 
         $rule = $requestData['rule'];
 
-        $query_rule = $rule === 'priority' ? 'prioridade' : 'id_tarefa';
+        if($rule === 'priority'){
+            $query_rule = 'prioridade';
+        } else if($rule === 'difficulty') {
+            $query_rule = 'dificuldade';
+        } else {
+            $query_rule = 'id_tarefa';
+        }
 
         $tarefas = $this->tarefaDao->listTarefas($userID, $query_rule);
 

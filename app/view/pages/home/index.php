@@ -28,6 +28,7 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
         <select name="subFilter" id="subFilter">
             <option value="date" selected>Date</option>
             <option value="priority">Priority</option>
+            <option value="difficulty">Difficulty</option>
         </select>
 
         <input type="text" id="taskNameSearch" class="dark-input" placeholder="Search task by name" >
