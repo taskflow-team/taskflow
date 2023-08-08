@@ -12,21 +12,10 @@ include_once(__DIR__ . "/../model/Tarefa.php");
 class TarefaDAO {
 
     //Método para listar as tarefas a partir da base de dados
-    public function listTarefas($id_usuario) {
+    public function listTarefas($id_usuario, $rule) {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM tb_tarefas WHERE id_usuario = ". $id_usuario ." ORDER BY id_tarefa DESC";
-        $stm = $conn->prepare($sql);
-        $stm->execute();
-        $result = $stm->fetchAll();
-
-        return $this->mapTarefas($result);
-    }
-
-    public function listByPriority($id_usuario){
-        $conn = Connection::getConn();
-
-        $sql = "SELECT * FROM tb_tarefas WHERE id_usuario = ". $id_usuario ." ORDER BY prioridade DESC";
+        $sql = "SELECT * FROM tb_tarefas WHERE id_usuario = ". $id_usuario ." ORDER BY ". $rule ." DESC";
         $stm = $conn->prepare($sql);
         $stm->execute();
         $result = $stm->fetchAll();

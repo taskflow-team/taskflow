@@ -44,13 +44,9 @@ class TarefaController extends Controller {
 
         $rule = $requestData['rule'];
 
-        if ($rule === 'priority') {
-            // Obtém as tarefas do usuário do banco de dados
-            $tarefas = $this->tarefaDao->listByPriority($userID);
-        } else {
-            // Obtém as tarefas do usuário do banco de dados
-            $tarefas = $this->tarefaDao->listTarefas($userID);
-        }
+        $query_rule = $rule === 'priority' ? 'prioridade' : 'id_tarefa';
+
+        $tarefas = $this->tarefaDao->listTarefas($userID, $query_rule);
 
         // Cria um array de resposta contendo a mensagem de sucesso e os dados das tarefas
         $response = array(
