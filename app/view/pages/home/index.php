@@ -19,6 +19,7 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
     <?php
         // Form para adicionar tarefas
         require_once(__DIR__ . "/taskForm.php");
+        require_once(__DIR__ . "/editModal.php");
     ?>
 
     <div class="filter-section" >
@@ -44,3 +45,4 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 <!-- Incluir formAsync.js -->
 <script type="module" src="../view/js/tasks/taskFunctions.js"></script>
 <script type="module" src="../view/js/tasks/taskForm.js"></script>
+<script type="module" src="../view/js/tasks/taskModal.js"></script>

@@ -57,9 +57,7 @@ async function fetchTaskList() {
 fetchTaskList();
 
 // Filtra as tarefas por data ou prioridade
-subFilter.options[0].addEventListener('click', fetchTaskList);
-subFilter.options[1].addEventListener('click', fetchTaskList);
-subFilter.options[2].addEventListener('click', fetchTaskList);
+subFilter.addEventListener('click', fetchTaskList);
 
 function updateTaskList(tasks) {
     // Limpa a lista de tarefas existente
@@ -98,7 +96,7 @@ function updateTaskList(tasks) {
                     "</div>" +
 
                     // Icones
-                    "<i class='fa-regular fa-pen-to-square task-icon editBtn'></i>" +
+                    "<i class='fa-regular fa-pen-to-square task-icon editBtn' data-task-id='" + task.id_tarefa + "' data-task-name='" + task.nome_tarefa + "' data-task-description='" + task.descricao_tarefa + "' data-task-priority='" + task.prioridade + "' data-task-difficulty='" + task.dificuldade + "'></i>" +
                     "<i class='fa-solid fa-trash task-icon deleteBtn' data-id='" + task.id_tarefa + "'></i>" +
 
                     // Adiciona botão para exibir mais informações sobre a tarefa

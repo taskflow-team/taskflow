@@ -10,11 +10,9 @@
         value="<?php echo (isset($dados["tarefa"]) ? $dados["tarefa"]->getNome_tarefa() : ''); ?>"
     >
 
-
-
     <div style="display: none" id="formDiv">
         <label for="descricao">Task Description</label>
-        <textarea class="form-control dark-input" id="descricao" name="descricao" placeholder="Enter task description"   ><?php echo (isset($dados["tarefa"]) ? $dados["tarefa"]->getDescricao() : ''); ?></textarea>
+        <textarea class="form-control dark-input" id="descricao" name="descricao" placeholder="Enter task description"><?php echo (isset($dados["tarefa"]) ? $dados["tarefa"]->getDescricao() : ''); ?></textarea>
 
         <div class="last-row" >
             <fieldset class="element" >
