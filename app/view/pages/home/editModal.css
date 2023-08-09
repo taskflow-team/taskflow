@@ -1,0 +1,153 @@
+.modal {
+    display: none;
+    position: fixed; 
+    z-index: 1; 
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal.show {
+    display: block !important;
+    animation: blur-in .3s forwards, background-in .3s forwards !important;
+}
+
+@keyframes blur-in {
+    from {
+      backdrop-filter: blur(0px);
+    }
+    to {
+      backdrop-filter: blur(2px);
+    }
+}
+
+@keyframes background-in {
+    from {
+      background-color: rgba(0, 0, 0, 0);
+    }
+    to {
+      background-color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+.modal .modal-content {
+    background-color: #2D2D2D;
+    margin: 15% auto; 
+    padding: 40px;
+    width: 50%; 
+    left: 100px;
+    top: -100px;
+    border-radius: 13px;
+    border: 0px;
+}
+
+.modal.show .modal-content {
+    animation: slide-in .3s forwards, opacity-in .3s forwards !important;
+}
+
+@keyframes slide-in {
+    from {
+      top: 0px;
+    }
+    to {
+      top: -100px;
+    }
+}
+
+@keyframes opacity-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+}
+
+.modal-content .dark-input{
+    width: 100%;
+    height: 50px;
+    padding: 20px;
+    font-weight: 500;
+    margin-top: 15px;
+}
+
+.modal-content textarea{
+    height: 100px !important;
+}
+
+.modal-content .last-row {
+    margin-bottom: 20px;
+}
+
+.modal-content label {
+    margin-bottom: 0px !important;
+    margin-top: 15px;
+}
+
+.modal-content #taskPoints{
+    margin-top: 0px !important;
+}
+
+.close {
+    position: absolute;
+    right: 50px;
+    color: #FFFFFF;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.radios{
+    display: flex;
+    align-items: center;
+}
+
+.modal-content input[type='radio']{
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    -o-appearance: none;
+}
+
+.modal-content .radio-square::before {
+    content: '';
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 20px;
+    height: 20px;
+    border-radius: 2px;
+    margin-right: 15px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.modal-content .radio-square.green::before {
+    background-color: #4DD167;
+}
+
+.modal-content .radio-square.yellow::before {
+    background-color: #FFD361;
+}
+
+.modal-content .radio-square.red::before {
+    background-color: #FF6161;
+}
+
+.modal-content .radio-square:checked::before {
+    content: "✔️";
+}
+
+#editTaskBtn {
+    font-weight: 600;
+    color: #FFFFFF;
+}

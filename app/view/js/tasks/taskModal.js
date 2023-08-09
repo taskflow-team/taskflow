@@ -9,8 +9,8 @@ const taskEditModal = document.querySelector('#taskModal');
 const closeEditBtn = document.querySelector('.close');
 const taskModalEditBtn = document.querySelector('.editTaskBtn');
 
-function openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPriority, taskPoints) {
-    taskEditModal.style.display = "block";
+function openEditModal(taskName, taskDescription, taskDifficulty, taskPriority, taskPoints) {
+    taskEditModal.classList.add('show');
 
     const taskEditName = document.querySelector('.nameEditTask');
     const taskEditDescription = document.querySelector('#taskDescription');
@@ -56,7 +56,7 @@ function openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPr
 }
 
 function closeEditModal() {
-    taskEditModal.style.display = "none";
+    taskEditModal.classList.remove('show');
     editTaskModal();
     fetchTaskList();
 }
@@ -103,12 +103,11 @@ closeEditBtn.addEventListener('click', closeEditModal);
 taskModalEditBtn.addEventListener('click', closeEditModal);
 
 $(document).on("click", ".editBtn", function () {
-    const taskId = $(this).data("task-id");
     const taskName = $(this).data("task-name");
     const taskDescription = $(this).data("task-description");
     const taskDifficulty = $(this).data("task-difficulty");
     const taskPriority = $(this).data("task-priority");
     const taskPoints = $(this).data("task-points");
 
-    openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPriority, taskPoints);
+    openEditModal(taskName, taskDescription, taskDifficulty, taskPriority, taskPoints);
 });

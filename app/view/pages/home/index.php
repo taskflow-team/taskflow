@@ -12,6 +12,7 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/pages/home/taskForm.css">
+<link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/pages/home/editModal.css">
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/css/task.css">
 
 <!-- Exibir as tarefas -->
