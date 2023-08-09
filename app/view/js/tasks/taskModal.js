@@ -58,15 +58,22 @@ function openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPr
 }
 
 function closeEditModal(element) {
-    if(element.target == closeEditBtn)
-    {
+    if (element.target == closeEditBtn) {
         taskEditModal.classList.remove('show');
-    }else if(element.target == taskModalEditBtn)
-    {
+    } else if (element.target == taskModalEditBtn) {
+        const taskForm = document.querySelector('#frmEditTarefa');
+        
+        // Checa se todos os campos do formulário marcados como required estão preenchidos
+        if (!taskForm.checkValidity()) {
+            taskForm.reportValidity();
+            return;
+        }
+        
         taskEditModal.classList.remove('show');
         editTaskModal();
     }
 }
+
 
 async function editTaskModal() {
     const taskForm = document.querySelector('#frmEditTarefa');

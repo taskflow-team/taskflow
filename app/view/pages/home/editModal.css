@@ -93,16 +93,20 @@
 .close {
     position: absolute;
     right: 50px;
-    color: #FFFFFF;
+    color: #FFFFFF !important;
     float: right;
     font-size: 28px;
     font-weight: bold;
+    transition: all 0.2s ease;
 }
 
 .close:hover,
 .close:focus {
+    color: #FF6161 !important;
     text-decoration: none;
     cursor: pointer;
+    text-shadow: none;
+    transform: scale(1.2);
 }
 
 .radios{
@@ -150,4 +154,9 @@
 #editTaskBtn {
     font-weight: 600;
     color: #FFFFFF;
+    transition: all 0.2s ease;
+}
+
+#editTaskBtn:hover {
+    transform: scale(1.01);
 }
