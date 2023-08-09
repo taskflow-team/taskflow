@@ -27,12 +27,7 @@
                 </fieldset>
                 <fieldset class="points-holder">
                     <label for="valor_pontos">Task Points</label>
-                    <input
-                        class="dark-input"
-                        type="number" id="valor_pontos"
-                        name="valor_pontos"
-                        value="0"
-                    />
+                    <input class="dark-input" type="number" id="taskPoints" name="taskPoints" value="0"/>
                 </fieldset>
             </div>
         </form>

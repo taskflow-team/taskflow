@@ -9,7 +9,7 @@ const taskEditForm = document.querySelector('#frmEditTarefa');
 const taskEditModal = document.querySelector('#taskModal');
 const closeEditBtn = document.querySelector('.close');
 
-function openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPriority) {
+function openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPriority, taskPoints) {
     taskEditModal.style.display = "block";
 
     const taskEditName = document.querySelector('.nameEditTask');
@@ -22,6 +22,8 @@ function openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPr
     const taskEditPriority1 = document.querySelector('#priority1');
     const taskEditPriority2 = document.querySelector('#priority2');
     const taskEditPriority3 = document.querySelector('#priority3');
+
+    const taskEditPoints = document.querySelector('#taskPoints');
 
     taskEditName.value = taskName;
     taskEditDescription.innerHTML = taskDescription;
@@ -49,6 +51,8 @@ function openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPr
             taskEditPriority3.checked = true;
             break;
     }
+
+    taskEditPoints.value = taskPoints;
 }
 
 function closeEditModal() {
@@ -64,8 +68,9 @@ $(document).on("click", ".editBtn", function () {
     const taskDescription = $(this).data("task-description");
     const taskDifficulty = $(this).data("task-difficulty");
     const taskPriority = $(this).data("task-priority");
+    const taskPoints = $(this).data("task-points");
 
-    openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPriority);
+    openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPriority, taskPoints);
 });
 
 window.onclick = function(event) {
