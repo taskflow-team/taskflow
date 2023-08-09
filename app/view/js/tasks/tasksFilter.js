@@ -96,7 +96,7 @@ function updateTaskList(tasks) {
                     "</div>" +
 
                     // Icones
-                    "<i class='fa-regular fa-pen-to-square task-icon editBtn' data-task-id='" + task.id_tarefa + "' data-task-name='" + task.nome_tarefa + "' data-task-description='" + task.descricao_tarefa + "' data-task-priority='" + task.prioridade + "' data-task-difficulty='" + task.dificuldade + "' ' data-task-points='" + task.valor_pontos + "'></i>" +
+                    "<i class='fa-regular fa-pen-to-square task-icon editBtn' data-task-id='" + task.id_tarefa + "' data-task-name='" + task.nome_tarefa + "' data-task-description='" + task.descricao_tarefa + "' data-task-priority='" + task.prioridade + "' data-task-difficulty='" + task.dificuldade + "' ' data-task-points='" + task.valor_pontos + "' data-id='" + task.id_tarefa + "'></i>" +
                     "<i class='fa-solid fa-trash task-icon deleteBtn' data-id='" + task.id_tarefa + "'></i>" +
 
                     // Adiciona botão para exibir mais informações sobre a tarefa

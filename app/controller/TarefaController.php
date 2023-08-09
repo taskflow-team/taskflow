@@ -99,9 +99,9 @@ class TarefaController extends Controller {
         }
 
         $formData = $requestData['formData'];
-        $userID = $requestData['userID'];
+        $taskId = $requestData['taskId'];
 
-        $tarefa = $this->tarefaDao->findByIdTarefa($userID);
+        $tarefa = $this->tarefaDao->findByIdTarefa($taskId);
 
         $tarefa->setNome_tarefa($formData['nome']);
         $tarefa->setDescricao_tarefa($formData['descricao']);

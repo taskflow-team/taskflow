@@ -32,7 +32,7 @@
             </div>
         </form>
 
-        <button class="btn success editTaskBtn" id="editTaskBtn">Edit Task</button>
+        <button class="btn success editTaskBtn" id="editTaskBtn" data_id="">Edit Task</button>
     </div>
 
     <div class="col-6 p-0">

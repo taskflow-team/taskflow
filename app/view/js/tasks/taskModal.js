@@ -9,8 +9,10 @@ const taskEditModal = document.querySelector('#taskModal');
 const closeEditBtn = document.querySelector('.close');
 const taskModalEditBtn = document.querySelector('.editTaskBtn');
 
-function openEditModal(taskName, taskDescription, taskDifficulty, taskPriority, taskPoints) {
+function openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPriority, taskPoints) {
     taskEditModal.classList.add('show');
+
+    taskModalEditBtn.dataset.id = taskId;
 
     const taskEditName = document.querySelector('.nameEditTask');
     const taskEditDescription = document.querySelector('#taskDescription');
@@ -55,15 +57,20 @@ function openEditModal(taskName, taskDescription, taskDifficulty, taskPriority, 
     taskEditPoints.value = taskPoints;
 }
 
-function closeEditModal() {
-    taskEditModal.classList.remove('show');
-    editTaskModal();
-    fetchTaskList();
+function closeEditModal(element) {
+    if(element.target == closeEditBtn)
+    {
+        taskEditModal.classList.remove('show');
+    }else if(element.target == taskModalEditBtn)
+    {
+        taskEditModal.classList.remove('show');
+        editTaskModal();
+    }
 }
 
 async function editTaskModal() {
-    const userID = Number(document.querySelector('#idUsuario').value);
     const taskForm = document.querySelector('#frmEditTarefa');
+    const taskId = Number(taskModalEditBtn.dataset.id);
 
     const rawFormContent = new FormData(taskForm);
     const formData = Object.fromEntries(rawFormContent);
@@ -77,7 +84,7 @@ async function editTaskModal() {
             },
             body: JSON.stringify({
                 formData: formData,
-                userID: userID
+                taskId: taskId
             })
         };
 
@@ -103,11 +110,12 @@ closeEditBtn.addEventListener('click', closeEditModal);
 taskModalEditBtn.addEventListener('click', closeEditModal);
 
 $(document).on("click", ".editBtn", function () {
+    const taskId = $(this).data("id");
     const taskName = $(this).data("task-name");
     const taskDescription = $(this).data("task-description");
     const taskDifficulty = $(this).data("task-difficulty");
     const taskPriority = $(this).data("task-priority");
     const taskPoints = $(this).data("task-points");
 
-    openEditModal(taskName, taskDescription, taskDifficulty, taskPriority, taskPoints);
+    openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPriority, taskPoints);
 });

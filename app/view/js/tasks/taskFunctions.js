@@ -48,7 +48,7 @@ async function createTask(event) {
 taskForm.addEventListener('submit', createTask);
 
 async function completeTask(element) {
-    const taskId = element.target.parentElement.parentElement.id; // checkbox is grandchild of the task
+    const taskId = element.target.parentElement.parentElement.id;
 
     const rawFormContent = new FormData(taskForm);
     const formData = Object.fromEntries(rawFormContent);
