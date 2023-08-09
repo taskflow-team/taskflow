@@ -47,6 +47,16 @@ body{
 .error{
     background-color: #f86f6f;
     border-color: #f64242;
+    animation: right-slide-in .3s forwards, opacity-in .3s forwards !important;
+}
+
+@keyframes right-slide-in {
+    from {
+        right: 0px;
+    }
+    to {
+        right: 25px;
+    }
 }
 
 .success{
