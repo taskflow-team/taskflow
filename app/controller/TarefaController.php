@@ -98,6 +98,66 @@ class TarefaController extends Controller {
             exit;
         }
 
+        $formData = $requestData['formData'];
+        $userID = $requestData['userID'];
+
+        $tarefa = $this->tarefaDao->findByIdTarefa($userID);
+
+        $tarefa->setNome_tarefa($formData['nome']);
+        $tarefa->setDescricao_tarefa($formData['descricao']);
+        $tarefa->setDificuldade($formData['dificuldade']);
+        $tarefa->setPrioridade($formData['prioridade']);
+        $tarefa->setValor_pontos($formData['valor_pontos']);
+
+        $erros = $this->tarefaService->validarDados($tarefa);
+        if (empty($erros)) {
+            try {
+                $this->tarefaDao->updateTarefa($tarefa);
+
+                $response = array(
+                    'ok' => true,
+                    'message' => 'Tarefa atualizada com sucesso.'
+                );
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                exit;
+            } catch (PDOException $e) {
+                $response = array(
+                    'ok' => false,
+                    'message' => 'Ocorreu um erro durante a requisição',
+                    'error' => $e->getMessage()
+                );
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                exit;
+            }
+        } else {
+            $response = array(
+                'ok' => true,
+                'message' => 'Ocorreram erros de validação',
+                'errors' => $erros
+            );
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit;
+        }
+    }
+
+    protected function completeTask() {
+        $jsonString = file_get_contents('php://input');
+        $requestData = json_decode($jsonString, true);
+
+        if ($requestData === null) {
+            $response = array(
+                'message' => 'Dados JSON inválidos',
+            );
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit;
+        }
+
         $tarefaId = $requestData['taskId'];
         $taskCompleted = $requestData['taskCompleted'];
 

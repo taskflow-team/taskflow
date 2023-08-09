@@ -5,9 +5,9 @@ import notificate from "../notification.js";
 import formatDate from '../formatDate.js';
 import { fetchTaskList } from './tasksFilter.js';
 
-const taskEditForm = document.querySelector('#frmEditTarefa');
 const taskEditModal = document.querySelector('#taskModal');
 const closeEditBtn = document.querySelector('.close');
+const taskModalEditBtn = document.querySelector('.editTaskBtn');
 
 function openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPriority, taskPoints) {
     taskEditModal.style.display = "block";
@@ -57,10 +57,50 @@ function openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPr
 
 function closeEditModal() {
     taskEditModal.style.display = "none";
+    editTaskModal();
     fetchTaskList();
 }
 
+async function editTaskModal() {
+    const userID = Number(document.querySelector('#idUsuario').value);
+    const taskForm = document.querySelector('#frmEditTarefa');
+
+    const rawFormContent = new FormData(taskForm);
+    const formData = Object.fromEntries(rawFormContent);
+    taskForm.reset();
+
+    try {
+        const reqConfigs = {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                formData: formData,
+                userID: userID
+            })
+        };
+
+        const response = await fetch('TarefaController.php?action=edit', reqConfigs);
+        const responseData = await response.json();
+
+        if (!response.ok || response.status == 404 || !responseData.ok) {
+            notificate(
+                'error',
+                'Erro',
+                responseData.error
+            );
+        }
+
+        // Obtém a lista de tarefas atualizada após criar a tarefa
+        fetchTaskList();
+    } catch (error) {
+        notificate('error', 'Error', error);
+    }
+}
+
 closeEditBtn.addEventListener('click', closeEditModal);
+taskModalEditBtn.addEventListener('click', closeEditModal);
 
 $(document).on("click", ".editBtn", function () {
     const taskId = $(this).data("task-id");
@@ -72,9 +112,3 @@ $(document).on("click", ".editBtn", function () {
 
     openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPriority, taskPoints);
 });
-
-window.onclick = function(event) {
-  if (event.target == taskEditModal) {
-    taskEditModal.style.display = "none";
-  }
-}

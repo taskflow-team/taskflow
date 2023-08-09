@@ -4,9 +4,9 @@
         <h2>Edit Task</h2>
         
         <form class="task-edit-form" id="frmEditTarefa" method="POST">
-            <input required class="form-control dark-input nameEditTask" type="text" id="nameEditTask" name="nameEditTask" placeholder="Enter task name" value="">
+            <input required class="form-control dark-input nameEditTask" type="text" id="nameEditTask" name="nome" placeholder="Enter task name" value="">
 
-            <textarea class="form-control dark-input" id="taskDescription" name="taskDescription" placeholder="Enter task description"></textarea>
+            <textarea class="form-control dark-input" id="taskDescription" name="descricao" placeholder="Enter task description"></textarea>
 
             <div class="last-row" >
                 <fieldset class="element">
@@ -27,12 +27,12 @@
                 </fieldset>
                 <fieldset class="points-holder">
                     <label for="valor_pontos">Task Points</label>
-                    <input class="dark-input" type="number" id="taskPoints" name="taskPoints" value="0"/>
+                    <input class="dark-input" type="number" id="taskPoints" name="valor_pontos" value="0"/>
                 </fieldset>
             </div>
         </form>
 
-        <button class="btn success" id="editTaskBtn" >Edit Task</button>
+        <button class="btn success editTaskBtn" id="editTaskBtn">Edit Task</button>
     </div>
 
     <div class="col-6 p-0">

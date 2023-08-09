@@ -69,7 +69,7 @@ async function completeTask(element) {
             })
         };
 
-        const response = await fetch('TarefaController.php?action=edit', reqConfigs);
+        const response = await fetch('TarefaController.php?action=completeTask', reqConfigs);
 
         const responseData = await response.json();
 
