@@ -32,7 +32,7 @@ require_once(__DIR__ . "/../../components/htmlHead/htmlHead.php");
                            value="<?php echo isset($dados['senha']) ? $dados['senha'] : '' ?>" />
                 </div>
                 <div class="col-6 p-0">
-                    <?php include_once(__DIR__ . "/../../include/msg.php") ?>
+                    <?php include_once(__DIR__ . "/../../components/msg/msg.php") ?>
                 </div>
                 <div>
                     <a href="#">Forget your password?</a>

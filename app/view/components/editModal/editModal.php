@@ -2,7 +2,7 @@
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Edit Task</h2>
-        
+
         <form class="task-edit-form" id="frmEditTarefa" method="POST">
             <input required class="form-control dark-input nameEditTask" type="text" id="nameEditTask" name="nome" placeholder="Enter task name" value="">
 
@@ -36,6 +36,6 @@
     </div>
 
     <div class="col-6 p-0">
-        <?php include_once(__DIR__ . "/../include/msg.php") ?>
+        <?php include_once(__DIR__ . "/../components/msg/msg.php") ?>
     </div>
 </div>

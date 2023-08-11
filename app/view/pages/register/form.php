@@ -58,7 +58,7 @@ require_once(__DIR__ . "/../../components/htmlHead/htmlHead.php");
                 />
 
                 <div class="col-6">
-                    <?php require_once(__DIR__ . "/../../include/msg.php"); ?>
+                    <?php require_once(__DIR__ . "/../../components/msg/msg.php"); ?>
                 </div>
 
                 <div>

@@ -68,7 +68,7 @@
 
 
     <div class="col-6 p-0">
-        <?php include_once(__DIR__ . "/../../include/msg.php") ?>
+        <?php include_once(__DIR__ . "/../../components/msg/msg.php") ?>
     </div>
 </form>
 
