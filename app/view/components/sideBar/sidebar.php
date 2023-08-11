@@ -3,7 +3,7 @@
 require_once(__DIR__ . "/../../../controller/AcessoController.php");
 ?>
 
-<link rel="stylesheet" type="text/css" href="<?php echo BASEURL; ?>/view/css/sidebar.css">
+<link rel="stylesheet" type="text/css" href="<?php echo BASEURL; ?>/view/components/sideBar/sidebar.css">
 
 <div class="sidebar">
     <img class="logo" src="../view/assets/img/logo.png" alt="Logo">
