@@ -1,6 +1,6 @@
 <?php
 #Objetivo: sidebar padrão para todas as páginas
-require_once(__DIR__ . "/../../controller/AcessoController.php");
+require_once(__DIR__ . "/../../../controller/AcessoController.php");
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?php echo BASEURL; ?>/view/css/sidebar.css">

@@ -1,6 +1,6 @@
 <?php
     require_once(__DIR__ . "/../../include/header.php"); //meta links and botstrap
-    require_once(__DIR__ . "/../../include/sidebar.php");
+    require_once(__DIR__ . "/../../components/sideBar/sidebar.php");
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?php echo BASEURL; ?>/view/css/global.css">

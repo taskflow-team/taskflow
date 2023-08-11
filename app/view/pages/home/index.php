@@ -2,7 +2,7 @@
 require_once(__DIR__ . "/../../../service/TarefaService.php");
 require_once(__DIR__ . "/../../include/header.php");
 require_once(__DIR__ . "/../../../dao/TarefaDAO.php");
-require_once(__DIR__ . "/../../include/sidebar.php");
+require_once(__DIR__ . "/../../components/sideBar/sidebar.php");
 
 // Instanciar o DAO de tarefas
 $tarefaDAO = new TarefaDAO();
