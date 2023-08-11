@@ -11,7 +11,7 @@ $tarefaDAO = new TarefaDAO();
 $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 ?>
 
-<link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/pages/home/taskForm.css">
+<link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/components/taskForm/taskForm.css">
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/components/editModal/editModal.css">
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/css/task.css">
 
@@ -19,7 +19,7 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 <div class="pseudo-body">
     <?php
         // Form para adicionar tarefas
-        require_once(__DIR__ . "/taskForm.php");
+        require_once(__DIR__ . "/../../components/taskForm/taskForm.php");
         require_once(__DIR__ . "/../../components/editModal/editModal.php");
     ?>
 

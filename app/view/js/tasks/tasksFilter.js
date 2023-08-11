@@ -196,7 +196,6 @@ function updateTaskList(tasks) {
 }
 
 function handleTasksVisibility(element) {
-    const tasks = document.querySelectorAll('.task');
     const target = element.target;
     target.classList.toggle('button-active');
 
