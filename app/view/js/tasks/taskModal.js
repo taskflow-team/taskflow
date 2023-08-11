@@ -115,13 +115,6 @@ async function editTaskModal() {
 closeEditBtn.addEventListener('click', closeEditModal);
 taskModalEditBtn.addEventListener('click', closeEditModal);
 
-$(document).on("click", ".editBtn", function () {
-    const taskId = $(this).data("id");
-    const taskName = $(this).data("task-name");
-    const taskDescription = $(this).data("task-description");
-    const taskDifficulty = $(this).data("task-difficulty");
-    const taskPriority = $(this).data("task-priority");
-    const taskPoints = $(this).data("task-points");
-
-    openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPriority, taskPoints);
-});
+export {
+    openEditModal
+}

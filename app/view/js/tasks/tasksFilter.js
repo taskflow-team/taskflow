@@ -4,6 +4,7 @@
 import notificate from "../notification.js";
 import formatDate from '../formatDate.js';
 import { completeTask, deleteTask } from "./taskFunctions.js";
+import { openEditModal } from "./taskModal.js";
 
 const completedBtn = document.querySelector('#completedTasks');
 const incompletedBtn = document.querySelector('#incompletedTasks');
@@ -80,12 +81,23 @@ function updateTaskList(tasks) {
 
     // Cria e adiciona cada tarefa à lista de tarefas
     tasks.forEach(function (task) {
+        const {
+            id_tarefa,
+            concluida,
+            nome_tarefa,
+            descricao_tarefa,
+            dificuldade,
+            prioridade,
+            data_criacao,
+            valor_pontos
+        } = task;
+
         // Formata a data de criação da tarefa
-        const formattedDate = formatDate(task.data_criacao);
+        const formattedDate = formatDate(data_criacao);
 
         const liElement = document.createElement('li');
-        liElement.className = 'task ' + (task.concluida == 1 ? 'checked' : '');
-        liElement.id = task.id_tarefa;
+        liElement.className = 'task ' + (concluida == 1 ? 'checked' : '');
+        liElement.id = id_tarefa;
 
         const topContentDiv = document.createElement('div');
         topContentDiv.className = 'top-content';
@@ -93,30 +105,39 @@ function updateTaskList(tasks) {
         const checkbox = document.createElement('input');
         checkbox.type = 'checkbox';
         checkbox.className = 'completedBtn';
-        checkbox.dataset.id = task.id_tarefa;
-        checkbox.checked = task.concluida == 1;
+        checkbox.dataset.id = id_tarefa;
+        checkbox.checked = concluida == 1;
         checkbox.addEventListener('change', completeTask);
 
         const contentDiv = document.createElement('div');
         const taskName = document.createElement('p');
         taskName.className = 'task-name';
-        taskName.innerHTML = '<strong>' + task.nome_tarefa + '</strong>';
+        taskName.innerHTML = '<strong>' + nome_tarefa + '</strong>';
         const taskDescription = document.createElement('p');
-        taskDescription.textContent = task.descricao_tarefa;
+        taskDescription.textContent = descricao_tarefa;
 
         const editIcon = document.createElement('i');
         editIcon.className = 'fa-regular fa-pen-to-square task-icon editBtn';
-        editIcon.dataset.taskId = task.id_tarefa;
-        // ... Set other data attributes for editIcon
+        editIcon.dataset.taskId = id_tarefa;
+        editIcon.addEventListener('click', () => openEditModal(
+            id_tarefa,
+            nome_tarefa,
+            descricao_tarefa,
+            parseInt(dificuldade),
+            parseInt(prioridade),
+            valor_pontos
+        ));
+
+        console.log(prioridade)
 
         const deleteIcon = document.createElement('i');
         deleteIcon.className = 'fa-solid fa-trash task-icon deleteBtn';
-        deleteIcon.dataset.id = task.id_tarefa;
+        deleteIcon.dataset.id = id_tarefa;
         deleteIcon.addEventListener('click', deleteTask);
 
         const showMoreDiv = document.createElement('div');
         showMoreDiv.className = 'showMoreBtn';
-        showMoreDiv.dataset.taskId = task.id_tarefa;
+        showMoreDiv.dataset.taskId = id_tarefa;
 
         const arrowIcon = document.createElement('i');
         arrowIcon.className = 'fas fa-chevron-down arrowIcon task-icon';
@@ -135,16 +156,16 @@ function updateTaskList(tasks) {
         liElement.appendChild(topContentDiv);
 
         const moreInfoDiv = document.createElement('div');
-        moreInfoDiv.id = 'moreInfo_' + task.id_tarefa;
+        moreInfoDiv.id = 'moreInfo_' + id_tarefa;
         moreInfoDiv.className = 'moreInfoDiv';
         moreInfoDiv.style.display = 'none';
 
         const creationDateP = document.createElement('p');
         creationDateP.textContent = 'Creation Date: ' + formattedDate;
         const priorityP = document.createElement('p');
-        priorityP.textContent = 'Priority: ' + priorityMap[task.prioridade];
+        priorityP.textContent = 'Priority: ' + priorityMap[prioridade];
         const difficultyP = document.createElement('p');
-        difficultyP.textContent = 'Difficulty: ' + difficultyMap[task.dificuldade];
+        difficultyP.textContent = 'Difficulty: ' + difficultyMap[dificuldade];
 
         moreInfoDiv.appendChild(creationDateP);
         moreInfoDiv.appendChild(priorityP);
@@ -153,7 +174,7 @@ function updateTaskList(tasks) {
         liElement.appendChild(moreInfoDiv);
 
         const difficultyDiv = document.createElement('div');
-        difficultyDiv.className = 'difficulty ' + difficultyMap[task.dificuldade];
+        difficultyDiv.className = 'difficulty ' + difficultyMap[dificuldade];
 
         liElement.appendChild(difficultyDiv);
 
