@@ -61,13 +61,13 @@ function closeEditModal(element) {
         taskEditModal.classList.remove('show');
     } else if (element.target == taskModalEditBtn) {
         const taskForm = document.querySelector('#frmEditTarefa');
-        
+
         // Checa se todos os campos do formulário marcados como required estão preenchidos
         if (!taskForm.checkValidity()) {
             taskForm.reportValidity();
             return;
         }
-        
+
         taskEditModal.classList.remove('show');
         editTaskModal();
     }
@@ -81,9 +81,6 @@ async function editTaskModal() {
     const rawFormContent = new FormData(taskForm);
     const formData = Object.fromEntries(rawFormContent);
     taskForm.reset();
-
-    console.log(formData);
-    console.log(taskId);
 
     try {
         const reqConfigs = {
@@ -111,7 +108,6 @@ async function editTaskModal() {
         // Obtém a lista de tarefas atualizada após completar a tarefa
         fetchTaskList();
     } catch (error) {
-        console.log(error);
         notificate('error', 'Error', error);
     }
 }

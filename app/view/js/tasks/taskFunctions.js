@@ -57,10 +57,6 @@ async function completeTask(event) {
 
     const taskCompleted = checkbox.checked;
 
-    console.log(formData);
-    console.log(taskId);
-    console.log(taskCompleted);
-
     try {
         const reqConfigs = {
             method: "POST",

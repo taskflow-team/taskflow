@@ -13,7 +13,6 @@ const taskList = document.querySelector('#taskList');
 
 // Função para obter a lista de tarefas atualizada do servidor
 async function fetchTaskList() {
-    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     let dataPrioritySelector = document.querySelector('#subFilter');
     let selectedRule = dataPrioritySelector.selectedIndex;
     let rule = '';
