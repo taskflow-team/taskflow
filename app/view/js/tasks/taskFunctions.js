@@ -9,7 +9,7 @@ const taskForm = document.querySelector('#frmTarefa');
 async function createTask(event) {
     event.preventDefault();
 
-    const userID = Number(document.querySelector('#idUsuario').value);
+    const userID = parseInt(document.querySelector('#idUsuario').value);
 
     const rawFormContent = new FormData(taskForm);
     const formData = Object.fromEntries(rawFormContent);
@@ -47,14 +47,19 @@ async function createTask(event) {
 
 taskForm.addEventListener('submit', createTask);
 
-async function completeTask(element) {
-    const taskId = element.target.parentElement.parentElement.id;
+async function completeTask(event) {
+    const checkbox = event.target;
+    const taskId = checkbox.parentElement.parentElement.id;
 
     const rawFormContent = new FormData(taskForm);
     const formData = Object.fromEntries(rawFormContent);
     taskForm.reset();
 
-    const taskCompleted = $(this).prop("checked");
+    const taskCompleted = checkbox.checked;
+
+    console.log(formData);
+    console.log(taskId);
+    console.log(taskCompleted);
 
     try {
         const reqConfigs = {
@@ -70,7 +75,6 @@ async function completeTask(element) {
         };
 
         const response = await fetch('TarefaController.php?action=completeTask', reqConfigs);
-
         const responseData = await response.json();
 
         if (!response.ok || response.status == 404 || !responseData.ok) {
@@ -109,7 +113,7 @@ async function deleteTask() {
 
     try {
         const response = await fetch(`TarefaController.php?action=delete&id=${taskId}`, {
-            method: "GET",
+            method: "DELETE",
         });
 
         if (!response.ok) {

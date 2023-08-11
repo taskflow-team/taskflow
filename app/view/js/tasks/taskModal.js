@@ -2,7 +2,6 @@
 // Editar tarefas no banco de dados
 
 import notificate from "../notification.js";
-import formatDate from '../formatDate.js';
 import { fetchTaskList } from './tasksFilter.js';
 
 const taskEditModal = document.querySelector('#taskModal');
@@ -83,6 +82,9 @@ async function editTaskModal() {
     const formData = Object.fromEntries(rawFormContent);
     taskForm.reset();
 
+    console.log(formData);
+    console.log(taskId);
+
     try {
         const reqConfigs = {
             method: "POST",
@@ -90,8 +92,8 @@ async function editTaskModal() {
                 'Content-type': 'application/json'
             },
             body: JSON.stringify({
-                formData: formData,
-                taskId: taskId
+                taskId: taskId,
+                formData: formData
             })
         };
 
@@ -106,9 +108,10 @@ async function editTaskModal() {
             );
         }
 
-        // Obtém a lista de tarefas atualizada após criar a tarefa
+        // Obtém a lista de tarefas atualizada após completar a tarefa
         fetchTaskList();
     } catch (error) {
+        console.log(error);
         notificate('error', 'Error', error);
     }
 }

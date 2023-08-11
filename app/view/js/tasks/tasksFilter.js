@@ -9,9 +9,11 @@ const completedBtn = document.querySelector('#completedTasks');
 const incompletedBtn = document.querySelector('#incompletedTasks');
 const subFilter = document.querySelector('#subFilter');
 const searchBtn = document.querySelector('#searchBtn');
+const taskList = document.querySelector('#taskList');
 
 // Função para obter a lista de tarefas atualizada do servidor
 async function fetchTaskList() {
+    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAA");
     let dataPrioritySelector = document.querySelector('#subFilter');
     let selectedRule = dataPrioritySelector.selectedIndex;
     let rule = '';
@@ -77,57 +79,92 @@ function updateTaskList(tasks) {
         3: 'High'
     };
 
-    // Adiciona cada tarefa à lista de tarefas
+    // Cria e adiciona cada tarefa à lista de tarefas
     tasks.forEach(function (task) {
         // Formata a data de criação da tarefa
         const formattedDate = formatDate(task.data_criacao);
-        const taskCompleted = task.concluida == 1 ? 'checked' : '';
 
-        $("#taskList").append(
-            "<li class='task "+taskCompleted+"' id='" + task.id_tarefa + "'>" +
-                // Conteúdo principal
-                "<div class='top-content' >" +
+        const liElement = document.createElement('li');
+        liElement.className = 'task ' + (task.concluida == 1 ? 'checked' : '');
+        liElement.id = task.id_tarefa;
 
-                "<input type='checkbox' class='completedBtn' data-id='" + task.id_tarefa + "' " + taskCompleted + ">" +
+        const topContentDiv = document.createElement('div');
+        topContentDiv.className = 'top-content';
 
-                    "<div>" +
-                        "<p class='task-name'><strong>" + task.nome_tarefa + "</strong></p>" +
-                        "<p>" + task.descricao_tarefa + "</p>" +
-                    "</div>" +
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'completedBtn';
+        checkbox.dataset.id = task.id_tarefa;
+        checkbox.checked = task.concluida == 1;
+        checkbox.addEventListener('change', completeTask);
 
-                    // Icones
-                    "<i class='fa-regular fa-pen-to-square task-icon editBtn' data-task-id='" + task.id_tarefa + "' data-task-name='" + task.nome_tarefa + "' data-task-description='" + task.descricao_tarefa + "' data-task-priority='" + task.prioridade + "' data-task-difficulty='" + task.dificuldade + "' ' data-task-points='" + task.valor_pontos + "' data-id='" + task.id_tarefa + "'></i>" +
-                    "<i class='fa-solid fa-trash task-icon deleteBtn' data-id='" + task.id_tarefa + "'></i>" +
+        const contentDiv = document.createElement('div');
+        const taskName = document.createElement('p');
+        taskName.className = 'task-name';
+        taskName.innerHTML = '<strong>' + task.nome_tarefa + '</strong>';
+        const taskDescription = document.createElement('p');
+        taskDescription.textContent = task.descricao_tarefa;
 
-                    // Adiciona botão para exibir mais informações sobre a tarefa
-                    "<div class='showMoreBtn' data-task-id='" + task.id_tarefa + "'>" +
-                        "<i class='fas fa-chevron-down arrowIcon task-icon'></i>" +
-                    "</div>" +
-                "</div>" +
+        const editIcon = document.createElement('i');
+        editIcon.className = 'fa-regular fa-pen-to-square task-icon editBtn';
+        editIcon.dataset.taskId = task.id_tarefa;
+        // ... Set other data attributes for editIcon
 
-                // Div escondida
-                "<div id='moreInfo_" + task.id_tarefa + "' class='moreInfoDiv' style='display: none;'>" +
-                    "<p>Creation Date: " + formattedDate + "</p>" +
-                    "<p>Priority: " + priorityMap[task.prioridade] + "</p>" +
-                    "<p>Difficulty: " + difficultyMap[task.dificuldade] + "</p>" +
-                "</div>" +
+        const deleteIcon = document.createElement('i');
+        deleteIcon.className = 'fa-solid fa-trash task-icon deleteBtn';
+        deleteIcon.dataset.id = task.id_tarefa;
+        deleteIcon.addEventListener('click', deleteTask);
 
-                // Etiqueta de dificuldade
-                "<div class='difficulty " + difficultyMap[task.dificuldade] + "'></div>" +
-            "</li>"
-        );
+        const showMoreDiv = document.createElement('div');
+        showMoreDiv.className = 'showMoreBtn';
+        showMoreDiv.dataset.taskId = task.id_tarefa;
+
+        const arrowIcon = document.createElement('i');
+        arrowIcon.className = 'fas fa-chevron-down arrowIcon task-icon';
+
+        showMoreDiv.appendChild(arrowIcon);
+
+        contentDiv.appendChild(taskName);
+        contentDiv.appendChild(taskDescription);
+
+        topContentDiv.appendChild(checkbox);
+        topContentDiv.appendChild(contentDiv);
+        topContentDiv.appendChild(editIcon);
+        topContentDiv.appendChild(deleteIcon);
+        topContentDiv.appendChild(showMoreDiv);
+
+        liElement.appendChild(topContentDiv);
+
+        const moreInfoDiv = document.createElement('div');
+        moreInfoDiv.id = 'moreInfo_' + task.id_tarefa;
+        moreInfoDiv.className = 'moreInfoDiv';
+        moreInfoDiv.style.display = 'none';
+
+        const creationDateP = document.createElement('p');
+        creationDateP.textContent = 'Creation Date: ' + formattedDate;
+        const priorityP = document.createElement('p');
+        priorityP.textContent = 'Priority: ' + priorityMap[task.prioridade];
+        const difficultyP = document.createElement('p');
+        difficultyP.textContent = 'Difficulty: ' + difficultyMap[task.dificuldade];
+
+        moreInfoDiv.appendChild(creationDateP);
+        moreInfoDiv.appendChild(priorityP);
+        moreInfoDiv.appendChild(difficultyP);
+
+        liElement.appendChild(moreInfoDiv);
+
+        const difficultyDiv = document.createElement('div');
+        difficultyDiv.className = 'difficulty ' + difficultyMap[task.dificuldade];
+
+        liElement.appendChild(difficultyDiv);
+
+        taskList.appendChild(liElement);
     });
 
     // Verifica se a lista de tarefas está vazia e exibe uma mensagem apropriada
     if (tasks.length === 0) {
-        $("#taskList").append("<p>No pending tasks</p>");
+        taskList.innerHTML = "<p>Task list is empty</p>";
     }
-
-    // Anexa um evento de clique ao botão de conclusão de tarefa
-    $(".completedBtn").change(completeTask);
-
-    // Anexa um evento de clique ao botão de exclusão de tarefa
-    $(".deleteBtn").click(deleteTask);
 
     if(completedBtn.classList.contains('button-active')){
         filterTasks('completed', tasks);
