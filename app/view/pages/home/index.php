@@ -1,6 +1,6 @@
 <?php
 require_once(__DIR__ . "/../../../service/TarefaService.php");
-require_once(__DIR__ . "/../../include/header.php");
+require_once(__DIR__ . "/../../components/htmlHead/htmlHead.php");
 require_once(__DIR__ . "/../../../dao/TarefaDAO.php");
 require_once(__DIR__ . "/../../components/sideBar/sidebar.php");
 

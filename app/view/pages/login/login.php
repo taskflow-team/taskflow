@@ -1,7 +1,7 @@
 <?php
 #Nome do arquivo: login/login.php
 #Objetivo: interface para logar no sistema
-require_once(__DIR__ . "/../../include/header.php");
+require_once(__DIR__ . "/../../components/htmlHead/htmlHead.php");
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?php echo BASEURL; ?>/view/pages/login/login.css">
@@ -43,6 +43,6 @@ require_once(__DIR__ . "/../../include/header.php");
                 </div>
             </form>
         </div>
-        
+
     </div>
 </div>

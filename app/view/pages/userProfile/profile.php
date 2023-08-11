@@ -1,5 +1,5 @@
 <?php
-    require_once(__DIR__ . "/../../include/header.php"); //meta links and botstrap
+    require_once(__DIR__ . "/../../components/htmlHead/htmlHead.php"); //meta links and botstrap
     require_once(__DIR__ . "/../../components/sideBar/sidebar.php");
 ?>
 

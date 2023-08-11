@@ -1,7 +1,7 @@
 <?php
 #Nome do arquivo: usuario/list.php
 #Objetivo: interface para listagem dos usuários do sistema
-require_once(__DIR__ . "/../../include/header.php");
+require_once(__DIR__ . "/../../components/htmlHead/htmlHead.php");
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?php echo BASEURL; ?>/view/pages/register/form.css">
@@ -17,9 +17,9 @@ require_once(__DIR__ . "/../../include/header.php");
         </div>
 
             <h3>
-                <!-- <?php if($dados['id'] == 0) echo "Inserir"; else echo "Alterar"; ?> 
+                <!-- <?php if($dados['id'] == 0) echo "Inserir"; else echo "Alterar"; ?>
                 Usuário -->
-                <h4>Sign in:</h4> 
+                <h4>Sign in:</h4>
             </h3>
 
             <form id="frmUsuario" method="POST" action="<?= BASEURL ?>/controller/UsuarioController.php?action=save">
@@ -54,7 +54,7 @@ require_once(__DIR__ . "/../../include/header.php");
                 </div>
 
                 <input type="hidden" id="hddId" name="id"
-                    value="<?= $dados['id']; ?>" 
+                    value="<?= $dados['id']; ?>"
                 />
 
                 <div class="col-6">
