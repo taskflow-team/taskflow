@@ -152,7 +152,7 @@
 }
 
 .filterCompletedTasks {
-    width: 250px;
+    width: 305px;
     height: 45px;
     background-color: transparent;
     border: 1px solid #FFFFFF;
@@ -174,12 +174,14 @@
     color: #1D1D1D;
     border-color: transparent;
     transition: all 0.3s ease;
+    font-weight: 600;
 }
 
 .button-active {
     background-color: #4DD167;
     color: #1D1D1D;
     border-color: transparent;
+    font-weight: 600;
 }
 
 #subFilter{

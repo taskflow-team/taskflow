@@ -34,7 +34,7 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
         </select>
 
         <input type="text" id="taskNameSearch" class="dark-input" placeholder="Search task by name" >
-        <button class="btn success" id="searchBtn" >Search</button>
+        <button class="btn success" id="searchBtn" ><strong>Search</strong></button>
     </div>
 
     <ul id="taskList" class="task-list"></ul>
