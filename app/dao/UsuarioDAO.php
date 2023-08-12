@@ -5,10 +5,12 @@
 include_once(__DIR__ . "/../configs/Connection.php");
 include_once(__DIR__ . "/../model/Usuario.php");
 
-class UsuarioDAO {
+class UsuarioDAO
+{
 
     //Método para listar os usuaários a partir da base de dados
-    public function list() {
+    public function list()
+    {
         $conn = Connection::getConn();
 
         $sql = "SELECT * FROM tb_usuarios u ORDER BY u.nome_usuario";
@@ -20,20 +22,21 @@ class UsuarioDAO {
     }
 
     //Método para buscar um usuário por seu ID
-    public function findById(int $id) {
+    public function findById(int $id)
+    {
         $conn = Connection::getConn();
 
         $sql = "SELECT * FROM tb_usuarios u" .
-               " WHERE u.id_usuario = ?";
+            " WHERE u.id_usuario = ?";
         $stm = $conn->prepare($sql);
         $stm->execute([$id]);
         $result = $stm->fetchAll();
 
         $usuarios = $this->mapUsuarios($result);
 
-        if(count($usuarios) == 1)
+        if (count($usuarios) == 1)
             return $usuarios[0];
-        elseif(count($usuarios) == 0)
+        elseif (count($usuarios) == 0)
             return null;
 
         die("UsuarioDAO.findById()" .
@@ -42,20 +45,21 @@ class UsuarioDAO {
 
 
     //Método para buscar um usuário por seu login e senha
-    public function findByLoginSenha(string $login, string $senha) {
+    public function findByLoginSenha(string $login, string $senha)
+    {
         $conn = Connection::getConn();
 
         $sql = "SELECT * FROM tb_usuarios u" .
-               " WHERE u.login = ? AND u.senha = ?";
+            " WHERE u.login = ? AND u.senha = ?";
         $stm = $conn->prepare($sql);
         $stm->execute([$login, $senha]);
         $result = $stm->fetchAll();
 
         $usuarios = $this->mapUsuarios($result);
 
-        if(count($usuarios) == 1)
+        if (count($usuarios) == 1)
             return $usuarios[0];
-        elseif(count($usuarios) == 0)
+        elseif (count($usuarios) == 0)
             return null;
 
         die("UsuarioDAO.findByLoginSenha()" .
@@ -63,11 +67,12 @@ class UsuarioDAO {
     }
 
     //Método para inserir um Usuario
-    public function insert(Usuario $usuario) {
+    public function insert(Usuario $usuario)
+    {
         $conn = Connection::getConn();
 
         $sql = "INSERT INTO tb_usuarios (nome_usuario, login, senha, email, nivel, pontos, tarefas_concluidas)" .
-               " VALUES (:nome, :login, :senha, :email, :nivel, :pontos, :tarefas_concluidas)";
+            " VALUES (:nome, :login, :senha, :email, :nivel, :pontos, :tarefas_concluidas)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue("nome", $usuario->getNome());
@@ -81,12 +86,13 @@ class UsuarioDAO {
     }
 
     //Método para atualizar um Usuario
-    public function update(Usuario $usuario) {
+    public function update(Usuario $usuario)
+    {
         $conn = Connection::getConn();
 
         $sql = "UPDATE tb_usuarios SET email = :email," .
-               " senha = :senha" .
-               " WHERE id_usuario = :id";
+            " senha = :senha" .
+            " WHERE id_usuario = :id";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue("senha", $usuario->getSenha());
@@ -96,7 +102,8 @@ class UsuarioDAO {
     }
 
     //Método para excluir um Usuario pelo seu ID
-    public function deleteById(int $id) {
+    public function deleteById(int $id)
+    {
         $conn = Connection::getConn();
 
         $sql = "DELETE FROM tb_usuarios WHERE id_usuario = :id";
@@ -107,7 +114,8 @@ class UsuarioDAO {
     }
 
     //Método para converter um registro da base de dados em um objeto Usuario
-    private function mapUsuarios($result) {
+    private function mapUsuarios($result)
+    {
         $usuarios = array();
         foreach ($result as $reg) {
             $usuario = new Usuario();
@@ -124,5 +132,4 @@ class UsuarioDAO {
 
         return $usuarios;
     }
-
 }

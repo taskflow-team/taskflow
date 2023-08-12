@@ -4,20 +4,21 @@
 
 require_once(__DIR__ . "/../model/Usuario.php");
 
-class LoginService {
+class LoginService
+{
 
-    public function validarCampos(string $login, string $senha) {
+    public function validarCampos(string $login, string $senha)
+    {
         $arrayMsg = array();
 
         //Valida o campo nome
-        if(! $login)
+        if (!$login)
             array_push($arrayMsg, "'Login' is required");
 
         //Valida o campo login
-        if(! $senha)
+        if (!$senha)
             array_push($arrayMsg, "'Password' is required");
 
         return $arrayMsg;
     }
-
 }

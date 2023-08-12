@@ -9,13 +9,15 @@ error_reporting(E_ALL);
 include_once(__DIR__ . "/../configs/Connection.php");
 include_once(__DIR__ . "/../model/Tarefa.php");
 
-class TarefaDAO {
+class TarefaDAO
+{
 
     //Método para listar as tarefas a partir da base de dados
-    public function listTarefas($id_usuario, $rule) {
+    public function listTarefas($id_usuario, $rule)
+    {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM tb_tarefas WHERE id_usuario = ". $id_usuario ." ORDER BY ". $rule ." DESC";
+        $sql = "SELECT * FROM tb_tarefas WHERE id_usuario = " . $id_usuario . " ORDER BY " . $rule . " DESC";
         $stm = $conn->prepare($sql);
         $stm->execute();
         $result = $stm->fetchAll();
@@ -23,7 +25,8 @@ class TarefaDAO {
         return $this->mapTarefas($result);
     }
 
-    public function findAllTarefas($idUsuario) {
+    public function findAllTarefas($idUsuario)
+    {
         $conn = Connection::getConn();
 
         $sql = "SELECT * FROM tb_tarefas t WHERE t.id_usuario = ?";
@@ -35,20 +38,21 @@ class TarefaDAO {
     }
 
     //Método para buscar uma tarefa por seu ID
-    public function findByIdTarefa(int $id) {
+    public function findByIdTarefa(int $id)
+    {
         $conn = Connection::getConn();
 
         $sql = "SELECT * FROM tb_tarefas t" .
-               " WHERE t.id_tarefa = ?";
+            " WHERE t.id_tarefa = ?";
         $stm = $conn->prepare($sql);
         $stm->execute([$id]);
         $result = $stm->fetchAll();
 
         $tarefas = $this->mapTarefas($result);
 
-        if(count($tarefas) == 1)
+        if (count($tarefas) == 1)
             return $tarefas[0];
-        elseif(count($tarefas) == 0)
+        elseif (count($tarefas) == 0)
             return null;
 
         die("TarefaDAO.findByIdTarefa()" .
@@ -57,20 +61,21 @@ class TarefaDAO {
 
     //Método para buscar uma tarefa por seu nome
 
-    public function findByNomeTarefa(string $nome) {
+    public function findByNomeTarefa(string $nome)
+    {
         $conn = Connection::getConn();
 
         $sql = "SELECT * FROM tb_tarefas t" .
-               " WHERE t.nome_tarefa = ?";
+            " WHERE t.nome_tarefa = ?";
         $stm = $conn->prepare($sql);
         $stm->execute([$nome]);
         $result = $stm->fetchAll();
 
         $tarefas = $this->mapTarefas($result);
 
-        if(count($tarefas) == 1)
+        if (count($tarefas) == 1)
             return $tarefas[0];
-        elseif(count($tarefas) == 0)
+        elseif (count($tarefas) == 0)
             return null;
 
         die("TarefaDAO.findByNomeTarefa()" .
@@ -78,11 +83,12 @@ class TarefaDAO {
     }
 
     //Método para inserir uma Tarefa
-    public function insertTarefa(Tarefa $tarefa) {
+    public function insertTarefa(Tarefa $tarefa)
+    {
         $conn = Connection::getConn();
 
         $sql = "INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, data_criacao, id_usuario)" .
-               " VALUES (:nome_tarefa, :descricao, :dificuldade, :prioridade, :valor_pontos, :data_criacao, :id_usuario)";
+            " VALUES (:nome_tarefa, :descricao, :dificuldade, :prioridade, :valor_pontos, :data_criacao, :id_usuario)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue(":nome_tarefa", $tarefa->getNome_tarefa());
@@ -97,7 +103,8 @@ class TarefaDAO {
 
     //Método para atualizar uma Tarefa
 
-    public function updateTarefa(Tarefa $tarefa) {
+    public function updateTarefa(Tarefa $tarefa)
+    {
         $conn = Connection::getConn();
 
         $sql = "UPDATE tb_tarefas SET nome_tarefa = ?, descricao = ?, dificuldade = ?, prioridade = ?, valor_pontos = ?, data_criacao = ?, concluida = ? WHERE id_tarefa = ?";
@@ -116,7 +123,8 @@ class TarefaDAO {
 
     //Método para excluir uma Tarefa pelo seu ID
 
-    public function deleteTarefa(int $id) {
+    public function deleteTarefa(int $id)
+    {
         $conn = Connection::getConn();
 
         $sql = "DELETE FROM tb_tarefas WHERE id_tarefa = ?";
@@ -128,26 +136,24 @@ class TarefaDAO {
 
     //Método para mapear os dados de Tarefa para um array
 
-    private function mapTarefas($result) {
+    private function mapTarefas($result)
+    {
         $tarefas = array();
 
-foreach($result as $row) {
-        $tarefa = new Tarefa();
-        $tarefa->setId_tarefa($row["id_tarefa"]);
-        $tarefa->setNome_tarefa($row["nome_tarefa"]);
-        $tarefa->setDescricao_tarefa($row["descricao"]);
-        $tarefa->setDificuldade($row["dificuldade"]);
-        $tarefa->setPrioridade($row["prioridade"]);
-        $tarefa->setValor_pontos($row["valor_pontos"]);
-        $date_criacao = new DateTime($row["data_criacao"]);
-        $tarefa->setData_criacao($date_criacao);
-        $tarefa->setConcluida($row["concluida"]);
+        foreach ($result as $row) {
+            $tarefa = new Tarefa();
+            $tarefa->setId_tarefa($row["id_tarefa"]);
+            $tarefa->setNome_tarefa($row["nome_tarefa"]);
+            $tarefa->setDescricao_tarefa($row["descricao"]);
+            $tarefa->setDificuldade($row["dificuldade"]);
+            $tarefa->setPrioridade($row["prioridade"]);
+            $tarefa->setValor_pontos($row["valor_pontos"]);
+            $date_criacao = new DateTime($row["data_criacao"]);
+            $tarefa->setData_criacao($date_criacao);
+            $tarefa->setConcluida($row["concluida"]);
             array_push($tarefas, $tarefa);
         }
 
         return $tarefas;
     }
-
-
-
 }

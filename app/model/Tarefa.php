@@ -1,6 +1,7 @@
 <?php
 
-Class Tarefa {
+class Tarefa
+{
 
     private $id_tarefa;
     private $nome_tarefa;
@@ -33,7 +34,7 @@ Class Tarefa {
      *
      * @return  self
      */
-    public function setData_criacao($data_criacao) 
+    public function setData_criacao($data_criacao)
     {
         $this->data_criacao = $data_criacao;
 
@@ -42,7 +43,7 @@ Class Tarefa {
 
     /**
      * Get the value of valor_pontos
-     */ 
+     */
     public function getValor_pontos()
     {
         return $this->valor_pontos;
@@ -52,7 +53,7 @@ Class Tarefa {
      * Set the value of valor_pontos
      *
      * @return  self
-     */ 
+     */
     public function setValor_pontos($valor_pontos)
     {
         $this->valor_pontos = $valor_pontos;
@@ -62,7 +63,7 @@ Class Tarefa {
 
     /**
      * Get the value of prioridade
-     */ 
+     */
     public function getPrioridade()
     {
         return $this->prioridade;
@@ -72,7 +73,7 @@ Class Tarefa {
      * Set the value of prioridade
      *
      * @return  self
-     */ 
+     */
     public function setPrioridade($prioridade)
     {
         $this->prioridade = $prioridade;
@@ -82,7 +83,7 @@ Class Tarefa {
 
     /**
      * Get the value of descricao_tarefa
-     */ 
+     */
     public function getDescricao_tarefa()
     {
         return $this->descricao_tarefa;
@@ -92,7 +93,7 @@ Class Tarefa {
      * Set the value of descricao_tarefa
      *
      * @return  self
-     */ 
+     */
     public function setDescricao_tarefa($descricao_tarefa)
     {
         $this->descricao_tarefa = $descricao_tarefa;
@@ -102,7 +103,7 @@ Class Tarefa {
 
     /**
      * Get the value of nome_tarefa
-     */ 
+     */
     public function getNome_tarefa()
     {
         return $this->nome_tarefa;
@@ -112,7 +113,7 @@ Class Tarefa {
      * Set the value of nome_tarefa
      *
      * @return  self
-     */ 
+     */
     public function setNome_tarefa($nome_tarefa)
     {
         $this->nome_tarefa = $nome_tarefa;
@@ -122,7 +123,7 @@ Class Tarefa {
 
     /**
      * Get the value of id_tarefa
-     */ 
+     */
     public function getId_tarefa()
     {
         return $this->id_tarefa;
@@ -132,7 +133,7 @@ Class Tarefa {
      * Set the value of id_tarefa
      *
      * @return  self
-     */ 
+     */
     public function setId_tarefa($id_tarefa)
     {
         $this->id_tarefa = $id_tarefa;
@@ -142,7 +143,7 @@ Class Tarefa {
 
     /**
      * Get the value of dificuldade
-     */ 
+     */
     public function getDificuldade()
     {
         return $this->dificuldade;
@@ -152,7 +153,7 @@ Class Tarefa {
      * Set the value of dificuldade
      *
      * @return  self
-     */ 
+     */
     public function setDificuldade($dificuldade)
     {
         $this->dificuldade = $dificuldade;
@@ -162,7 +163,7 @@ Class Tarefa {
 
     /**
      * Get the value of concluida
-     */ 
+     */
     public function getConcluida()
     {
         return $this->concluida;
@@ -172,7 +173,7 @@ Class Tarefa {
      * Set the value of concluida
      *
      * @return  self
-     */ 
+     */
     public function setConcluida($concluida)
     {
         $this->concluida = $concluida;
@@ -182,7 +183,7 @@ Class Tarefa {
 
     /**
      * Get the value of id_usuario
-     */ 
+     */
     public function getId_usuario()
     {
         return $this->id_usuario;
@@ -192,7 +193,7 @@ Class Tarefa {
      * Set the value of id_usuario
      *
      * @return  self
-     */ 
+     */
     public function setId_usuario($id_usuario)
     {
         $this->id_usuario = $id_usuario;

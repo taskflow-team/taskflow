@@ -10,12 +10,14 @@ require_once(__DIR__ . "/../dao/UsuarioDAO.php");
 require_once(__DIR__ . "/../service/TarefaService.php");
 require_once(__DIR__ . "/Controller.php");
 
-class TarefaController extends Controller {
+class TarefaController extends Controller
+{
 
     private TarefaDAO $tarefaDao;
     private TarefaService $tarefaService;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->tarefaDao = new TarefaDAO();
         $this->tarefaService = new TarefaService();
 
@@ -24,12 +26,14 @@ class TarefaController extends Controller {
         $this->handleAction();
     }
 
-    protected function create() {
+    protected function create()
+    {
         $dados["id"] = 0;
         $this->loadView("home/form.php", $dados, "", "");
     }
 
-    protected function list() {
+    protected function list()
+    {
         // Verifica se o usuário está logado
         if (!$this->usuarioLogado()) {
             exit; // Se não estiver logado, encerra a execução
@@ -44,9 +48,9 @@ class TarefaController extends Controller {
 
         $rule = $requestData['rule'];
 
-        if($rule === 'priority'){
+        if ($rule === 'priority') {
             $query_rule = 'prioridade';
-        } else if($rule === 'difficulty') {
+        } else if ($rule === 'difficulty') {
             $query_rule = 'dificuldade';
         } else {
             $query_rule = 'id_tarefa';
@@ -58,7 +62,7 @@ class TarefaController extends Controller {
         $response = array(
             'message' => 'Success',
             'rule' => $requestData,
-            'data' => array_map(function($tarefa) {
+            'data' => array_map(function ($tarefa) {
                 // Converte o objeto tarefa em um objeto anônimo contendo apenas as propriedades necessárias
                 return (object) array(
                     'id_tarefa' => $tarefa->getId_tarefa(),
@@ -84,7 +88,8 @@ class TarefaController extends Controller {
         echo json_encode($response);
     }
 
-    protected function edit() {
+    protected function edit()
+    {
         $jsonString = file_get_contents('php://input');
         $requestData = json_decode($jsonString, true);
 
@@ -144,7 +149,8 @@ class TarefaController extends Controller {
         }
     }
 
-    protected function completeTask() {
+    protected function completeTask()
+    {
         $jsonString = file_get_contents('php://input');
         $requestData = json_decode($jsonString, true);
 
@@ -187,7 +193,8 @@ class TarefaController extends Controller {
         }
     }
 
-    protected function save() {
+    protected function save()
+    {
         // Obter os dados JSON brutos do corpo da requisição
         $jsonString = file_get_contents('php://input');
         $requestData = json_decode($jsonString, true); // Converter JSON para um array associativo
@@ -262,7 +269,8 @@ class TarefaController extends Controller {
         }
     }
 
-    protected function delete() {
+    protected function delete()
+    {
         if (!$this->usuarioLogado()) {
             exit;
         }
@@ -282,7 +290,8 @@ class TarefaController extends Controller {
         exit;
     }
 
-    protected function requestTest() {
+    protected function requestTest()
+    {
         $response = array(
             'message' => 'Request recieved successfully',
         );

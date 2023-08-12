@@ -1,37 +1,41 @@
-<?php 
+<?php
 #Classe controller para a Logar do sistema
 require_once(__DIR__ . "/Controller.php");
 require_once(__DIR__ . "/../dao/UsuarioDAO.php");
 require_once(__DIR__ . "/../service/LoginService.php");
 require_once(__DIR__ . "/../model/Usuario.php");
 
-class LoginController extends Controller {
+class LoginController extends Controller
+{
 
     private LoginService $loginService;
     private UsuarioDAO $usuarioDao;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->loginService = new LoginService();
         $this->usuarioDao = new UsuarioDAO();
         $this->setActionDefault("login");
         $this->handleAction();
     }
 
-    protected function login() {
+    protected function login()
+    {
         $this->loadView("/pages/login/login.php", []);
     }
 
     /* Método para logar um usuário a partir dos dados informados no formulário */
-    protected function logon() {
+    protected function logon()
+    {
         $login = isset($_POST['login']) ? trim($_POST['login']) : null;
         $senha = isset($_POST['senha']) ? trim($_POST['senha']) : null;
 
         //Validar os campos
         $erros = $this->loginService->validarCampos($login, $senha);
-        if(empty($erros)) {
+        if (empty($erros)) {
             //Valida o login a partir do banco de dados
             $usuario = $this->usuarioDao->findByLoginSenha($login, $senha);
-            if($usuario) {
+            if ($usuario) {
                 echo "Passou";
 
                 //Se encontrou o usuário, salva a sessão e redireciona para a HOME do sistema
@@ -52,14 +56,16 @@ class LoginController extends Controller {
         $this->loadView("/pages/login/login.php", $dados, $msg);
     }
 
-     /* Método para logar um usuário a partir dos dados informados no formulário */
-    protected function logout() {
+    /* Método para logar um usuário a partir dos dados informados no formulário */
+    protected function logout()
+    {
         $this->removerUsuarioSessao();
 
         $this->loadView("/pages/login/login.php", [], "", "Loged out successfully");
     }
 
-    private function salvarUsuarioSessao(Usuario $usuario) {
+    private function salvarUsuarioSessao(Usuario $usuario)
+    {
         //Habilitar o recurso de sessão no PHP nesta página
         session_start();
 
@@ -69,7 +75,8 @@ class LoginController extends Controller {
         //$_SESSION[SESSAO_USUARIO_PAPEIS] = $usuario->getPapeisAsArray();
     }
 
-    private function removerUsuarioSessao() {
+    private function removerUsuarioSessao()
+    {
         //Habilitar o recurso de sessão no PHP nesta página
         session_start();
 

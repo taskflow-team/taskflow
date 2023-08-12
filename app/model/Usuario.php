@@ -1,8 +1,9 @@
-<?php 
+<?php
 #Nome do arquivo: Usuario.php
 #Objetivo: classe Model para Usuario
 
-class Usuario implements JsonSerializable {
+class Usuario implements JsonSerializable
+{
 
     private $id;
     private $nome;
@@ -14,22 +15,23 @@ class Usuario implements JsonSerializable {
     private $tarefas_concluidas;
 
     #[\ReturnTypeWillChange]
-    public function jsonSerialize() {
+    public function jsonSerialize()
+    {
         return [
-                "id" => $this->id,
-                "nome" => $this->nome,
-                "login" => $this->login,
-                "senha" => $this->senha,
-                "email" => $this->email,
-                "pontos" => $this->pontos,
-                "nivel" => $this->nivel,
-                "tarefas_concluidas" => $this->tarefas_concluidas
-            ];
+            "id" => $this->id,
+            "nome" => $this->nome,
+            "login" => $this->login,
+            "senha" => $this->senha,
+            "email" => $this->email,
+            "pontos" => $this->pontos,
+            "nivel" => $this->nivel,
+            "tarefas_concluidas" => $this->tarefas_concluidas
+        ];
     }
 
     /**
      * Get the value of id
-     */ 
+     */
     public function getId()
     {
         return $this->id;
@@ -39,7 +41,7 @@ class Usuario implements JsonSerializable {
      * Set the value of id
      *
      * @return  self
-     */ 
+     */
     public function setId($id)
     {
         $this->id = $id;
@@ -49,7 +51,7 @@ class Usuario implements JsonSerializable {
 
     /**
      * Get the value of login
-     */ 
+     */
     public function getLogin()
     {
         return $this->login;
@@ -59,7 +61,7 @@ class Usuario implements JsonSerializable {
      * Set the value of login
      *
      * @return  self
-     */ 
+     */
     public function setLogin($login)
     {
         $this->login = $login;
@@ -69,7 +71,7 @@ class Usuario implements JsonSerializable {
 
     /**
      * Get the value of nome
-     */ 
+     */
     public function getNome()
     {
         return $this->nome;
@@ -79,7 +81,7 @@ class Usuario implements JsonSerializable {
      * Set the value of nome
      *
      * @return  self
-     */ 
+     */
     public function setNome($nome)
     {
         $this->nome = $nome;
@@ -89,7 +91,7 @@ class Usuario implements JsonSerializable {
 
     /**
      * Get the value of senha
-     */ 
+     */
     public function getSenha()
     {
         return $this->senha;
@@ -99,7 +101,7 @@ class Usuario implements JsonSerializable {
      * Set the value of senha
      *
      * @return  self
-     */ 
+     */
     public function setSenha($senha)
     {
         $this->senha = $senha;
@@ -109,7 +111,7 @@ class Usuario implements JsonSerializable {
 
     /**
      * Get the value of pontos
-     */ 
+     */
     public function getPontos()
     {
         return $this->pontos;
@@ -119,7 +121,7 @@ class Usuario implements JsonSerializable {
      * Set the value of pontos
      *
      * @return  self
-     */ 
+     */
     public function setPontos($pontos)
     {
         $this->pontos = $pontos;
@@ -129,7 +131,7 @@ class Usuario implements JsonSerializable {
 
     /**
      * Get the value of tarefas_concluidas
-     */ 
+     */
     public function getTarefas_concluidas()
     {
         return $this->tarefas_concluidas;
@@ -139,7 +141,7 @@ class Usuario implements JsonSerializable {
      * Set the value of tarefas_concluidas
      *
      * @return  self
-     */ 
+     */
     public function setTarefas_concluidas($tarefas_concluidas)
     {
         $this->tarefas_concluidas = $tarefas_concluidas;
@@ -149,7 +151,7 @@ class Usuario implements JsonSerializable {
 
     /**
      * Get the value of nivel
-     */ 
+     */
     public function getNivel()
     {
         return $this->nivel;
@@ -159,7 +161,7 @@ class Usuario implements JsonSerializable {
      * Set the value of nivel
      *
      * @return  self
-     */ 
+     */
     public function setNivel($nivel)
     {
         $this->nivel = $nivel;
@@ -169,7 +171,7 @@ class Usuario implements JsonSerializable {
 
     /**
      * Get the value of email
-     */ 
+     */
     public function getEmail()
     {
         return $this->email;
@@ -179,7 +181,7 @@ class Usuario implements JsonSerializable {
      * Set the value of email
      *
      * @return  self
-     */ 
+     */
     public function setEmail($email)
     {
         $this->email = $email;

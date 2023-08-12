@@ -6,12 +6,14 @@ require_once(__DIR__ . "/../service/UsuarioService.php");
 require_once(__DIR__ . "/../model/Usuario.php");
 
 
-class UsuarioController extends Controller {
+class UsuarioController extends Controller
+{
 
     private UsuarioDAO $usuarioDao;
     private UsuarioService $usuarioService;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->usuarioDao = new UsuarioDAO();
         $this->usuarioService = new UsuarioService();
 
@@ -20,21 +22,24 @@ class UsuarioController extends Controller {
         $this->handleAction();
     }
 
-    protected function create() {
+    protected function create()
+    {
         $dados["id"] = 0;
         $this->loadView("pages/register/form.php", $dados);
     }
 
-    protected function showProfile() {
-        if(! $this->usuarioLogado()){
+    protected function showProfile()
+    {
+        if (!$this->usuarioLogado()) {
             exit;
         }
 
         $this->loadView("/pages/userProfile/profile.php", []);
     }
 
-    protected function getUserData(){
-        if(! $this->usuarioLogado()){
+    protected function getUserData()
+    {
+        if (!$this->usuarioLogado()) {
             exit;
         }
 
@@ -52,7 +57,8 @@ class UsuarioController extends Controller {
         echo json_encode($response);
     }
 
-    protected function edit() {
+    protected function edit()
+    {
         $jsonString = file_get_contents('php://input');
         $requestData = json_decode($jsonString, true);
 
@@ -88,7 +94,8 @@ class UsuarioController extends Controller {
         echo json_encode($response);
     }
 
-    protected function save() {
+    protected function save()
+    {
         //Captura os dados do formulário
         $dados["id"] = isset($_POST['id']) ? $_POST['id'] : 0;
         $nome = isset($_POST['nome']) ? trim($_POST['nome']) : NULL;
@@ -113,11 +120,11 @@ class UsuarioController extends Controller {
 
         //Validar os dados
         $erros = $this->usuarioService->validarDados($usuario, $confSenha);
-        if(empty($erros)) {
+        if (empty($erros)) {
             //Persiste o objeto
             try {
 
-                if($dados["id"] == 0)  //Inserindo
+                if ($dados["id"] == 0)  //Inserindo
                     $this->usuarioDao->insert($usuario);
                 else { //Alterando
                     $usuario->setId($dados["id"]);
@@ -143,17 +150,19 @@ class UsuarioController extends Controller {
         $this->loadView("pages/register/form.php", $dados, $msgsErro);
     }
 
-    protected function delete() {
+    protected function delete()
+    {
         $usuario = $this->findUsuarioById();
-        if($usuario) {
+        if ($usuario) {
             $this->usuarioDao->deleteById($usuario->getId());
         }
     }
 
-    private function findUsuarioById() {
+    private function findUsuarioById()
+    {
         $id =  0;
 
-        if(isset($_SESSION[SESSAO_USUARIO_ID])) {
+        if (isset($_SESSION[SESSAO_USUARIO_ID])) {
             $id = $_SESSION[SESSAO_USUARIO_ID];
         }
 
