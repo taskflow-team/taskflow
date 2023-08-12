@@ -22,7 +22,11 @@
 }
 
 .pseudo-body .task-form button{
-    width: 100px;
+    min-width: 100px;
+    width: fit-content;
+    background-color: #4DD167;
+    border: none;
+    color: #2D2D2D;
 }
 
 .task-form .last-row{
@@ -81,7 +85,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-right: 10px; 
+    margin-right: 10px;
 }
 
 .btn-wrapper {

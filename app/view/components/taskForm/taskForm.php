@@ -59,9 +59,9 @@
     <input id="idUsuario" name="idUsuario" type="hidden" value="<?php echo $_SESSION[SESSAO_USUARIO_ID]; ?>" />
 
     <div class="btn-wrapper">
-        <div class="showMoreBtn btn btn-success">
-            <p id="showMoreText">Show more <i class="fas fa-chevron-down arrowIcon task-icon"></i></p>
-        </div>
+        <button class="showMoreBtn btn btn-success">
+            <strong>Show more <i class="fas fa-chevron-down arrowIcon task-icon"></i></strong>
+        </button>
 
         <button type="submit" class="btn btn-success" id="submitTaskButton">Add Task</button>
     </div>
