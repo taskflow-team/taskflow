@@ -1,6 +1,10 @@
 import { fetchLists } from "./listFilter.js";
 import notificate from "../notification.js";
 
+async function createList(){
+
+}
+
 async function deleteList(event){
     const listID = parseInt(event.target.parentNode.parentNode.id);
 
@@ -25,5 +29,6 @@ async function deleteList(event){
 }
 
 export {
-    deleteList
+    deleteList,
+    createList
 }

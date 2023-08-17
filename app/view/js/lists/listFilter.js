@@ -1,5 +1,6 @@
 // Fetch lists and filter them
 import { deleteList } from "./listFunctions.js";
+import createListModal from "./createlistModal.js";
 import notificate from "../notification.js";
 
 const pseudoBody = document.querySelector('.pseudo-body');
@@ -28,6 +29,7 @@ function updateLists(lists){
 
     const createListDiv = document.createElement('div');
     createListDiv.className = 'list-card create-list';
+    createListDiv.addEventListener('click', createListModal);
 
     const addIcon = document.createElement('i');
     addIcon.className = 'fa-regular fa-plus';
