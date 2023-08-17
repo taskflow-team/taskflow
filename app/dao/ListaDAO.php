@@ -9,11 +9,11 @@ include_once(__DIR__ . "/../model/Lista.php");
 
 class ListaDAO {
 
-    public function findAllListas()
+    public function getUserLists($user_id)
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM tb_listas";
+        $sql = "SELECT * FROM tb_listas WHERE idtb_usuario = " . $user_id . " ;";
         $stm = $conn->prepare($sql);
         $stm->execute();
         $result = $stm->fetchAll();

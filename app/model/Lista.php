@@ -1,11 +1,19 @@
 <?php
 
-Class Lista{
-
+Class Lista implements JsonSerializable
+{
     private $id_lista;
     private $nome_lista;
 
-
+    #[\ReturnTypeWillChange]
+    public function jsonSerialize()
+    {
+        return [
+            "id_lista" => $this->id_lista,
+            "nome_lista" => $this->nome_lista,
+        ];
+    }
+    
     /**
      * Get the value of id_lista
      */ 

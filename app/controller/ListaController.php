@@ -37,8 +37,11 @@ class ListaController extends Controller
             exit; // Se não estiver logado, encerra a execução
         }
 
+        // Obtém o ID do usuário da sessão
+        $userID = $_SESSION[SESSAO_USUARIO_ID];
+
         // Obtém todas as listas
-        $listas = $this->listaDao->findAllListas();
+        $listas = $this->listaDao->getUserLists($userID);
 
         // Cria um array de resposta contendo a mensagem de sucesso e os dados das listas
         $response = array(

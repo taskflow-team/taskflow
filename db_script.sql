@@ -25,9 +25,20 @@ CREATE TABLE tb_grupos (
 CREATE TABLE tb_listas (
     idtb_listas INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(45),
+    idtb_usuario INT,
     idtb_grupo INT,
-    FOREIGN KEY (idtb_grupo) REFERENCES tb_grupos (idtb_grupos)
+    FOREIGN KEY (idtb_grupo) REFERENCES tb_grupos (idtb_grupos),
+    FOREIGN KEY (idtb_usuario) REFERENCES tb_usuarios (id_usuario)
 );
+
+INSERT INTO tb_listas (nome, idtb_usuario) VALUES ('Lista 01', 1);
+INSERT INTO tb_listas (nome, idtb_usuario) VALUES ('Lista 02', 1);
+INSERT INTO tb_listas (nome, idtb_usuario) VALUES ('O marcola da cartola', 1);
+
+INSERT INTO tb_listas (nome, idtb_usuario) VALUES ('Lista 05', 2);
+INSERT INTO tb_listas (nome, idtb_usuario) VALUES ('Lista 06', 2);
+INSERT INTO tb_listas (nome, idtb_usuario) VALUES ('O mapa da cartola', 2);
+
 
 -- Cria a tabela de tarefas
 CREATE TABLE tb_tarefas (
