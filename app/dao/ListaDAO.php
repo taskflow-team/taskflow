@@ -78,8 +78,8 @@ class ListaDAO {
 
         foreach ($result as $row) {
             $lista = new Lista();
-            $lista->setId_lista($row["id_lista"]);
-            $lista->setNome_lista($row["nome_lista"]);
+            $lista->setId_lista($row["idtb_lista"]);
+            $lista->setNome_lista($row["nome"]);
             array_push($listas, $lista);
         }
 

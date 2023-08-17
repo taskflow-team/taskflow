@@ -44,7 +44,27 @@ function updateLists(lists){
         const cardTitle = document.createElement('h3');
         cardTitle.innerText = list.nome_lista;
 
+        const infoDiv = document.createElement('div');
+        infoDiv.className = 'info-div';
+
+        const leftInfo = document.createElement('div');
+        leftInfo.className = 'left-div';
+
+        const rigthInfo = document.createElement('div');
+        rigthInfo.className = 'right-div';
+        rigthInfo.innerHTML = '<span>List</span>';
+
+        const barsIcon = document.createElement('i');
+        barsIcon.className = 'fa-solid fa-bars';
+
+
+        leftInfo.appendChild(barsIcon);
+        infoDiv.appendChild(leftInfo);
+        infoDiv.appendChild(rigthInfo);
+
         listCard.appendChild(cardTitle);
+        listCard.appendChild(infoDiv);
+
         pseudoBody.appendChild(listCard);
     });
 }
