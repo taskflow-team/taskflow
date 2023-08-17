@@ -22,8 +22,6 @@ async function fetchLists(){
 fetchLists();
 
 function updateLists(lists){
-    console.log(lists);
-
     pseudoBody.innerHTML = '';
     pseudoBody.innerText = '';
 
@@ -57,16 +55,43 @@ function updateLists(lists){
         const barsIcon = document.createElement('i');
         barsIcon.className = 'fa-solid fa-bars';
 
+        const dotsIcon = document.createElement('i');
+        dotsIcon.className = 'fa-solid fa-ellipsis-vertical dots';
+        dotsIcon.addEventListener('click', showActionDiv)
+
+        const actionsDiv = document.createElement('div');
+        actionsDiv.className = 'actions-div';
+        actionsDiv.style.visibility = 'hidden';
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.innerText = 'Delete';
+        deleteBtn.className = 'delete-btn'
+
+        const renameBtn = document.createElement('button');
+        renameBtn.innerText = 'Rename';
+        renameBtn.className = 'rename-btn';
 
         leftInfo.appendChild(barsIcon);
         infoDiv.appendChild(leftInfo);
         infoDiv.appendChild(rigthInfo);
 
+        actionsDiv.appendChild(renameBtn);
+        actionsDiv.appendChild(deleteBtn);
+
         listCard.appendChild(cardTitle);
         listCard.appendChild(infoDiv);
+        listCard.appendChild(dotsIcon);
+        listCard.appendChild(actionsDiv);
 
         pseudoBody.appendChild(listCard);
     });
+}
+
+function showActionDiv(event){
+    const actionsDiv = event.target.parentNode.children[3];
+    let divVisibility = actionsDiv.style.visibility;
+    actionsDiv.style.visibility = divVisibility == 'hidden' ? 'visible' : 'hidden';
+
 }
 
 export {

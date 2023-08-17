@@ -78,7 +78,7 @@ class ListaDAO {
 
         foreach ($result as $row) {
             $lista = new Lista();
-            $lista->setId_lista($row["idtb_lista"]);
+            $lista->setId_lista($row["idtb_listas"]);
             $lista->setNome_lista($row["nome"]);
             array_push($listas, $lista);
         }

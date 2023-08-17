@@ -20,6 +20,8 @@
     height: 260px;
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     cursor: pointer;
+    border: 1px solid #4DD167;
+
 }
 
 .create-list{
@@ -65,6 +67,51 @@
     font-size: 22px;
     font-weight: 600;
     position: absolute;
-    top: 90px;
+    top: 105px;
     left: 25px;
+}
+
+.list-card .dots{
+    padding: 25px 25px;
+    font-size: 18px;
+    position: absolute;
+    top: 0px;
+    right: 0px;
+}
+
+.list-card .dots:hover{
+    color: #4DD167;
+}
+
+.list-card .actions-div{
+    width: 200px;
+    height: fit-content;
+    background-color: #1D1D1D;
+    border: 1px solid #2D2D2D;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    font-size: 18px;
+    z-index: 10;
+    position: absolute;
+    top: 50px;
+    right: 25px;
+}
+
+.list-card .actions-div button{
+    padding: 10px 25px;
+    background-color: transparent;
+    border: none;
+    color: #FFF;
+    text-align: left;
+}
+
+.list-card .actions-div button:hover{
+    cursor: pointer;
+    background-color: #2D2D2D;
+}
+
+.list-card .actions-div .delete-btn{
+    padding-top: 0;
+    color: #FF6161;
 }
