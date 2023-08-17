@@ -11,7 +11,7 @@ $tarefaDAO = new TarefaDAO();
 $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 ?>
 
-<link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/pages/home/listCard.css">
+<link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/css/lists.css">
 
 <!-- Exibir as tarefas -->
 <div class="pseudo-body">
