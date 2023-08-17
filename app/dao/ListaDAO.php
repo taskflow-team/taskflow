@@ -66,7 +66,7 @@ class ListaDAO {
     {
         $conn = Connection::getConn();
 
-        $sql = "DELETE FROM tb_listas WHERE idtb_lista = ?";
+        $sql = "DELETE FROM tb_listas WHERE idtb_listas = ?";
         $stm = $conn->prepare($sql);
         $stm->bindValue(1, $id);
         $stm->execute();
