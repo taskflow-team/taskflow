@@ -62,7 +62,7 @@ class ListaDAO {
         $stm->execute();
     }
 
-    public function deleteLista($id)
+    public function deleteLista(int $id)
     {
         $conn = Connection::getConn();
 

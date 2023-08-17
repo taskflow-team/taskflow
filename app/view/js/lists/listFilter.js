@@ -1,4 +1,5 @@
 // Fetch lists and filter them
+import { deleteList } from "./listFunctions.js";
 import notificate from "../notification.js";
 
 const pseudoBody = document.querySelector('.pseudo-body');
@@ -65,7 +66,8 @@ function updateLists(lists){
 
         const deleteBtn = document.createElement('button');
         deleteBtn.innerText = 'Delete';
-        deleteBtn.className = 'delete-btn'
+        deleteBtn.className = 'delete-btn';
+        deleteBtn.addEventListener('click', deleteList);
 
         const renameBtn = document.createElement('button');
         renameBtn.innerText = 'Rename';
@@ -91,7 +93,6 @@ function showActionDiv(event){
     const actionsDiv = event.target.parentNode.children[3];
     let divVisibility = actionsDiv.style.visibility;
     actionsDiv.style.visibility = divVisibility == 'hidden' ? 'visible' : 'hidden';
-
 }
 
 export {

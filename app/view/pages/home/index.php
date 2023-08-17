@@ -15,12 +15,7 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 
 <!-- Exibir as tarefas -->
 <div class="pseudo-body">
-    <!-- <div class="list-card create-list">
-        <i class="fa-regular fa-plus"></i>
-    </div> -->
-
-
-
+    
 </div>
 
 <script type="module" src="../view/js/lists/listFunctions.js"></script>

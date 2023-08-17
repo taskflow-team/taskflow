@@ -65,7 +65,7 @@ class ListaController extends Controller
         echo json_encode($response);
     }
 
-    protected function edit()
+    protected function rename()
     {
         $jsonString = file_get_contents('php://input');
         $requestData = json_decode($jsonString, true);
@@ -80,12 +80,12 @@ class ListaController extends Controller
             exit;
         }
 
-        $formData = $requestData['formData'];
-        $listaId = $requestData['listaId'];
+        $newName = $requestData['nome_lista'];
+        $id_lista = $requestData['id_lista'];
 
-        $lista = $this->listaDao->findByIdLista($listaId);
+        $lista = $this->listaDao->findByIdLista($id_lista);
 
-        $lista->setNome_lista($formData['nome_lista']);
+        $lista->setNome_lista($newName);
 
         $erros = $this->listaService->validarDados($lista);
         if (empty($erros)) {
@@ -207,6 +207,7 @@ class ListaController extends Controller
             'message' => 'Lista deletada com sucesso.',
         );
 
+        ob_clean();
         header('Content-Type: application/json');
         echo json_encode($response);
         exit;
