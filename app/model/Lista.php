@@ -4,6 +4,8 @@ Class Lista implements JsonSerializable
 {
     private $id_lista;
     private $nome_lista;
+    private $id_usuario;
+    private $id_grupo;
 
     #[\ReturnTypeWillChange]
     public function jsonSerialize()
@@ -50,6 +52,46 @@ Class Lista implements JsonSerializable
     public function setNome_lista($nome_lista)
     {
         $this->nome_lista = $nome_lista;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of id_usuario
+     */ 
+    public function getId_usuario()
+    {
+        return $this->id_usuario;
+    }
+
+    /**
+     * Set the value of id_usuario
+     *
+     * @return  self
+     */ 
+    public function setId_usuario($id_usuario)
+    {
+        $this->id_usuario = $id_usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of id_grupo
+     */ 
+    public function getId_grupo()
+    {
+        return $this->id_grupo;
+    }
+
+    /**
+     * Set the value of id_grupo
+     *
+     * @return  self
+     */ 
+    public function setId_grupo($id_grupo)
+    {
+        $this->id_grupo = $id_grupo;
 
         return $this;
     }

@@ -84,7 +84,8 @@
 }
 
 .list-card .actions-div{
-    width: 200px;
+    min-width: 200px;
+    width: fit-content;
     height: fit-content;
     background-color: #1D1D1D;
     border: 1px solid #2D2D2D;
@@ -112,6 +113,33 @@
 }
 
 .list-card .actions-div .delete-btn{
-    padding-top: 0;
+    height: 47px;
+    padding: 0;
     color: #FF6161;
+    outline:none;  
 }
+
+.list-card .actions-div .confirm-btn{
+    padding: 10px 25px;
+    width: fit-content;
+    margin-right: 15px;
+    color: #4DD167;
+    border-bottom-left-radius: 10px;
+}
+
+.list-card .actions-div .confirm-btn:hover{
+    background-color: #4DD167;
+    color: #1D1D1D;
+}
+
+.list-card .actions-div .cancel-btn{
+    padding: 10px 25px;
+    width: fit-content;
+}
+
+.list-card .actions-div .cancel-btn:hover{
+    background-color: #FF6161;
+    color: #1D1D1D;
+    border-bottom-right-radius: 10px;
+}
+

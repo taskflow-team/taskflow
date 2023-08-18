@@ -17,7 +17,7 @@ body{
     color: #FFFFFF;
 }
 
-.pseudo-body .dark-input{
+.dark-input{
     background-color: #1D1D1D;
     border: none;
     border-radius: 8px;
@@ -78,7 +78,7 @@ body{
     width: 100vw;
     height: 100vh;
     background-color: #2D2D2D;
-    opacity: 0.6;
+    opacity: 0.9;
     z-index: 10;
     display: flex;
     align-items: center;
@@ -86,10 +86,60 @@ body{
 }
 
 .modal {
+    width: 900px;
+    height: 300px;
+    padding: 40px;
     background: #1D1D1D;
-    width: 500px;
     z-index: 11;
     position: absolute;
-    top: 10%;
-    left: 20%;;
+    top: 31%;
+    left: 31%;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 20px;
+}
+
+.modal .dark-input{
+    width: 80%;
+    padding: 20px;
+    background-color: #2D2D2D;
+}
+
+.modal button{
+    padding: 20px;
+    color: #1D1D1D;
+    font-weight: 600;
+    transition: all 1s ease;
+}
+
+.modal .fa-x{
+    color:  #FFF;
+    position: absolute;
+    top: 30px;
+    right: 30px;
+    cursor: pointer;
+    font-size: 20px;
+}
+
+.modal.close-animation{
+    animation: slide-out 0.8s forwards;
+}
+
+@keyframes slide-out {
+    from {
+        top: 31%;
+    }
+    to {
+        top: -500px;
+    }
+}
+
+@keyframes opacity-in {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
 }

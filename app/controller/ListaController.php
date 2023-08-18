@@ -141,11 +141,13 @@ class ListaController extends Controller
         }
 
         // Extrair os dados do array JSON
-        $formData = $requestData['formData'];
+        $listName = $requestData['listName'];
+        $userID = $requestData['userID'];
 
         // Supondo que a classe Lista tenha os métodos setters apropriados para as propriedades
         $lista = new Lista();
-        $lista->setNome_lista($formData['nome_lista']);
+        $lista->setNome_lista($listName);
+        $lista->setId_usuario($userID);
 
         // Validar os dados da lista
         $erros = $this->listaService->validarDados($lista);

@@ -1,6 +1,6 @@
 // Fetch lists and filter them
 import { deleteList } from "./listFunctions.js";
-import createListModal from "./createlistModal.js";
+import { createListModal } from "./createlistModal.js";
 import notificate from "../notification.js";
 
 const pseudoBody = document.querySelector('.pseudo-body');
@@ -70,6 +70,7 @@ function updateLists(lists){
         deleteBtn.innerText = 'Delete';
         deleteBtn.className = 'delete-btn';
         deleteBtn.addEventListener('click', deleteList);
+        deleteBtn.style.padding = '0 25px 10px 25px';
 
         const renameBtn = document.createElement('button');
         renameBtn.innerText = 'Rename';
