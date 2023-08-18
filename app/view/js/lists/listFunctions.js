@@ -1,5 +1,5 @@
 import { fetchLists } from "./listFilter.js";
-import { closeModal } from "./createlistModal.js";
+import { closeModal } from "./listModal.js";
 import notificate from "../notification.js";
 
 async function createList(){
