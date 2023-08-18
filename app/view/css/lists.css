@@ -1,7 +1,7 @@
 .pseudo-body{
     padding: 50px 30px;
     display: grid;
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 30px;
     grid-row-gap: 30px;
 }
@@ -16,8 +16,6 @@
 }
 
 .list-card:hover{
-    /* width: 360px;
-    height: 260px; */
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     cursor: pointer;
     border: 1px solid #4DD167;
@@ -113,13 +111,16 @@
 }
 
 .list-card .actions-div .delete-btn{
-    height: 47px;
+    height: 43px;
     padding: 0;
     color: #FF6161;
-    outline:none;  
+    outline:none;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .list-card .actions-div .confirm-btn{
+    height: 100%;
     padding: 10px 25px;
     width: fit-content;
     margin-right: 15px;

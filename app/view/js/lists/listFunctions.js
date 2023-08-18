@@ -12,9 +12,9 @@ async function createList(){
             headers: {
                 'Content-type': 'application/json'
             },
-            body: JSON.stringify({ 
+            body: JSON.stringify({
                 listName: listName,
-                userID: userID 
+                userID: userID
             })
         };
 
@@ -37,28 +37,31 @@ async function deleteList(event){
     const listID = deleteBtn.parentNode.parentNode.id;
 
     deleteBtn.style.padding = '0';
-    
+
     deleteBtn.innerText = '';
-    
+
     const confirmBtn = document.createElement('span');
     confirmBtn.innerText = 'Confirm';
     confirmBtn.className = 'confirm-btn';
     confirmBtn.addEventListener('click', async() => {
+        deleteBtn.innerHtml = '';
+        deleteBtn.innerText = '';
+
         try {
             const response = await fetch(`ListaController.php?action=delete&id=${listID}`, {
                 method: "DELETE",
             });
-    
+
             if (!response.ok) {
                 throw new Error('The request to the server has failed');
             }
-    
+
             const responseData =  await response.json();
             notificate('success', 'Success', responseData.message)
-    
+
             // Atualiza a tela com as listas atuais
             fetchLists();
-    
+
         } catch (error) {
             notificate('error', 'Error', error.message);
         }
