@@ -106,7 +106,7 @@ class ListaController extends Controller
                     'message' => 'Ocorreu um erro durante a requisição',
                     'error' => $e->getMessage()
                 );
-                
+
                 header('Content-Type: application/json');
                 echo json_encode($response);
                 exit;

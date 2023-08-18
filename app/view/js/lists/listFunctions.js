@@ -32,7 +32,9 @@ async function createList(){
     }
 }
 
-async function renameList(listId, listName){
+async function renameList(listId){
+    let listName = document.querySelector('#list-name-input').value;
+
     try {
         const reqConfigs = {
             method: "POST",

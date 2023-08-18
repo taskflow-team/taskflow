@@ -22,7 +22,7 @@ function listModal(type, listId, listName){
         submitBtn.addEventListener('click', createList);
     } else {
         input.value = listName;
-        submitBtn.addEventListener('click', () => renameList(listId, listName));
+        submitBtn.addEventListener('click', () => renameList(listId));
     }
 
     const closeIcon = document.createElement('i');
