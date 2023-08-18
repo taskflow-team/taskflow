@@ -114,6 +114,7 @@ body{
     color: #1D1D1D;
     font-weight: 600;
     transition: all 1s ease;
+    border-radius: 8px;
 }
 
 .modal .fa-x{

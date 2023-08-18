@@ -29,7 +29,7 @@ function updateLists(lists){
 
     const createListDiv = document.createElement('div');
     createListDiv.className = 'list-card create-list';
-    createListDiv.addEventListener('click', listModal);
+    createListDiv.addEventListener('click', () => listModal('create'));
 
     const addIcon = document.createElement('i');
     addIcon.className = 'fa-regular fa-plus';
@@ -66,15 +66,16 @@ function updateLists(lists){
         actionsDiv.className = 'actions-div';
         actionsDiv.style.visibility = 'hidden';
 
+        const renameBtn = document.createElement('button');
+        renameBtn.innerText = 'Rename';
+        renameBtn.className = 'rename-btn';
+        renameBtn.addEventListener('click', () => listModal('edit', list.id_lista, list.nome_lista));
+
         const deleteBtn = document.createElement('button');
         deleteBtn.innerText = 'Delete';
         deleteBtn.className = 'delete-btn';
         deleteBtn.addEventListener('click', deleteList);
         deleteBtn.style.padding = '0 25px 10px 25px';
-
-        const renameBtn = document.createElement('button');
-        renameBtn.innerText = 'Rename';
-        renameBtn.className = 'rename-btn';
 
         leftInfo.appendChild(barsIcon);
         infoDiv.appendChild(leftInfo);

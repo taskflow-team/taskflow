@@ -32,6 +32,33 @@ async function createList(){
     }
 }
 
+async function renameList(listId, listName){
+    try {
+        const reqConfigs = {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                listId: listId,
+                listName: listName
+            })
+        };
+
+        const response = await fetch('ListaController.php?action=rename', reqConfigs);
+        const responseData = await response.json();
+
+        if (!response.ok || response.status == 404 || !responseData.ok) {
+            throw new Error('Failed to create List');
+        }
+
+        closeModal();
+        fetchLists();
+    } catch (error) {
+        notificate('error', 'Error', error.message);
+    }
+}
+
 async function deleteList(event){
     const deleteBtn = event.target;
     const listID = deleteBtn.parentNode.parentNode.id;
@@ -83,5 +110,6 @@ async function deleteList(event){
 
 export {
     deleteList,
-    createList
+    createList,
+    renameList
 }

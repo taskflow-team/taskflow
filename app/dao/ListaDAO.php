@@ -25,7 +25,7 @@ class ListaDAO {
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM tb_listas WHERE idtb_lista = ?";
+        $sql = "SELECT * FROM tb_listas WHERE idtb_listas = ?";
         $stm = $conn->prepare($sql);
         $stm->execute([$id]);
         $result = $stm->fetchAll();
@@ -56,7 +56,7 @@ class ListaDAO {
     {
         $conn = Connection::getConn();
 
-        $sql = "UPDATE tb_listas SET nome = ? WHERE idtb_lista = ?";
+        $sql = "UPDATE tb_listas SET nome = ? WHERE idtb_listas = ?";
         $stm = $conn->prepare($sql);
         $stm->bindValue(1, $lista->getNome_lista());
         $stm->bindValue(2, $lista->getId_lista());

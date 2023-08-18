@@ -80,12 +80,12 @@ class ListaController extends Controller
             exit;
         }
 
-        $newName = $requestData['nome_lista'];
-        $id_lista = $requestData['id_lista'];
+        $id_lista = $requestData['listId'];
+        $new_name = $requestData['listName'];
 
         $lista = $this->listaDao->findByIdLista($id_lista);
 
-        $lista->setNome_lista($newName);
+        $lista->setNome_lista($new_name);
 
         $erros = $this->listaService->validarDados($lista);
         if (empty($erros)) {
@@ -96,6 +96,7 @@ class ListaController extends Controller
                     'ok' => true,
                     'message' => 'Lista atualizada com sucesso.'
                 );
+
                 header('Content-Type: application/json');
                 echo json_encode($response);
                 exit;
@@ -105,6 +106,7 @@ class ListaController extends Controller
                     'message' => 'Ocorreu um erro durante a requisição',
                     'error' => $e->getMessage()
                 );
+                
                 header('Content-Type: application/json');
                 echo json_encode($response);
                 exit;
