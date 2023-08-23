@@ -60,43 +60,54 @@ function updateLists(lists){
 
         const dotsIcon = document.createElement('i');
         dotsIcon.className = 'fa-solid fa-ellipsis-vertical dots';
-        dotsIcon.addEventListener('click', showActionDiv)
-
+        dotsIcon.addEventListener('click', (event) => {
+            event.stopPropagation(); 
+            showActions(actionsDiv);
+        });
+        
         const actionsDiv = document.createElement('div');
         actionsDiv.className = 'actions-div';
         actionsDiv.style.visibility = 'hidden';
-
-        const renameBtn = document.createElement('button');
-        renameBtn.innerText = 'Rename';
-        renameBtn.className = 'rename-btn';
-        renameBtn.addEventListener('click', () => listModal('edit', list.id_lista, list.nome_lista));
-
-        const deleteBtn = document.createElement('button');
-        deleteBtn.innerText = 'Delete';
-        deleteBtn.className = 'delete-btn';
-        deleteBtn.addEventListener('click', deleteList);
-        deleteBtn.style.padding = '0 25px 10px 25px';
+        createActionsDiv(list, actionsDiv);
 
         leftInfo.appendChild(barsIcon);
         infoDiv.appendChild(leftInfo);
         infoDiv.appendChild(rigthInfo);
 
-        actionsDiv.appendChild(renameBtn);
-        actionsDiv.appendChild(deleteBtn);
+        const listCardBody = document.createElement('div');
+        listCardBody.className = 'list-card-body';
+        listCardBody.addEventListener('click', () => {
+            window.location.href = `tasksIndex.php?listId=${list.id_lista}`;
+        });
 
         listCard.appendChild(cardTitle);
         listCard.appendChild(infoDiv);
-        listCard.appendChild(dotsIcon);
         listCard.appendChild(actionsDiv);
+        listCard.appendChild(listCardBody); 
+        listCard.appendChild(dotsIcon);
 
         pseudoBody.appendChild(listCard);
     });
 }
 
-function showActionDiv(event){
-    const actionsDiv = event.target.parentNode.children[3];
-    let divVisibility = actionsDiv.style.visibility;
-    actionsDiv.style.visibility = divVisibility == 'hidden' ? 'visible' : 'hidden';
+function createActionsDiv(list, actionsDiv) {
+    const renameBtn = document.createElement('button');
+    renameBtn.innerText = 'Rename';
+    renameBtn.className = 'rename-btn';
+    renameBtn.addEventListener('click', () => listModal('edit', list.id_lista, list.nome_lista));
+
+    const deleteBtn = document.createElement('button');
+    deleteBtn.innerText = 'Delete';
+    deleteBtn.className = 'delete-btn';
+    deleteBtn.addEventListener('click', deleteList);
+    deleteBtn.style.padding = '0 25px 10px 25px';
+
+    actionsDiv.appendChild(renameBtn);
+    actionsDiv.appendChild(deleteBtn);
+}
+
+function showActions(actionsDiv) {
+    actionsDiv.style.visibility = actionsDiv.style.visibility == 'visible' ? 'hidden' : 'visible';
 }
 
 export {

@@ -79,6 +79,7 @@
     position: absolute;
     top: 0px;
     right: 0px;
+    z-index: 2;
 }
 
 .list-card .dots:hover{
@@ -148,3 +149,15 @@
     border-bottom-right-radius: 10px;
 }
 
+.list-card-body {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 10px; 
+    z-index: 1;
+    background-color: transparent; 
+    cursor: pointer; 
+    display: block;
+}
