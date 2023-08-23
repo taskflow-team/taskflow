@@ -7,12 +7,15 @@ require_once(__DIR__ . "/../../components/sideBar/sidebar.php");
 // Instanciar o DAO de tarefas
 $tarefaDAO = new TarefaDAO();
 
+// Pegando o id da lista
+$listId = isset($_GET['listId']) ? $_GET['listId'] : null;
+
 // Pegando o id do usuário
-$id_usuario = $_SESSION[SESSAO_USUARIO_ID];
+$id_usuario = $_GET['sessionId'];
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/components/taskForm/taskForm.css">
-<!-- <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/components/editModal/editModal.css"> -->
+<link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/components/editModal/editModal.css">
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/css/task.css">
 
 <!-- Exibir as tarefas -->
@@ -44,6 +47,11 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <!-- Incluir formAsync.js -->
-<script type="module" src="../view/js/tasks/taskFunctions.js"></script>
-<script type="module" src="../view/js/tasks/taskForm.js"></script>
-<script type="module" src="../view/js/tasks/taskModal.js"></script>
+<script>
+    const BASE_URL = '<?= BASEURL; ?>';
+    const LIST_ID = '<?= $listId; ?>'; // Pass the listId to JavaScript
+</script>
+<script type="module" src="<?= BASEURL; ?>/view/js/tasks/taskFunctions.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/tasks/taskForm.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/tasks/taskModal.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/tasks/tasksFilter.js"></script>

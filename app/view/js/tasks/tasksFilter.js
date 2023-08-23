@@ -37,7 +37,7 @@ async function fetchTaskList() {
     };
 
     try {
-        const response = await fetch('TarefaController.php?action=list', reqConfigs);
+        const response = await fetch(`${BASE_URL}/controller/TarefaController.php?action=list&listId=${listId}`, reqConfigs);
         const responseData = await response.json();
 
         if (!response.ok || response.status == 404) {

@@ -77,7 +77,7 @@ function updateLists(lists){
         const listCardBody = document.createElement('div');
         listCardBody.className = 'list-card-body';
         listCardBody.addEventListener('click', () => {
-            window.location.href = `tasksIndex.php?listId=${list.id_lista}`;
+            window.location.href = `../view/pages/tasks/index.php?listId=${list.id_lista}`;
         });
 
         listCard.appendChild(cardTitle);

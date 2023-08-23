@@ -76,7 +76,6 @@ function closeEditModal(element) {
 
 async function editTaskModal() {
     const taskForm = document.querySelector('#frmEditTarefa');
-    const taskId = Number(taskModalEditBtn.dataset.id);
 
     const rawFormContent = new FormData(taskForm);
     const formData = Object.fromEntries(rawFormContent);
@@ -90,7 +89,8 @@ async function editTaskModal() {
             },
             body: JSON.stringify({
                 taskId: taskId,
-                formData: formData
+                formData: formData,
+                listId: LIST_ID // Add the listId to the request
             })
         };
 
