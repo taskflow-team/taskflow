@@ -10,8 +10,17 @@ $tarefaDAO = new TarefaDAO();
 // Pegando o id da lista
 $listId = isset($_GET['listId']) ? $_GET['listId'] : null;
 
-// Pegando o id do usuário
-$id_usuario = $_SESSION[SESSAO_USUARIO_ID];
+session_status();
+if (session_status() !== PHP_SESSION_ACTIVE) 
+{
+    session_start();
+}
+
+$id_usuario = "(Sessão expirada)";
+if (isset($_SESSION[SESSAO_USUARIO_NOME]))
+{
+    $id_usuario = $_SESSION[SESSAO_USUARIO_NOME];
+}
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/components/taskForm/taskForm.css">
