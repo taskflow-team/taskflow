@@ -28,7 +28,7 @@ async function createTask(event) {
             })
         };
 
-        const response = await fetch('TarefaController.php?action=save', reqConfigs);
+        const response = await fetch(BASE_URL + '/controller/TarefaController.php?action=save&listId=' + LIST_ID, reqConfigs);
         const responseData = await response.json();
 
         if (!response.ok || response.status == 404 || !responseData.ok) {
@@ -71,7 +71,7 @@ async function completeTask(event) {
             })
         };
 
-        const response = await fetch('TarefaController.php?action=completeTask', reqConfigs);
+        const response = await fetch(BASE_URL + '/controller/TarefaController.php?action=completeTask&listId=' + LIST_ID, reqConfigs);
         const responseData = await response.json();
 
         if (!response.ok || response.status == 404 || !responseData.ok) {
@@ -109,7 +109,7 @@ async function deleteTask() {
     const taskId = $(this).data("id");
 
     try {
-        const response = await fetch(`TarefaController.php?action=delete&id=${taskId}`, {
+        const response = await fetch(BASE_URL + '/controller/TarefaController.php?action=delete&listId=' + LIST_ID, {
             method: "DELETE",
         });
 

@@ -75,5 +75,5 @@ ALTER TABLE tb_tarefas ADD FOREIGN KEY (idtb_listas) REFERENCES tb_listas (idtb_
 ALTER TABLE tb_tarefas ADD CONSTRAINT fk_usuarios FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario);
 
 -- Insere alguns dados iniciais na tabela de tarefas
-INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, id_usuario) VALUES ('Tarefa 1', 'Descrição da tarefa 1', 1, 1, 10, 1);
-INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, id_usuario) VALUES ('Tarefa 2', 'Descrição da tarefa 2', 2, 2, 20, 1);
+INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, id_usuario) VALUES ('Tarefa 1', 'Descrição da tarefa 1', 1, 1, 10, 1, 1);
+INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, id_usuario) VALUES ('Tarefa 2', 'Descrição da tarefa 2', 2, 2, 20, 1, 1);

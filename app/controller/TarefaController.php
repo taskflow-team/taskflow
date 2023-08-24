@@ -74,6 +74,7 @@ class TarefaController extends Controller
                     'data_criacao' => $tarefa->getData_criacao(),
                     'concluida' => $tarefa->getConcluida(),
                     'id_usuario' => $tarefa->getId_usuario(),
+                    'idtb_listas' => $tarefa->getIdtb_listas(),
                 );
             }, $tarefas)
         );

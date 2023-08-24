@@ -12,6 +12,7 @@ class Tarefa
     private $concluida;
     private $data_criacao;
     private $id_usuario;
+    private $idtb_listas;
 
     public function getData_criacaoFormatted()
     {
@@ -197,6 +198,26 @@ class Tarefa
     public function setId_usuario($id_usuario)
     {
         $this->id_usuario = $id_usuario;
+
+        return $this;
+    }
+
+    /**
+     * Get the value of idtb_listas
+     */
+    public function getIdtb_listas()
+    {
+        return $this->idtb_listas;
+    }
+
+    /**
+     * Set the value of idtb_listas
+     *
+     * @return  self
+     */
+    public function setIdtb_listas($idtb_listas)
+    {
+        $this->idtb_listas = $idtb_listas;
 
         return $this;
     }

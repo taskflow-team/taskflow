@@ -11,7 +11,7 @@ $tarefaDAO = new TarefaDAO();
 $listId = isset($_GET['listId']) ? $_GET['listId'] : null;
 
 // Pegando o id do usuário
-$id_usuario = $_GET['sessionId'];
+$id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/components/taskForm/taskForm.css">
@@ -49,7 +49,7 @@ $id_usuario = $_GET['sessionId'];
 <!-- Incluir formAsync.js -->
 <script>
     const BASE_URL = '<?= BASEURL; ?>';
-    const LIST_ID = '<?= $listId; ?>'; // Pass the listId to JavaScript
+    const LIST_ID = '<?= $listId; ?>'; 
 </script>
 <script type="module" src="<?= BASEURL; ?>/view/js/tasks/taskFunctions.js"></script>
 <script type="module" src="<?= BASEURL; ?>/view/js/tasks/taskForm.js"></script>

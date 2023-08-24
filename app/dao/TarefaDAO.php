@@ -87,8 +87,8 @@ class TarefaDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, data_criacao, id_usuario)" .
-            " VALUES (:nome_tarefa, :descricao, :dificuldade, :prioridade, :valor_pontos, :data_criacao, :id_usuario)";
+        $sql = "INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, data_criacao, id_usuario, idtb_listas)" .
+            " VALUES (:nome_tarefa, :descricao, :dificuldade, :prioridade, :valor_pontos, :data_criacao, :id_usuario, :idtb_listas)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue(":nome_tarefa", $tarefa->getNome_tarefa());
@@ -98,6 +98,7 @@ class TarefaDAO
         $stm->bindValue(":valor_pontos", $tarefa->getValor_pontos(), PDO::PARAM_INT);
         $stm->bindValue(":data_criacao", $tarefa->getData_criacaoFormatted());
         $stm->bindValue(":id_usuario", $tarefa->getId_usuario());
+        $stm->bindValue(":idtb_listas", $tarefa->getIdtb_listas());
         $stm->execute();
     }
 
@@ -107,7 +108,7 @@ class TarefaDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "UPDATE tb_tarefas SET nome_tarefa = ?, descricao = ?, dificuldade = ?, prioridade = ?, valor_pontos = ?, data_criacao = ?, concluida = ? WHERE id_tarefa = ?";
+        $sql = "UPDATE tb_tarefas SET nome_tarefa = ?, descricao = ?, dificuldade = ?, prioridade = ?, valor_pontos = ?, data_criacao = ?, concluida = ? WHERE id_tarefa = ? WHERE idtb_listas = ?";
         $stm = $conn->prepare($sql);
         $stm->bindValue(1, $tarefa->getNome_tarefa());
         $stm->bindValue(2, $tarefa->getDescricao_tarefa());
@@ -117,6 +118,7 @@ class TarefaDAO
         $stm->bindValue(6, $tarefa->getData_criacao());
         $stm->bindValue(7, $tarefa->getConcluida());
         $stm->bindValue(8, $tarefa->getId_tarefa());
+        $stm->bindValue(9, $tarefa->getIdtb_listas());
         $stm->execute();
     }
 
@@ -151,6 +153,7 @@ class TarefaDAO
             $date_criacao = new DateTime($row["data_criacao"]);
             $tarefa->setData_criacao($date_criacao);
             $tarefa->setConcluida($row["concluida"]);
+            $tarefa->setIdtb_listas($row["idtb_listas"]);
             array_push($tarefas, $tarefa);
         }
 

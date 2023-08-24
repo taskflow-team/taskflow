@@ -94,7 +94,7 @@ async function editTaskModal() {
             })
         };
 
-        const response = await fetch('TarefaController.php?action=edit', reqConfigs);
+        const response = await fetch(BASE_URL + '/controller/TarefaController.php?action=edit&listId=' + LIST_ID, reqConfigs);
         const responseData = await response.json();
 
         if (!response.ok || response.status == 404 || !responseData.ok) {
