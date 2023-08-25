@@ -29,6 +29,12 @@
                     <label for="valor_pontos">Task Points</label>
                     <input class="dark-input" type="number" id="taskPoints" name="valor_pontos" value="0"/>
                 </fieldset>
+                <fieldset class="element">
+                    <label>Task List</label>
+                    <select class="dark-input" name="idtb_listas" id="taskListSelection">
+                        <option value="0">Select a list</option>
+                    </select>
+                </fieldset>
             </div>
         </form>
 

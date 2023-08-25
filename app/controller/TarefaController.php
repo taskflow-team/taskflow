@@ -47,6 +47,7 @@ class TarefaController extends Controller
         $requestData = json_decode($jsonString, true);
 
         $rule = $requestData['rule'];
+        $listID = $requestData['listID'];
 
         if ($rule === 'priority') {
             $query_rule = 'prioridade';
@@ -56,7 +57,7 @@ class TarefaController extends Controller
             $query_rule = 'id_tarefa';
         }
 
-        $tarefas = $this->tarefaDao->listTarefas($userID, $query_rule);
+        $tarefas = $this->tarefaDao->listTarefas($userID, $listID, $query_rule);
 
         // Cria um array de resposta contendo a mensagem de sucesso e os dados das tarefas
         $response = array(
@@ -114,6 +115,7 @@ class TarefaController extends Controller
         $tarefa->setDificuldade($formData['dificuldade']);
         $tarefa->setPrioridade($formData['prioridade']);
         $tarefa->setValor_pontos($formData['valor_pontos']);
+        $tarefa->setIdtb_listas($formData['idtb_listas']);
 
         $erros = $this->tarefaService->validarDados($tarefa);
         if (empty($erros)) {
@@ -215,6 +217,7 @@ class TarefaController extends Controller
         // Extrair os dados do array JSON
         $formData = $requestData['formData'];
         $userID = $requestData['userID'];
+        $listID = $requestData['listID'];
 
         // Supondo que a classe Tarefa tenha os métodos setters apropriados para as propriedades
         $tarefa = new Tarefa();
@@ -225,6 +228,7 @@ class TarefaController extends Controller
         $tarefa->setValor_pontos($formData['valor_pontos']);
         $tarefa->setData_criacao(date('Y-m-d H:i:s'));
         $tarefa->setId_usuario($userID);
+        $tarefa->setIdtb_listas($listID);
 
         // Validar os dados da tarefa
         $erros = $this->tarefaService->validarDados($tarefa);

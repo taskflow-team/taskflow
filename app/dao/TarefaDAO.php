@@ -13,11 +13,11 @@ class TarefaDAO
 {
 
     //Método para listar as tarefas a partir da base de dados
-    public function listTarefas($id_usuario, $rule)
+    public function listTarefas($id_usuario, $idtb_listas, $rule)
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM tb_tarefas WHERE id_usuario = " . $id_usuario . " ORDER BY " . $rule . " DESC";
+        $sql = "SELECT * FROM tb_tarefas WHERE id_usuario = " . $id_usuario . " AND idtb_listas = " . $idtb_listas . " ORDER BY " . $rule . " DESC";
         $stm = $conn->prepare($sql);
         $stm->execute();
         $result = $stm->fetchAll();
@@ -108,7 +108,7 @@ class TarefaDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "UPDATE tb_tarefas SET nome_tarefa = ?, descricao = ?, dificuldade = ?, prioridade = ?, valor_pontos = ?, data_criacao = ?, concluida = ? WHERE id_tarefa = ? WHERE idtb_listas = ?";
+        $sql = "UPDATE tb_tarefas SET nome_tarefa = ?, descricao = ?, dificuldade = ?, prioridade = ?, valor_pontos = ?, data_criacao = ?, concluida = ?, idtb_listas = ? WHERE id_tarefa = ?";
         $stm = $conn->prepare($sql);
         $stm->bindValue(1, $tarefa->getNome_tarefa());
         $stm->bindValue(2, $tarefa->getDescricao_tarefa());

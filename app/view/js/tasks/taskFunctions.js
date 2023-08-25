@@ -24,7 +24,7 @@ async function createTask(event) {
             body: JSON.stringify({
                 formData: formData,
                 userID: userID,
-                listId: LIST_ID // Add the listId to the request
+                listID: LIST_ID 
             })
         };
 

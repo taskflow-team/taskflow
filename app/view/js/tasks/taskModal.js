@@ -8,7 +8,7 @@ const taskEditModal = document.querySelector('#taskModal');
 const closeEditBtn = document.querySelector('.close');
 const taskModalEditBtn = document.querySelector('.editTaskBtn');
 
-function openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPriority, taskPoints) {
+function openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPriority, taskPoints, idtb_listas) {
     taskEditModal.classList.add('show');
 
     taskModalEditBtn.dataset.id = taskId;
@@ -54,6 +54,7 @@ function openEditModal(taskId, taskName, taskDescription, taskDifficulty, taskPr
     }
 
     taskEditPoints.value = taskPoints;
+    populateTaskLists(idtb_listas);
 }
 
 function closeEditModal(element) {
@@ -73,9 +74,38 @@ function closeEditModal(element) {
     }
 }
 
+async function populateTaskLists(currentListId) {
+    const taskListSelect = document.querySelector('#taskListSelection');
+
+    try {
+        const response = await fetch(BASE_URL + '/controller/ListaController.php?action=list');
+        const data = await response.json();
+
+        if (response.ok) {
+            taskListSelect.innerHTML = '<option value="0">Select a list</option>';
+            data.data.forEach(list => {
+                const option = document.createElement('option');
+                option.value = list.id_lista;
+                option.textContent = list.nome_lista;
+
+                if (list.id_lista === currentListId) {
+                    option.selected = true;
+                }
+
+                taskListSelect.appendChild(option);
+            });
+        } else {
+            notificate('error', 'Error', 'Failed to fetch task lists');
+        }
+    } catch (error) {
+        notificate('error', 'Error', error);
+    }
+}
+
 
 async function editTaskModal() {
     const taskForm = document.querySelector('#frmEditTarefa');
+    const taskId = Number(taskModalEditBtn.dataset.id);
 
     const rawFormContent = new FormData(taskForm);
     const formData = Object.fromEntries(rawFormContent);
@@ -89,12 +119,11 @@ async function editTaskModal() {
             },
             body: JSON.stringify({
                 taskId: taskId,
-                formData: formData,
-                listId: LIST_ID // Add the listId to the request
+                formData: formData
             })
         };
 
-        const response = await fetch(BASE_URL + '/controller/TarefaController.php?action=edit&listId=' + LIST_ID, reqConfigs);
+        const response = await fetch(BASE_URL + '/controller/TarefaController.php?action=edit', reqConfigs);
         const responseData = await response.json();
 
         if (!response.ok || response.status == 404 || !responseData.ok) {

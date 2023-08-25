@@ -32,7 +32,8 @@ async function fetchTaskList() {
             'Content-type': 'application/json'
         },
         body: JSON.stringify({
-            rule: rule
+            rule: rule,
+            listID: LIST_ID
         })
     };
 
@@ -89,7 +90,8 @@ function updateTaskList(tasks) {
             dificuldade,
             prioridade,
             data_criacao,
-            valor_pontos
+            valor_pontos,
+            idtb_listas
         } = task;
 
         // Formata a data de criação da tarefa
@@ -125,10 +127,9 @@ function updateTaskList(tasks) {
             descricao_tarefa,
             parseInt(dificuldade),
             parseInt(prioridade),
-            valor_pontos
+            valor_pontos,
+            idtb_listas
         ));
-
-        console.log(prioridade)
 
         const deleteIcon = document.createElement('i');
         deleteIcon.className = 'fa-solid fa-trash task-icon deleteBtn';
