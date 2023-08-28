@@ -9,6 +9,7 @@ $tarefaDAO = new TarefaDAO();
 
 // Pegando o id da lista
 $listId = isset($_GET['listId']) ? $_GET['listId'] : null;
+$listName = isset($_GET['listName']) ? $_GET['listName'] : null;
 
 session_status();
 if (session_status() !== PHP_SESSION_ACTIVE) 
@@ -29,6 +30,8 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
 
 <!-- Exibir as tarefas -->
 <div class="pseudo-body">
+    <h2 class="list-title" ><?= $listName ?></h2>
+
     <?php
         // Form para adicionar tarefas
         require_once(__DIR__ . "/../../components/taskForm/taskForm.php");

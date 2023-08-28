@@ -2,9 +2,10 @@
 // ser desempenhadas dentro de uma tarefa
 
 import notificate from '../notification.js';
-import { fetchTaskList, filterTasks } from './tasksFilter.js';
+import { fetchTaskList } from './tasksFilter.js';
 
 const taskForm = document.querySelector('#frmTarefa');
+const createBtn = document.querySelector('#submitTaskButton');
 
 async function createTask(event) {
     event.preventDefault();
@@ -46,7 +47,7 @@ async function createTask(event) {
     }
 }
 
-taskForm.addEventListener('submit', createTask);
+createBtn.addEventListener('click', createTask);
 
 async function completeTask(event) {
     const checkbox = event.target;

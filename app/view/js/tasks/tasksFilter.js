@@ -109,7 +109,7 @@ function updateTaskList(tasks) {
         checkbox.className = 'completedBtn';
         checkbox.dataset.id = id_tarefa;
         checkbox.checked = concluida == 1;
-        checkbox.addEventListener('change', completeTask);
+        checkbox.addEventListener('click', completeTask);
 
         const contentDiv = document.createElement('div');
         const taskName = document.createElement('p');

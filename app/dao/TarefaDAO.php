@@ -117,8 +117,8 @@ class TarefaDAO
         $stm->bindValue(5, $tarefa->getValor_pontos());
         $stm->bindValue(6, $tarefa->getData_criacao());
         $stm->bindValue(7, $tarefa->getConcluida());
-        $stm->bindValue(8, $tarefa->getId_tarefa());
-        $stm->bindValue(9, $tarefa->getIdtb_listas());
+        $stm->bindValue(8, $tarefa->getIdtb_listas());
+        $stm->bindValue(9, $tarefa->getId_tarefa());
         $stm->execute();
     }
 

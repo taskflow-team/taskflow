@@ -133,7 +133,7 @@ class UsuarioController extends Controller
 
                 //TODO - Enviar mensagem de sucesso
                 $msg = "Usuário salvo com sucesso.";
-                $this->loadView("/pages/login/login.php", []);
+                $this->loadView("/pages/login/login.php", [], "", $msg);
                 exit;
             } catch (PDOException $e) {
                 $erros = array("An error occurred while saving the user on our database."); //erro deve ser um array para ser validado no método implode()

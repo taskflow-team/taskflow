@@ -1,3 +1,8 @@
+.list-title{
+    margin: 35px 0;
+    font-weight: 600;
+}
+
 .filter-section{
     width: 100%;
     display: flex;
