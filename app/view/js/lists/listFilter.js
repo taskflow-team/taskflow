@@ -90,6 +90,60 @@ function updateLists(lists){
     });
 }
 
+// Função para obter os dados do usuário do servidor
+async function fetchUserData() {
+    const reqConfigs = {
+        method: "GET",
+        headers: {
+            'Content-type': 'application/json'
+        },
+    };
+
+    try {
+        const response = await fetch('UsuarioController.php?action=getUserData', reqConfigs);
+        const responseData = await response.json();
+
+        if (!response.ok || response.status == 404) {
+            notificate(
+                'error',
+                'Erro',
+                responseData.error
+            );
+        }
+
+        updateUserData(responseData.user);
+
+    } catch (error) {
+        notificate('error', 'Error', error);
+    }
+}
+
+// Chama a função fetchUserData para carregar os dados do usuário na carga da página
+fetchUserData();
+
+function updateUserData(user) {
+    const {
+        id,
+        nome,
+        email,
+        pontos,
+        nivel,
+        tarefas_concluidas
+    } = user;
+
+    const userData = document.createElement('div');
+    userData.id = 'userData';
+
+    const userDataHtml = `
+        <p><strong>User ID:</strong> ${id}</p>
+        <p><strong>Points:</strong> ${pontos}</p>
+    `;
+
+    userData.innerHTML = userDataHtml;
+
+    pseudoBody.appendChild(userData);
+}
+
 function createActionsDiv(list, actionsDiv) {
     const renameBtn = document.createElement('button');
     renameBtn.innerText = 'Rename';

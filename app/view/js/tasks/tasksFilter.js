@@ -45,7 +45,6 @@ async function fetchUserData() {
 fetchUserData();
 
 function updateUserData(user) {
-    // Update the user data on the page with the fetched data
     const {
         id,
         nome,

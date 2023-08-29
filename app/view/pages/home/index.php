@@ -15,7 +15,6 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 
 <!-- Exibir as tarefas -->
 <div class="pseudo-body">
-   
 </div>
 
 <input id="idUsuario" name="idUsuario" type="" value="<?php echo $_SESSION[SESSAO_USUARIO_ID]; ?>" />
