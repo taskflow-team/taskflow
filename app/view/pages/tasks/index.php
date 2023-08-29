@@ -38,6 +38,10 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
         require_once(__DIR__ . "/../../components/editModal/editModal.php");
     ?>
 
+    <div id="userData"> 
+        
+    </div>
+
     <div class="filter-section" >
         <button class="filterCompletedTasks button-active" id="incompletedTasks">Incompleted Tasks</button>
         <button class="filterCompletedTasks" id="completedTasks">Completed Tasks</button>

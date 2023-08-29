@@ -2,7 +2,7 @@
 // ser desempenhadas dentro de uma tarefa
 
 import notificate from '../notification.js';
-import { fetchTaskList } from './tasksFilter.js';
+import { fetchTaskList, fetchUserData } from './tasksFilter.js';
 
 const taskForm = document.querySelector('#frmTarefa');
 const createBtn = document.querySelector('#submitTaskButton');
@@ -57,6 +57,8 @@ async function completeTask(event) {
     const formData = Object.fromEntries(rawFormContent);
     taskForm.reset();
 
+    const userID = parseInt(document.querySelector('#idUsuario').value);
+
     const taskCompleted = checkbox.checked;
 
     try {
@@ -68,6 +70,7 @@ async function completeTask(event) {
             body: JSON.stringify({
                 taskId: taskId,
                 formData: formData,
+                userID: userID,
                 taskCompleted: taskCompleted
             })
         };
@@ -85,6 +88,7 @@ async function completeTask(event) {
 
         // Obtém a lista de tarefas atualizada após completar a tarefa
         fetchTaskList();
+        fetchUserData();
     } catch (error) {
         notificate('error', 'Error', error);
     }
@@ -108,9 +112,13 @@ $(document).on("click", ".showMoreBtn", function () {
 
 async function deleteTask() {
     const taskId = $(this).data("id");
+    const userId = parseInt(document.querySelector('#idUsuario').value);
+
+    const checkbox = document.querySelector(`#checkbox-task[data-id="${taskId}"]`);
+    const taskCompleted = checkbox.checked;
 
     try {
-        const response = await fetch(BASE_URL + '/controller/TarefaController.php?action=delete&listId=' + LIST_ID, {
+        const response = await fetch(BASE_URL + '/controller/TarefaController.php?action=delete&listId=' + LIST_ID + "&taskId=" + taskId + "&userId=" + userId + "&taskCompleted=" + taskCompleted, {
             method: "DELETE",
         });
 
@@ -119,6 +127,7 @@ async function deleteTask() {
         } else {
             // Realiza um fetch da lista de tarefas atualizada após excluir a tarefa
             fetchTaskList();
+            fetchUserData();
         }
     } catch (error) {
         notificate('error', 'Error', error);

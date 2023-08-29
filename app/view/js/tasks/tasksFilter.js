@@ -11,6 +11,57 @@ const incompletedBtn = document.querySelector('#incompletedTasks');
 const subFilter = document.querySelector('#subFilter');
 const searchBtn = document.querySelector('#searchBtn');
 const taskList = document.querySelector('#taskList');
+const userData = document.querySelector('#userData');
+
+// Função para obter os dados do usuário do servidor
+async function fetchUserData() {
+    const reqConfigs = {
+        method: "GET",
+        headers: {
+            'Content-type': 'application/json'
+        },
+    };
+
+    try {
+        const response = await fetch(BASE_URL + '/controller/UsuarioController.php?action=getUserData', reqConfigs);
+        const responseData = await response.json();
+
+        if (!response.ok || response.status == 404) {
+            notificate(
+                'error',
+                'Erro',
+                responseData.error
+            );
+        }
+
+        updateUserData(responseData.user);
+
+    } catch (error) {
+        notificate('error', 'Error', error);
+    }
+}
+
+// Chama a função fetchUserData para carregar os dados do usuário na carga da página
+fetchUserData();
+
+function updateUserData(user) {
+    // Update the user data on the page with the fetched data
+    const {
+        id,
+        nome,
+        email,
+        pontos,
+        nivel,
+        tarefas_concluidas
+    } = user;
+
+    const userDataHtml = `
+        <p><strong>User ID:</strong> ${id}</p>
+        <p><strong>Points:</strong> ${pontos}</p>
+    `;
+
+    userData.innerHTML = userDataHtml;
+}
 
 // Função para obter a lista de tarefas atualizada do servidor
 async function fetchTaskList() {
@@ -105,6 +156,7 @@ function updateTaskList(tasks) {
         topContentDiv.className = 'top-content';
 
         const checkbox = document.createElement('input');
+        checkbox.id = "checkbox-task"
         checkbox.type = 'checkbox';
         checkbox.className = 'completedBtn';
         checkbox.dataset.id = id_tarefa;
@@ -262,5 +314,6 @@ searchBtn.addEventListener('click', searchByName);
 
 export {
     fetchTaskList,
-    filterTasks
+    filterTasks,
+    fetchUserData
 }

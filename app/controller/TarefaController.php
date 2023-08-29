@@ -20,6 +20,7 @@ class TarefaController extends Controller
     {
         $this->tarefaDao = new TarefaDAO();
         $this->tarefaService = new TarefaService();
+        $this->usuarioDao = new UsuarioDAO();
 
         $this->setActionDefault("list");
 
@@ -169,6 +170,7 @@ class TarefaController extends Controller
 
         $tarefaId = $requestData['taskId'];
         $taskCompleted = $requestData['taskCompleted'];
+        $userId = $requestData['userID'];
 
         $tarefa = $this->tarefaDao->findByIdTarefa($tarefaId);
 
@@ -176,6 +178,26 @@ class TarefaController extends Controller
 
         try {
             $this->tarefaDao->updateTarefa($tarefa);
+
+            // Se a tarefa foi marcada como concluída, adicionar os pontos ao usuário
+            if ($taskCompleted) {
+                $user = $this->usuarioDao->findById($userId);
+                $userPoints = $user->getPontos();
+                $taskPoints = $tarefa->getValor_pontos();
+    
+                // Adiciona os pontos da tarefa aos pontos do usuário
+                $user->setPontos($userPoints + $taskPoints);
+                $this->usuarioDao->update($user);
+            } else if(!$taskCompleted)
+            {
+                $user = $this->usuarioDao->findById($userId);
+                $userPoints = $user->getPontos();
+                $taskPoints = $tarefa->getValor_pontos();
+    
+                // Adiciona os pontos da tarefa aos pontos do usuário
+                $user->setPontos($userPoints - $taskPoints);
+                $this->usuarioDao->update($user);
+            }
 
             $response = array(
                 'ok' => true,
@@ -280,7 +302,21 @@ class TarefaController extends Controller
             exit;
         }
 
-        $tarefaId = $_GET['id'];
+        $tarefaId = $_GET['taskId'];
+        $taskCompleted = $_GET['taskCompleted'] == 'true' ? 1 : 0;
+        $userId = $_GET['userId'];
+
+        $tarefa = $this->tarefaDao->findByIdTarefa($tarefaId);
+
+        if ($taskCompleted) {
+            $user = $this->usuarioDao->findById($userId);
+            $userPoints = $user->getPontos();
+            $taskPoints = $tarefa->getValor_pontos();
+
+            // Adiciona os pontos da tarefa aos pontos do usuário
+            $user->setPontos($userPoints - $taskPoints);
+            $this->usuarioDao->update($user);
+        } 
 
         // Deleta a tarefa
         $this->tarefaDao->deleteTarefa($tarefaId);

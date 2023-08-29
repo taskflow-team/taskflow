@@ -91,13 +91,14 @@ class UsuarioDAO
         $conn = Connection::getConn();
 
         $sql = "UPDATE tb_usuarios SET email = :email," .
-            " senha = :senha" .
+            " senha = :senha," . " pontos = :pontos" .
             " WHERE id_usuario = :id";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue("senha", $usuario->getSenha());
         $stm->bindValue("email", $usuario->getEmail());
         $stm->bindValue("id", $usuario->getId());
+        $stm->bindValue("pontos", $usuario->getPontos());
         $stm->execute();
     }
 
