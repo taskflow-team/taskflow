@@ -17,7 +17,7 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 <div class="pseudo-body">
 </div>
 
-<input id="idUsuario" name="idUsuario" type="" value="<?php echo $_SESSION[SESSAO_USUARIO_ID]; ?>" />
+<input id="idUsuario" name="idUsuario" type="hidden" value="<?php echo $_SESSION[SESSAO_USUARIO_ID]; ?>" />
 
 <script type="module" src="../view/js/lists/listFunctions.js"></script>
 <script type="module" src="../view/js/lists/listFilter.js"></script>

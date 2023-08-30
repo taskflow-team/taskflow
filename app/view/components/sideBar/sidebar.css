@@ -1,12 +1,14 @@
 .sidebar{
     width: 350px;
     padding: 0 50px;
+    margin: 20px 10px;
     position: fixed;
     left: 0;
     top: 0;
     bottom: 0;
-    background-color: #1D1D1D;
+    background-color: #171717;
     font-size: 20px;
+    border-radius: 10px;
 }
 
 .sidebar .logo{

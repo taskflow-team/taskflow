@@ -1,5 +1,5 @@
 .pseudo-body{
-    padding: 50px 30px;
+    padding: 20px 30px;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 30px;
@@ -9,7 +9,7 @@
 .list-card{
     width: 350px;
     height: 250px;
-    background-color: #1D1D1D;
+    background-color: #171717;
     border-radius: 10px;
     transition: all 0.6s ease;
     position: relative;
@@ -90,7 +90,7 @@
     min-width: 200px;
     width: fit-content;
     height: fit-content;
-    background-color: #1D1D1D;
+    background-color: #171717;
     border: 1px solid #2D2D2D;
     border-radius: 10px;
     display: flex;
@@ -135,7 +135,7 @@
 
 .list-card .actions-div .confirm-btn:hover{
     background-color: #4DD167;
-    color: #1D1D1D;
+    color: #171717;
 }
 
 .list-card .actions-div .cancel-btn{
@@ -145,7 +145,7 @@
 
 .list-card .actions-div .cancel-btn:hover{
     background-color: #FF6161;
-    color: #1D1D1D;
+    color: #171717;
     border-bottom-right-radius: 10px;
 }
 
@@ -155,9 +155,9 @@
     left: 0;
     right: 0;
     bottom: 0;
-    padding: 10px; 
+    padding: 10px;
     z-index: 1;
-    background-color: transparent; 
-    cursor: pointer; 
+    background-color: transparent;
+    cursor: pointer;
     display: block;
 }
