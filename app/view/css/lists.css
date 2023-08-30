@@ -1,5 +1,38 @@
 .pseudo-body{
     padding: 20px 30px;
+}
+
+.top-content{
+    width: 100%;
+    height: 50px;
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.emeralds-section{
+    min-width: 140px;
+    width: fit-content;
+    height: 50px;
+    padding: 8px 12px;
+    background-color: #171717;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    transition: all 0.6s ease;
+}
+
+.emeralds-section #emeralds-holder{
+    margin: 0 5px;
+}
+
+.emeralds-section img{
+    max-height: 70%;
+}
+
+.lists-holder{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-column-gap: 30px;
@@ -15,7 +48,7 @@
     position: relative;
 }
 
-.list-card:hover{
+.list-card:hover, .emeralds-section:hover{
     box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
     cursor: pointer;
     border: 1px solid #4DD167;

@@ -15,6 +15,15 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 
 <!-- Exibir as tarefas -->
 <div class="pseudo-body">
+    <div class="top-content">
+        <h2>Your Personal Lists</h2>
+        <div class="emeralds-section">
+            <img src="<?= BASEURL . '/view/assets/icons/emerald.png'?>" alt="Emerald icon">
+            <span id="emeralds-holder" ></span>
+            <strong>Emeralds</strong>
+        </div>
+    </div>
+    <div class="lists-holder"></div>
 </div>
 
 <input id="idUsuario" name="idUsuario" type="hidden" value="<?php echo $_SESSION[SESSAO_USUARIO_ID]; ?>" />

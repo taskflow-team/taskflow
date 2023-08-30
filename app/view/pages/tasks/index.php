@@ -12,7 +12,7 @@ $listId = isset($_GET['listId']) ? $_GET['listId'] : null;
 $listName = isset($_GET['listName']) ? $_GET['listName'] : null;
 
 session_status();
-if (session_status() !== PHP_SESSION_ACTIVE) 
+if (session_status() !== PHP_SESSION_ACTIVE)
 {
     session_start();
 }
@@ -38,7 +38,7 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
         require_once(__DIR__ . "/../../components/editModal/editModal.php");
     ?>
 
-    <div id="userData"> 
+    <div id="userData">
         
     </div>
 
@@ -65,7 +65,7 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
 <!-- Incluir formAsync.js -->
 <script>
     const BASE_URL = '<?= BASEURL; ?>';
-    const LIST_ID = '<?= $listId; ?>'; 
+    const LIST_ID = '<?= $listId; ?>';
 </script>
 <script type="module" src="<?= BASEURL; ?>/view/js/tasks/taskFunctions.js"></script>
 <script type="module" src="<?= BASEURL; ?>/view/js/tasks/taskForm.js"></script>

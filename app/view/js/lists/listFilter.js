@@ -4,6 +4,7 @@ import { listModal } from "./listModal.js";
 import notificate from "../notification.js";
 
 const pseudoBody = document.querySelector('.pseudo-body');
+const listsHolder = document.querySelector('.lists-holder');
 
 async function fetchLists(){
     try {
@@ -24,8 +25,8 @@ async function fetchLists(){
 fetchLists();
 
 function updateLists(lists){
-    pseudoBody.innerHTML = '';
-    pseudoBody.innerText = '';
+    listsHolder.innerHTML = '';
+    listsHolder.innerText = '';
 
     const createListDiv = document.createElement('div');
     createListDiv.className = 'list-card create-list';
@@ -35,7 +36,7 @@ function updateLists(lists){
     addIcon.className = 'fa-regular fa-plus';
 
     createListDiv.appendChild(addIcon);
-    pseudoBody.appendChild(createListDiv);
+    listsHolder.appendChild(createListDiv);
 
     lists.forEach((list) => {
         const listCard = document.createElement('div');
@@ -61,10 +62,10 @@ function updateLists(lists){
         const dotsIcon = document.createElement('i');
         dotsIcon.className = 'fa-solid fa-ellipsis-vertical dots';
         dotsIcon.addEventListener('click', (event) => {
-            event.stopPropagation(); 
+            event.stopPropagation();
             showActions(actionsDiv);
         });
-        
+
         const actionsDiv = document.createElement('div');
         actionsDiv.className = 'actions-div';
         actionsDiv.style.visibility = 'hidden';
@@ -83,10 +84,10 @@ function updateLists(lists){
         listCard.appendChild(cardTitle);
         listCard.appendChild(infoDiv);
         listCard.appendChild(actionsDiv);
-        listCard.appendChild(listCardBody); 
+        listCard.appendChild(listCardBody);
         listCard.appendChild(dotsIcon);
 
-        pseudoBody.appendChild(listCard);
+        listsHolder.appendChild(listCard);
     });
 }
 
@@ -131,17 +132,9 @@ function updateUserData(user) {
         tarefas_concluidas
     } = user;
 
-    const userData = document.createElement('div');
-    userData.id = 'userData';
-
-    const userDataHtml = `
-        <p><strong>User ID:</strong> ${id}</p>
-        <p><strong>Points:</strong> ${pontos}</p>
-    `;
-
-    userData.innerHTML = userDataHtml;
-
-    pseudoBody.appendChild(userData);
+    const emeraldsHolder = document.querySelector('#emeralds-holder');
+    console.log(emeraldsHolder)
+    emeraldsHolder.innerText = pontos;
 }
 
 function createActionsDiv(list, actionsDiv) {
