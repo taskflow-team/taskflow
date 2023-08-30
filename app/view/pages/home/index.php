@@ -16,7 +16,7 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 <!-- Exibir as tarefas -->
 <div class="pseudo-body">
     <div class="top-content">
-        <h2>Your Personal Lists</h2>
+        <h2>Personal Lists</h2>
         <div class="emeralds-section">
             <img src="<?= BASEURL . '/view/assets/icons/emerald.png'?>" alt="Emerald icon">
             <span id="emeralds-holder" ></span>
