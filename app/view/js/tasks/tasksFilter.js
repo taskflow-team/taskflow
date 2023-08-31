@@ -54,12 +54,12 @@ function updateUserData(user) {
         tarefas_concluidas
     } = user;
 
-    const userDataHtml = `
-        <p><strong>User ID:</strong> ${id}</p>
-        <p><strong>Points:</strong> ${pontos}</p>
-    `;
+    // const userDataHtml = `
+    //     <p><strong>User ID:</strong> ${id}</p>
+    //     <p><strong>Points:</strong> ${pontos}</p>
+    // `;
 
-    userData.innerHTML = userDataHtml;
+    // userData.innerHTML = userDataHtml;
 }
 
 // Função para obter a lista de tarefas atualizada do servidor

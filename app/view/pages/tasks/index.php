@@ -39,7 +39,7 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
     ?>
 
     <div id="userData">
-        
+
     </div>
 
     <div class="filter-section" >
