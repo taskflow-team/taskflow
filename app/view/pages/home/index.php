@@ -12,6 +12,8 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/css/lists.css">
+<link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/css/rewards.css">
+<link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/pages/home/index.css">
 
 <!-- Exibir as tarefas -->
 <div class="pseudo-body">
@@ -25,7 +27,7 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
                 <strong>Emeralds</strong>
             </div>
 
-            <div class="rewards top-button">
+            <div class="rewards top-button" id="rewardsBtn" >
                 <i class="fa-solid fa-gift"></i>
                 <strong>Rewards</strong>
             </div>
@@ -37,7 +39,7 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
     </div>
 </div>
 
-<div class="rewards-bar" >
+<div class="rewards-bar rewards-hidden" >
     <h3>Rewards</h3>
 
     <div class="rewards-holder" >
@@ -64,3 +66,4 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 
 <script type="module" src="../view/js/lists/listFunctions.js"></script>
 <script type="module" src="../view/js/lists/listFilter.js"></script>
+<script type="module" src="../view/js/rewards/rewards.js"></script>

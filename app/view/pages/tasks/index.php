@@ -71,3 +71,4 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
 <script type="module" src="<?= BASEURL; ?>/view/js/tasks/taskForm.js"></script>
 <script type="module" src="<?= BASEURL; ?>/view/js/tasks/taskModal.js"></script>
 <script type="module" src="<?= BASEURL; ?>/view/js/tasks/tasksFilter.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/tasks/tasksFilter.js"></script>
