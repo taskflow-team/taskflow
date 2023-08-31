@@ -24,6 +24,7 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
                 <span id="emeralds-holder" ></span>
                 <strong>Emeralds</strong>
             </div>
+
             <div class="rewards top-button">
                 <i class="fa-solid fa-gift"></i>
                 <strong>Rewards</strong>
@@ -34,7 +35,20 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
     <div class="lists-holder">
 
     </div>
+</div>
 
+<div class="rewards-bar" >
+    <h3>Rewards</h3>
+
+    <div class="rewards-holder" >
+        <div class="reward-card" >
+            <span>My reward</span>
+            <div class="cost" >
+                880
+                <img src="<?= BASEURL . '/view/assets/icons/emerald.png'?>" alt="Emerald icon">
+            </div>
+        </div>
+    </div>
 
 </div>
 

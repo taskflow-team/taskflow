@@ -133,7 +133,6 @@ function updateUserData(user) {
     } = user;
 
     const emeraldsHolder = document.querySelector('#emeralds-holder');
-    console.log(emeraldsHolder)
     emeraldsHolder.innerText = pontos;
 }
 
