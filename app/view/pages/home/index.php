@@ -43,19 +43,30 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
     <h3>Rewards</h3>
 
     <div class="rewards-holder" >
-        <div class="reward-card" >
-            <span>Day off</span>
-            <div class="cost" >
-                880
-                <img src="<?= BASEURL . '/view/assets/icons/emerald.png'?>" alt="Emerald icon">
+    <div class="reward-card" >
+            <div class="default-content" >
+                <span>Day off</span>
+                <div class="cost" >
+                    770
+                    <img src="<?= BASEURL . '/view/assets/icons/emerald.png'?>" alt="Emerald icon">
+                </div>
+            </div>
+            <div class="rewards-functions functions-hidden" >
+
             </div>
         </div>
 
         <div class="reward-card" >
-            <span>Ice cream</span>
-            <div class="cost" >
-                230
-                <img src="<?= BASEURL . '/view/assets/icons/emerald.png'?>" alt="Emerald icon">
+            <div class="default-content" >
+                <span>Ice cream</span>
+                <div class="cost" >
+                    230
+                    <img src="<?= BASEURL . '/view/assets/icons/emerald.png'?>" alt="Emerald icon">
+                </div>
+            </div>
+            <div class="rewards-functions functions-show" >
+                <button id="claimBtn" >Claim</button>
+                <button id="deleteBtn" >Delete</button>
             </div>
         </div>
     </div>
