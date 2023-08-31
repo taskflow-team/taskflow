@@ -17,13 +17,25 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 <div class="pseudo-body">
     <div class="top-content">
         <h2>Personal Lists</h2>
-        <div class="emeralds-section">
-            <img src="<?= BASEURL . '/view/assets/icons/emerald.png'?>" alt="Emerald icon">
-            <span id="emeralds-holder" ></span>
-            <strong>Emeralds</strong>
+
+        <div class="top-content-buttons" >
+            <div class="emeralds-section top-button">
+                <img src="<?= BASEURL . '/view/assets/icons/emerald.png'?>" alt="Emerald icon">
+                <span id="emeralds-holder" ></span>
+                <strong>Emeralds</strong>
+            </div>
+            <div class="rewards top-button">
+                <i class="fa-solid fa-gift"></i>
+                <strong>Rewards</strong>
+            </div>
         </div>
     </div>
-    <div class="lists-holder"></div>
+
+    <div class="lists-holder">
+
+    </div>
+
+
 </div>
 
 <input id="idUsuario" name="idUsuario" type="hidden" value="<?php echo $_SESSION[SESSAO_USUARIO_ID]; ?>" />
