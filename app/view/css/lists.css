@@ -37,6 +37,7 @@
     align-items: end;
     justify-content: space-around;
     transition: all 0.6s ease;
+    margin-bottom: 20px;
 }
 
 .reward-card span{

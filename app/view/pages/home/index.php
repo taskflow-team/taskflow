@@ -42,9 +42,17 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 
     <div class="rewards-holder" >
         <div class="reward-card" >
-            <span>My reward</span>
+            <span>Day off</span>
             <div class="cost" >
                 880
+                <img src="<?= BASEURL . '/view/assets/icons/emerald.png'?>" alt="Emerald icon">
+            </div>
+        </div>
+
+        <div class="reward-card" >
+            <span>Ice cream</span>
+            <div class="cost" >
+                230
                 <img src="<?= BASEURL . '/view/assets/icons/emerald.png'?>" alt="Emerald icon">
             </div>
         </div>
