@@ -88,7 +88,7 @@ function updateRewards(rewards) {
             reward_owned
         } = reward;
 
-        if(reward_owned != null)
+        if(reward_owned != null && reward_owned != 0)
         {
             const rewardCard = document.createElement('div');
             rewardCard.className = 'reward-card';

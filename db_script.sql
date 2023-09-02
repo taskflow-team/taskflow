@@ -86,6 +86,6 @@ CREATE TABLE tb_rewards (
     FOREIGN KEY (id_group) REFERENCES tb_grupos (idtb_grupos)
 );
 
-INSERT INTO tb_rewards (reward_name, reward_cost, id_user, reward_owned) VALUES ('Sorvete', 50, 1, 0);
-INSERT INTO tb_rewards (reward_name, reward_cost, id_user, reward_owned) VALUES ('Maconha', 150, 1, 0);
+INSERT INTO tb_rewards (reward_name, reward_cost, id_user, reward_owned) VALUES ('Sorvete', 50, 1, NULL);
+INSERT INTO tb_rewards (reward_name, reward_cost, id_user, reward_owned) VALUES ('Maconha', 150, 1, NULL);
 
