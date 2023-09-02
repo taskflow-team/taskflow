@@ -13,7 +13,7 @@ CREATE TABLE tb_usuarios (
 -- Insere alguns dados iniciais na tabela de usuários
 INSERT INTO tb_usuarios (nome_usuario, login, email, senha) VALUES ('Sr. Administrador', 'admin', 'admin@admin', 'admin');
 INSERT INTO tb_usuarios (nome_usuario, login, email, senha) VALUES ('Sr. Root', 'root','root@root', 'root');
-
+    
 -- Cria a tabela de grupos
 CREATE TABLE tb_grupos (
     idtb_grupos INT PRIMARY KEY AUTO_INCREMENT,
@@ -72,6 +72,19 @@ ALTER TABLE tb_tarefas ADD FOREIGN KEY (idtb_listas) REFERENCES tb_listas (idtb_
 ALTER TABLE tb_tarefas ADD CONSTRAINT fk_usuarios FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario);
 
 -- Insere alguns dados iniciais na tabela de tarefas
-INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, id_usuario, idtb_listas) VALUES ('Tarefa 1', 'Descrição da tarefa 1', 1, 1, 10, 1, 1);
-INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, id_usuario, idtb_listas) VALUES ('Tarefa 2', 'Descrição da tarefa 2', 2, 2, 20, 1, 1);
+INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, id_usuario, idtb_listas) VALUES ('Tarefa 1', 'Descrição da tarefa 1', 1, 1, 150, 1, 1);
+INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, id_usuario, idtb_listas) VALUES ('Tarefa 2', 'Descrição da tarefa 2', 2, 2, 50, 1, 1);
 
+CREATE TABLE tb_rewards (
+    id_reward INT AUTO_INCREMENT PRIMARY KEY,
+    reward_name VARCHAR(80),
+    reward_cost INT,
+    id_user INT,
+    id_group INT,
+    reward_owned TINYINT,
+    FOREIGN KEY (id_user) REFERENCES tb_usuarios (id_usuario),
+    FOREIGN KEY (id_group) REFERENCES tb_grupos (idtb_grupos)
+);
+
+INSERT INTO tb_rewards (reward_name, reward_cost, id_user, reward_owned) VALUES ('Sorvete', 50, 1, 0);
+INSERT INTO tb_rewards (reward_name, reward_cost, id_user, reward_owned) VALUES ('Maconha', 150, 1, 0);

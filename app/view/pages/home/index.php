@@ -43,7 +43,9 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
     <h3>Rewards</h3>
 
     <div class="rewards-holder" >
-    <div class="reward-card" >
+
+    <button id="reward-button-add">Add Reward</button>
+    <!-- <div class="reward-card" >
             <div class="default-content" >
                 <span>Day off</span>
                 <div class="cost" >
@@ -68,13 +70,18 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
                 <button id="claimBtn" >Claim</button>
                 <button id="deleteBtn" >Delete</button>
             </div>
-        </div>
-    </div>
-
+        </div>-->
+    </div> 
 </div>
+
+<script>
+    const BASE_URL = '<?= BASEURL; ?>';
+</script>
 
 <input id="idUsuario" name="idUsuario" type="hidden" value="<?php echo $_SESSION[SESSAO_USUARIO_ID]; ?>" />
 
-<script type="module" src="../view/js/lists/listFunctions.js"></script>
-<script type="module" src="../view/js/lists/listFilter.js"></script>
-<script type="module" src="../view/js/rewards/rewards.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/lists/listFunctions.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/lists/listFilter.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/rewards/rewardModal.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/rewards/rewardFunctions.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/rewards/rewardFilters.js"></script>
