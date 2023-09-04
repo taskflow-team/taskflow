@@ -42,35 +42,10 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 <div class="rewards-bar rewards-hidden" >
     <h3>Rewards</h3>
 
+    <button id="addRewardBtn" class="btn btn-success">Add Reward</button>
+
     <div class="rewards-holder" >
 
-    <button id="reward-button-add">Add Reward</button>
-    <!-- <div class="reward-card" >
-            <div class="default-content" >
-                <span>Day off</span>
-                <div class="cost" >
-                    770
-                    <img src="<?= BASEURL . '/view/assets/icons/emerald.png'?>" alt="Emerald icon">
-                </div>
-            </div>
-            <div class="rewards-functions functions-hidden" >
-
-            </div>
-        </div>
-
-        <div class="reward-card" >
-            <div class="default-content" >
-                <span>Ice cream</span>
-                <div class="cost" >
-                    230
-                    <img src="<?= BASEURL . '/view/assets/icons/emerald.png'?>" alt="Emerald icon">
-                </div>
-            </div>
-            <div class="rewards-functions functions-show" >
-                <button id="claimBtn" >Claim</button>
-                <button id="deleteBtn" >Delete</button>
-            </div>
-        </div>-->
     </div> 
 </div>
 
@@ -82,6 +57,7 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 
 <script type="module" src="<?= BASEURL; ?>/view/js/lists/listFunctions.js"></script>
 <script type="module" src="<?= BASEURL; ?>/view/js/lists/listFilter.js"></script>
-<script type="module" src="<?= BASEURL; ?>/view/js/rewards/rewardModal.js"></script>
-<script type="module" src="<?= BASEURL; ?>/view/js/rewards/rewardFunctions.js"></script>
-<script type="module" src="<?= BASEURL; ?>/view/js/rewards/rewardFilters.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/rewards/rewardsModal.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/rewards/rewardsFunctions.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/rewards/rewardsFilters.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/rewards/rewardsBar.js"></script>

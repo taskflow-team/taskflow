@@ -1,32 +1,6 @@
-import { fetchUserData } from "./rewardFilters.js";
-import { closeModal, showRewardsBar } from "./rewardModal.js";
+import { fetchRewards, updateUserData } from "./rewardsFilters.js";
+import { closeModal } from "./rewardsModal.js";
 import notificate from "../notification.js";
-
-async function claimReward(userID, rewardID){
-    try {
-        const reqConfigs = {
-            method: "POST",
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                userID: userID,
-                rewardID: rewardID
-            })
-        };
-
-        const response = await fetch('RewardController.php?action=claimReward', reqConfigs);
-        const responseData = await response.json();
-
-        if (!response.ok || response.status == 404 || !responseData.ok) {
-            throw new Error('Failed to create Reward');
-        }
-
-        fetchUserData();
-    } catch (error) {
-        notificate('error', 'Error', error.message);
-    }
-}
 
 async function createReward(userID){
     let rewardName = document.querySelector('#reward-name-input').value;
@@ -53,7 +27,7 @@ async function createReward(userID){
         }
 
         closeModal();
-        fetchUserData();
+        fetchRewards();
     } catch (error) {
         notificate('error', 'Error', error.message);
     }
@@ -82,7 +56,8 @@ async function renameReward(rewardID){
         }
 
         closeModal();
-        fetchUserData();
+        fetchRewards();
+        updateUserData();
     } catch (error) {
         notificate('error', 'Error', error.message);
     }
@@ -96,7 +71,7 @@ async function deleteReward(event){
 
     deleteBtn.innerText = '';
 
-    const confirmBtn = document.createElement('span');
+    let confirmBtn = document.createElement('span');
     confirmBtn.innerText = 'Confirm';
     confirmBtn.className = 'confirm-btn';
     confirmBtn.addEventListener('click', async() => {
@@ -112,18 +87,15 @@ async function deleteReward(event){
                 throw new Error('The request to the server has failed');
             }
 
-            const responseData =  await response.json();
-            notificate('success', 'Success', responseData.message)
-
             // Atualiza a tela com as recompensas atuais
-            fetchUserData();
+            fetchRewards();
 
         } catch (error) {
             notificate('error', 'Error', error.message);
         }
     })
 
-    const cancelBtn = document.createElement('span');
+    let cancelBtn = document.createElement('span');
     cancelBtn.innerText = 'Cancel';
     cancelBtn.className = 'cancel-btn';
 
@@ -136,6 +108,59 @@ async function deleteReward(event){
         deleteBtn.style.padding = '0 25px 10px 25px';
     });
 }
+
+async function claimReward(event, user, reward){
+    const element = event.target;
+
+    if(reward.reward_cost > user.pontos){
+        notificate('error', 'Error', 'You dont have enough emeralds, please complete more tasks');
+        return;
+    }
+
+    let confirmBtn = document.createElement('span');
+    confirmBtn.innerText = 'Confirm';
+    confirmBtn.className = 'confirm-btn';
+    confirmBtn.addEventListener('click', async() => {
+        try {
+            const reqConfigs = {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    userID: user.id,
+                    rewardID: reward.id_reward
+                })
+            };
+    
+            const response = await fetch('RewardController.php?action=claimReward', reqConfigs);
+            const responseData = await response.json();
+    
+            if (!response.ok || response.status == 404 || !responseData.ok) {
+                throw new Error('Failed to create Reward');
+            }
+    
+            updateUserData();
+        } catch (error) {
+            notificate('error', 'Error', error.message);
+        }
+    })
+
+    let cancelBtn = document.createElement('span');
+    cancelBtn.innerText = 'Cancel';
+    cancelBtn.className = 'cancel-btn';
+    cancelBtn.addEventListener('click', () => {
+        element.innerHtml = '';
+        element.innerText = 'Claim';
+    });
+
+    element.innerText = '';
+    element.innerHtml = '';
+    element.appendChild(confirmBtn);
+    element.appendChild(cancelBtn);
+}
+
+
 
 export {
     deleteReward,

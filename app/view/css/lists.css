@@ -12,17 +12,17 @@
 }
 
 /* Align items in the first column to the left */
-.lists-holder > :nth-child(3n+1) {
+.three-columns > :nth-child(3n+1) {
     justify-self: start;
 }
 
 /* Align items in the second column to the center */
-.lists-holder > :nth-child(3n+2) {
+.three-columns > :nth-child(3n+2) {
     justify-self: center;
 }
 
 /* Align items in the third column to the right */
-.lists-holder > :nth-child(3n+3) {
+.three-columns > :nth-child(3n+3) {
     justify-self: end;
 }
 

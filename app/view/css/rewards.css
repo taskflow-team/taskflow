@@ -12,6 +12,10 @@
     z-index: 10;
 }
 
+.rewards-bar #addRewardBtn{
+    margin-bottom: 20px;
+}
+
 .rewards-hidden{
     right: -300px;
 }
@@ -102,4 +106,16 @@
 
 .reward-card .cost img{
     max-height: 14px;
+}
+
+.create-reward-modal{
+    height: 350px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-between;
+}
+
+.create-reward-modal .dark-input{
+    width: 100%;
 }

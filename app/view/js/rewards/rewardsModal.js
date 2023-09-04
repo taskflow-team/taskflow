@@ -1,6 +1,6 @@
-import { createReward, renameReward } from './rewardFunctions.js';
-
-const rewardsBtn = document.querySelector('#rewardsBtn');
+import fetchUserData from '../user/fetchUserData.js';
+import { createReward, renameReward } from './rewardsFunctions.js';
+import { fetchRewards } from './rewardsFilters.js';
 
 function rewardModal(userID, type, rewardId, rewardName, rewardCost){
     const modalBg = document.createElement('div');
@@ -59,28 +59,11 @@ function closeModal(){
     }, 500);
 }
 
-function showRewardsBar(){
-    let pseudoBody = document.querySelector('.pseudo-body');
-    let listsHolder = document.querySelector('.lists-holder');
-    let rewardsBar = document.querySelector('.rewards-bar');
-
-    if(rewardsBar.classList.contains('rewards-show')){
-        rewardsBar.className = 'rewards-bar rewards-hidden';
-        pseudoBody.style.right = '0';
-        listsHolder.style.gridTemplateColumns = 'repeat(4, 1fr)';
-        return;
-    }
-
-    rewardsBar.className = 'rewards-bar rewards-show';
-    pseudoBody.style.right = '300px';
-    listsHolder.style.gridTemplateColumns = 'repeat(3, 1fr)';
-
-}
-
-rewardsBtn.addEventListener('click', showRewardsBar);
+const user = await fetchUserData();
+const addRewardBtn = document.querySelector('#addRewardBtn');
+addRewardBtn.addEventListener('click', () => rewardModal( user.id, 'create'));
 
 export {
     rewardModal,
     closeModal,
-    showRewardsBar
 }
