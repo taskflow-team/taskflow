@@ -16,8 +16,16 @@ function notificate(type, title, content){
     closeBtn.addEventListener('click', closeNotification);
 
     const notification = document.createElement('div');
-    const notificationClass = type == 'error' ? 'notification error' : 'notification success';
-    notification.setAttribute('class', notificationClass);
+
+    if(type == 'success'){
+        notification.className =  'notification success';
+    } else if(type == 'error'){
+        notification.className = 'notification error';
+    } else if(type == 'warning') {
+        notification.className = 'notification warning';
+        closeBtn.style.color = '#171717';
+    }
+
     notification.appendChild(htmlTitle);
     notification.appendChild(htmlContent);
     notification.appendChild(closeBtn);

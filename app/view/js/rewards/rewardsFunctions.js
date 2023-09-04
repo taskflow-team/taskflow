@@ -113,7 +113,7 @@ async function claimReward(event, user, reward){
     const element = event.target;
 
     if(reward.reward_cost > user.pontos){
-        notificate('error', 'Error', 'You dont have enough emeralds, please complete more tasks');
+        notificate('warning', 'Warning', "You don't have enough emeralds, please complete more tasks");
         return;
     }
 
@@ -132,14 +132,14 @@ async function claimReward(event, user, reward){
                     rewardID: reward.id_reward
                 })
             };
-    
+
             const response = await fetch('RewardController.php?action=claimReward', reqConfigs);
             const responseData = await response.json();
-    
+
             if (!response.ok || response.status == 404 || !responseData.ok) {
                 throw new Error('Failed to create Reward');
             }
-    
+
             updateUserData();
         } catch (error) {
             notificate('error', 'Error', error.message);

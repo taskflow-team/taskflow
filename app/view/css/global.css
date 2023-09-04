@@ -49,18 +49,32 @@ body{
     bottom: 20px;
     right: 20px;
     box-shadow: rgba(255, 255, 255, 0.1) 0px 1px 1px 0px inset, rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px;
+    animation: right-slide-in 0.7s forwards, opacity-in 0.7s forwards !important;
     z-index: 10;
 }
 
 .notification h3{
     font-size: 18px;
+}
+
+.notification h3, .notification button{
     font-weight: 600;
 }
 
 .error{
     background-color: #f86f6f;
     border-color: #f64242;
-    animation: right-slide-in .3s forwards, opacity-in .3s forwards !important;
+}
+
+.success{
+    background-color: #4DD167;
+    border-color: #22b13e;
+}
+
+.warning{
+    background-color: #FFD361;
+    border-color: #af8314;
+    color: #171717;
 }
 
 @keyframes right-slide-in {
@@ -70,11 +84,6 @@ body{
     to {
         right: 25px;
     }
-}
-
-.success{
-    background-color: #4DD167;
-    border-color: #22b13e;
 }
 
 .notification .closeBtn{
