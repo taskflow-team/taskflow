@@ -5,6 +5,7 @@ import notificate from "../notification.js";
 async function createReward(userID){
     let rewardName = document.querySelector('#reward-name-input').value;
     let rewardCost = document.querySelector('#reward-cost-input').value;
+    let rewardUnities = document.querySelector('#reward-unities-input').value;
 
     try {
         const reqConfigs = {
@@ -15,6 +16,7 @@ async function createReward(userID){
             body: JSON.stringify({
                 rewardName: rewardName,
                 rewardCost: rewardCost,
+                rewardUnities: rewardUnities,
                 userID: userID
             })
         };
@@ -137,7 +139,7 @@ async function claimReward(event, user, reward){
             const responseData = await response.json();
 
             if (!response.ok || response.status == 404 || !responseData.ok) {
-                throw new Error('Failed to create Reward');
+                throw new Error('Failed to claim the Reward');
             }
 
             updateUserData();

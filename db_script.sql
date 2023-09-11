@@ -79,13 +79,14 @@ CREATE TABLE tb_rewards (
     id_reward INT AUTO_INCREMENT PRIMARY KEY,
     reward_name VARCHAR(80),
     reward_cost INT,
+    reward_unities INT,
+    claimed_times INT,
     id_user INT,
     id_group INT,
-    reward_owned TINYINT,
     FOREIGN KEY (id_user) REFERENCES tb_usuarios (id_usuario),
     FOREIGN KEY (id_group) REFERENCES tb_grupos (idtb_grupos)
 );
 
-INSERT INTO tb_rewards (reward_name, reward_cost, id_user, reward_owned) VALUES ('Sorvete', 50, 1, NULL);
-INSERT INTO tb_rewards (reward_name, reward_cost, id_user, reward_owned) VALUES ('Maconha', 150, 1, NULL);
+INSERT INTO tb_rewards (reward_name, reward_cost, id_user, reward_unities, claimed_times) VALUES ('Sorvete', 50, 1, 5, 2);
+INSERT INTO tb_rewards (reward_name, reward_cost, id_user, reward_unities, claimed_times) VALUES ('Maconha', 150, 1, 6, 2);
 

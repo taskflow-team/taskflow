@@ -41,48 +41,103 @@ function updateRewards(rewards) {
             reward_cost,
             id_user,
             id_group,
-            reward_owned
+            reward_unities,
+            claimed_times
         } = reward;
 
-        const rewardCard = document.createElement('div');
-        rewardCard.className = 'reward-card';
+        if(reward_unities > 0)
+        {
+            const rewardCard = document.createElement('div');
+            rewardCard.className = 'reward-card';
 
-        const defaultContent = document.createElement('div');
-        defaultContent.className = 'default-content';
+            const defaultContent = document.createElement('div');
+            defaultContent.className = 'default-content';
 
-        const rewardName = document.createElement('span');
-        rewardName.innerText = reward.reward_name;
+            const rewardName = document.createElement('span');
+            rewardName.innerText = reward.reward_name;
 
-        const costDiv = document.createElement('div');
-        costDiv.className = 'cost';
-        costDiv.innerHTML = reward.reward_cost + ' <img src="' + BASE_URL + '/view/assets/icons/emerald.png" alt="Emerald icon">';
+            const costDiv = document.createElement('div');
+            costDiv.className = 'cost';
+            costDiv.innerHTML = reward.reward_cost + ' <img src="' + BASE_URL + '/view/assets/icons/emerald.png" alt="Emerald icon">';
 
-        defaultContent.appendChild(rewardName);
-        defaultContent.appendChild(costDiv);
+            const col01 = document.createElement('div');
+            col01.className = 'reward-col';
+            col01.appendChild(rewardName);
+            col01.appendChild(costDiv);
 
-        const functionsDiv = document.createElement('div');
-        functionsDiv.className = 'rewards-functions functions-show';
+            const rewardUnities = document.createElement('span');
+            rewardUnities.className = 'reward-unities';
+            rewardUnities.innerHTML = reward.reward_unities + "x";
 
-        const claimBtn = document.createElement('button')
-        claimBtn.id = 'claimBtn';
-        claimBtn.innerText = 'Claim';
-        claimBtn.addEventListener('click', (event) => claimReward(event, user, reward));
+            const claimedTimes = document.createElement('span');
+            claimedTimes.className = 'reward-claimed';
+            claimedTimes.innerHTML = reward.claimed_times == null ? "Claimed Times: " + 0 : "Claimed Times: " + reward.claimed_times;
 
-        functionsDiv.appendChild(claimBtn);
+            defaultContent.appendChild(rewardUnities);
+            defaultContent.appendChild(col01);
+            defaultContent.appendChild(claimedTimes);
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.id = 'deleteBtn';
-        deleteBtn.dataset.id = id_reward;
-        deleteBtn.innerText = 'Delete';
-        deleteBtn.addEventListener('click', deleteReward);
-        
-        functionsDiv.appendChild(deleteBtn);
+            const functionsDiv = document.createElement('div');
+            functionsDiv.className = 'rewards-functions functions-show';
 
-        rewardCard.appendChild(defaultContent);
-        rewardCard.appendChild(functionsDiv);
+            const claimBtn = document.createElement('button')
+            claimBtn.id = 'claimBtn';
+            claimBtn.innerText = 'Claim';
+            claimBtn.addEventListener('click', (event) => claimReward(event, user, reward));
 
-        rewardsHolder.appendChild(rewardCard);
+            functionsDiv.appendChild(claimBtn);
 
+            const deleteBtn = document.createElement('button');
+            deleteBtn.id = 'deleteBtn';
+            deleteBtn.dataset.id = id_reward;
+            deleteBtn.innerText = 'Delete';
+            deleteBtn.addEventListener('click', deleteReward);
+            
+            functionsDiv.appendChild(deleteBtn);
+
+            rewardCard.appendChild(defaultContent);
+            rewardCard.appendChild(functionsDiv);
+
+            rewardsHolder.appendChild(rewardCard);
+        }
+        else
+        {
+            const rewardCard = document.createElement('div');
+            rewardCard.className = 'reward-card';
+
+            const defaultContent = document.createElement('div');
+            defaultContent.className = 'default-content';
+
+            const rewardName = document.createElement('span');
+            rewardName.innerText = reward.reward_name;
+
+            const costDiv = document.createElement('div');
+            costDiv.className = 'cost';
+            costDiv.innerHTML = reward.reward_cost + ' <img src="' + BASE_URL + '/view/assets/icons/emerald.png" alt="Emerald icon">';
+
+            const rewardSoldOut = document.createElement('div');
+            rewardSoldOut.className = 'rewardSoldOut';
+            rewardSoldOut.innerHTML = "rewardSoldOut"
+
+            defaultContent.appendChild(rewardName);
+            defaultContent.appendChild(rewardSoldOut);
+
+            const functionsDiv = document.createElement('div');
+            functionsDiv.className = 'rewards-functions functions-show';
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.id = 'deleteBtn';
+            deleteBtn.dataset.id = id_reward;
+            deleteBtn.innerText = 'Delete';
+            deleteBtn.addEventListener('click', deleteReward);
+            
+            functionsDiv.appendChild(deleteBtn);
+
+            rewardCard.appendChild(defaultContent);
+            rewardCard.appendChild(functionsDiv);
+
+            rewardsHolder.appendChild(rewardCard);
+        }
     });
 }
 

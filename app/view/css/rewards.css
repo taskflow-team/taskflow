@@ -10,6 +10,11 @@
     border-radius: 10px;
     transition: all 0.6s ease;
     z-index: 10;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    color: #FFF;
+    overflow: scroll
 }
 
 .rewards-bar #addRewardBtn{
@@ -24,15 +29,32 @@
     right: 0;
 }
 
-.rewards-bar{
+.rewards-bar h3{
+    margin-bottom: 30px;
+}
+
+.rewards-bar .rewards-filters{
+    width: 100%;
+    margin-bottom: 20px;
     display: flex;
-    flex-direction: column;
-    align-items: start;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.rewards-bar .rewards-filters button{
+    width: 47%;
+    background-color: transparent;
     color: #FFF;
 }
 
-.rewards-bar h3{
-    margin-bottom: 30px;
+.rewards-bar .rewards-filters .active{
+    background-color: #4DD167 !important;
+    color: #171717 !important;
+    font-weight: 600;
+}
+
+.rewards-bar .rewards-holder{
+    height: fit-content;
 }
 
 .reward-card{
@@ -52,6 +74,32 @@
     width: 100%;
     padding: 8px 20px 8px 20px;
     display: flex;
+    flex-direction: column;
+}
+
+.reward-card .default-content .reward-unities{
+    text-align: end;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.reward-card .default-content .reward-claimed{
+    margin: 8px 0;
+    font-size: 16px;
+    font-weight: 400;
+}
+
+
+.reward-card .default-content .reward-col{
+    width: 100%;
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.reward-card .default-content .reward-col span{
+    font-weight: 600;
 }
 
 .reward-card .rewards-functions{

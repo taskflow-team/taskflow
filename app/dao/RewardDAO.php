@@ -46,15 +46,16 @@ class RewardDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO tb_rewards (reward_name, reward_cost, id_user, id_group, reward_owned)" .
-            " VALUES (:reward_name, :reward_cost, :id_user, :id_group, :reward_owned)";
+        $sql = "INSERT INTO tb_rewards (reward_name, reward_cost, id_user, id_group, reward_unities, claimed_times)" .
+            " VALUES (:reward_name, :reward_cost, :id_user, :id_group, :reward_unities, :claimed_times)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue(":reward_name", $reward->getRewardName());
         $stm->bindValue(":reward_cost", $reward->getRewardCost(), PDO::PARAM_INT);
         $stm->bindValue(":id_user", $reward->getIdUser());
         $stm->bindValue(":id_group", $reward->getIdGroup());
-        $stm->bindValue(":reward_owned", $reward->getRewardOwned());
+        $stm->bindValue(":reward_unities", $reward->getRewardUnities());
+        $stm->bindValue(":claimed_times", $reward->getClaimed_times());
         $stm->execute();
     }
 
@@ -62,14 +63,15 @@ class RewardDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "UPDATE tb_rewards SET reward_name = ?, reward_cost = ?, id_user = ?, id_group = ?, reward_owned = ? WHERE id_reward = ?";
+        $sql = "UPDATE tb_rewards SET reward_name = ?, reward_cost = ?, id_user = ?, id_group = ?, reward_unities = ?, claimed_times = ? WHERE id_reward = ?";
         $stm = $conn->prepare($sql);
         $stm->bindValue(1, $reward->getRewardName());
         $stm->bindValue(2, $reward->getRewardCost(), PDO::PARAM_INT);
         $stm->bindValue(3, $reward->getIdUser());
         $stm->bindValue(4, $reward->getIdGroup());
-        $stm->bindValue(5, $reward->getRewardOwned());
-        $stm->bindValue(6, $reward->getIdReward());
+        $stm->bindValue(5, $reward->getRewardUnities());
+        $stm->bindValue(6, $reward->getClaimed_times());
+        $stm->bindValue(7, $reward->getIdReward());
         $stm->execute();
     }
 
@@ -94,7 +96,8 @@ class RewardDAO
             $reward->setRewardCost($row["reward_cost"]);
             $reward->setIdUser($row["id_user"]);
             $reward->setIdGroup($row["id_group"]);
-            $reward->setRewardOwned($row["reward_owned"]);
+            $reward->setRewardUnities($row["reward_unities"]);
+            $reward->setClaimed_times($row["claimed_times"]);
             array_push($rewards, $reward);
         }
 

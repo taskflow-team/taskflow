@@ -15,6 +15,10 @@ class RewardService {
             array_push($erros, "O campo [Custo] é obrigatório.");
         }
 
+        if (!$reward->getRewardUnities()) {
+            array_push($erros, "O campo [Unidades] é obrigatório.");
+        }
+
         return $erros;
     }
 }

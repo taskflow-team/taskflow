@@ -51,7 +51,12 @@ class RewardController extends Controller
         $rewardID = $requestData['rewardID'];
 
         $reward = $this->rewardDao->findRewardById($rewardID);
-        $reward->setRewardOwned(1);
+
+        $claimed_times = $reward->getClaimed_times();
+        $reward_unities = $reward->getRewardUnities();
+
+        $reward->setRewardUnities($reward_unities - 1);
+        $reward->setClaimed_times($claimed_times + 1);
 
         try {
             $this->rewardDao->updateReward($reward);
@@ -101,7 +106,8 @@ class RewardController extends Controller
                     'reward_cost' => $reward->getRewardCost(),
                     'id_user' => $reward->getIdUser(),
                     'id_group' => $reward->getIdGroup(),
-                    'reward_owned' => $reward->getRewardOwned(),
+                    'reward_unities' => $reward->getRewardUnities(),
+                    'claimed_times' => $reward->getClaimed_times(),
                 );
             }, $rewards)
         );
@@ -175,11 +181,13 @@ class RewardController extends Controller
 
         $rewardName = $requestData['rewardName'];
         $rewardCost = $requestData['rewardCost'];
+        $rewardUnities = $requestData['rewardUnities'];
         $userID = $requestData['userID'];
 
         $reward = new Reward();
         $reward->setRewardName($rewardName);
         $reward->setRewardCost($rewardCost);
+        $reward->setRewardUnities($rewardUnities);
         $reward->setIdUser($userID);
 
         $erros = $this->rewardService->validarDados($reward);

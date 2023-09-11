@@ -44,6 +44,11 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 
     <button id="addRewardBtn" class="btn btn-success">Add Reward</button>
 
+    <div class="rewards-filters">
+        <button class="btn btn-success active" >Available</button>
+        <button class="btn btn-success" >Unavalible</button>
+    </div>
+
     <div class="rewards-holder" >
 
     </div> 

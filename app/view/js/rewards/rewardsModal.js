@@ -22,6 +22,12 @@ function rewardModal(userID, type, rewardId, rewardName, rewardCost){
     inputCost.setAttribute('type', 'number');
     inputCost.setAttribute('placeholder', '0');
 
+    const inputUnities = document.createElement('input');
+    inputUnities.className = 'dark-input';
+    inputUnities.id = 'reward-unities-input';
+    inputUnities.setAttribute('type', 'number');
+    inputUnities.setAttribute('placeholder', '0');
+
     const submitBtn = document.createElement('button');
     submitBtn.className = 'btn btn success';
     submitBtn.innerText = type == 'create' ? 'Create' : 'Rename';
@@ -40,6 +46,7 @@ function rewardModal(userID, type, rewardId, rewardName, rewardCost){
 
     modal.appendChild(inputName);
     modal.appendChild(inputCost);
+    modal.appendChild(inputUnities);
     modal.appendChild(submitBtn);
     modal.appendChild(closeIcon);
 
@@ -56,7 +63,7 @@ function closeModal(){
     setTimeout(() => {
         modalBg.remove();
         modal.remove();
-    }, 500);
+    }, 1000);
 }
 
 const user = await fetchUserData();

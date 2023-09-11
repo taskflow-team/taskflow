@@ -7,16 +7,29 @@ class Reward
     private $reward_cost;
     private $id_user;
     private $id_group;
-    private $reward_owned;
+    private $reward_unities;
+    private $claimed_times;
 
-    public function getRewardOwned()
+    public function getClaimed_times()
     {
-        return $this->reward_owned;
+        return $this->claimed_times;
     }
 
-    public function setRewardOwned($reward_owned)
+    public function setClaimed_times($claimed_times)
     {
-        $this->reward_owned = $reward_owned;
+        $this->claimed_times = $claimed_times;
+
+        return $this;
+    }
+
+    public function getRewardUnities()
+    {
+        return $this->reward_unities;
+    }
+
+    public function setRewardUnities($reward_unities)
+    {
+        $this->reward_unities = $reward_unities;
     }
 
     public function getIdReward()
