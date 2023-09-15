@@ -55,8 +55,11 @@ class RewardController extends Controller
         $claimed_times = $reward->getClaimed_times();
         $reward_unities = $reward->getRewardUnities();
 
-        $reward->setRewardUnities($reward_unities - 1);
-        $reward->setClaimed_times($claimed_times + 1);
+        if($reward_unities > 0)
+        {
+            $reward->setRewardUnities($reward_unities - 1);
+            $reward->setClaimed_times($claimed_times + 1);
+        }
 
         try {
             $this->rewardDao->updateReward($reward);
@@ -94,8 +97,9 @@ class RewardController extends Controller
         }
 
         $userID = $_SESSION[SESSAO_USUARIO_ID];
+        $rule = $_GET['rule'];
 
-        $rewards = $this->rewardDao->findAllRewards($userID);
+        $rewards = $this->rewardDao->findAllRewards($userID, $rule);
 
         $response = array(
             'message' => 'Success',
