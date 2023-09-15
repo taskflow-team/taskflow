@@ -139,7 +139,11 @@ async function claimReward(event, user, reward){
             const responseData = await response.json();
 
             if (!response.ok || response.status == 404 || !responseData.ok) {
-                throw new Error('Failed to claim the Reward');
+                notificate(
+                    'error',
+                    'Erro',
+                    responseData.error
+                );
             }
 
             updateUserData();

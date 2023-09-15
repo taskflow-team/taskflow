@@ -64,8 +64,7 @@ class RewardController extends Controller
         {
             $response = array(
                 'ok' => false,
-                'message' => 'This reward does not have more units to claim.',
-                'error' => $e->getMessage()
+                'error' => 'This reward does not have more unities to claim.'
             );
             header('Content-Type: application/json');
             echo json_encode($response);
