@@ -60,6 +60,17 @@ class RewardController extends Controller
             $reward->setRewardUnities($reward_unities - 1);
             $reward->setClaimed_times($claimed_times + 1);
         }
+        else
+        {
+            $response = array(
+                'ok' => false,
+                'message' => 'This reward does not have more units to claim.',
+                'error' => $e->getMessage()
+            );
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit;
+        }
 
         try {
             $this->rewardDao->updateReward($reward);
