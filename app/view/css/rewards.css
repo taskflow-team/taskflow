@@ -14,7 +14,8 @@
     flex-direction: column;
     align-items: start;
     color: #FFF;
-    overflow: scroll
+    overflow: scroll;
+    overflow-x: hidden;
 }
 
 .rewards-bar #addRewardBtn{
