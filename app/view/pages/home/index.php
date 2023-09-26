@@ -1,11 +1,7 @@
 <?php
 require_once(__DIR__ . "/../../../service/TarefaService.php");
 require_once(__DIR__ . "/../../components/htmlHead/htmlHead.php");
-require_once(__DIR__ . "/../../../dao/TarefaDAO.php");
 require_once(__DIR__ . "/../../components/sideBar/sidebar.php");
-
-// Instanciar o DAO de tarefas
-$tarefaDAO = new TarefaDAO();
 
 // Pegando o id do usuário
 $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
@@ -15,7 +11,7 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/css/rewards.css">
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/pages/home/index.css">
 
-<!-- Exibir as tarefas -->
+<!-- Exibir as listas -->
 <div class="pseudo-body">
     <div class="top-content">
         <h2>Personal Lists</h2>

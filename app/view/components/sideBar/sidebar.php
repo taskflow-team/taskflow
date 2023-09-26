@@ -13,7 +13,7 @@ require_once(__DIR__ . "/../../../controller/AcessoController.php");
             <img class="icon" src="<?= BASEURL . '/view/assets/icons/home.png'?>" alt="home icon">
             Home
         </a>
-        <a href="#">
+        <a href="<?= BASEURL . '/controller/GrupoController.php?action=list'?>">
             <img class="icon" src="<?= BASEURL . '/view/assets/icons/groups.png'?>" alt="groups icon">
             Groups
         </a>

@@ -54,15 +54,16 @@ CREATE TABLE tb_tarefas (
 );
 
 -- Cria a tabela de associação entre usuários e grupos
-CREATE TABLE tb_usuarios_has_tb_grupos (
-    usuarios_idtb_usuarios INT,
-    grupos_idtb_grupos INT,
-    administradores TINYINT,
+CREATE TABLE tb_grupos_usuarios (
+    id_grupos_usuarios INT NOT NULL AUTO_INCREMENT,
+    id_grupo INT,
+    id_usuario INT,
+    administrador TINYINT,
     pontos INT,
-    recompensas VARCHAR(150),
-    PRIMARY KEY (usuarios_idtb_usuarios, grupos_idtb_grupos),
-    FOREIGN KEY (usuarios_idtb_usuarios) REFERENCES tb_usuarios (id_usuario),
-    FOREIGN KEY (grupos_idtb_grupos) REFERENCES tb_grupos (idtb_grupos)
+    PRIMARY KEY (id_grupos_usuarios),
+    FOREIGN KEY (id_grupo) REFERENCES tb_grupos (idtb_grupos),
+    FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario), 
+    CONSTRAINT uc_grupos_usuarios UNIQUE (id_usuario, id_grupo) 
 );
 
 -- Adiciona a chave estrangeira referenciando a tabela tb_listas
