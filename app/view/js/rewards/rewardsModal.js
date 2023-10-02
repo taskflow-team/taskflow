@@ -10,11 +10,17 @@ function rewardModal(userID, type, rewardId, rewardName, rewardCost){
     modal.className = 'modal create-reward-modal';
     modal.style.display = 'flex';
 
+    const title = document.createElement('h2');
+    title.innerText = 'Create a reward';
+
     const inputName = document.createElement('input');
     inputName.className = 'dark-input';
     inputName.id = 'reward-name-input';
     inputName.setAttribute('type', 'text');
     inputName.setAttribute('placeholder', 'Enter the reward name here');
+
+    const nameLabel = document.createElement('label');
+    nameLabel.innerText = 'Reward name';
 
     const inputCost = document.createElement('input');
     inputCost.className = 'dark-input';
@@ -22,11 +28,17 @@ function rewardModal(userID, type, rewardId, rewardName, rewardCost){
     inputCost.setAttribute('type', 'number');
     inputCost.setAttribute('placeholder', '0');
 
+    const unitiesLabel = document.createElement('label');
+    unitiesLabel.innerText = 'Reward unities';
+
     const inputUnities = document.createElement('input');
     inputUnities.className = 'dark-input';
     inputUnities.id = 'reward-unities-input';
     inputUnities.setAttribute('type', 'number');
     inputUnities.setAttribute('placeholder', '0');
+
+    const costLabel = document.createElement('label');
+    costLabel.innerText = 'Reward cost';
 
     const submitBtn = document.createElement('button');
     submitBtn.className = 'btn btn success';
@@ -44,9 +56,13 @@ function rewardModal(userID, type, rewardId, rewardName, rewardCost){
     closeIcon.className = 'fa-solid fa-x';
     closeIcon.addEventListener('click', closeModal);
 
+    modal.appendChild(title);
+    modal.appendChild(nameLabel);
     modal.appendChild(inputName);
-    modal.appendChild(inputCost);
+    modal.appendChild(unitiesLabel);
     modal.appendChild(inputUnities);
+    modal.appendChild(costLabel);
+    modal.appendChild(inputCost);
     modal.appendChild(submitBtn);
     modal.appendChild(closeIcon);
 

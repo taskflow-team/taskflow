@@ -8,7 +8,7 @@ async function fetchUserData() {
     };
 
     try {
-        const response = await fetch(BASE_URL + '/controller/UsuarioController.php?action=getUserData', reqConfigs);
+        const response = await fetch('UsuarioController.php?action=getUserData', reqConfigs);
         const responseData = await response.json();
 
         if (!response.ok || response.status == 404) {

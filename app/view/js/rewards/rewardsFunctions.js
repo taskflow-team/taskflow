@@ -54,7 +54,7 @@ async function renameReward(rewardID){
         const responseData = await response.json();
 
         if (!response.ok || response.status == 404 || !responseData.ok) {
-            throw new Error('Failed to create List');
+            throw new Error('Failed to rename List');
         }
 
         closeModal();
@@ -139,7 +139,11 @@ async function claimReward(event, user, reward){
             const responseData = await response.json();
 
             if (!response.ok || response.status == 404 || !responseData.ok) {
-                throw new Error('Failed to claim the Reward');
+                notificate(
+                    'error',
+                    'Erro',
+                    responseData.error
+                );
             }
 
             updateUserData();

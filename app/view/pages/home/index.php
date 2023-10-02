@@ -1,11 +1,7 @@
 <?php
 require_once(__DIR__ . "/../../../service/TarefaService.php");
 require_once(__DIR__ . "/../../components/htmlHead/htmlHead.php");
-require_once(__DIR__ . "/../../../dao/TarefaDAO.php");
 require_once(__DIR__ . "/../../components/sideBar/sidebar.php");
-
-// Instanciar o DAO de tarefas
-$tarefaDAO = new TarefaDAO();
 
 // Pegando o id do usuário
 $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
@@ -15,7 +11,7 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/css/rewards.css">
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/pages/home/index.css">
 
-<!-- Exibir as tarefas -->
+<!-- Exibir as listas -->
 <div class="pseudo-body">
     <div class="top-content">
         <h2>Personal Lists</h2>
@@ -23,7 +19,7 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
         <div class="top-content-buttons" >
             <div class="emeralds-section top-button">
                 <img src="<?= BASEURL . '/view/assets/icons/emerald.png'?>" alt="Emerald icon">
-                <span id="emeralds-holder" ></span>
+                <span id="emeralds-holder"></span>
                 <strong>Emeralds</strong>
             </div>
 
@@ -45,8 +41,8 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
     <button id="addRewardBtn" class="btn btn-success">Add Reward</button>
 
     <div class="rewards-filters">
-        <button class="btn btn-success active" >Available</button>
-        <button class="btn btn-success" >Unavalible</button>
+        <button class="btn-filter-available btn btn-success active">Available</button>
+        <button class="btn-filter-unavalible btn btn-success">Unavalible</button>
     </div>
 
     <div class="rewards-holder" >

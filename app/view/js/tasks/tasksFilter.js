@@ -218,10 +218,13 @@ function updateTaskList(tasks) {
         priorityP.textContent = 'Priority: ' + priorityMap[prioridade];
         const difficultyP = document.createElement('p');
         difficultyP.textContent = 'Difficulty: ' + difficultyMap[dificuldade];
+        const emeraldsP = document.createElement('p');
+        emeraldsP.textContent = 'Emeralds: ' + valor_pontos;
 
         moreInfoDiv.appendChild(creationDateP);
         moreInfoDiv.appendChild(priorityP);
         moreInfoDiv.appendChild(difficultyP);
+        moreInfoDiv.appendChild(emeraldsP);
 
         liElement.appendChild(moreInfoDiv);
 

@@ -157,13 +157,20 @@
 }
 
 .create-reward-modal{
-    height: 350px;
+    height: 600px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
+    color: #FFF;
+    top: 200px;
 }
 
 .create-reward-modal .dark-input{
     width: 100%;
+}
+
+.create-reward-modal label{
+    margin: 0;
+    padding: 0;
 }

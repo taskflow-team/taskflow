@@ -1,4 +1,4 @@
-<div id="taskModal" class="modal">
+<div id="taskModal" class="task-modal">
     <div class="modal-content">
         <span class="close">&times;</span>
         <h2>Edit Task</h2>
@@ -9,26 +9,30 @@
             <textarea class="form-control dark-input" id="taskDescription" name="descricao" placeholder="Enter task description"></textarea>
 
             <div class="last-row" >
-                <fieldset class="element">
-                    <label>Task Difficulty</label>
-                    <div class="radios">
-                        <input title="easy" class="radio-square green" id="difficulty1" name="dificuldade" type="radio" value="1"/>
-                        <input title="medium" class="radio-square yellow" id="difficulty2" name="dificuldade" type="radio" value="2"/>
-                        <input title="hard" class="radio-square red" id="difficulty3" name="dificuldade" type="radio" value="3"/>
-                    </div>
-                </fieldset>
-                <fieldset class="element">
-                    <label>Task Priority</label>
-                    <div class="radios">
-                        <input title="low" class="radio-square green" id="priority1" name="prioridade" type="radio" value="1"/>
-                        <input title="medium" class="radio-square yellow" id="priority2" name="prioridade" type="radio" value="2"/>
-                        <input title="high" class="radio-square red" id="priority3" name="prioridade" type="radio" value="3"/>
-                    </div>
-                </fieldset>
+                <div class="squares">
+                    <fieldset class="element">
+                        <label>Task Difficulty</label>
+                        <div class="radios">
+                            <input title="easy" class="radio-square green" id="difficulty1" name="dificuldade" type="radio" value="1"/>
+                            <input title="medium" class="radio-square yellow" id="difficulty2" name="dificuldade" type="radio" value="2"/>
+                            <input title="hard" class="radio-square red" id="difficulty3" name="dificuldade" type="radio" value="3"/>
+                        </div>
+                    </fieldset>
+
+                    <fieldset class="element">
+                        <label>Task Priority</label>
+                        <div class="radios">
+                            <input title="low" class="radio-square green" id="priority1" name="prioridade" type="radio" value="1"/>
+                            <input title="medium" class="radio-square yellow" id="priority2" name="prioridade" type="radio" value="2"/>
+                            <input title="high" class="radio-square red" id="priority3" name="prioridade" type="radio" value="3"/>
+                        </div>
+                    </fieldset>
+                </div>
+
                 <fieldset class="points-holder">
-                    <label for="valor_pontos">Task Points</label>
-                    <input class="dark-input" type="number" id="taskPoints" name="valor_pontos" value="0"/>
-                </fieldset>
+                        <label for="valor_pontos">Task Points</label>
+                        <input class="dark-input" type="number" id="taskPoints" name="valor_pontos" value="0"/>
+                    </fieldset>
                 <fieldset class="element">
                     <label>Task List</label>
                     <select class="dark-input" name="idtb_listas" id="taskListSelection">

@@ -1,4 +1,4 @@
-.modal {
+.task-modal {
     display: none;
     position: fixed; 
     z-index: 1; 
@@ -9,7 +9,7 @@
     background-color: rgba(0, 0, 0, 0.5);
 }
 
-.modal.show {
+.task-modal.show {
     display: block !important;
     animation: blur-in .3s forwards, background-in .3s forwards !important;
 }
@@ -32,18 +32,18 @@
     }
 }
 
-.modal .modal-content {
+.task-modal .modal-content {
     background-color: #2D2D2D;
     margin: 15% auto; 
     padding: 40px;
     width: 50%; 
-    left: 100px;
-    top: -100px;
+    left: 0;
+    top: -200px !important;
     border-radius: 13px;
     border: 0px;
 }
 
-.modal.show .modal-content {
+.task-modal.show .modal-content {
     animation: slide-in .3s forwards, opacity-in .3s forwards !important;
 }
 
@@ -152,11 +152,25 @@
 }
 
 #editTaskBtn {
+    width: 100px;
     font-weight: 600;
-    color: #FFFFFF;
     transition: all 0.2s ease;
 }
 
 #editTaskBtn:hover {
     transform: scale(1.01);
+}
+
+.squares{
+    display: flex;
+    align-items: center;
+}
+
+.squares .element{
+    margin-right: 30px;
+}
+
+#taskListSelection{
+    padding-top: 0;
+    padding-bottom: 0;
 }

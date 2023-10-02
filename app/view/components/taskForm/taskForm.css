@@ -129,12 +129,12 @@ input[type=number] {
 }
 
 .task-form .points-holder input{
-    width: 60px;
+    width: 120px;
     height: 40px;
     margin: 0;
-    padding: 0;
-    border-radius: 20px;
-    text-align: center;
+    padding: 0 12px;
+    border-radius: 8px;
+    text-align: left;
 }
 
 .task-form #submitTaskButton{

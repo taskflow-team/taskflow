@@ -31,7 +31,7 @@
             </fieldset>
 
             <fieldset class="points-holder" >
-                <label for="valor_pontos">Task Points</label>
+                <label for="valor_pontos">Emeralds</label>
                 <input
                     class="dark-input"
                     type="number" id="valor_pontos"

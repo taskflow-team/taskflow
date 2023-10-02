@@ -11,11 +11,23 @@ include_once(__DIR__ . "/../model/Reward.php");
 
 class RewardDAO
 {
-    public function findAllRewards($idUsuario)
+    public function findAllRewards($idUsuario, $rule)
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM tb_rewards r WHERE r.id_user = ?";
+        if($rule == "available")
+        {
+            $sql = "SELECT * FROM tb_rewards r WHERE r.id_user = ? AND reward_unities > 0";
+        }   
+        else if($rule == "unavalible")
+        {
+            $rule = 0;
+            $sql = "SELECT * FROM tb_rewards r WHERE r.id_user = ? AND reward_unities = " . $rule;
+        }
+        else
+        {
+            $sql = "SELECT * FROM tb_rewards r WHERE r.id_user = ?";
+        }
         $stm = $conn->prepare($sql);
         $stm->execute([$idUsuario]);
         $result = $stm->fetchAll();

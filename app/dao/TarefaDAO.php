@@ -150,7 +150,7 @@ class TarefaDAO
             $tarefa->setDificuldade($row["dificuldade"]);
             $tarefa->setPrioridade($row["prioridade"]);
             $tarefa->setValor_pontos($row["valor_pontos"]);
-            $date_criacao = new DateTime($row["data_criacao"]);
+            $date_criacao = new DateTime($row["data_criacao"] ?? '');
             $tarefa->setData_criacao($date_criacao);
             $tarefa->setConcluida($row["concluida"]);
             $tarefa->setIdtb_listas($row["idtb_listas"]);

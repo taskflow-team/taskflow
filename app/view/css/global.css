@@ -152,6 +152,10 @@ body{
     animation: slide-out 0.8s forwards;
 }
 
+.modal h2{
+    color: #fff;
+}
+
 @keyframes slide-out {
     from {
         top: 31%;
