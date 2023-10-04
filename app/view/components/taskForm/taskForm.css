@@ -140,3 +140,7 @@ input[type=number] {
 .task-form #submitTaskButton{
     font-weight: 600;
 }
+
+#descricao{
+    height: 120px;
+}
