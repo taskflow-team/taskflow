@@ -19,6 +19,12 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
         <button id="btn-create-group">Criar grupo</button>
         <button id="btn-join-group">Entrar em um grupo</button>
     </div>
+
+    <div class="groups-holder">
+
+    </div>  
 </div>
 
 <script type="module" src="<?= BASEURL; ?>/view/js/groups/groupsModal.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/groups/groupsFunctions.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/groups/groupsFilters.js"></script>

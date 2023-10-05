@@ -19,7 +19,7 @@ class GrupoController extends Controller
         $this->grupoDao = new GrupoDAO();
         $this->grupoService = new GrupoService();
 
-        $this->setActionDefault("list");
+        $this->setActionDefault("create");
 
         $this->handleAction();
     }
@@ -27,7 +27,7 @@ class GrupoController extends Controller
     protected function create()
     {
         $dados["id_grupo"] = 0;
-        $this->loadView("group/group.php", $dados, "", "");
+        $this->loadView("pages/group/group.php", $dados, "", "");
     }
 
     protected function list()
@@ -37,7 +37,37 @@ class GrupoController extends Controller
             exit; // Se não estiver logado, encerra a execução
         }
 
-        $this->loadView("/pages/group/group.php", [], "");
+        // Obtém o ID do usuário da sessão
+        $userID = $_SESSION[SESSAO_USUARIO_ID];
+
+        // Obtém todas as grupos
+        $grupos = $this->grupoDao->getUserGrupos($userID);
+
+        // Cria um array de resposta contendo a mensagem de sucesso e os dados das grupos
+        $response = array(
+            'message' => 'Success',
+            'data' => array_map(function ($grupo) {
+                // Converte o objeto grupo em um objeto anônimo contendo apenas as propriedades necessárias
+                return (object) array(
+                    'idtb_grupo' => $grupo->getIdtbGrupo(),
+                    'codigo_convite' => $grupo->getCodigo_convite(),
+                    'nome' => $grupo->getNome(),
+                    'id_usuario' => $grupo->getId_usuario(),
+                    'id_grupo' => $grupo->getId_grupo(),
+                    'administrador' => $grupo->getAdministrador(),
+                    'pontos' => $grupo->getPontos(),
+                );
+            }, $grupos)
+        );
+
+        // Limpa qualquer saída anterior antes de definir os cabeçalhos JSON
+        ob_clean();
+
+        // Define o cabeçalho para indicar que a resposta é um JSON
+        header('Content-Type: application/json');
+
+        // Imprime a resposta em formato JSON
+        echo json_encode($response);
     }
 
     protected function rename()

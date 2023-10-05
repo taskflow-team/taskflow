@@ -9,20 +9,27 @@ include_once(__DIR__ . "/../model/Grupo.php");
 
 class GrupoDAO {
 
-    private const SQL_USUARIO_GRUPO = "SELECT tb_usuario.id_usuario FROM tb_usuario INNER JOIN tb_grupos_usuarios ON tb_usuario.id_usuario=tb_grupos_usuarios.id_usuario";
+    private const SQL_USUARIO_GRUPO = "SELECT tb_usuarios.id_usuario FROM tb_usuarios INNER JOIN tb_grupos_usuarios ON tb_usuarios.id_usuario=tb_grupos_usuarios.id_usuario";
     private const SQL_GRUPOS = "SELECT tb_grupo.id_grupo FROM tb_grupos INNER JOIN tb_grupos_usuarios ON tb_grupo.id_grupo=tb_grupos_usuarios.id_grupo";
 
     public function getUserGrupos($user_id)
     {
         $conn = Connection::getConn();
-
-        $sql = GrupoDAO::SQL_USUARIO_GRUPO . " WHERE id_usuario = " . $user_id . " ;";
+    
+        $sql = "SELECT g.*, gu.administrador, gu.pontos, gu.id_grupo
+                FROM tb_grupos g
+                INNER JOIN tb_grupos_usuarios gu ON g.idtb_grupos = gu.id_grupo
+                WHERE gu.id_usuario = :user_id";
+    
         $stm = $conn->prepare($sql);
+        $stm->bindParam(':user_id', $user_id, PDO::PARAM_INT);
         $stm->execute();
-        $result = $stm->fetchAll();
-
-        return $this->mapGrupos($result);
-    }
+        $result = $stm->fetchAll(PDO::FETCH_ASSOC);
+    
+        $grupos = $this->mapGrupos($result);
+    
+        return $grupos;
+    } 
 
     public function findByIdGrupo($id)
     {
@@ -41,7 +48,7 @@ class GrupoDAO {
             return null;
         }
 
-        die("ListaDAO.findByIdGrupo() - Error: more than one group found.");
+        die("GrupoDAO.findByIdGrupo() - Error: more than one group found.");
     }
 
     public function insertGrupo(Grupo $grupo)
