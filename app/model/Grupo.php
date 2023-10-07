@@ -163,7 +163,7 @@ Class Grupo
     /**
      * Set the value of idtb_grupo
      */
-    public function setIdtbGrupo($idtb_grupo): self
+    public function setIdtbGrupo($idtb_grupo)
     {
         $this->idtb_grupo = $idtb_grupo;
 

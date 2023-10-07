@@ -10,10 +10,10 @@ include_once(__DIR__ . "/../model/Grupo.php");
 class GrupoDAO {
 
     private const SQL_USUARIO_GRUPO = "SELECT tb_usuarios.id_usuario FROM tb_usuarios INNER JOIN tb_grupos_usuarios ON tb_usuarios.id_usuario=tb_grupos_usuarios.id_usuario";
-    private const SQL_GRUPOS = "SELECT tb_grupo.id_grupo FROM tb_grupos INNER JOIN tb_grupos_usuarios ON tb_grupo.id_grupo=tb_grupos_usuarios.id_grupo";
+    private const SQL_GRUPOS = "SELECT tb_grupos.id_grupo FROM tb_grupos INNER JOIN tb_grupos_usuarios ON tb_grupos.id_grupo=tb_grupos_usuarios.id_grupo";
 
     public function getUserGrupos($user_id)
-    {
+    {   	
         $conn = Connection::getConn();
     
         $sql = "SELECT g.*, gu.administrador, gu.pontos, gu.id_grupo
@@ -34,32 +34,37 @@ class GrupoDAO {
     public function findByIdGrupo($id)
     {
         $conn = Connection::getConn();
-
-        $sql = GrupoDAO::SQL_GRUPOS . " WHERE id_grupo = ?";
+    
+        $sql = "SELECT * FROM tb_grupos WHERE idtb_grupos = ?";
         $stm = $conn->prepare($sql);
         $stm->execute([$id]);
         $result = $stm->fetchAll();
-
+    
         $grupos = $this->mapGrupos($result);
-
+    
         if (count($grupos) == 1) {
             return $grupos[0];
         } elseif (count($grupos) == 0) {
             return null;
         }
-
+    
         die("GrupoDAO.findByIdGrupo() - Error: more than one group found.");
     }
 
     public function insertGrupo(Grupo $grupo)
     {
         $conn = Connection::getConn();
-
+    
         $sql = "INSERT INTO tb_grupos (codigo_convite, nome) VALUES (:codigo_convite, :nome)";
         $stm = $conn->prepare($sql);
         $stm->bindValue(":codigo_convite", $grupo->getCodigo_convite());
         $stm->bindValue(":nome", $grupo->getNome());
         $stm->execute();
+    
+        // Set the ID of the newly inserted group in the Grupo object
+        $grupo->setIdtbGrupo($conn->lastInsertId());
+        
+        return $grupo; // Return the modified Grupo object with the ID set
     }
 
     public function findGroupByCode($groupCode)
@@ -136,23 +141,46 @@ class GrupoDAO {
         $stm->execute();
     }
 
-
-    private function mapGrupos($result) {
+    private function mapGrupos($result)
+    {
         $grupos = array();
     
         foreach ($result as $row) {
             $grupo = new Grupo();
-            $grupo->setIdtbGrupo($row["idtb_grupo"]);
-            $grupo->setId_grupo($row["id_grupo"]);
-            $grupo->setId_usuario($row["id_usuario"]);
-            $grupo->setAdministrador($row["administrador"]);
-            $grupo->setPontos($row["pontos"]);
-            $grupo->setCodigo_convite($row["codigo_convite"]);
-            $grupo->setNome($row["nome"]);
+    
+            if (isset($row['idtb_grupo'])) {
+                $grupo->setIdtbGrupo($row['idtb_grupo']);
+            }
+    
+            if (isset($row['id_grupo'])) {
+                $grupo->setId_grupo($row['id_grupo']);
+            }
+    
+            if (isset($row['id_usuario'])) {
+                $grupo->setId_usuario($row['id_usuario']);
+            }
+    
+            if (isset($row['administrador'])) {
+                $grupo->setAdministrador($row['administrador']);
+            }
+    
+            if (isset($row['pontos'])) {
+                $grupo->setPontos($row['pontos']);
+            }
+    
+            if (isset($row['codigo_convite'])) {
+                $grupo->setCodigo_convite($row['codigo_convite']);
+            }
+    
+            if (isset($row['nome'])) {
+                $grupo->setNome($row['nome']);
+            }
+    
             array_push($grupos, $grupo);
         }
     
         return $grupos;
     }
+    
     
 }

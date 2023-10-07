@@ -1,3 +1,4 @@
+import { fetchGroups } from "./groupsFilters.js";
 import { closeModal } from "./groupsModal.js";
 import notificate from "../notification.js";
 
@@ -37,7 +38,7 @@ async function createGroup(userID){
         }
 
         closeModal();
-        // fetchRewards();
+        fetchGroups();
     } catch (error) {
         notificate('error', 'Error', error.message);
     }
@@ -77,7 +78,36 @@ async function joinGroup(userID){
         }
 
         closeModal();
-        // fetchRewards();
+        fetchGroups();
+    } catch (error) {
+        notificate('error', 'Error', error.message);
+    }
+}
+
+async function renameGroup(groupId){
+    let groupName = document.querySelector('#group-name-input').value;
+
+    try {
+        const reqConfigs = {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                groupId: groupId,
+                groupName: groupName
+            })
+        };
+
+        const response = await fetch('GrupoController.php?action=rename', reqConfigs);
+        const responseData = await response.json();
+
+        if (!response.ok || response.status == 404 || !responseData.ok) {
+            throw new Error('Failed to create List');
+        }
+
+        closeModal();
+        fetchGroups();
     } catch (error) {
         notificate('error', 'Error', error.message);
     }
@@ -97,5 +127,6 @@ function randomString() {
 
 export {
     createGroup,
-    joinGroup
+    joinGroup,
+    renameGroup
 }

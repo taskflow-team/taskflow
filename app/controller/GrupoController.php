@@ -84,6 +84,50 @@ class GrupoController extends Controller
             echo json_encode($response);
             exit;
         }
+
+        $groupId = $requestData['groupId'];
+        $groupName = $requestData['groupName'];
+
+        $grupo = $this->grupoDao->findByIdGrupo($groupId);
+
+        $grupo->setNome($groupName);
+        $grupo->setIdtbGrupo($groupId);
+
+        $erros = $this->grupoService->validarDados($grupo);
+        if (empty($erros)) {
+            try {
+                $this->grupoDao->updateGrupo($grupo);
+
+                $response = array(
+                    'ok' => true,
+                    'message' => 'Grupo atualizada com sucesso.'
+                );
+
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                exit;
+            } catch (PDOException $e) {
+                $response = array(
+                    'ok' => false,
+                    'message' => 'Ocorreu um erro durante a requisição',
+                    'error' => $e->getMessage()
+                );
+
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                exit;
+            }
+        } else {
+            $response = array(
+                'ok' => true,
+                'message' => 'Ocorreram erros de validação',
+                'errors' => $erros
+            );
+
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit;
+        }
     }
 
     protected function join()

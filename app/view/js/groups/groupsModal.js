@@ -1,13 +1,13 @@
 import fetchUserData from "../user/fetchUserData.js";
-import { createGroup, joinGroup } from './groupsFunctions.js';
+import { createGroup, joinGroup, renameGroup } from './groupsFunctions.js';
 import notificate from "../notification.js";
 
-function groupModal(userID, type){
+function groupModal(userID, type, group){
     const modalBg = document.createElement('div');
     modalBg.className = 'modal-bg';
 
     const modal = document.createElement('div');
-    modal.className = 'modal create-reward-modal';
+    modal.className = 'modal create-group-modal';
     modal.style.display = 'flex';
 
     const input = document.createElement('input');
@@ -40,12 +40,12 @@ function groupModal(userID, type){
         submitBtn.innerText = "Create"
 
         submitBtn.addEventListener('click', () => createGroup(userID));
-    } else {
-        input.value = rewardName;
+    } else if(type == 'rename') {
+        input.value = group.nome;
 
         submitBtn.innerText = "Rename"
 
-        // submitBtn.addEventListener('click', () => renameReward(rewardId));
+        submitBtn.addEventListener('click', () => renameGroup(group.id_grupo));
     }
 
     const closeIcon = document.createElement('i');

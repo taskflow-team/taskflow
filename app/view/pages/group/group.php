@@ -8,7 +8,11 @@ require_once(__DIR__ . "/../../components/sideBar/sidebar.php");
 $grupoDAO = new GrupoDAO();
 
 // Pegando o id do usuário
-$id_usuario = $_SESSION[SESSAO_USUARIO_ID];
+$id_usuario = "(Sessão expirada)";
+if (isset($_SESSION[SESSAO_USUARIO_NOME]))
+{
+    $id_usuario = $_SESSION[SESSAO_USUARIO_NOME];
+}
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/pages/group/group.css">

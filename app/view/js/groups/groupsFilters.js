@@ -1,3 +1,6 @@
+import { groupModal } from "./groupsModal.js";
+import notificate from "../notification.js";
+
 const groupsHolder = document.querySelector('.groups-holder');
 
 async function fetchGroups(){
@@ -35,6 +38,24 @@ function updateGroups(groups) {
         const groupElement = document.createElement('p');
         groupElement.textContent = `Invitation Code: ${codigo_convite}, Name: ${nome}, Admin: ${administrador}, Points: ${pontos}`;
 
+        const renameBtn = document.createElement('button')
+        renameBtn.id = 'renameBtn';
+        renameBtn.innerText = 'Rename';
+        renameBtn.addEventListener('click', () => groupModal(id_usuario, 'rename', group));
+
+        const deleteBtn = document.createElement('button');
+        deleteBtn.id = 'deleteBtn';
+        deleteBtn.dataset.id = id_grupo;
+        deleteBtn.innerText = 'Delete';
+        // deleteBtn.addEventListener('click', deleteGroup);
+
+        groupElement.appendChild(renameBtn);
+        groupElement.appendChild(deleteBtn);
+
         groupsHolder.appendChild(groupElement);
     });
+}
+
+export {
+    fetchGroups,
 }
