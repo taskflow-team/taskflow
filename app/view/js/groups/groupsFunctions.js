@@ -37,6 +37,7 @@ async function createGroup(userID){
             );
         }
 
+        joinGroup(userID, groupCode, true)
         closeModal();
         fetchGroups();
     } catch (error) {
@@ -44,9 +45,7 @@ async function createGroup(userID){
     }
 }
 
-async function joinGroup(userID){
-    let groupCode = document.querySelector('#group-code-input').value;
-
+async function joinGroup(userID, groupCode, isAdministrator){
     try {
         const reqConfigs = {
             method: "POST",
@@ -55,7 +54,8 @@ async function joinGroup(userID){
             },
             body: JSON.stringify({
                 groupCode: groupCode,
-                userID: userID
+                userID: userID,
+                isAdministrator: isAdministrator
             })
         };
 

@@ -137,6 +137,7 @@ class GrupoController extends Controller
     
         $groupCode = $requestData['groupCode'];
         $userID = $requestData['userID'];
+        $isAdministrator = $requestData['isAdministrator'];
     
         try {
             // Check if the user is already a member of the group
@@ -151,7 +152,7 @@ class GrupoController extends Controller
                 exit;
             }
     
-            // Validate groupCode (check if it exists in your database)
+            // Validate groupCode
             $group = $this->grupoDao->findGroupByCode($groupCode);
     
             if (!$group) {
@@ -165,9 +166,7 @@ class GrupoController extends Controller
                 exit;
             }
     
-            // Add the user to the group using your DAO's joinGroup method
-            // You'll need to implement this method in your GrupoDAO
-            $result = $this->grupoDao->joinGroup($group->getId_grupo(), $userID);
+            $result = $this->grupoDao->joinGroup($group->getId_grupo(), $userID, $isAdministrator);
     
             if ($result) {
                 // Successfully joined the group

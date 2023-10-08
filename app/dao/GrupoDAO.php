@@ -80,15 +80,13 @@ class GrupoDAO {
         return null;
     }
     
-    public function joinGroup($groupID, $userID)
+    public function joinGroup($groupID, $userID, $administrador)
     {
         $conn = Connection::getConn();
     
-        $sql = "INSERT INTO tb_grupos_usuarios (id_grupo, id_usuario, administrador, pontos) VALUES (?, ?, ?, ?)";
+        $sql = "INSERT INTO tb_grupos_usuarios (id_grupo, id_usuario, administrador) VALUES (?, ?, ?)";
         $stm = $conn->prepare($sql);
-        $administrador = 0;
-        $pontos = 0;
-        $stm->execute([$groupID, $userID, $administrador, $pontos]);
+        $stm->execute([$groupID, $userID, $administrador]);
     
         return $stm->rowCount() > 0;
     }

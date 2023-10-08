@@ -29,7 +29,7 @@ function groupModal(userID, type, group){
 
         submitBtn.innerText = "Join"
 
-        submitBtn.addEventListener('click', () => joinGroup(userID));
+        submitBtn.addEventListener('click', () => joinGroup(userID, document.querySelector('#group-code-input').value,true));
     }
     else if(type == 'create'){
         input.className = 'dark-input';
