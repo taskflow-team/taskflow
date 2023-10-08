@@ -113,6 +113,28 @@ async function renameGroup(groupId){
     }
 }
 
+async function deleteGroup(event){
+    const deleteBtn = event.target;
+    const groupId = deleteBtn.dataset.id;
+
+    try {
+        const response = await fetch(`GrupoController.php?action=delete&id=${groupId}`, {
+            method: "DELETE",
+        });
+
+        if (!response.ok) {
+            throw new Error('The request to the server has failed');
+        }
+
+        const responseData =  await response.json();
+        notificate('success', 'Success', responseData.message)
+
+        fetchGroups();
+    } catch (error) {
+        notificate('error', 'Error', error.message);
+    }
+}
+
 function randomString() {
     var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
     var string_length = 8;
@@ -128,5 +150,6 @@ function randomString() {
 export {
     createGroup,
     joinGroup,
-    renameGroup
+    renameGroup,
+    deleteGroup
 }

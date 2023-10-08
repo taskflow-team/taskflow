@@ -1,4 +1,5 @@
 import { groupModal } from "./groupsModal.js";
+import { deleteGroup } from "./groupsFunctions.js";
 import notificate from "../notification.js";
 
 const groupsHolder = document.querySelector('.groups-holder');
@@ -47,7 +48,7 @@ function updateGroups(groups) {
         deleteBtn.id = 'deleteBtn';
         deleteBtn.dataset.id = id_grupo;
         deleteBtn.innerText = 'Delete';
-        // deleteBtn.addEventListener('click', deleteGroup);
+        deleteBtn.addEventListener('click', deleteGroup);
 
         groupElement.appendChild(renameBtn);
         groupElement.appendChild(deleteBtn);

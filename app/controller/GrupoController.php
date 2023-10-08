@@ -269,6 +269,11 @@ class GrupoController extends Controller
             exit;
         }
 
+        $groupId = $_GET['id'];
+
+        // Deleta o grupo
+        $this->grupoDao->deleteGrupo($groupId);
+
         // Envia a resposta como JSON
         $response = array(
             'message' => 'Grupo deletada com sucesso.',
