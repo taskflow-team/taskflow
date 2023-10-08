@@ -54,17 +54,12 @@ class GrupoDAO {
     public function insertGrupo(Grupo $grupo)
     {
         $conn = Connection::getConn();
-    
+
         $sql = "INSERT INTO tb_grupos (codigo_convite, nome) VALUES (:codigo_convite, :nome)";
         $stm = $conn->prepare($sql);
         $stm->bindValue(":codigo_convite", $grupo->getCodigo_convite());
         $stm->bindValue(":nome", $grupo->getNome());
         $stm->execute();
-    
-        // Set the ID of the newly inserted group in the Grupo object
-        $grupo->setIdtbGrupo($conn->lastInsertId());
-        
-        return $grupo; // Return the modified Grupo object with the ID set
     }
 
     public function findGroupByCode($groupCode)
@@ -148,8 +143,8 @@ class GrupoDAO {
         foreach ($result as $row) {
             $grupo = new Grupo();
     
-            if (isset($row['idtb_grupo'])) {
-                $grupo->setIdtbGrupo($row['idtb_grupo']);
+            if (isset($row['idtb_grupos'])) {
+                $grupo->setIdtbGrupo($row['idtb_grupos']);
             }
     
             if (isset($row['id_grupo'])) {

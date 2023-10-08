@@ -91,7 +91,6 @@ class GrupoController extends Controller
         $grupo = $this->grupoDao->findByIdGrupo($groupId);
 
         $grupo->setNome($groupName);
-        $grupo->setIdtbGrupo($groupId);
 
         $erros = $this->grupoService->validarDados($grupo);
         if (empty($erros)) {

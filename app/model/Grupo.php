@@ -162,6 +162,8 @@ Class Grupo
 
     /**
      * Set the value of idtb_grupo
+     * 
+     * @return  self
      */
     public function setIdtbGrupo($idtb_grupo)
     {
