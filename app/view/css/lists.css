@@ -1,7 +1,6 @@
 .pseudo-body {
     padding: 20px 30px;
     background-color: #262626; 
-    cursor: pointer;
     margin-top: 50px;
 }
 
@@ -15,6 +14,7 @@
     background-color: #1A1A1A; 
     border-radius: 10px;
     padding: 20px; 
+    cursor: pointer;
     transition: transform 0.4s ease-in-out; 
 }
 
@@ -31,6 +31,7 @@
 .create-list {
     font-size: 45px;
     color: #ffffff; 
+    cursor: pointer;
     transition: 0.4s ease; 
 }
 
@@ -59,33 +60,51 @@
 
 .list-card .actions-div {
     background-color: #1A1A1A; 
-    gap: 10px; 
-    padding: 15px; 
+    margin-left: 25px;
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: nowrap; 
 }
 
-.list-card .actions-div button{
+.list-card .buttons-div{
+    margin-top: 50px;
+}
+
+.list-card .actions-div .rename-btn{
     padding: 10px 25px;
     background-color: #141414;
     border: none;
-    color: #FFF;
+    color: #4DD167;
+    cursor: pointer;
     text-align: left;
 }
 
-.list-card .actions-div .delete-btn{
-    height: 100%;
+.list-card .actions-div .rename-btn:hover{
+    background-color: #4DD167;
+    color: #141414;
+}
+
+.list-card .actions-div .delete-btn {
     width: fit-content;
-    padding: 10px 25px 10px !important;
     color: #FF6161;
-    outline:none;
+    background-color: #141414;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    text-align: left;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
-.list-card .actions-div .confirm-btn{
-    height: 100%;
-    padding: 10px 25px;
-    width: fit-content;
+.list-card .actions-div .delete-btn.hover-enabled:hover {
+    color: #141414;
+    background-color: #FF6161;
+}
+
+.list-card .actions-div .confirm-btn {
+    padding: 13px 25px;
     color: #4DD167;
+    background-color: #141414;
 }
 
 .list-card .actions-div .confirm-btn:hover{
@@ -94,10 +113,11 @@
 }
 
 .list-card .actions-div .cancel-btn{
-    padding: 10px 25px;
-    width: fit-content;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
+    padding: 13px 25px 13px 25px;
+    background-color: #141414;
+    color: #FF6161;
 }
 
 .list-card .actions-div .cancel-btn:hover{

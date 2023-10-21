@@ -71,6 +71,9 @@ function updateLists(lists){
         actionsDiv.style.visibility = 'hidden';
         createActionsDiv(list, actionsDiv);
 
+        const buttonsDiv = document.createElement('div');
+        buttonsDiv.className = 'buttons-div';
+
         leftInfo.appendChild(barsIcon);
         infoDiv.appendChild(leftInfo);
         infoDiv.appendChild(rigthInfo);
@@ -81,11 +84,13 @@ function updateLists(lists){
             window.location.href = `../view/pages/tasks/index.php?listId=${list.id_lista}&listName=${list.nome_lista}`;
         });
 
+        buttonsDiv.appendChild(dotsIcon);
+        buttonsDiv.appendChild(actionsDiv);
+
         listCard.appendChild(cardTitle);
         listCard.appendChild(infoDiv);
-        listCard.appendChild(actionsDiv);
         listCard.appendChild(listCardBody);
-        listCard.appendChild(dotsIcon);
+        listCard.appendChild(buttonsDiv);
 
         listsHolder.appendChild(listCard);
     });
@@ -144,13 +149,14 @@ function createActionsDiv(list, actionsDiv) {
 
     const deleteBtn = document.createElement('button');
     deleteBtn.innerText = 'Delete';
-    deleteBtn.className = 'delete-btn';
+    deleteBtn.className = 'delete-btn hover-enabled';
+    deleteBtn.style.padding = '10px 25px';
     deleteBtn.addEventListener('click', deleteList);
-    deleteBtn.style.padding = '0 25px 10px 25px';
 
     actionsDiv.appendChild(renameBtn);
     actionsDiv.appendChild(deleteBtn);
 }
+
 
 function showActions(actionsDiv) {
     actionsDiv.style.visibility = actionsDiv.style.visibility == 'visible' ? 'hidden' : 'visible';

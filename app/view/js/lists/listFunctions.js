@@ -65,9 +65,11 @@ async function deleteList(event){
     const deleteBtn = event.target;
     const listID = deleteBtn.parentNode.parentNode.id;
 
-    deleteBtn.style.padding = '0';
+    deleteBtn.style.padding = '0px';
 
     deleteBtn.innerText = '';
+
+    deleteBtn.classList.remove('hover-enabled');
 
     const confirmBtn = document.createElement('span');
     confirmBtn.innerText = 'Confirm';
@@ -106,7 +108,8 @@ async function deleteList(event){
     cancelBtn.addEventListener('click', () => {
         deleteBtn.innerHtml = '';
         deleteBtn.innerText = 'Delete';
-        deleteBtn.style.padding = '0 25px 10px 25px';
+        deleteBtn.style.padding = '10px 25px';
+        deleteBtn.classList.add('hover-enabled');
     });
 }
 
