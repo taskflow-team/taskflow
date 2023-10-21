@@ -42,6 +42,9 @@ function updateLists(lists){
         const listCard = document.createElement('div');
         listCard.className = 'list-card';
         listCard.id = list.id_lista;
+        listCard.addEventListener('click', () => {
+            window.location.href = `../view/pages/tasks/index.php?listId=${list.id_lista}&listName=${list.nome_lista}`;
+        });
 
         const cardTitle = document.createElement('h3');
         cardTitle.innerText = list.nome_lista;
@@ -78,20 +81,13 @@ function updateLists(lists){
         infoDiv.appendChild(leftInfo);
         infoDiv.appendChild(rigthInfo);
 
-        const listCardBody = document.createElement('div');
-        listCardBody.className = 'list-card-body';
-        listCardBody.addEventListener('click', () => {
-            window.location.href = `../view/pages/tasks/index.php?listId=${list.id_lista}&listName=${list.nome_lista}`;
-        });
-
         buttonsDiv.appendChild(dotsIcon);
         buttonsDiv.appendChild(actionsDiv);
 
         listCard.appendChild(cardTitle);
         listCard.appendChild(infoDiv);
-        listCard.appendChild(listCardBody);
         listCard.appendChild(buttonsDiv);
-
+    
         listsHolder.appendChild(listCard);
     });
 }
@@ -145,13 +141,20 @@ function createActionsDiv(list, actionsDiv) {
     const renameBtn = document.createElement('button');
     renameBtn.innerText = 'Rename';
     renameBtn.className = 'rename-btn';
-    renameBtn.addEventListener('click', () => listModal('edit', list.id_lista, list.nome_lista));
+    renameBtn.addEventListener('click', (event) => {
+        event.stopPropagation();
+        listModal('edit', list.id_lista, list.nome_lista)
+    });
 
     const deleteBtn = document.createElement('button');
+    deleteBtn.id = list.id_lista;
     deleteBtn.innerText = 'Delete';
     deleteBtn.className = 'delete-btn hover-enabled';
     deleteBtn.style.padding = '10px 25px';
-    deleteBtn.addEventListener('click', deleteList);
+    deleteBtn.addEventListener('click', (event) => { 
+        event.stopPropagation();
+        deleteList(event);
+    });
 
     actionsDiv.appendChild(renameBtn);
     actionsDiv.appendChild(deleteBtn);

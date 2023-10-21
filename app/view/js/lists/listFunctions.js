@@ -63,7 +63,7 @@ async function renameList(listId){
 
 async function deleteList(event){
     const deleteBtn = event.target;
-    const listID = deleteBtn.parentNode.parentNode.id;
+    const listID = deleteBtn.id;
 
     deleteBtn.style.padding = '0px';
 
@@ -75,6 +75,7 @@ async function deleteList(event){
     confirmBtn.innerText = 'Confirm';
     confirmBtn.className = 'confirm-btn';
     confirmBtn.addEventListener('click', async() => {
+        event.stopPropagation();
         deleteBtn.innerHtml = '';
         deleteBtn.innerText = '';
 
@@ -106,6 +107,7 @@ async function deleteList(event){
     deleteBtn.appendChild(cancelBtn);
 
     cancelBtn.addEventListener('click', () => {
+        event.stopPropagation();
         deleteBtn.innerHtml = '';
         deleteBtn.innerText = 'Delete';
         deleteBtn.style.padding = '10px 25px';
