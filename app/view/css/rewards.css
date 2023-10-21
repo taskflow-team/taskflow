@@ -17,16 +17,27 @@
     overflow: scroll
 }
 
+.top-button {
+    margin-bottom: 75px;
+    transition: 0.3 ease-in-out;
+}
+
+.top-button:hover {
+    border: 1px solid #4DD167;
+}
+
 .rewards-bar #addRewardBtn{
     margin-bottom: 20px;
 }
 
 .rewards-hidden{
     right: -300px;
+    margin: 0px
 }
 
 .rewards-show{
     right: 0;
+    margin: 0px
 }
 
 .rewards-bar h3{

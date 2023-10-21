@@ -1,7 +1,6 @@
 .top-content{
     width: 100%;
     height: 50px;
-    /* margin: 15px 0; */
     margin-bottom: 15px;
     display: flex;
     align-items: center;
@@ -24,6 +23,10 @@
 .top-button i{
     font-size: 18px;
     color: #4DD167;
+}
+
+.emeralds-section {
+    margin-bottom: 75px;
 }
 
 .emeralds-section #emeralds-holder{

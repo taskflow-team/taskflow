@@ -1,146 +1,83 @@
-.pseudo-body{
+.pseudo-body {
     padding: 20px 30px;
-    transition: all 0.6s ease;
-}
-
-.lists-holder{
-    display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-column-gap: 30px;
-    grid-row-gap: 30px;
-    transition: all 0.8s ease;
-}
-
-/* Align items in the first column to the left */
-.three-columns > :nth-child(3n+1) {
-    justify-self: start;
-}
-
-/* Align items in the second column to the center */
-.three-columns > :nth-child(3n+2) {
-    justify-self: center;
-}
-
-/* Align items in the third column to the right */
-.three-columns > :nth-child(3n+3) {
-    justify-self: end;
-}
-
-.list-card{
-    width: 350px;
-    height: 250px;
-    background-color: #171717;
-    border-radius: 10px;
-    transition: all 0.6s ease;
-    position: relative;
-}
-
-.list-card:hover, .top-button:hover, .reward-card:hover{
-    box-shadow: rgba(0, 0, 0, 0.25) 0px 14px 28px, rgba(0, 0, 0, 0.22) 0px 10px 10px;
+    background-color: #262626; 
     cursor: pointer;
+    margin-top: 50px;
+}
+
+.lists-holder {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); 
+    grid-gap: 30px;
+}
+
+.list-card {
+    background-color: #1A1A1A; 
+    border-radius: 10px;
+    padding: 20px; 
+    transition: transform 0.4s ease-in-out; 
+}
+
+.list-card:hover {
+    transform: scale(1.02); 
     border: 1px solid #4DD167;
 }
 
-.list-card:hover h3 {
-    color: #4DD167;
+.list-card h3 {
+    font-size: 24px;
+    margin-bottom: 20px; 
 }
 
-
-.create-list{
-    display: flex;
-    align-items: center;
-    justify-content: center;
+.create-list {
     font-size: 45px;
+    color: #ffffff; 
+    transition: 0.4s ease; 
 }
 
-.create-list:hover{
-    font-size: 65px;
+.create-list:hover {
+    transform: scale(1.03); 
+    border: 1px solid #4DD167;
     color: #4DD167;
 }
 
-.list-card .info-div{
-    width: 80px;
-    height: fit-content;
-    font-size: 16px;
+.list-card .info-div {
     display: flex;
+    gap: 10px; 
     align-items: center;
-    position: absolute;
-    top: 25px;
-    left: 25px;
 }
 
-.list-card .info-div .left-div{
-    width: 35%;
-    background-color: #4DD167;
-    border-top-left-radius: 3px;
-    border-bottom-left-radius: 3px;
-    text-align: center;
+.list-card .dots {
+    font-size: 20px; 
+    color: #ffffff; 
+    transition: 0.1s ease; 
 }
 
-.list-card .info-div .right-div{
-    width: 65%;
-    background-color: #2D2D2D;
-    border-bottom-right-radius: 3px;
-    border-top-right-radius: 3px;
-    text-align: center;
+.list-card .dots:hover {
+    font-size: 20px; 
+    color: #4DD167; 
 }
 
-.list-card h3{
-    font-size: 22px;
-    font-weight: 600;
-    position: absolute;
-    top: 105px;
-    left: 25px;
-}
-
-.list-card .dots{
-    padding: 25px 25px;
-    font-size: 18px;
-    position: absolute;
-    top: 0px;
-    right: 0px;
-    z-index: 2;
-}
-
-.list-card .dots:hover{
-    color: #4DD167;
-}
-
-.list-card .actions-div{
-    min-width: 200px;
-    width: fit-content;
-    height: fit-content;
-    background-color: #171717;
-    border: 1px solid #2D2D2D;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    font-size: 18px;
-    z-index: 10;
-    position: absolute;
-    top: 50px;
-    right: 25px;
+.list-card .actions-div {
+    background-color: #1A1A1A; 
+    gap: 10px; 
+    padding: 15px; 
 }
 
 .list-card .actions-div button{
     padding: 10px 25px;
-    background-color: transparent;
+    background-color: #141414;
     border: none;
     color: #FFF;
     text-align: left;
 }
 
-.list-card .actions-div button:hover{
-    cursor: pointer;
-    background-color: #2D2D2D;
-}
-
 .list-card .actions-div .delete-btn{
-    height: 43px;
-    padding: 0;
+    height: 100%;
+    width: fit-content;
+    padding: 10px 25px 10px !important;
     color: #FF6161;
     outline:none;
-    border-bottom-left-radius: 10px;
+    border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }
 
@@ -148,9 +85,7 @@
     height: 100%;
     padding: 10px 25px;
     width: fit-content;
-    margin-right: 15px;
     color: #4DD167;
-    border-bottom-left-radius: 10px;
 }
 
 .list-card .actions-div .confirm-btn:hover{
@@ -161,23 +96,13 @@
 .list-card .actions-div .cancel-btn{
     padding: 10px 25px;
     width: fit-content;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 
 .list-card .actions-div .cancel-btn:hover{
     background-color: #FF6161;
     color: #171717;
+    border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
-}
-
-.list-card-body {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 10px;
-    z-index: 1;
-    background-color: transparent;
-    cursor: pointer;
-    display: block;
 }
