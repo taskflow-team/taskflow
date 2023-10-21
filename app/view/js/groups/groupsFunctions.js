@@ -37,7 +37,7 @@ async function createGroup(userID){
             );
         }
 
-        joinGroup(userID, groupCode, true)
+        joinGroup(userID, groupCode, 1)
         closeModal();
         fetchGroups();
     } catch (error) {
@@ -135,6 +135,28 @@ async function deleteGroup(event){
     }
 }
 
+async function leaveGroup(event){
+    const leaveBtn = event.target;
+    const groupId = leaveBtn.dataset.id;
+
+    try {
+        const response = await fetch(`GrupoController.php?action=leaveGroup&id=${groupId}`, {
+            method: "DELETE",
+        });
+
+        if (!response.ok) {
+            throw new Error('The request to the server has failed');
+        }
+
+        const responseData =  await response.json();
+        notificate('success', 'Success', responseData.message)
+
+        fetchGroups();
+    } catch (error) {
+        notificate('error', 'Error', error.message);
+    }
+}
+
 function randomString() {
     var chars = "0123456789ABCDEFGHIJKLMNOPQRSTUVWXTZabcdefghiklmnopqrstuvwxyz";
     var string_length = 8;
@@ -151,5 +173,6 @@ export {
     createGroup,
     joinGroup,
     renameGroup,
-    deleteGroup
+    deleteGroup,
+    leaveGroup
 }

@@ -1,5 +1,5 @@
 import { groupModal } from "./groupsModal.js";
-import { deleteGroup } from "./groupsFunctions.js";
+import { deleteGroup, leaveGroup } from "./groupsFunctions.js";
 import notificate from "../notification.js";
 
 const groupsHolder = document.querySelector('.groups-holder');
@@ -37,21 +37,45 @@ function updateGroups(groups) {
         } = group;
 
         const groupElement = document.createElement('p');
-        groupElement.textContent = `Invitation Code: ${codigo_convite}, Name: ${nome}, Admin: ${administrador}, Points: ${pontos}`;
+        groupElement.textContent = `Group Name: ${nome}, Points: ${pontos}`;
 
-        const renameBtn = document.createElement('button')
-        renameBtn.id = 'renameBtn';
-        renameBtn.innerText = 'Rename';
-        renameBtn.addEventListener('click', () => groupModal(id_usuario, 'rename', group));
+        if(administrador)
+        {
+            const groupElement = document.createElement('p');
+            groupElement.textContent = `Name: ${nome}, Points: ${pontos}`;
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.id = 'deleteBtn';
-        deleteBtn.dataset.id = id_grupo;
-        deleteBtn.innerText = 'Delete';
-        deleteBtn.addEventListener('click', deleteGroup);
+            const invitationCode = document.createElement('p');
+            invitationCode.textContent = `Invitation Code: ${codigo_convite}`;
 
-        groupElement.appendChild(renameBtn);
-        groupElement.appendChild(deleteBtn);
+            const adminElement = document.createElement('p');
+            groupElement.textContent = `ADMIN`;
+
+            const renameBtn = document.createElement('button')
+            renameBtn.id = 'renameBtn';
+            renameBtn.innerText = 'Rename';
+            renameBtn.addEventListener('click', () => groupModal(id_usuario, 'rename', group));
+
+            const deleteBtn = document.createElement('button');
+            deleteBtn.id = 'deleteBtn';
+            deleteBtn.dataset.id = id_grupo;
+            deleteBtn.innerText = 'Delete';
+            deleteBtn.addEventListener('click', deleteGroup);
+
+            groupElement.appendChild(renameBtn);
+            groupElement.appendChild(deleteBtn);
+
+            groupsHolder.appendChild(invitationCode);
+            groupsHolder.appendChild(adminElement);
+
+            groupsHolder.appendChild(groupElement);
+        }
+        const leaveBtn = document.createElement('button')
+        leaveBtn.id = 'leaveBtn';
+        leaveBtn.dataset.id = id_grupo;
+        leaveBtn.innerText = 'Leave';
+        leaveBtn.addEventListener('click', leaveGroup);
+
+        groupElement.appendChild(leaveBtn);
 
         groupsHolder.appendChild(groupElement);
     });

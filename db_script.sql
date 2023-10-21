@@ -20,7 +20,63 @@ CREATE TABLE tb_grupos (
     codigo_convite VARCHAR(45),
     nome VARCHAR(45)
 );
+ protected function save()
+    {
+        // Obter os dados JSON brutos do corpo da requisição
+        $jsonString = file_get_contents('php://input');
+        $requestData = json_decode($jsonString, true); // Converter JSON para um array associativo
 
+        $groupName = $requestData['groupName'];
+        $groupCode = $requestData['groupCode'];
+        $userID = $requestData['userID'];
+
+        $grupo = new Grupo();
+        $grupo->setNome($groupName);
+        $grupo->setCodigo_convite($groupCode);
+        $grupo->setId_usuario($userID);
+
+        $erros = $this->grupoService->validarDados($grupo);
+        if (empty($erros)) {
+            try {
+                // Inserir a lista no banco de dados
+                $this->grupoDao->insertGrupo($grupo);
+
+                // Enviar mensagem de sucesso como JSON
+                $response = array(
+                    'ok' => true,
+                    'message' => 'Grupo salvo com sucesso.'
+                );
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                exit;
+            } catch (PDOException $e) {
+                // Se ocorrer um erro durante a inserção, enviar mensagem de erro como JSON
+                $response = array(
+                    'ok' => false,
+                    'message' => 'Ocorreu um erro durante a requisição',
+                    'error' => $e->getMessage() // Usar a mensagem de erro da exceção
+                );
+
+                // Enviar a resposta como JSON
+                http_response_code(400);
+                header('Content-Type: application/json');
+                echo json_encode($response);
+                exit;
+            }
+        } else {
+            // Se houver erros de validação, enviar a resposta com os erros como JSON
+            $response = array(
+                'ok' => true,
+                'message' => 'Ocorreram erros de validação',
+                'errors' => $erros // Incluir os erros de validação na resposta
+            );
+
+            // Enviar a resposta como JSON
+            header('Content-Type: application/json');
+            echo json_encode($response);
+            exit;
+        }
+    }
 -- Cria a tabela de listas
 CREATE TABLE tb_listas (
     idtb_listas INT PRIMARY KEY AUTO_INCREMENT,

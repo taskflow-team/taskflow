@@ -134,6 +134,17 @@ class GrupoDAO {
         $stm->execute();
     }
 
+    public function leaveGrupo(int $groupId, int $userId)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "DELETE FROM tb_grupos_usuarios WHERE id_grupo = ? AND id_usuario = ?";
+        $stm = $conn->prepare($sql);
+        $stm->bindValue(1, $groupId);
+        $stm->bindValue(2, $userId);
+        $stm->execute();
+    }
+
     private function mapGrupos($result)
     {
         $grupos = array();
