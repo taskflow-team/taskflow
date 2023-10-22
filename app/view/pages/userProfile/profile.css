@@ -1,90 +1,99 @@
-.pseudo-body{
+.pseudo-body {
     display: flex;
     align-items: center;
     justify-content: center;
+    height: 100vh;
 }
 
-.pseudo-body .profile-holder{
-    width: 600px;
-    height: 700px;
-    margin: 100px 50px;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
+.profile-holder {
+    width: 650px;
+    padding: 40px;
+    border-radius: 10px;
+    background-color: #171717;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s;
 }
 
-.pseudo-body .profile-holder h1{
-    margin-top: 50px;
-    font-weight: 600;
+.profile-holder:hover {
+    transform: translateY(-5px); 
 }
 
-.pseudo-body .profile-holder img{
-    align-self: center;
+.avatar-section {
+    text-align: center;
+    margin-bottom: 30px;
 }
 
-.profile-holder form, .profile-holder form div{
-    width: 600px;
+.avatar-section img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+    transition: transform 0.3s;
 }
 
-.profile-holder form{
+.avatar-section img:hover {
+    transform: scale(1.1);
+}
+
+.input-group {
+    margin-bottom: 20px;
+    position: relative;
+}
+
+input.dark-input {
     width: 100%;
-    height: 400px;
+    padding: 10px 40px 10px 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #262626;
+    transition: background-color 0.3s;
 }
 
-.profile-holder form label, .profile-holder form .alert-success{
-    margin-top: 25px;
+input.dark-input:focus {
+    background-color: #333;
+    outline: none;
 }
 
-.profile-holder form .alert-success{
-    margin-bottom: 0;
-}
-
-.profile-holder form div{
-    width: 100%;
-    height: 50px;
-    display: flex;
-    align-items: center;
-}
-
-.profile-holder form div input{
-    width: 85%;
-    height: 100%;
-    padding: 0 10px;
+.btn {
+    height: 38px;
+    padding: 0 15px;
     border-radius: 5px;
     border: none;
-}
-
-.profile-holder form div{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-}
-
-.btn:hover{
-    background-color: #218838;
-}
-
-.eyeIcon{
-    height: 100%;
-    margin-left: -90px;
     cursor: pointer;
-}
-
-#btnSubmit{
-    margin-top: 20px;
-    background-color: #218838;
-    border-color: #218838;
-}
-
-.btn{
-    padding-top: 0;
-    padding-bottom: 0;
-    height: 50px;
-    background-color: #898C8D;
+    background-color: #40a855;
     color: #FFF;
+    transition: background-color 0.2s;
 }
 
-.profile-holder form div .eyeIcon{
-    height: 30px;
+.btn:hover {
+    background-color: #349745; 
+}
+
+.eyeIcon {
+    position: absolute;
+    top: 45px;
+    right: 15px;
+    height: 20px;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.eyeIcon:hover {
+    transform: scale(1.2); 
+}
+
+#btnSubmit {
+    display: block;
+    width: 100%;
+    background-color: #40a855;
+    color: #FFF;
+    border-color: #40a855;
+    height: 40px;
+    margin-top: 35px;
+    font-weight: 500;
+    transition: background-color 0.2s;
+}
+
+#btnSubmit:hover {
+    background-color: #349745;
 }
