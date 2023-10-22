@@ -64,9 +64,10 @@
 .list-card .actions-div {
     background-color: #1A1A1A; 
     margin-left: 25px;
-    display: inline-flex;
+    display: flex;
     align-items: center;
     flex-wrap: nowrap; 
+    margin-top: -34px;
 }
 
 .list-card .buttons-div{

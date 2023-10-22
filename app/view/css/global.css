@@ -99,48 +99,54 @@ body{
 .modal-bg{
     width: 100vw;
     height: 100vh;
-    background-color: #2D2D2D;
-    opacity: 0.9;
+    background-color: rgba(45, 45, 45, 0.9);
     z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
 }
 
 .modal {
-    width: 50vw;
-    height: 30vh;
-    padding: 40px;
+    margin: auto;
+    max-width: 700px;
+    width: 90%;
+    max-height: 200px;
+    padding: 30px 40px;
+    border-radius: 15px;
+    box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.2);
     background: #1D1D1D;
     z-index: 11;
-    position: absolute;
-    top: 30%;
-    left: 25%;
-
+    display: flex;
+    flex-direction: column;
     align-items: center;
-    justify-content: space-around;
-    border-radius: 20px;
+    justify-content: space-between;
+    animation: scale-in 0.5s forwards;
 }
 
 .modal .dark-input{
-    width: 80%;
-    padding: 20px;
+    width: 90%; 
+    padding: 12px 20px; 
+    margin-top: 16px;
     background-color: #2D2D2D;
 }
 
 .modal button{
-    padding: 20px;
-    color: #1D1D1D;
+    padding: 10px 20px;
+    background-color: #4DD167;
     font-weight: 600;
-    transition: all 1s ease;
     border-radius: 8px;
+    color: #FFF;
+    border: none;
+    transition: background-color 0.3s ease;
+    cursor: pointer;
+    margin-bottom: 6px;
 }
 
 .modal .fa-x{
-    color:  #FFF;
+    color: #FFF;
     position: absolute;
     top: 20px;
     right: 20px;
@@ -148,28 +154,33 @@ body{
     font-size: 20px;
 }
 
-.modal.close-animation{
-    animation: slide-out 0.8s forwards;
-}
-
 .modal h2{
     color: #fff;
+    margin-bottom: 20px;
 }
 
-@keyframes slide-out {
+.modal.close-animation{
+    animation: scale-out 0.5s forwards;
+}
+
+@keyframes scale-out {
     from {
-        top: 31%;
+        transform: scale(1);
+        opacity: 1;
     }
     to {
-        top: -500px;
+        transform: scale(0.9);
+        opacity: 0;
     }
 }
 
-@keyframes opacity-in {
+@keyframes scale-in {
     from {
+        transform: scale(0.9);
         opacity: 0;
     }
     to {
+        transform: scale(1);
         opacity: 1;
     }
 }
