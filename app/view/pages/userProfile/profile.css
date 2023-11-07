@@ -15,7 +15,7 @@
 }
 
 .profile-holder:hover {
-    transform: translateY(-5px); 
+    transform: translateY(-5px);
 }
 
 .avatar-section {
@@ -66,7 +66,7 @@ input.dark-input:focus {
 }
 
 .btn:hover {
-    background-color: #349745; 
+    background-color: #349745;
 }
 
 .eyeIcon {
@@ -79,7 +79,7 @@ input.dark-input:focus {
 }
 
 .eyeIcon:hover {
-    transform: scale(1.2); 
+    transform: scale(1.2);
 }
 
 #btnSubmit {

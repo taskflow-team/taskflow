@@ -26,6 +26,7 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
 
     <hr class="line" >
 
+    <h2 class="your-groups" >Your Groups</h2>
     <div class="groups-holder">
 
     </div>

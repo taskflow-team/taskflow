@@ -14,6 +14,10 @@
     background-color: #4DD167;
 }
 
+.your-groups{
+    margin-bottom: 30px;
+}
+
 .groups-holder{
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -21,7 +25,7 @@
 }
 
 .group-card{
-    width: 350px;
+    width: 300px;
     height: 250px;
     background-color: #1A1A1A;
     border-radius: 10px;

@@ -18,7 +18,7 @@
 
         <form id="frmEditUsuario" method="POST" action="<?= BASEURL ?>/controller/UsuarioController.php?action=edit">
             <div class="input-group">
-            <label for="user-email">Email:</label>
+                <label for="user-email">Email:</label>
                 <input
                     class="dark-input"
                     type="email"
