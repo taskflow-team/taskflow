@@ -1,0 +1,48 @@
+.buttons-group{
+    display: flex;
+    align-items: center;
+    margin: 30px 0;
+}
+
+.buttons-group button{
+    margin-right: 20px;
+}
+
+.line{
+    height: 1px;
+    background-color: #4DD167;
+}
+
+.groups-holder{
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 40px;
+}
+
+.group-card{
+    width: 350px;
+    height: 250px;
+    background-color: #1A1A1A;
+    border-radius: 10px;
+    padding: 15px;
+    transition: transform 0.4s ease-in-out;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+}
+
+.group-card p{
+    font-size: 18px;
+}
+
+.group-functions{
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
+.group-functions button{
+    margin-right: 20px;
+}

@@ -20,13 +20,15 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
 <!-- Exibir os grupos -->
 <div class="pseudo-body">
     <div class="buttons-group">
-        <button id="btn-create-group">Criar grupo</button>
-        <button id="btn-join-group">Entrar em um grupo</button>
+        <button id="btn-create-group" class="btn btn-success" >Criar grupo</button>
+        <button id="btn-join-group" class="btn btn-success" >Entrar em um grupo</button>
     </div>
+
+    <hr class="line" >
 
     <div class="groups-holder">
 
-    </div>  
+    </div>
 </div>
 
 <script type="module" src="<?= BASEURL; ?>/view/js/groups/groupsModal.js"></script>

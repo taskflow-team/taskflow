@@ -31,10 +31,17 @@ body{
     color: #FFFFFF;
 }
 
-.btn-success, .btn-success:hover{
-    background-color: #4DD167;
+.btn{
     color: #171717;
     font-weight: 600;
+}
+
+.btn::hover{
+    color: #FFF;
+}
+
+.btn-success{
+    background-color: #4DD167;
 }
 
 .notification{
@@ -127,8 +134,8 @@ body{
 }
 
 .modal .dark-input{
-    width: 90%; 
-    padding: 12px 20px; 
+    width: 90%;
+    padding: 12px 20px;
     margin-top: 16px;
     background-color: #2D2D2D;
 }
