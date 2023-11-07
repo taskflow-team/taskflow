@@ -36,8 +36,8 @@ body{
     font-weight: 600;
 }
 
-.btn::hover{
-    color: #FFF;
+.btn:hover{
+    color: #FFF !important;
 }
 
 .btn-success{

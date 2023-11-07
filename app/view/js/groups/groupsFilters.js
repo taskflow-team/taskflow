@@ -57,15 +57,23 @@ function updateGroups(groups) {
             const renameBtn = document.createElement('button')
             renameBtn.id = 'renameBtn';
             renameBtn.className = 'btn btn-success';
-            renameBtn.innerText = 'Rename';
             renameBtn.addEventListener('click', () => groupModal(id_usuario, 'rename', group));
+
+            const editIcon = document.createElement('i');
+            editIcon.className = 'fa fa-pencil-square';
+
+            renameBtn.appendChild(editIcon);
 
             const deleteBtn = document.createElement('button');
             deleteBtn.id = 'deleteBtn';
             deleteBtn.className = 'btn btn-danger';
             deleteBtn.dataset.id = id_grupo;
-            deleteBtn.innerText = 'Delete';
             deleteBtn.addEventListener('click', deleteGroup);
+
+            const deleteIcon = document.createElement('i');
+            deleteIcon.className = 'fa fa-trash';
+
+            deleteBtn.appendChild(deleteIcon);
 
             functions.appendChild(renameBtn);
             functions.appendChild(deleteBtn);
@@ -78,8 +86,12 @@ function updateGroups(groups) {
         leaveBtn.id = 'leaveBtn';
         leaveBtn.className = 'btn btn-warning';
         leaveBtn.dataset.id = id_grupo;
-        leaveBtn.innerText = 'Leave';
         leaveBtn.addEventListener('click', leaveGroup);
+
+        const leaveIcon = document.createElement('i');
+        leaveIcon.className = 'fa fa-sign-out';
+
+        leaveBtn.appendChild(leaveIcon);
 
         functions.appendChild(leaveBtn);
 
