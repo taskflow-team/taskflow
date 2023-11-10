@@ -10,6 +10,7 @@ require_once(__DIR__ . "/../dao/UsuarioDAO.php");
 require_once(__DIR__ . "/../service/TarefaService.php");
 require_once(__DIR__ . "/Controller.php");
 
+#[AllowDynamicProperties]
 class TarefaController extends Controller
 {
 
