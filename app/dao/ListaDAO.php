@@ -21,6 +21,18 @@ class ListaDAO {
         return $this->mapListas($result);
     }
 
+    public function getGroupLists($group_id)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM tb_listas WHERE idtb_grupo = " . $group_id . " ;";
+        $stm = $conn->prepare($sql);
+        $stm->execute();
+        $result = $stm->fetchAll();
+
+        return $this->mapListas($result);
+    }
+
     public function findByIdLista($id)
     {
         $conn = Connection::getConn();

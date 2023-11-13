@@ -24,12 +24,6 @@
     background-color: #4DD167;
 }
 
-.content-holder {
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 20px;
-}
-
 .sidebar-right {
     width: 200px;
     margin-left: 20px;
@@ -48,7 +42,6 @@
 .group-name{
     width: 100%;
     height: 40px;
-    margin-top: 60px;
     margin-bottom: -72px;
     display: flex;
     align-items: center;

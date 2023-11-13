@@ -1,4 +1,5 @@
 import { createList, renameList } from './listFunctions.js';
+import { createListGroup } from '../groups/groupLists.js';
 
 function listModal(type, listId, listName){
     const modalBg = document.createElement('div');
@@ -20,7 +21,12 @@ function listModal(type, listId, listName){
 
     if(type == 'create'){
         submitBtn.addEventListener('click', createList);
-    } else {
+
+    } 
+    else if(type == 'groupCreate'){
+        submitBtn.addEventListener('click', createListGroup);
+    } 
+    else {
         input.value = listName;
         submitBtn.addEventListener('click', () => renameList(listId));
     }

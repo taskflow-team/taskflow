@@ -30,6 +30,42 @@ class ListaController extends Controller
         $this->loadView("home/form.php", $dados, "", "");
     }
 
+    protected function listGroup()
+    {
+        // Verifica se o usuário está logado
+        if (!$this->usuarioLogado()) {
+            exit; // Se não estiver logado, encerra a execução
+        }
+
+        // Obtém o ID do usuário da sessão
+        $userID = $_SESSION[SESSAO_USUARIO_ID];
+        $group_id = $_GET['groupId'];
+
+        // Obtém todas as listas
+        $listas = $this->listaDao->getGroupLists($group_id);
+
+        // Cria um array de resposta contendo a mensagem de sucesso e os dados das listas
+        $response = array(
+            'message' => 'Success',
+            'data' => array_map(function ($lista) {
+                // Converte o objeto lista em um objeto anônimo contendo apenas as propriedades necessárias
+                return (object) array(
+                    'id_lista' => $lista->getId_lista(),
+                    'nome_lista' => $lista->getNome_lista(),
+                );
+            }, $listas)
+        );
+
+        // Limpa qualquer saída anterior antes de definir os cabeçalhos JSON
+        ob_clean();
+
+        // Define o cabeçalho para indicar que a resposta é um JSON
+        header('Content-Type: application/json');
+
+        // Imprime a resposta em formato JSON
+        echo json_encode($response);
+    }
+
     protected function list()
     {
         // Verifica se o usuário está logado

@@ -19,6 +19,7 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
 ?>
 
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/pages/groupHome/groupHome.css">
+<link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/css/lists.css">
 
 <div class="pseudo-body">
     <h2 class="group-name"><?= $groupName ?></h2>
@@ -32,7 +33,7 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
 
             <hr class="line" >  
             
-            <div id="lists-holder" class="content-holder">
+            <div id="lists-holder" class="lists-holder">
             </div>
             
             <div id="rewards-holder" class="content-holder">
@@ -45,3 +46,10 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
         </div>
     </div>
 </div>
+
+<script>
+    const BASE_URL = '<?= BASEURL; ?>';
+    const GROUP_ID = '<?= $groupId; ?>';
+    const GROUP_NAME = '<?= $groupName; ?>';
+</script>
+<script type="module" src="<?= BASEURL; ?>/view/js/groups/groupLists.js"></script>

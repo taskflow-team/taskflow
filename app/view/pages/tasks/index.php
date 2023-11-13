@@ -59,10 +59,8 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
     <ul id="taskList" class="task-list"></ul>
 </div>
 
-<!-- Incluir jQuery -->
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
-<!-- Incluir formAsync.js -->
 <script>
     const BASE_URL = '<?= BASEURL; ?>';
     const LIST_ID = '<?= $listId; ?>';
