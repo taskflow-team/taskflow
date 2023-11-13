@@ -7,6 +7,9 @@ require_once(__DIR__ . "/../../components/sideBar/sidebar.php");
 // Instanciar o DAO de tarefas
 $grupoDAO = new GrupoDAO();
 
+$groupId = isset($_GET['groupId']) ? $_GET['groupId'] : null;
+$groupName = isset($_GET['groupName']) ? $_GET['groupName'] : null;
+
 // Pegando o id do usuário
 $id_usuario = "(Sessão expirada)";
 if (isset($_SESSION[SESSAO_USUARIO_NOME]))
@@ -18,6 +21,8 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/pages/groupHome/groupHome.css">
 
 <div class="pseudo-body">
+    <h2 class="group-name"><?= $groupName ?></h2>
+
     <div class="content-with-sidebar">
         <div class="content-main">
             <div class="navigation-bar">

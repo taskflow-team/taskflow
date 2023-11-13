@@ -39,7 +39,7 @@ function updateGroups(groups) {
         const groupCard = document.createElement('div');
         groupCard.className = 'group-card';
         groupCard.addEventListener('click', () => {
-            window.location.href = `../view/pages/groupHome/groupHome.php`;
+            window.location.href = `../view/pages/groupHome/groupHome.php?groupId=${id_grupo}&groupName=${nome}`;
         });
 
         const groupName = document.createElement('h3');
