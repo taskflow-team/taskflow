@@ -57,10 +57,11 @@ class ListaDAO {
     {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO tb_listas (nome, idtb_usuario) VALUES (:nome, :idtb_usuario)";
+        $sql = "INSERT INTO tb_listas (nome, idtb_usuario, idtb_grupo) VALUES (:nome, :idtb_usuario, :idtb_grupo)";
         $stm = $conn->prepare($sql);
         $stm->bindValue(":nome", $lista->getNome_lista());
         $stm->bindValue(":idtb_usuario", $lista->getId_usuario());
+        $stm->bindValue(":idtb_grupo", $lista->getId_grupo());
         $stm->execute();
     }
 

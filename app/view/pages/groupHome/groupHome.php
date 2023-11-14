@@ -11,6 +11,12 @@ $groupId = isset($_GET['groupId']) ? $_GET['groupId'] : null;
 $groupName = isset($_GET['groupName']) ? $_GET['groupName'] : null;
 
 // Pegando o id do usuário
+session_status();
+if (session_status() !== PHP_SESSION_ACTIVE)
+{
+    session_start();
+}
+
 $id_usuario = "(Sessão expirada)";
 if (isset($_SESSION[SESSAO_USUARIO_NOME]))
 {
@@ -52,4 +58,4 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
     const GROUP_ID = '<?= $groupId; ?>';
     const GROUP_NAME = '<?= $groupName; ?>';
 </script>
-<script type="module" src="<?= BASEURL; ?>/view/js/groups/groupLists.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/groups/lists/groupListsFilter.js"></script>

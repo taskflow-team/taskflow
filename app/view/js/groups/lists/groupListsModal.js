@@ -1,4 +1,4 @@
-import { createList, renameList } from './listFunctions.js';
+import { createListGroup } from './groupListsFunctions.js';
 
 function listModal(type, listId, listName){
     const modalBg = document.createElement('div');
@@ -19,7 +19,7 @@ function listModal(type, listId, listName){
     submitBtn.innerText = type == 'create' ? 'Create' : 'Rename';
 
     if(type == 'create'){
-        submitBtn.addEventListener('click', createList);
+        submitBtn.addEventListener('click', createListGroup);
     } 
     else {
         input.value = listName;
@@ -49,7 +49,6 @@ function closeModal(){
         modal.remove();
     }, 500);
 }
-
 
 export {
     listModal,

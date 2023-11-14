@@ -1,5 +1,5 @@
-import notificate from "../notification.js";
-import { listModal, closeModal } from "../lists/listModal.js";
+import notificate from "../../notification.js";
+import { listModal, closeModal } from "./groupListsModal.js";
 
 const listsBtn = document.querySelector('#btn-lists');
 const rewardsBtn = document.querySelector('#btn-rewards');
@@ -36,7 +36,7 @@ function updateLists(lists){
 
     const createListDiv = document.createElement('div');
     createListDiv.className = 'list-card create-list';
-    createListDiv.addEventListener('click', () => listModal('groupCreate'));
+    createListDiv.addEventListener('click', () => listModal('create'));
 
     const addIcon = document.createElement('i');
     addIcon.className = 'fa-regular fa-plus';
@@ -128,36 +128,6 @@ function showActions(actionsDiv) {
 
 listsBtn.addEventListener("click", fetchLists);
 
-async function createListGroup(){
-    const listName = document.querySelector('#list-name-input').value;
-    const userID = document.querySelector('#idUsuario').value;
-
-    try {
-        const reqConfigs = {
-            method: "POST",
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                listName: listName,
-                userID: userID
-            })
-        };
-
-        const response = await fetch('ListaController.php?action=save', reqConfigs);
-        const responseData = await response.json();
-
-        if (!response.ok || response.status == 404 || !responseData.ok) {
-            throw new Error('Failed to create List');
-        }
-
-        closeModal();
-        fetchLists();
-    } catch (error) {
-        notificate('error', 'Error', error.message);
-    }
-}
-
 export {
-    createListGroup
+    fetchLists,
 }
