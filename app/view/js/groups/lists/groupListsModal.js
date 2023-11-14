@@ -1,4 +1,4 @@
-import { createListGroup } from './groupListsFunctions.js';
+import { createListGroup, renameListGroup } from './groupListsFunctions.js';
 
 function listModal(type, listId, listName){
     const modalBg = document.createElement('div');
@@ -23,7 +23,7 @@ function listModal(type, listId, listName){
     } 
     else {
         input.value = listName;
-        submitBtn.addEventListener('click', () => renameList(listId));
+        submitBtn.addEventListener('click', () => renameListGroup(listId));
     }
 
     const closeIcon = document.createElement('i');

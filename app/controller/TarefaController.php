@@ -50,6 +50,7 @@ class TarefaController extends Controller
 
         $rule = $requestData['rule'];
         $listID = $requestData['listID'];
+        $groupID = $requestData['groupID'];
 
         if ($rule === 'priority') {
             $query_rule = 'prioridade';
@@ -59,7 +60,14 @@ class TarefaController extends Controller
             $query_rule = 'id_tarefa';
         }
 
-        $tarefas = $this->tarefaDao->listTarefas($userID, $listID, $query_rule);
+        if(is_null($groupID))
+        {
+            $tarefas = $this->tarefaDao->listTarefas($userID, $listID, $query_rule);
+        }
+        else
+        {
+            $tarefas = $this->tarefaDao->listTarefasGrupo($groupID, $listID, $query_rule);
+        }
 
         // Cria um array de resposta contendo a mensagem de sucesso e os dados das tarefas
         $response = array(
@@ -78,6 +86,7 @@ class TarefaController extends Controller
                     'concluida' => $tarefa->getConcluida(),
                     'id_usuario' => $tarefa->getId_usuario(),
                     'idtb_listas' => $tarefa->getIdtb_listas(),
+                    'id_grupo' => $tarefa->getId_grupo(),
                 );
             }, $tarefas)
         );
@@ -241,6 +250,7 @@ class TarefaController extends Controller
         $formData = $requestData['formData'];
         $userID = $requestData['userID'];
         $listID = $requestData['listID'];
+        $groupID = $requestData['groupID'];
 
         // Supondo que a classe Tarefa tenha os métodos setters apropriados para as propriedades
         $tarefa = new Tarefa();
@@ -252,6 +262,7 @@ class TarefaController extends Controller
         $tarefa->setData_criacao(date('Y-m-d H:i:s'));
         $tarefa->setId_usuario($userID);
         $tarefa->setIdtb_listas($listID);
+        $tarefa->setId_grupo($groupID);
 
         // Validar os dados da tarefa
         $erros = $this->tarefaService->validarDados($tarefa);

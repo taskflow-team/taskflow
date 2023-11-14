@@ -1,5 +1,6 @@
 import notificate from "../../notification.js";
-import { listModal, closeModal } from "./groupListsModal.js";
+import { listModal } from "./groupListsModal.js";
+import { deleteListGroup } from "./groupListsFunctions.js";
 
 const listsBtn = document.querySelector('#btn-lists');
 const rewardsBtn = document.querySelector('#btn-rewards');
@@ -34,22 +35,25 @@ function updateLists(lists){
     listsHolder.innerHTML = '';
     listsHolder.innerText = '';
 
-    const createListDiv = document.createElement('div');
-    createListDiv.className = 'list-card create-list';
-    createListDiv.addEventListener('click', () => listModal('create'));
+    if(IS_ADMIN == 1)
+    {
+        const createListDiv = document.createElement('div');
+        createListDiv.className = 'list-card create-list';
+        createListDiv.addEventListener('click', () => listModal('create'));
 
-    const addIcon = document.createElement('i');
-    addIcon.className = 'fa-regular fa-plus';
+        const addIcon = document.createElement('i');
+        addIcon.className = 'fa-regular fa-plus';
 
-    createListDiv.appendChild(addIcon);
-    listsHolder.appendChild(createListDiv);
+        createListDiv.appendChild(addIcon);
+        listsHolder.appendChild(createListDiv);
+    }
 
     lists.forEach((list) => {
         const listCard = document.createElement('div');
         listCard.className = 'list-card';
         listCard.id = list.id_lista;
         listCard.addEventListener('click', () => {
-            window.location.href = `../view/pages/tasks/index.php?listId=${list.id_lista}&listName=${list.nome_lista}`;
+            window.location.href = `../tasks/index.php?listId=${list.id_lista}&listName=${list.nome_lista}&isAdmin=${IS_ADMIN}&groupId=${GROUP_ID}`;
         });
 
         const cardTitle = document.createElement('h3');
@@ -68,33 +72,46 @@ function updateLists(lists){
         const barsIcon = document.createElement('i');
         barsIcon.className = 'fa-solid fa-bars';
 
-        const dotsIcon = document.createElement('i');
-        dotsIcon.className = 'fa-solid fa-ellipsis-vertical dots';
-        dotsIcon.addEventListener('click', (event) => {
-            event.stopPropagation();
-            showActions(actionsDiv);
-        });
+        if(IS_ADMIN == 1)
+        {
+            const dotsIcon = document.createElement('i');
+            dotsIcon.className = 'fa-solid fa-ellipsis-vertical dots';
+            dotsIcon.addEventListener('click', (event) => {
+                event.stopPropagation();
+                showActions(actionsDiv);
+            });
 
-        const actionsDiv = document.createElement('div');
-        actionsDiv.className = 'actions-div';
-        actionsDiv.style.visibility = 'hidden';
-        createActionsDiv(list, actionsDiv);
+            const actionsDiv = document.createElement('div');
+            actionsDiv.className = 'actions-div';
+            actionsDiv.style.visibility = 'hidden';
+            createActionsDiv(list, actionsDiv);
 
-        const buttonsDiv = document.createElement('div');
-        buttonsDiv.className = 'buttons-div';
+            const buttonsDiv = document.createElement('div');
+            buttonsDiv.className = 'buttons-div';
 
-        leftInfo.appendChild(barsIcon);
-        infoDiv.appendChild(leftInfo);
-        infoDiv.appendChild(rigthInfo);
+            leftInfo.appendChild(barsIcon);
+            infoDiv.appendChild(leftInfo);
+            infoDiv.appendChild(rigthInfo);
 
-        buttonsDiv.appendChild(dotsIcon);
-        buttonsDiv.appendChild(actionsDiv);
+            buttonsDiv.appendChild(dotsIcon);
+            buttonsDiv.appendChild(actionsDiv);
 
-        listCard.appendChild(cardTitle);
-        listCard.appendChild(infoDiv);
-        listCard.appendChild(buttonsDiv);
-    
-        listsHolder.appendChild(listCard);
+            listCard.appendChild(cardTitle);
+            listCard.appendChild(infoDiv);
+            listCard.appendChild(buttonsDiv);
+        
+            listsHolder.appendChild(listCard);
+        }
+        else{
+            leftInfo.appendChild(barsIcon);
+            infoDiv.appendChild(leftInfo);
+            infoDiv.appendChild(rigthInfo);
+
+            listCard.appendChild(cardTitle);
+            listCard.appendChild(infoDiv);
+        
+            listsHolder.appendChild(listCard);
+        }
     });
 }
 
@@ -114,7 +131,7 @@ function createActionsDiv(list, actionsDiv) {
     deleteBtn.style.padding = '10px 25px';
     deleteBtn.addEventListener('click', (event) => { 
         event.stopPropagation();
-        deleteList(event);
+        deleteListGroup(event);
     });
 
     actionsDiv.appendChild(renameBtn);

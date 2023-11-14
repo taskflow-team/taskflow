@@ -7,55 +7,55 @@ import { fetchTaskList, fetchUserData } from './tasksFilter.js';
 const taskForm = document.querySelector('#frmTarefa');
 const createBtn = document.querySelector('#submitTaskButton');
 
-async function createTask(event) {
-    event.preventDefault();
+if(IS_ADMIN == 1)
+{
+    async function createTask(event) {
+        event.preventDefault();
 
-    const userID = parseInt(document.querySelector('#idUsuario').value);
+        const userID = parseInt(document.querySelector('#idUsuario').value);
 
-    const rawFormContent = new FormData(taskForm);
-    const formData = Object.fromEntries(rawFormContent);
-    taskForm.reset();
+        const rawFormContent = new FormData(taskForm);
+        const formData = Object.fromEntries(rawFormContent);
+        taskForm.reset();
 
-    try {
-        const reqConfigs = {
-            method: "POST",
-            headers: {
-                'Content-type': 'application/json'
-            },
-            body: JSON.stringify({
-                formData: formData,
-                userID: userID,
-                listID: LIST_ID 
-            })
-        };
+        try {
+            const reqConfigs = {
+                method: "POST",
+                headers: {
+                    'Content-type': 'application/json'
+                },
+                body: JSON.stringify({
+                    formData: formData,
+                    userID: userID,
+                    groupID: GROUP_ID,
+                    listID: LIST_ID 
+                })
+            };
 
-        const response = await fetch(BASE_URL + '/controller/TarefaController.php?action=save&listId=' + LIST_ID, reqConfigs);
-        const responseData = await response.json();
+            const response = await fetch(BASE_URL + '/controller/TarefaController.php?action=save&listId=' + LIST_ID, reqConfigs);
+            const responseData = await response.json();
 
-        if (!response.ok || response.status == 404 || !responseData.ok) {
-            notificate(
-                'error',
-                'Erro',
-                responseData.error
-            );
+            if (!response.ok || response.status == 404 || !responseData.ok) {
+                notificate(
+                    'error',
+                    'Erro',
+                    responseData.error
+                );
+            }
+
+            // Obtém a lista de tarefas atualizada após criar a tarefa
+            fetchTaskList();
+        } catch (error) {
+            notificate('error', 'Error', error);
         }
-
-        // Obtém a lista de tarefas atualizada após criar a tarefa
-        fetchTaskList();
-    } catch (error) {
-        notificate('error', 'Error', error);
     }
-}
 
-createBtn.addEventListener('click', createTask);
+    createBtn.addEventListener('click', createTask);
+}
 
 async function completeTask(event) {
     const checkbox = event.target;
     const taskId = checkbox.parentElement.parentElement.id;
-
-    const rawFormContent = new FormData(taskForm);
-    const formData = Object.fromEntries(rawFormContent);
-    taskForm.reset();
 
     const userID = parseInt(document.querySelector('#idUsuario').value);
 
@@ -69,7 +69,6 @@ async function completeTask(event) {
             },
             body: JSON.stringify({
                 taskId: taskId,
-                formData: formData,
                 userID: userID,
                 taskCompleted: taskCompleted
             })

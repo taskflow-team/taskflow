@@ -10,6 +10,8 @@ $tarefaDAO = new TarefaDAO();
 // Pegando o id da lista
 $listId = isset($_GET['listId']) ? $_GET['listId'] : null;
 $listName = isset($_GET['listName']) ? $_GET['listName'] : null;
+$groupId = isset($_GET['groupId']) ? $_GET['groupId'] : null;
+$isAdmin = isset($_GET['isAdmin']) ? $_GET['isAdmin'] : null;
 
 session_status();
 if (session_status() !== PHP_SESSION_ACTIVE)
@@ -34,8 +36,11 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
 
     <?php
         // Form para adicionar tarefas
-        require_once(__DIR__ . "/../../components/taskForm/taskForm.php");
-        require_once(__DIR__ . "/../../components/editModal/editModal.php");
+        if($isAdmin == 1)
+        {
+            require_once(__DIR__ . "/../../components/taskForm/taskForm.php");
+            require_once(__DIR__ . "/../../components/editModal/editModal.php");
+        }
     ?>
 
     <div id="userData">
@@ -59,11 +64,15 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
     <ul id="taskList" class="task-list"></ul>
 </div>
 
+<input id="idUsuario" name="idUsuario" type="hidden" value="<?php echo $_SESSION[SESSAO_USUARIO_ID]; ?>" />
+
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
 <script>
     const BASE_URL = '<?= BASEURL; ?>';
     const LIST_ID = '<?= $listId; ?>';
+    const GROUP_ID = '<?= $groupId; ?>';
+    const IS_ADMIN = '<?= $isAdmin; ?>';
 </script>
 <script type="module" src="<?= BASEURL; ?>/view/js/tasks/taskFunctions.js"></script>
 <script type="module" src="<?= BASEURL; ?>/view/js/tasks/taskForm.js"></script>

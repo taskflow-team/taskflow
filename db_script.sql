@@ -49,6 +49,7 @@ CREATE TABLE tb_tarefas (
     data_criacao TIMESTAMP DEFAULT (CURRENT_TIMESTAMP),
     id_usuario INT,
     idtb_listas INT,
+    id_grupo INT,
     FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario),
     FOREIGN KEY (idtb_listas) REFERENCES tb_listas (idtb_listas)
 );

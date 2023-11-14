@@ -53,13 +53,6 @@ function updateUserData(user) {
         nivel,
         tarefas_concluidas
     } = user;
-
-    // const userDataHtml = `
-    //     <p><strong>User ID:</strong> ${id}</p>
-    //     <p><strong>Points:</strong> ${pontos}</p>
-    // `;
-
-    // userData.innerHTML = userDataHtml;
 }
 
 // Função para obter a lista de tarefas atualizada do servidor
@@ -83,7 +76,8 @@ async function fetchTaskList() {
         },
         body: JSON.stringify({
             rule: rule,
-            listID: LIST_ID
+            listID: LIST_ID,
+            groupID: GROUP_ID
         })
     };
 

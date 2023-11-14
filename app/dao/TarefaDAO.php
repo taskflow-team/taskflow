@@ -25,6 +25,18 @@ class TarefaDAO
         return $this->mapTarefas($result);
     }
 
+    public function listTarefasGrupo($id_grupo, $idtb_listas, $rule)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM tb_tarefas WHERE id_grupo = " . $id_grupo . " AND idtb_listas = " . $idtb_listas . " ORDER BY " . $rule . " DESC";
+        $stm = $conn->prepare($sql);
+        $stm->execute();
+        $result = $stm->fetchAll();
+
+        return $this->mapTarefas($result);
+    }
+
     public function findAllTarefas($idUsuario)
     {
         $conn = Connection::getConn();
@@ -87,8 +99,8 @@ class TarefaDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, data_criacao, id_usuario, idtb_listas)" .
-            " VALUES (:nome_tarefa, :descricao, :dificuldade, :prioridade, :valor_pontos, :data_criacao, :id_usuario, :idtb_listas)";
+        $sql = "INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, data_criacao, id_usuario, idtb_listas, id_grupo)" .
+            " VALUES (:nome_tarefa, :descricao, :dificuldade, :prioridade, :valor_pontos, :data_criacao, :id_usuario, :idtb_listas, :id_grupo)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue(":nome_tarefa", $tarefa->getNome_tarefa());
@@ -99,6 +111,7 @@ class TarefaDAO
         $stm->bindValue(":data_criacao", $tarefa->getData_criacaoFormatted());
         $stm->bindValue(":id_usuario", $tarefa->getId_usuario());
         $stm->bindValue(":idtb_listas", $tarefa->getIdtb_listas());
+        $stm->bindValue(":id_grupo", $tarefa->getId_grupo());
         $stm->execute();
     }
 
@@ -108,7 +121,7 @@ class TarefaDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "UPDATE tb_tarefas SET nome_tarefa = ?, descricao = ?, dificuldade = ?, prioridade = ?, valor_pontos = ?, data_criacao = ?, concluida = ?, idtb_listas = ? WHERE id_tarefa = ?";
+        $sql = "UPDATE tb_tarefas SET nome_tarefa = ?, descricao = ?, dificuldade = ?, prioridade = ?, valor_pontos = ?, data_criacao = ?, concluida = ?, idtb_listas = ?, id_grupo = ? WHERE id_tarefa = ?";
         $stm = $conn->prepare($sql);
         $stm->bindValue(1, $tarefa->getNome_tarefa());
         $stm->bindValue(2, $tarefa->getDescricao_tarefa());
@@ -118,7 +131,8 @@ class TarefaDAO
         $stm->bindValue(6, $tarefa->getData_criacao());
         $stm->bindValue(7, $tarefa->getConcluida());
         $stm->bindValue(8, $tarefa->getIdtb_listas());
-        $stm->bindValue(9, $tarefa->getId_tarefa());
+        $stm->bindValue(9, $tarefa->getId_grupo());
+        $stm->bindValue(10, $tarefa->getId_tarefa());
         $stm->execute();
     }
 
@@ -154,6 +168,7 @@ class TarefaDAO
             $tarefa->setData_criacao($date_criacao);
             $tarefa->setConcluida($row["concluida"]);
             $tarefa->setIdtb_listas($row["idtb_listas"]);
+            $tarefa->setId_grupo($row["id_grupo"]);
             array_push($tarefas, $tarefa);
         }
 

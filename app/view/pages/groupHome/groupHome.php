@@ -9,6 +9,7 @@ $grupoDAO = new GrupoDAO();
 
 $groupId = isset($_GET['groupId']) ? $_GET['groupId'] : null;
 $groupName = isset($_GET['groupName']) ? $_GET['groupName'] : null;
+$isAdmin = isset($_GET['isAdmin']) ? $_GET['isAdmin'] : null;
 
 // Pegando o id do usuário
 session_status();
@@ -57,5 +58,6 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
     const BASE_URL = '<?= BASEURL; ?>';
     const GROUP_ID = '<?= $groupId; ?>';
     const GROUP_NAME = '<?= $groupName; ?>';
+    const IS_ADMIN = '<?= $isAdmin; ?>';
 </script>
 <script type="module" src="<?= BASEURL; ?>/view/js/groups/lists/groupListsFilter.js"></script>

@@ -54,8 +54,6 @@
         </div>
     </div>
 
-    <input id="idUsuario" name="idUsuario" type="hidden" value="<?php echo $_SESSION[SESSAO_USUARIO_ID]; ?>" />
-
     <div class="btn-wrapper">
         <button class="showMoreBtn btn btn-success">
             <strong>Show more <i class="fas fa-chevron-down arrowIcon task-icon"></i></strong>

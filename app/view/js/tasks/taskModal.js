@@ -141,8 +141,11 @@ async function editTaskModal() {
     }
 }
 
-closeEditBtn.addEventListener('click', closeEditModal);
-taskModalEditBtn.addEventListener('click', closeEditModal);
+if(IS_ADMIN == 1)
+{
+    closeEditBtn.addEventListener('click', closeEditModal);
+    taskModalEditBtn.addEventListener('click', closeEditModal);
+}
 
 export {
     openEditModal
