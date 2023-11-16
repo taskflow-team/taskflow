@@ -163,23 +163,29 @@ function updateTaskList(tasks) {
         const taskDescription = document.createElement('p');
         taskDescription.textContent = descricao_tarefa;
 
-        const editIcon = document.createElement('i');
-        editIcon.className = 'fa-regular fa-pen-to-square task-icon editBtn';
-        editIcon.dataset.taskId = id_tarefa;
-        editIcon.addEventListener('click', () => openEditModal(
-            id_tarefa,
-            nome_tarefa,
-            descricao_tarefa,
-            parseInt(dificuldade),
-            parseInt(prioridade),
-            valor_pontos,
-            idtb_listas
-        ));
+        if(IS_ADMIN == 1)
+        {
+            const editIcon = document.createElement('i');
+            editIcon.className = 'fa-regular fa-pen-to-square task-icon editBtn';
+            editIcon.dataset.taskId = id_tarefa;
+            editIcon.addEventListener('click', () => openEditModal(
+                id_tarefa,
+                nome_tarefa,
+                descricao_tarefa,
+                parseInt(dificuldade),
+                parseInt(prioridade),
+                valor_pontos,
+                idtb_listas
+            ));
 
-        const deleteIcon = document.createElement('i');
-        deleteIcon.className = 'fa-solid fa-trash task-icon deleteBtn';
-        deleteIcon.dataset.id = id_tarefa;
-        deleteIcon.addEventListener('click', deleteTask);
+            const deleteIcon = document.createElement('i');
+            deleteIcon.className = 'fa-solid fa-trash task-icon deleteBtn';
+            deleteIcon.dataset.id = id_tarefa;
+            deleteIcon.addEventListener('click', deleteTask);
+
+            topContentDiv.appendChild(editIcon);
+            topContentDiv.appendChild(deleteIcon);
+        }
 
         const showMoreDiv = document.createElement('div');
         showMoreDiv.className = 'showMoreBtn';
@@ -195,8 +201,7 @@ function updateTaskList(tasks) {
 
         topContentDiv.appendChild(checkbox);
         topContentDiv.appendChild(contentDiv);
-        topContentDiv.appendChild(editIcon);
-        topContentDiv.appendChild(deleteIcon);
+
         topContentDiv.appendChild(showMoreDiv);
 
         liElement.appendChild(topContentDiv);

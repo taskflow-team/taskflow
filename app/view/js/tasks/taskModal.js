@@ -76,9 +76,10 @@ function closeEditModal(element) {
 
 async function populateTaskLists(currentListId) {
     const taskListSelect = document.querySelector('#taskListSelection');
+    let grupo = GROUP_ID == null ? `list` : `listGroup&groupId=${GROUP_ID}`;
 
     try {
-        const response = await fetch(BASE_URL + '/controller/ListaController.php?action=list');
+        const response = await fetch(BASE_URL + '/controller/ListaController.php?action=' + grupo);
         const data = await response.json();
 
         if (response.ok) {

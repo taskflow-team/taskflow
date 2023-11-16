@@ -60,7 +60,10 @@ function updateGroups(groups) {
             const renameBtn = document.createElement('button')
             renameBtn.id = 'renameBtn';
             renameBtn.className = 'btn btn-success';
-            renameBtn.addEventListener('click', () => groupModal(id_usuario, 'rename', group));
+            renameBtn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                groupModal(id_usuario, 'rename', group);
+            });
 
             const editIcon = document.createElement('i');
             editIcon.className = 'fa fa-pencil-square';
@@ -71,7 +74,10 @@ function updateGroups(groups) {
             deleteBtn.id = 'deleteBtn';
             deleteBtn.className = 'btn btn-danger';
             deleteBtn.dataset.id = id_grupo;
-            deleteBtn.addEventListener('click', deleteGroup);
+            deleteBtn.addEventListener('click', (event) => {
+                event.stopPropagation();
+                deleteGroup(event);
+            });
 
             const deleteIcon = document.createElement('i');
             deleteIcon.className = 'fa fa-trash';
@@ -89,7 +95,10 @@ function updateGroups(groups) {
         leaveBtn.id = 'leaveBtn';
         leaveBtn.className = 'btn btn-warning';
         leaveBtn.dataset.id = id_grupo;
-        leaveBtn.addEventListener('click', leaveGroup);
+        leaveBtn.addEventListener('click', (event) => {
+            event.stopPropagation();
+            leaveGroup(event);
+        });
 
         const leaveIcon = document.createElement('i');
         leaveIcon.className = 'fa fa-sign-out';
