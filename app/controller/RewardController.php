@@ -14,6 +14,8 @@ class RewardController extends Controller
 {
 
     private RewardDAO $rewardDao;
+    private RewardService $rewardService;
+    private UsuarioDAO $usuarioDao;
 
     public function __construct()
     {

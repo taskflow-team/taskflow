@@ -7,17 +7,20 @@ error_reporting(E_ALL);
 require_once(__DIR__ . "/../model/Grupo.php");
 require_once(__DIR__ . "/../dao/GrupoDAO.php");
 require_once(__DIR__ . "/../service/GrupoService.php");
+require_once(__DIR__ . "/../dao/UsuarioDAO.php");
 require_once(__DIR__ . "/Controller.php");
 
 class GrupoController extends Controller
 {
     private GrupoDAO $grupoDao;
     private GrupoService $grupoService;
+    private UsuarioDAO $usuarioDao;
 
     public function __construct()
     {
         $this->grupoDao = new GrupoDAO();
         $this->grupoService = new GrupoService();
+        $this->usuarioDao = new UsuarioDAO();
 
         $this->setActionDefault("create");
 
@@ -320,6 +323,40 @@ class GrupoController extends Controller
         header('Content-Type: application/json');
         echo json_encode($response);
         exit;
+    }
+
+    protected function listGroupUsers()
+    {
+        if (!$this->usuarioLogado()) {
+            exit; 
+        }
+    
+        $groupId = $_GET['groupId']; 
+    
+        try {
+            $userIds = $this->grupoDao->getUsersInGroup($groupId);
+            $userIdsArray = array_column($userIds, 'id_usuario');
+    
+            $usersInfo = $this->usuarioDao->getUsersByIds($userIdsArray);
+    
+            $response = [
+                'ok' => true,
+                'data' => $usersInfo
+            ];
+    
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        } catch (PDOException $e) {
+            $response = [
+                'ok' => false,
+                'message' => 'An error occurred',
+                'error' => $e->getMessage()
+            ];
+    
+            http_response_code(500);
+            header('Content-Type: application/json');
+            echo json_encode($response);
+        }
     }
 
     protected function requestTest()

@@ -7,6 +7,25 @@ include_once(__DIR__ . "/../model/Usuario.php");
 
 class UsuarioDAO
 {
+    public function getUsersByIds($userIds)
+    {
+        if (empty($userIds)) {
+            return [];
+        }
+    
+        $conn = Connection::getConn();
+    
+        $inQuery = implode(',', array_fill(0, count($userIds), '?'));
+        $sql = "SELECT * FROM tb_usuarios WHERE id_usuario IN ($inQuery)";
+    
+        $stm = $conn->prepare($sql);
+        foreach ($userIds as $k => $id) {
+            $stm->bindValue(($k+1), $id, PDO::PARAM_INT);
+        }
+        $stm->execute();
+    
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
+    }
 
     //Método para listar os usuaários a partir da base de dados
     public function list()

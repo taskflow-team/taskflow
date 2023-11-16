@@ -61,3 +61,6 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
     const IS_ADMIN = '<?= $isAdmin; ?>';
 </script>
 <script type="module" src="<?= BASEURL; ?>/view/js/groups/lists/groupListsFilter.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/groups/lists/groupListsFunctions.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/groups/lists/groupListsModal.js"></script>
+<script type="module" src="<?= BASEURL; ?>/view/js/groups/users/groupUsersFilter.js"></script>

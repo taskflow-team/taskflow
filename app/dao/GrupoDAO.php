@@ -82,6 +82,21 @@ class GrupoDAO {
         return $grupos;
     } 
 
+    public function getUsersInGroup($groupId)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT u.* FROM tb_usuarios u
+                INNER JOIN tb_grupos_usuarios gu ON u.id_usuario = gu.id_usuario
+                WHERE gu.id_grupo = :groupId";
+
+        $stm = $conn->prepare($sql);
+        $stm->bindParam(':groupId', $groupId, PDO::PARAM_INT);
+        $stm->execute();
+
+        return $stm->fetchAll(PDO::FETCH_ASSOC);
+    }
+
     public function findByIdGrupo($id)
     {
         $conn = Connection::getConn();
