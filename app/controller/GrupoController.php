@@ -294,8 +294,19 @@ class GrupoController extends Controller
         $userId = $_SESSION[SESSAO_USUARIO_ID];
         $groupId = $_GET['id'];
 
-        // Deleta o grupo
+        // Verifica se o usuário é o administrador
+        $isAdmin = $this->grupoDao->isUserAdmin($groupId, $userId);
+
+        // Sai do grupo
         $this->grupoDao->leaveGrupo($groupId, $userId);
+
+        if ($isAdmin) {
+            // Escolhe um novo administrador aleatoriamente
+            $newAdminId = $this->grupoDao->selectRandomMemberAsAdmin($groupId);
+
+            // Atualiza o administrador do grupo
+            $this->grupoDao->updateGroupAdmin($groupId, $newAdminId);
+        }
 
         // Envia a resposta como JSON
         $response = array(

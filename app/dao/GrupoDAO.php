@@ -12,11 +12,35 @@ class GrupoDAO {
     private const SQL_USUARIO_GRUPO = "SELECT tb_usuarios.id_usuario FROM tb_usuarios INNER JOIN tb_grupos_usuarios ON tb_usuarios.id_usuario=tb_grupos_usuarios.id_usuario";
     private const SQL_GRUPOS = "SELECT tb_grupos.id_grupo FROM tb_grupos INNER JOIN tb_grupos_usuarios ON tb_grupos.id_grupo=tb_grupos_usuarios.id_grupo";
 
+    public function isUserAdmin($groupId, $userId)
+    {
+        $conn = Connection::getConn();
+    
+        $sql = "SELECT administrador FROM tb_grupos_usuarios WHERE id_grupo = ? AND id_usuario = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$groupId, $userId]);
+        $result = $stm->fetch();
+    
+        return $result && $result['administrador'] == 1;
+    }    
+
+    public function selectRandomMemberAsAdmin($groupId)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT id_usuario FROM tb_grupos_usuarios WHERE id_grupo = ? AND administrador = 0 ORDER BY RAND() LIMIT 1";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$groupId]);
+        $result = $stm->fetch();
+
+        return $result ? $result['id_usuario'] : null;
+    }
+
     public function getUserGrupos($user_id)
     {   	
         $conn = Connection::getConn();
     
-        $sql = "SELECT g.*, gu.administrador, gu.pontos, gu.id_grupo
+        $sql = "SELECT g.*, gu.id_grupo
                 FROM tb_grupos g
                 INNER JOIN tb_grupos_usuarios gu ON g.idtb_grupos = gu.id_grupo
                 WHERE gu.id_usuario = :user_id";
@@ -116,10 +140,11 @@ class GrupoDAO {
     {
         $conn = Connection::getConn();
 
-        $sql = "UPDATE tb_grupos SET nome = ? WHERE idtb_grupos = ?";
+        $sql = "INSERT INTO tb_grupos (administrador) WHERE idtb_grupos = ? AND administrador = 0  VALUES (?)";
         $stm = $conn->prepare($sql);
         $stm->bindValue(1, $grupo->getNome());
         $stm->bindValue(2, $grupo->getIdtbGrupo());
+        $stm->bindValue(3, 1);
         $stm->execute();
     }
 
@@ -134,7 +159,22 @@ class GrupoDAO {
         $stm->execute();
     }
 
-    public function leaveGrupo(int $groupId, int $userId)
+    public function updateGroupAdmin($groupId, $newAdminId)
+    {
+        $conn = Connection::getConn();
+    
+        // Primeiro, define todos os usuários como não administradores
+        $sql = "UPDATE tb_grupos_usuarios SET administrador = 0 WHERE id_grupo = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$groupId]);
+    
+        // Em seguida, define o novo administrador
+        $sql = "UPDATE tb_grupos_usuarios SET administrador = 1 WHERE id_grupo = ? AND id_usuario = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$groupId, $newAdminId]);
+    }
+
+    public function leaveGrupo($groupId, $userId)
     {
         $conn = Connection::getConn();
 

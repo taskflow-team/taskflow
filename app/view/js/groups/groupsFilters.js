@@ -76,7 +76,7 @@ function updateGroups(groups) {
             deleteBtn.dataset.id = id_grupo;
             deleteBtn.addEventListener('click', (event) => {
                 event.stopPropagation();
-                deleteGroup(event);
+                deleteGroup(id_grupo);
             });
 
             const deleteIcon = document.createElement('i');
@@ -94,10 +94,9 @@ function updateGroups(groups) {
         const leaveBtn = document.createElement('button');
         leaveBtn.id = 'leaveBtn';
         leaveBtn.className = 'btn btn-warning';
-        leaveBtn.dataset.id = id_grupo;
         leaveBtn.addEventListener('click', (event) => {
             event.stopPropagation();
-            leaveGroup(event);
+            leaveGroup(id_grupo);
         });
 
         const leaveIcon = document.createElement('i');

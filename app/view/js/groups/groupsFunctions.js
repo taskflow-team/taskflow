@@ -113,10 +113,7 @@ async function renameGroup(groupId){
     }
 }
 
-async function deleteGroup(event){
-    const deleteBtn = event.target;
-    const groupId = deleteBtn.dataset.id;
-
+async function deleteGroup(groupId){
     try {
         const response = await fetch(`GrupoController.php?action=delete&id=${groupId}`, {
             method: "DELETE",
@@ -135,10 +132,7 @@ async function deleteGroup(event){
     }
 }
 
-async function leaveGroup(event){
-    const leaveBtn = event.target;
-    const groupId = leaveBtn.dataset.id;
-
+async function leaveGroup(groupId){
     try {
         const response = await fetch(`GrupoController.php?action=leaveGroup&id=${groupId}`, {
             method: "DELETE",
