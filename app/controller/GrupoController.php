@@ -296,16 +296,19 @@ class GrupoController extends Controller
 
         // Verifica se o usuário é o administrador
         $isAdmin = $this->grupoDao->isUserAdmin($groupId, $userId);
+        $hasOtherAdmins = $this->grupoDao->hasOtherAdministrators($groupId, $userId);
 
         // Sai do grupo
         $this->grupoDao->leaveGrupo($groupId, $userId);
 
-        if ($isAdmin) {
+        if ($isAdmin && !$hasOtherAdmins) {
             // Escolhe um novo administrador aleatoriamente
             $newAdminId = $this->grupoDao->selectRandomMemberAsAdmin($groupId);
 
-            // Atualiza o administrador do grupo
-            $this->grupoDao->updateGroupAdmin($groupId, $newAdminId);
+            if ($newAdminId) {
+                // Atualiza o administrador do grupo
+                $this->grupoDao->updateGroupAdmin($groupId, $newAdminId);
+            }
         }
 
         // Envia a resposta como JSON
