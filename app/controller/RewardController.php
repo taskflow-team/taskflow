@@ -102,6 +102,37 @@ class RewardController extends Controller
         }
     }
 
+    protected function listGroup()
+    {
+        if (!$this->usuarioLogado()) {
+            exit;
+        }
+
+        $rule = $_GET['rule'];
+        $groupId = $_GET['groupId'];
+
+        $rewards = $this->rewardDao->findAllRewardsByGroupId($groupId, $rule);
+
+        $response = array(
+            'message' => 'Success',
+            'data' => array_map(function ($reward) {
+                return (object) array(
+                    'id_reward' => $reward->getIdReward(),
+                    'reward_name' => $reward->getRewardName(),
+                    'reward_cost' => $reward->getRewardCost(),
+                    'id_user' => $reward->getIdUser(),
+                    'id_group' => $reward->getIdGroup(),
+                    'reward_unities' => $reward->getRewardUnities(),
+                    'claimed_times' => $reward->getClaimed_times(),
+                );
+            }, $rewards)
+        );
+
+        ob_clean();
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+
     protected function list()
     {
         if (!$this->usuarioLogado()) {
@@ -199,12 +230,14 @@ class RewardController extends Controller
         $rewardCost = $requestData['rewardCost'];
         $rewardUnities = $requestData['rewardUnities'];
         $userID = $requestData['userID'];
+        $groupID = isset($requestData['groupID']) ? $requestData['groupID'] : null;
 
         $reward = new Reward();
         $reward->setRewardName($rewardName);
         $reward->setRewardCost($rewardCost);
         $reward->setRewardUnities($rewardUnities);
         $reward->setIdUser($userID);
+        $reward->setIdGroup($groupID);
 
         $erros = $this->rewardService->validarDados($reward);
 

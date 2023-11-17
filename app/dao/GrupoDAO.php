@@ -12,6 +12,25 @@ class GrupoDAO {
     private const SQL_USUARIO_GRUPO = "SELECT tb_usuarios.id_usuario FROM tb_usuarios INNER JOIN tb_grupos_usuarios ON tb_usuarios.id_usuario=tb_grupos_usuarios.id_usuario";
     private const SQL_GRUPOS = "SELECT tb_grupos.id_grupo FROM tb_grupos INNER JOIN tb_grupos_usuarios ON tb_grupos.id_grupo=tb_grupos_usuarios.id_grupo";
 
+    public function getGroupUserPoints($groupId, $userId) {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT pontos FROM tb_grupos_usuarios WHERE id_grupo = ? AND id_usuario = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$groupId, $userId]);
+        $result = $stm->fetch();
+
+        return $result ? $result['pontos'] : 0;
+    }
+
+    public function updateGroupUserPoints($groupId, $userId, $points) {
+        $conn = Connection::getConn();
+
+        $sql = "UPDATE tb_grupos_usuarios SET pontos = pontos + ? WHERE id_grupo = ? AND id_usuario = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$points, $groupId, $userId]);
+    }
+
     public function hasOtherAdministrators($groupId, $userId)
     {
         $conn = Connection::getConn();

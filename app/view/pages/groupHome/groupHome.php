@@ -44,13 +44,16 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
             <div id="lists-holder" class="lists-holder">
             </div>
 
-            <div id="rewards-holder" class="rewards-holder">
+            <div id="rewards-controls-holder">
                 <button id="addRewardBtn" class="btn btn-success">Add Reward</button>
 
                 <div class="rewards-filters">
                     <button class="btn-filter-available btn btn-success active">Available</button>
-                    <button class="btn-filter-unavalible btn btn-success">Unavalible</button>
+                    <button class="btn-filter-unavailable btn btn-success">Unavailable</button>
                 </div>
+            </div>
+
+            <div id="rewards-holder" class="rewards-holder">
             </div>
         </div>
 
@@ -75,11 +78,13 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
     document.getElementById('btn-lists').addEventListener('click', function() {
         document.getElementById('lists-holder').style.display = 'grid';
         document.getElementById('rewards-holder').style.display = 'none';
+        document.getElementById('rewards-controls-holder').style.display = 'none';
     });
 
     document.getElementById('btn-rewards').addEventListener('click', function() {
         document.getElementById('lists-holder').style.display = 'none';
         document.getElementById('rewards-holder').style.display = 'block';
+        document.getElementById('rewards-controls-holder').style.display = 'block';
     });
 </script>
 <script type="module" src="<?= BASEURL; ?>/view/js/groups/lists/groupListsFilter.js"></script>

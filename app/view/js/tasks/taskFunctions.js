@@ -70,6 +70,7 @@ async function completeTask(event) {
             body: JSON.stringify({
                 taskId: taskId,
                 userID: userID,
+                groupID: GROUP_ID,
                 taskCompleted: taskCompleted
             })
         };

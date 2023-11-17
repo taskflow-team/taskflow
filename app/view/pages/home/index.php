@@ -42,7 +42,7 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 
     <div class="rewards-filters">
         <button class="btn-filter-available btn btn-success active">Available</button>
-        <button class="btn-filter-unavalible btn btn-success">Unavalible</button>
+        <button class="btn-filter-unavailable btn btn-success">Unavailable</button>
     </div>
 
     <div class="rewards-holder" >

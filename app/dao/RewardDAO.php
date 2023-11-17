@@ -14,22 +14,46 @@ class RewardDAO
     public function findAllRewards($idUsuario, $rule)
     {
         $conn = Connection::getConn();
+    
+        if ($rule == "available") {
+            $sql = "SELECT * FROM tb_rewards r WHERE r.id_user = ? AND reward_unities > 0 AND r.id_group IS NULL";
+        } 
+        elseif ($rule == "unavailable") {
+            $sql = "SELECT * FROM tb_rewards r WHERE r.id_user = ? AND reward_unities = 0 AND r.id_group IS NULL";
+        } 
+        else {
+            $sql = "SELECT * FROM tb_rewards r WHERE r.id_user = ? AND r.id_group IS NULL";
+        }
+    
+        $stm = $conn->prepare($sql);
+        $stm->bindValue(1, $idUsuario);
+    
+        $stm->execute();
+        $result = $stm->fetchAll();
+    
+        return $this->mapRewards($result);
+    }
+    
+
+    public function findAllRewardsByGroupId($groupId, $rule)
+    {
+        $conn = Connection::getConn();
 
         if($rule == "available")
         {
-            $sql = "SELECT * FROM tb_rewards r WHERE r.id_user = ? AND reward_unities > 0";
+            $sql = "SELECT * FROM tb_rewards r WHERE r.id_group = ? AND reward_unities > 0";
         }   
-        else if($rule == "unavalible")
+        else if($rule == "unavailable")
         {
             $rule = 0;
-            $sql = "SELECT * FROM tb_rewards r WHERE r.id_user = ? AND reward_unities = " . $rule;
+            $sql = "SELECT * FROM tb_rewards r WHERE r.id_group = ? AND reward_unities = " . $rule;
         }
         else
         {
-            $sql = "SELECT * FROM tb_rewards r WHERE r.id_user = ?";
+            $sql = "SELECT * FROM tb_rewards r WHERE r.id_group = ?";
         }
         $stm = $conn->prepare($sql);
-        $stm->execute([$idUsuario]);
+        $stm->execute([$groupId]);
         $result = $stm->fetchAll();
 
         return $this->mapRewards($result);

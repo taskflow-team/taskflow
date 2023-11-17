@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 require_once(__DIR__ . "/../model/Tarefa.php");
 require_once(__DIR__ . "/../dao/TarefaDAO.php");
 require_once(__DIR__ . "/../dao/UsuarioDAO.php");
+require_once(__DIR__ . "/../dao/GrupoDAO.php");
 require_once(__DIR__ . "/../service/TarefaService.php");
 require_once(__DIR__ . "/Controller.php");
 
@@ -22,6 +23,7 @@ class TarefaController extends Controller
         $this->tarefaDao = new TarefaDAO();
         $this->tarefaService = new TarefaService();
         $this->usuarioDao = new UsuarioDAO();
+        $this->GrupoDao = new GrupoDAO();
 
         $this->setActionDefault("list");
 
@@ -60,7 +62,7 @@ class TarefaController extends Controller
             $query_rule = 'id_tarefa';
         }
 
-        if(is_null($groupID))
+        if($groupID == null)
         {
             $tarefas = $this->tarefaDao->listTarefas($userID, $listID, $query_rule);
         }
@@ -181,32 +183,26 @@ class TarefaController extends Controller
         $tarefaId = $requestData['taskId'];
         $taskCompleted = $requestData['taskCompleted'];
         $userId = $requestData['userID'];
+        $groupID = isset($requestData['groupID']) ? $requestData['groupID'] : null;
 
         $tarefa = $this->tarefaDao->findByIdTarefa($tarefaId);
-
         $tarefa->setConcluida($taskCompleted ? 1 : 0);
 
         try {
             $this->tarefaDao->updateTarefa($tarefa);
 
-            // Se a tarefa foi marcada como concluída, adicionar os pontos ao usuário
-            if ($taskCompleted) {
+            $taskPoints = $tarefa->getValor_pontos();
+
+            if ($groupID == null) {   
                 $user = $this->usuarioDao->findById($userId);
                 $userPoints = $user->getPontos();
-                $taskPoints = $tarefa->getValor_pontos();
-    
-                // Adiciona os pontos da tarefa aos pontos do usuário
-                $user->setPontos($userPoints + $taskPoints);
+                $newPoints = $taskCompleted ? ($userPoints + $taskPoints) : ($userPoints - $taskPoints);
+                $user->setPontos($newPoints);
                 $this->usuarioDao->update($user);
-            } else if(!$taskCompleted)
-            {
-                $user = $this->usuarioDao->findById($userId);
-                $userPoints = $user->getPontos();
-                $taskPoints = $tarefa->getValor_pontos();
-    
-                // Adiciona os pontos da tarefa aos pontos do usuário
-                $user->setPontos($userPoints - $taskPoints);
-                $this->usuarioDao->update($user);
+            } else {
+                $groupUserPoints = $this->GrupoDao->getGroupUserPoints($groupID, $userId);
+                $newPoints = $taskCompleted ? ($groupUserPoints + $taskPoints) : ($groupUserPoints - $taskPoints);
+                $this->GrupoDao->updateGroupUserPoints($groupID, $userId, $newPoints);
             }
 
             $response = array(

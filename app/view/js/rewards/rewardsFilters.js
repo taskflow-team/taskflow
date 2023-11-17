@@ -4,7 +4,7 @@ import fetchUserData from "../user/fetchUserData.js";
 
 let user;
 const availableBtn = document.querySelector('.btn-filter-available');
-const unavalibleBtn = document.querySelector('.btn-filter-unavalible');
+const unavailableBtn = document.querySelector('.btn-filter-unavailable');
 
 async function updateUserData() {
     user = await fetchUserData();
@@ -21,13 +21,13 @@ async function fetchRewards(){
     let selectedRule = 0;
 
     let availableBtnRule = availableBtn.classList.contains("active") ? 1 : 2;
-    let unavalibleBtnRule = unavalibleBtn.classList.contains("active") ? 1 : 2;
+    let unavailableBtnRule = unavailableBtn.classList.contains("active") ? 1 : 2;
 
-    if(availableBtnRule == 1 && unavalibleBtnRule == 2)
+    if(availableBtnRule == 1 && unavailableBtnRule == 2)
     {  
         selectedRule = 1;
     }
-    else if(availableBtnRule == 2 && unavalibleBtnRule == 1)
+    else if(availableBtnRule == 2 && unavailableBtnRule == 1)
     {
         selectedRule = 2;
     }
@@ -41,7 +41,7 @@ async function fetchRewards(){
     if (selectedRule == 1 ) {
         rule =  'available';
     } else if(selectedRule == 2) {
-        rule = 'unavalible';
+        rule = 'unavailable';
     } else {
         rule = '';
     }
@@ -150,19 +150,19 @@ availableBtn.addEventListener('click', function(){
     else
     {
         availableBtn.classList.add("active");
-        unavalibleBtn.classList.remove("active");
+        unavailableBtn.classList.remove("active");
     }
     fetchRewards();
 });
 
-unavalibleBtn.addEventListener('click', function(){
-    if(unavalibleBtn.classList.contains("active"))
+unavailableBtn.addEventListener('click', function(){
+    if(unavailableBtn.classList.contains("active"))
     {
-        unavalibleBtn.classList.remove("active");
+        unavailableBtn.classList.remove("active");
     }
     else
     {
-        unavalibleBtn.classList.add("active");
+        unavailableBtn.classList.add("active");
         availableBtn.classList.remove("active");
     }
     fetchRewards();

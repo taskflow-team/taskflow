@@ -3,7 +3,7 @@ import notificate from "../../notification.js";
 
 let user;
 const availableBtn = document.querySelector('.btn-filter-available');
-const unavalibleBtn = document.querySelector('.btn-filter-unavalible');
+const unavailableBtn = document.querySelector('.btn-filter-unavailable');
 
 async function fetchUserData() {
     const reqConfigs = {
@@ -47,13 +47,13 @@ async function fetchRewards(){
     let selectedRule = 0;
 
     let availableBtnRule = availableBtn.classList.contains("active") ? 1 : 2;
-    let unavalibleBtnRule = unavalibleBtn.classList.contains("active") ? 1 : 2;
+    let unavailableBtnRule = unavailableBtn.classList.contains("active") ? 1 : 2;
 
-    if(availableBtnRule == 1 && unavalibleBtnRule == 2)
+    if(availableBtnRule == 1 && unavailableBtnRule == 2)
     {  
         selectedRule = 1;
     }
-    else if(availableBtnRule == 2 && unavalibleBtnRule == 1)
+    else if(availableBtnRule == 2 && unavailableBtnRule == 1)
     {
         selectedRule = 2;
     }
@@ -67,7 +67,7 @@ async function fetchRewards(){
     if (selectedRule == 1 ) {
         rule =  'available';
     } else if(selectedRule == 2) {
-        rule = 'unavalible';
+        rule = 'unavailable';
     } else {
         rule = '';
     }
@@ -80,7 +80,7 @@ async function fetchRewards(){
     };
 
     try {
-        const response = await fetch(BASE_URL + '/controller/RewardController.php?action=list&rule=' + rule, reqConfigs);
+        const response = await fetch(BASE_URL + '/controller/RewardController.php?action=listGroup&rule=' + rule + `&groupId=${GROUP_ID}`, reqConfigs);
         const responseData = await response.json();
 
         if (!response.ok || response.status == 404) {
@@ -176,19 +176,19 @@ availableBtn.addEventListener('click', function(){
     else
     {
         availableBtn.classList.add("active");
-        unavalibleBtn.classList.remove("active");
+        unavailableBtn.classList.remove("active");
     }
     fetchRewards();
 });
 
-unavalibleBtn.addEventListener('click', function(){
-    if(unavalibleBtn.classList.contains("active"))
+unavailableBtn.addEventListener('click', function(){
+    if(unavailableBtn.classList.contains("active"))
     {
-        unavalibleBtn.classList.remove("active");
+        unavailableBtn.classList.remove("active");
     }
     else
     {
-        unavalibleBtn.classList.add("active");
+        unavailableBtn.classList.add("active");
         availableBtn.classList.remove("active");
     }
     fetchRewards();

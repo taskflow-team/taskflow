@@ -17,6 +17,7 @@ async function createReward(userID){
                 rewardName: rewardName,
                 rewardCost: rewardCost,
                 rewardUnities: rewardUnities,
+                groupID: GROUP_ID,
                 userID: userID
             })
         };
