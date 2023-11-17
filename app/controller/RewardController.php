@@ -7,6 +7,7 @@ error_reporting(E_ALL);
 require_once(__DIR__ . "/../model/Reward.php");
 require_once(__DIR__ . "/../dao/RewardDAO.php");
 require_once(__DIR__ . "/../dao/UsuarioDAO.php");
+require_once(__DIR__ . "/../dao/GrupoDAO.php");
 require_once(__DIR__ . "/../service/RewardService.php");
 require_once(__DIR__ . "/Controller.php");
 
@@ -16,12 +17,14 @@ class RewardController extends Controller
     private RewardDAO $rewardDao;
     private RewardService $rewardService;
     private UsuarioDAO $usuarioDao;
+    private GrupoDAO $grupoDao;
 
     public function __construct()
     {
         $this->rewardDao = new RewardDAO();
         $this->rewardService = new RewardService();
         $this->usuarioDao = new UsuarioDAO();
+        $this->grupoDao = new GrupoDAO();
 
         $this->setActionDefault("list");
 
@@ -38,32 +41,27 @@ class RewardController extends Controller
     {
         $jsonString = file_get_contents('php://input');
         $requestData = json_decode($jsonString, true);
-
+    
         if ($requestData === null) {
             $response = array(
                 'message' => 'Invalid JSON data',
             );
-
+    
             header('Content-Type: application/json');
             echo json_encode($response);
             exit;
         }
-
+    
         $userID = $requestData['userID'];
         $rewardID = $requestData['rewardID'];
-
+        $groupID = isset($requestData['groupID']) ? $requestData['groupID'] : null;
+    
         $reward = $this->rewardDao->findRewardById($rewardID);
-
+    
         $claimed_times = $reward->getClaimed_times();
         $reward_unities = $reward->getRewardUnities();
-
-        if($reward_unities > 0)
-        {
-            $reward->setRewardUnities($reward_unities - 1);
-            $reward->setClaimed_times($claimed_times + 1);
-        }
-        else
-        {
+    
+        if ($reward_unities <= 0) {
             $response = array(
                 'ok' => false,
                 'error' => 'This reward does not have more unities to claim.'
@@ -72,20 +70,30 @@ class RewardController extends Controller
             echo json_encode($response);
             exit;
         }
-
+    
+        $reward->setRewardUnities($reward_unities - 1);
+        $reward->setClaimed_times($claimed_times + 1);
+    
         try {
             $this->rewardDao->updateReward($reward);
-
-            $user = $this->usuarioDao->findById($userID);
-            $userPoints = $user->getPontos();
+    
             $rewardCost = $reward->getRewardCost();
-
-            $user->setPontos($userPoints - $rewardCost);
-            $this->usuarioDao->update($user);
-
+    
+            if ($groupID == null) {
+                $user = $this->usuarioDao->findById($userID);
+                $userPoints = $user->getPontos();
+                $newPoints = $userPoints - $rewardCost; 
+                $user->setPontos($newPoints);
+                $this->usuarioDao->update($user);
+            } else {
+                $groupUserPoints = $this->grupoDao->getGroupUserPoints($groupID, $userID);
+                $newPoints = $groupUserPoints - $rewardCost; 
+                $this->grupoDao->updateGroupUserPoints($groupID, $userID, $newPoints);
+            }
+    
             $response = array(
                 'ok' => true,
-                'message' => 'Reward updated successfully.'
+                'message' => 'Reward claimed successfully.'
             );
             header('Content-Type: application/json');
             echo json_encode($response);

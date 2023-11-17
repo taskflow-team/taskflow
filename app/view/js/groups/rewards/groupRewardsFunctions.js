@@ -112,10 +112,11 @@ async function deleteReward(event){
     });
 }
 
-async function claimReward(event, user, reward){
+async function claimReward(event, points, reward){
     const element = event.target;
+    const userID = document.querySelector("#idUsuario").value;
 
-    if(reward.reward_cost > user.pontos){
+    if(reward.reward_cost > points){
         notificate('warning', 'Warning', "You don't have enough emeralds, please complete more tasks");
         return;
     }
@@ -131,7 +132,8 @@ async function claimReward(event, user, reward){
                     'Content-type': 'application/json'
                 },
                 body: JSON.stringify({
-                    userID: user.id,
+                    userID: userID,
+                    groupID: GROUP_ID,
                     rewardID: reward.id_reward
                 })
             };
@@ -166,8 +168,6 @@ async function claimReward(event, user, reward){
     element.appendChild(confirmBtn);
     element.appendChild(cancelBtn);
 }
-
-
 
 export {
     deleteReward,

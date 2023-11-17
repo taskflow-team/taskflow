@@ -69,6 +69,8 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
     </div>
 </div>
 
+<input id="idUsuario" name="idUsuario" type="hidden" value="<?php echo $_SESSION[SESSAO_USUARIO_ID]; ?>" />
+
 <script>
     const BASE_URL = '<?= BASEURL; ?>';
     const GROUP_ID = '<?= $groupId; ?>';

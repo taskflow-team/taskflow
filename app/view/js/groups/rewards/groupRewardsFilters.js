@@ -33,6 +33,8 @@ async function updateUserGroupPoints() {
 
     const pointsHolder = document.querySelector('#emeralds-holder');
     pointsHolder.innerText = points;
+
+    fetchRewards();
 }
 
 updateUserGroupPoints();
@@ -93,6 +95,12 @@ async function fetchRewards(){
 }
 
 function updateRewards(rewards) {
+    if(IS_ADMIN == 0)
+    {
+        const rewardCard = document.querySelector('#addRewardBtn');
+        rewardCard.style.display = 'none';
+    }
+
     const rewardsHolder = document.querySelector('.rewards-holder');
     rewardsHolder.innerHTML = '';
 
@@ -140,20 +148,25 @@ function updateRewards(rewards) {
         const functionsDiv = document.createElement('div');
         functionsDiv.className = 'rewards-functions functions-show';
 
+        const points = document.querySelector('#emeralds-holder').innerText;
+
         const claimBtn = document.createElement('button')
         claimBtn.id = 'claimBtn';
         claimBtn.innerText = 'Claim';
-        claimBtn.addEventListener('click', (event) => claimReward(event, user, reward));
+        claimBtn.addEventListener('click', (event) => claimReward(event, points, reward));
 
         functionsDiv.appendChild(claimBtn);
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.id = 'deleteBtn';
-        deleteBtn.dataset.id = id_reward;
-        deleteBtn.innerText = 'Delete';
-        deleteBtn.addEventListener('click', deleteReward);
-        
-        functionsDiv.appendChild(deleteBtn);
+        if(IS_ADMIN == 1)
+        {
+            const deleteBtn = document.createElement('button');
+            deleteBtn.id = 'deleteBtn';
+            deleteBtn.dataset.id = id_reward;
+            deleteBtn.innerText = 'Delete';
+            deleteBtn.addEventListener('click', deleteReward);
+            
+            functionsDiv.appendChild(deleteBtn);
+        }
 
         rewardCard.appendChild(defaultContent);
         rewardCard.appendChild(functionsDiv);

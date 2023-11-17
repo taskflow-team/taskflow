@@ -25,12 +25,11 @@ class GrupoDAO {
 
     public function updateGroupUserPoints($groupId, $userId, $points) {
         $conn = Connection::getConn();
-
-        $sql = "UPDATE tb_grupos_usuarios SET pontos = pontos + ? WHERE id_grupo = ? AND id_usuario = ?";
+        $sql = "UPDATE tb_grupos_usuarios SET pontos = ? WHERE id_grupo = ? AND id_usuario = ?";
         $stm = $conn->prepare($sql);
         $stm->execute([$points, $groupId, $userId]);
     }
-
+    
     public function hasOtherAdministrators($groupId, $userId)
     {
         $conn = Connection::getConn();
