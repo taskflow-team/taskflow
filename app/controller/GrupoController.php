@@ -288,6 +288,33 @@ class GrupoController extends Controller
         exit;
     }
 
+    public function getUserGroupPoints() 
+    {
+        if (!$this->usuarioLogado()) {
+            exit;
+        }
+
+        $userId = $_SESSION[SESSAO_USUARIO_ID];
+        $groupId = $_GET['groupId'];
+    
+        try {
+            $points = $this->grupoDao->getGroupUserPoints($groupId, $userId);
+    
+            $response = array(
+                'ok' => true,
+                'points' => $points
+            );
+        } catch (Exception $e) {
+            $response = array(
+                'ok' => false,
+                'error' => $e->getMessage()
+            );
+        }
+    
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+
     protected function leaveGroup()
     {
         if (!$this->usuarioLogado()) {

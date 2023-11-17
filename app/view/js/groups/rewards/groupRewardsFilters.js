@@ -5,7 +5,7 @@ let user;
 const availableBtn = document.querySelector('.btn-filter-available');
 const unavailableBtn = document.querySelector('.btn-filter-unavailable');
 
-async function fetchUserData() {
+async function fetchUserGroupPoints() {
     const reqConfigs = {
         method: "GET",
         headers: {
@@ -14,34 +14,28 @@ async function fetchUserData() {
     };
 
     try {
-        const response = await fetch(BASE_URL + '/controller/UsuarioController.php?action=getUserData', reqConfigs);
+        const response = await fetch(BASE_URL + `/controller/GrupoController.php?action=getUserGroupPoints&groupId=${GROUP_ID}`, reqConfigs);
         const responseData = await response.json();
 
         if (!response.ok || response.status == 404) {
-            notificate(
-                'error',
-                'Erro',
-                responseData.error
-            );
+            notificate('error', 'Erro', responseData.error);
         }
 
-        return responseData.user;
+        return responseData.points;
 
     } catch (error) {
         notificate('error', 'Error', error);
     }
 }
 
-async function updateUserData() {
-    user = await fetchUserData();
+async function updateUserGroupPoints() {
+    const points = await fetchUserGroupPoints();
 
-    const emeraldsHolder = document.querySelector('#emeralds-holder');
-    emeraldsHolder.innerText = user.pontos;
-
-    fetchRewards();
+    const pointsHolder = document.querySelector('#emeralds-holder');
+    pointsHolder.innerText = points;
 }
 
-updateUserData();
+updateUserGroupPoints();
 
 async function fetchRewards(){
     let selectedRule = 0;
@@ -196,5 +190,5 @@ unavailableBtn.addEventListener('click', function(){
 
 export {
     fetchRewards,
-    updateUserData
+    updateUserGroupPoints
 }

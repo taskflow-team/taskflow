@@ -1,4 +1,4 @@
-import { fetchRewards, updateUserData } from "./groupRewardsFilters.js";
+import { fetchRewards, updateUserGroupPoints } from "./groupRewardsFilters.js";
 import { closeModal } from "./groupRewardsModal.js";
 import notificate from "../../notification.js";
 
@@ -60,7 +60,7 @@ async function renameReward(rewardID){
 
         closeModal();
         fetchRewards();
-        updateUserData();
+        updateUserGroupPoints();
     } catch (error) {
         notificate('error', 'Error', error.message);
     }
@@ -147,7 +147,7 @@ async function claimReward(event, user, reward){
                 );
             }
 
-            updateUserData();
+            updateUserGroupPoints();
         } catch (error) {
             notificate('error', 'Error', error.message);
         }
