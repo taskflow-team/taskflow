@@ -16,7 +16,7 @@ $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
     <div class="top-content">
         <h2>Personal Lists</h2>
 
-        <div class="top-content-buttons" >
+        <div class="top-content-buttons">
             <div class="emeralds-section top-button">
                 <img src="<?= BASEURL . '/view/assets/icons/emerald.png'?>" alt="Emerald icon">
                 <span id="emeralds-holder"></span>
