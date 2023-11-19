@@ -12,6 +12,27 @@ class GrupoDAO {
     private const SQL_USUARIO_GRUPO = "SELECT tb_usuarios.id_usuario FROM tb_usuarios INNER JOIN tb_grupos_usuarios ON tb_usuarios.id_usuario=tb_grupos_usuarios.id_usuario";
     private const SQL_GRUPOS = "SELECT tb_grupos.id_grupo FROM tb_grupos INNER JOIN tb_grupos_usuarios ON tb_grupos.id_grupo=tb_grupos_usuarios.id_grupo";
 
+    public function removeUserFromAdmin($userId) {
+        $conn = Connection::getConn();
+        $sql = "UPDATE tb_grupos_usuarios SET administrador = 0 WHERE id_usuario = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$userId]);
+    }
+
+    public function turnUserToAdmin($userId) {
+        $conn = Connection::getConn();
+        $sql = "UPDATE tb_grupos_usuarios SET administrador = 1 WHERE id_usuario = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$userId]);
+    }
+
+    public function banUserFromGroup($userId) {
+        $conn = Connection::getConn();
+        $sql = "DELETE FROM tb_grupos_usuarios WHERE id_usuario = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$userId]);
+    }
+
     public function getGroupUserPoints($groupId, $userId) {
         $conn = Connection::getConn();
 
@@ -81,7 +102,7 @@ class GrupoDAO {
         return $result && $result['administrador'] == 1;
     }
 
-    public function getUserGrupos($user_id)
+    public function getUserGroup($user_id)
     {   	
         $conn = Connection::getConn();
     
@@ -103,17 +124,17 @@ class GrupoDAO {
     public function getUsersInGroup($groupId)
     {
         $conn = Connection::getConn();
-
-        $sql = "SELECT u.* FROM tb_usuarios u
+    
+        $sql = "SELECT u.*, gu.administrador FROM tb_usuarios u
                 INNER JOIN tb_grupos_usuarios gu ON u.id_usuario = gu.id_usuario
                 WHERE gu.id_grupo = :groupId";
-
+    
         $stm = $conn->prepare($sql);
         $stm->bindParam(':groupId', $groupId, PDO::PARAM_INT);
         $stm->execute();
-
+    
         return $stm->fetchAll(PDO::FETCH_ASSOC);
-    }
+    }    
 
     public function findByIdGrupo($id)
     {

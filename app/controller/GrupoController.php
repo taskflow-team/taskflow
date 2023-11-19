@@ -100,7 +100,7 @@ class GrupoController extends Controller
         $userID = $_SESSION[SESSAO_USUARIO_ID];
 
         // Obtém todas as grupos
-        $grupos = $this->grupoDao->getUserGrupos($userID);
+        $grupos = $this->grupoDao->getUserGroup($userID);
 
         // Cria um array de resposta contendo a mensagem de sucesso e os dados das grupos
         $response = array(
@@ -315,6 +315,45 @@ class GrupoController extends Controller
         echo json_encode($response);
     }
 
+    protected function turnToAdmin() {
+        $userId = $_GET['userId'];
+        $this->grupoDao->turnUserToAdmin($userId);
+
+        $response = array(
+            'ok' => true,
+            'message' => 'User turned to admin successfully.'
+        );
+
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+
+    protected function removeAdmin() {
+        $userId = $_GET['userId'];
+        $this->grupoDao->removeUserFromAdmin($userId);
+
+        $response = array(
+            'ok' => true,
+            'message' => 'Admin rights removed successfully.'
+        );
+
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+
+    protected function banUser() {
+        $userId = $_GET['userId'];
+        $this->grupoDao->banUserFromGroup($userId);
+
+        $response = array(
+            'ok' => true,
+            'message' => 'User banned successfully.'
+        );
+
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+
     protected function leaveGroup()
     {
         if (!$this->usuarioLogado()) {
@@ -361,10 +400,7 @@ class GrupoController extends Controller
         $groupId = $_GET['groupId']; 
     
         try {
-            $userIds = $this->grupoDao->getUsersInGroup($groupId);
-            $userIdsArray = array_column($userIds, 'id_usuario');
-    
-            $usersInfo = $this->usuarioDao->getUsersByIds($userIdsArray);
+            $usersInfo = $this->grupoDao->getUsersInGroup($groupId);
     
             $response = [
                 'ok' => true,
@@ -384,7 +420,7 @@ class GrupoController extends Controller
             header('Content-Type: application/json');
             echo json_encode($response);
         }
-    }
+    }    
 
     protected function requestTest()
     {

@@ -76,6 +76,7 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
     const GROUP_ID = '<?= $groupId; ?>';
     const GROUP_NAME = '<?= $groupName; ?>';
     const IS_ADMIN = '<?= $isAdmin; ?>';
+    const USER = '<?= $id_usuario; ?>';
 
     document.getElementById('btn-lists').addEventListener('click', function() {
         document.getElementById('lists-holder').style.display = 'grid';
