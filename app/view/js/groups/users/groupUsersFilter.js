@@ -79,8 +79,6 @@ function updateUsersSidebar(users) {
     membersTable.appendChild(tableHeader);
 
     users.forEach((user) => {
-        console.log(user);
-
         const userRow = document.createElement('tr');
         userRow.className = 'user-row';
 

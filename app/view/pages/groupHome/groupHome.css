@@ -14,9 +14,10 @@
     margin: 10px 0 0 0;
 }
 
-.navigation-bar button {
+.navigation-bar button, .group-emeralds{
     margin-right: 0;
     border-radius: 0;
+    padding: 6px 12px;
     background-color: transparent;
     color: #FFF;
     border:  2px solid #4DD167;
@@ -40,6 +41,20 @@
 
 .navigation-bar #btn-members{
     border-top-right-radius: 5px;
+}
+
+.group-emeralds{
+    width: 165px;
+    margin-left: auto;
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
+    display: flex;
+    align-self: center;
+    justify-content: space-between;
+}
+
+.group-emeralds img{
+    height: 22px;
 }
 
 .line{
@@ -86,6 +101,10 @@
 
 .group-reward span{
     font-size: 17px;
+}
+
+#rewards-controls-holder .rewards-filters{
+    margin-bottom: 30px;
 }
 
 .members-table th{
