@@ -18,6 +18,8 @@ if(IS_ADMIN == 1)
         const formData = Object.fromEntries(rawFormContent);
         taskForm.reset();
 
+        const groupConfirmation = GROUP_ID == "" ? null : GROUP_ID;
+
         try {
             const reqConfigs = {
                 method: "POST",
@@ -27,7 +29,7 @@ if(IS_ADMIN == 1)
                 body: JSON.stringify({
                     formData: formData,
                     userID: userID,
-                    groupID: GROUP_ID,
+                    groupID: groupConfirmation,
                     listID: LIST_ID 
                 })
             };

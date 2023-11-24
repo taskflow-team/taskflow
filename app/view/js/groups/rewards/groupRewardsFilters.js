@@ -46,7 +46,7 @@ async function fetchRewards(){
     let unavailableBtnRule = unavailableBtn.classList.contains("active") ? 1 : 2;
 
     if(availableBtnRule == 1 && unavailableBtnRule == 2)
-    {  
+    {
         selectedRule = 1;
     }
     else if(availableBtnRule == 2 && unavailableBtnRule == 1)
@@ -116,7 +116,7 @@ function updateRewards(rewards) {
         } = reward;
 
         const rewardCard = document.createElement('div');
-        rewardCard.className = 'reward-card';
+        rewardCard.className = 'reward-card group-reward';
 
         const defaultContent = document.createElement('div');
         defaultContent.className = 'default-content';
@@ -164,7 +164,7 @@ function updateRewards(rewards) {
             deleteBtn.dataset.id = id_reward;
             deleteBtn.innerText = 'Delete';
             deleteBtn.addEventListener('click', deleteReward);
-            
+
             functionsDiv.appendChild(deleteBtn);
         }
 

@@ -37,33 +37,34 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
             <div class="navigation-bar">
                 <button id="btn-lists" class="btn btn-success">Lists</button>
                 <button id="btn-rewards" class="btn btn-success">Rewards</button>
+                <button id="btn-members" class="btn btn-success">Members</button>
+
+                <div class="group-emeralds">
+                    <img src="<?= BASEURL . '/view/assets/icons/emerald.png'?>" alt="Emerald icon">
+                    <span id="emeralds-holder"></span>
+                    <strong>Emeralds</strong>
+                </div>
             </div>
 
-            <hr class="line" >  
-            
+            <hr class="line" >
+
             <div id="lists-holder" class="lists-holder">
             </div>
 
             <div id="rewards-controls-holder">
-                <button id="addRewardBtn" class="btn btn-success">Add Reward</button>
-
                 <div class="rewards-filters">
+                    <button id="addRewardBtn" class="btn btn-success">Add Reward</button>
                     <button class="btn-filter-available btn btn-success active">Available</button>
                     <button class="btn-filter-unavailable btn btn-success">Unavailable</button>
                 </div>
             </div>
 
-            <div id="rewards-holder" class="rewards-holder">
+            <div id="members" class="members">
+                <table class="members-table">
+                </table>
             </div>
-        </div>
 
-        <div class="sidebar-right">
-            <div class="emeralds-section top-button">
-                <img src="<?= BASEURL . '/view/assets/icons/emerald.png'?>" alt="Emerald icon">
-                <span id="emeralds-holder"></span>
-                <strong>Emeralds</strong>
-            </div>
-            <div class="usernames-holder">
+            <div id="rewards-holder" class="rewards-holder">
             </div>
         </div>
     </div>
@@ -81,15 +82,25 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
     document.getElementById('btn-lists').addEventListener('click', function() {
         document.getElementById('lists-holder').style.display = 'grid';
         document.getElementById('rewards-holder').style.display = 'none';
+        document.getElementById('members').style.display = 'none';
         document.getElementById('rewards-controls-holder').style.display = 'none';
     });
 
     document.getElementById('btn-rewards').addEventListener('click', function() {
         document.getElementById('lists-holder').style.display = 'none';
+        document.getElementById('members').style.display = 'none';
         document.getElementById('rewards-holder').style.display = 'block';
         document.getElementById('rewards-controls-holder').style.display = 'block';
     });
+
+    document.getElementById('btn-members').addEventListener('click', function() {
+        document.getElementById('members').style.display = 'block';
+        document.getElementById('lists-holder').style.display = 'none';
+        document.getElementById('rewards-holder').style.display = 'none';
+        document.getElementById('rewards-controls-holder').style.display = 'none';
+    });
 </script>
+
 <script type="module" src="<?= BASEURL; ?>/view/js/groups/lists/groupListsFilter.js"></script>
 <script type="module" src="<?= BASEURL; ?>/view/js/groups/lists/groupListsFunctions.js"></script>
 <script type="module" src="<?= BASEURL; ?>/view/js/groups/lists/groupListsModal.js"></script>

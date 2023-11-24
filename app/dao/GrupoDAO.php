@@ -125,7 +125,7 @@ class GrupoDAO {
     {
         $conn = Connection::getConn();
     
-        $sql = "SELECT u.*, gu.administrador FROM tb_usuarios u
+        $sql = "SELECT u.*, gu.administrador, gu.pontos FROM tb_usuarios u
                 INNER JOIN tb_grupos_usuarios gu ON u.id_usuario = gu.id_usuario
                 WHERE gu.id_grupo = :groupId";
     

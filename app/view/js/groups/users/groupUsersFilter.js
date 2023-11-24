@@ -1,7 +1,5 @@
 import notificate from "../../notification.js";
 
-const usersHolder = document.querySelector('.usernames-holder');
-
 async function fetchGroupUsers(groupId){
     try {
         const response = await fetch(BASE_URL + `/controller/GrupoController.php?action=listGroupUsers&groupId=${groupId}`);
@@ -48,31 +46,92 @@ async function fetchUserData() {
 const userId = await fetchUserData();
 
 function updateUsersSidebar(users) {
-    usersHolder.innerHTML = '';
+    const membersTable = document.querySelector('.members-table');
+    membersTable.innerHTML = '';
+
+    const tableHeader = document.createElement('tr');
+
+    const userNameCell = document.createElement('th');
+    userNameCell.innerText = 'Name';
+
+    const userRoleCell = document.createElement('th');
+    userRoleCell.innerText = 'Role';
+
+    const levelCell = document.createElement('th');
+    levelCell.innerText = 'Level';
+
+    const completedTasksCell = document.createElement('th');
+    completedTasksCell.innerText = 'Completed Tasks';
+
+    const userEmeraldsCell = document.createElement('th');
+    userEmeraldsCell.innerText = 'Emeralds';
+
+    const adminFunctions = document.createElement('th');
+    adminFunctions.innerText = IS_ADMIN == 1 ? 'Admin Functions' : '';
+
+    tableHeader.appendChild(userNameCell);
+    tableHeader.appendChild(userRoleCell);
+    tableHeader.appendChild(levelCell);
+    tableHeader.appendChild(completedTasksCell);
+    tableHeader.appendChild(userEmeraldsCell);
+    tableHeader.appendChild(adminFunctions);
+
+    membersTable.appendChild(tableHeader);
 
     users.forEach((user) => {
-        const userElement = document.createElement('div');
-        userElement.className = 'user-element';
-        userElement.innerText = user.login; 
-        usersHolder.appendChild(userElement);
+        const userRow = document.createElement('tr');
+        userRow.className = 'user-row';
 
-        if(IS_ADMIN == 1 && user.id_usuario != userId.id)
-        {
+        const userNameCol = document.createElement('td');
+        userNameCol.innerText = user.nome_usuario;
+        userNameCol.className = 'user-name-col';
+
+        const roleCol = document.createElement('td');
+        roleCol.innerText = user.administrador == 1 ? 'admin' : 'member';
+        roleCol.className = 'user-role-col';
+
+        const levelCol = document.createElement('td');
+        // levelCol.innerText = user.nivel;
+        levelCol.className = 'user-level-col';
+
+        const completedTasksCol = document.createElement('td');
+        // completedTasksCol.innerText = user.pontos;
+        completedTasksCol.className = 'completed-tasks-col';
+
+        const emeraldsCol = document.createElement('td');
+        emeraldsCol.innerText = user.pontos;
+        emeraldsCol.className = 'user-emeralds-col';
+
+        userRow.appendChild(userNameCol);
+        userRow.appendChild(roleCol);
+        userRow.appendChild(levelCol);
+        userRow.appendChild(completedTasksCol);
+        userRow.appendChild(emeraldsCol);
+
+        const adminFunctionsCell = document.createElement('td');
+        adminFunctionsCell.className = 'admin-functions-col'
+
+        if(IS_ADMIN == 1 && user.id_usuario != userId.id){
             const turnAdmin = document.createElement('button');
-            turnAdmin.className = 'user-buttons';
+            turnAdmin.className = 'user-buttons btn btn-warning';
             turnAdmin.innerText = user.administrador == 1 ? 'Remove Admin' : 'Make Admin';
             turnAdmin.dataset.id = user.id_usuario;
-            usersHolder.appendChild(turnAdmin);
 
             const banUser = document.createElement('button');
-            banUser.className = 'user-buttons';
+            banUser.className = 'user-buttons btn btn-danger';
             banUser.innerText = 'Ban';
             banUser.dataset.id = user.id_usuario;
-            usersHolder.appendChild(banUser);
 
             turnAdmin.addEventListener('click', () => window.confirm('Are you sure you want to make this user an admin?') ? toggleUserAdminStatus(user.id_usuario, user.administrador, turnAdmin) : null);
             banUser.addEventListener('click', () => window.confirm('Are you sure you want to ban this user from the group?') ? banUserFromGroup(user.id_usuario) : null);
+
+            adminFunctionsCell.appendChild(turnAdmin);
+            adminFunctionsCell.appendChild(banUser);
         }
+
+        userRow.appendChild(adminFunctionsCell);
+
+        membersTable.appendChild(userRow);
     });
 }
 
@@ -118,7 +177,7 @@ async function banUserFromGroup(userId) {
     fetchGroupUsers(GROUP_ID);
 }
 
-fetchGroupUsers(GROUP_ID); 
+fetchGroupUsers(GROUP_ID);
 
 export {
     fetchGroupUsers,
