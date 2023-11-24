@@ -76,7 +76,7 @@ function updateGroups(groups) {
             deleteBtn.dataset.id = id_grupo;
             deleteBtn.addEventListener('click', (event) => {
                 event.stopPropagation();
-                deleteGroup(id_grupo);
+                window.confirm('Are you sure you want to delete this group?') ? deleteGroup(id_grupo) : null;
             });
 
             const deleteIcon = document.createElement('i');
@@ -96,7 +96,7 @@ function updateGroups(groups) {
         leaveBtn.className = 'btn btn-warning';
         leaveBtn.addEventListener('click', (event) => {
             event.stopPropagation();
-            leaveGroup(id_grupo);
+            window.confirm('Are you sure you want to leave this group?') ? leaveGroup(id_grupo) : null;
         });
 
         const leaveIcon = document.createElement('i');

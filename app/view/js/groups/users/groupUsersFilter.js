@@ -70,8 +70,8 @@ function updateUsersSidebar(users) {
             banUser.dataset.id = user.id_usuario;
             usersHolder.appendChild(banUser);
 
-            turnAdmin.addEventListener('click', () => toggleUserAdminStatus(user.id_usuario, user.administrador, turnAdmin));
-            banUser.addEventListener('click', () => banUserFromGroup(user.id_usuario));
+            turnAdmin.addEventListener('click', () => window.confirm('Are you sure you want to make this user an admin?') ? toggleUserAdminStatus(user.id_usuario, user.administrador, turnAdmin) : null);
+            banUser.addEventListener('click', () => window.confirm('Are you sure you want to ban this user from the group?') ? banUserFromGroup(user.id_usuario) : null);
         }
     });
 }
