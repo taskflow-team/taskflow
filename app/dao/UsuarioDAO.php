@@ -104,13 +104,17 @@ class UsuarioDAO
         $stm->execute();
     }
 
-    //Método para atualizar um Usuario
+    // Método para atualizar um Usuario
     public function update(Usuario $usuario)
     {
         $conn = Connection::getConn();
 
+        // Calcular o nivel com base nas tarefas concluidas
+        $nivel = $this->calcularNivel($usuario->getTarefas_concluidas());
+
         $sql = "UPDATE tb_usuarios SET email = :email," .
-            " senha = :senha," . " pontos = :pontos" .
+            " senha = :senha," . " pontos = :pontos," . " tarefas_concluidas = :tarefas_concluidas," .
+            " nivel = :nivel" .
             " WHERE id_usuario = :id";
 
         $stm = $conn->prepare($sql);
@@ -118,7 +122,24 @@ class UsuarioDAO
         $stm->bindValue("email", $usuario->getEmail());
         $stm->bindValue("id", $usuario->getId());
         $stm->bindValue("pontos", $usuario->getPontos());
+        $stm->bindValue("tarefas_concluidas", $usuario->getTarefas_concluidas());
+        $stm->bindValue("nivel", $nivel);
         $stm->execute();
+    }
+
+    // Método para calcular o nivel com base nas tarefas concluidas
+    private function calcularNivel($completedTasks)
+    {
+        // Define a base value for exponential growth
+        $baseValue = 10;
+
+        // Calculate nivel with exponential growth
+        $nivel = floor(log($completedTasks / $baseValue, 2));
+
+        // Ensure nivel is at least 0
+        $nivel = max(0, $nivel);
+
+        return $nivel;
     }
 
     //Método para excluir um Usuario pelo seu ID

@@ -169,42 +169,49 @@ class TarefaController extends Controller
     {
         $jsonString = file_get_contents('php://input');
         $requestData = json_decode($jsonString, true);
-
+    
         if ($requestData === null) {
             $response = array(
                 'message' => 'Dados JSON inválidos',
             );
-
+    
             header('Content-Type: application/json');
             echo json_encode($response);
             exit;
         }
-
+    
         $tarefaId = $requestData['taskId'];
         $taskCompleted = $requestData['taskCompleted'];
         $userId = $requestData['userID'];
         $groupID = isset($requestData['groupID']) ? $requestData['groupID'] : null;
-
+    
         $tarefa = $this->tarefaDao->findByIdTarefa($tarefaId);
         $tarefa->setConcluida($taskCompleted ? 1 : 0);
-
+    
         try {
             $this->tarefaDao->updateTarefa($tarefa);
-
+    
             $taskPoints = $tarefa->getValor_pontos();
-
+    
             if ($groupID == null) {   
                 $user = $this->usuarioDao->findById($userId);
                 $userPoints = $user->getPontos();
                 $newPoints = $taskCompleted ? ($userPoints + $taskPoints) : ($userPoints - $taskPoints);
                 $user->setPontos($newPoints);
+                
+                $user->setTarefas_concluidas($taskCompleted ? ($user->getTarefas_concluidas() + 1) : ($user->getTarefas_concluidas() - 1));
+    
                 $this->usuarioDao->update($user);
             } else {
                 $groupUserPoints = $this->GrupoDao->getGroupUserPoints($groupID, $userId);
                 $newPoints = $taskCompleted ? ($groupUserPoints + $taskPoints) : ($groupUserPoints - $taskPoints);
                 $this->GrupoDao->updateGroupUserPoints($groupID, $userId, $newPoints);
+    
+                $user = $this->usuarioDao->findById($userId);
+                $user->setTarefas_concluidas($taskCompleted ? ($user->getTarefas_concluidas() + 1) : ($user->getTarefas_concluidas() - 1));
+                $this->usuarioDao->update($user);
             }
-
+    
             $response = array(
                 'ok' => true,
                 'message' => 'Tarefa atualizada com sucesso.'
