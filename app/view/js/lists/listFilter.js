@@ -43,7 +43,7 @@ function updateLists(lists){
         listCard.className = 'list-card';
         listCard.id = list.id_lista;
         listCard.addEventListener('click', () => {
-            window.location.href = `../view/pages/tasks/index.php?listId=${list.id_lista}&listName=${list.nome_lista}&isAdmin=${1}`;
+            window.location.href = `../view/pages/tasks/index.php?listId=${list.id_lista}&groupId&listName=${list.nome_lista}&isAdmin=${1}`;
         });
 
         const cardTitle = document.createElement('h3');

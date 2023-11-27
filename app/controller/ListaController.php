@@ -39,10 +39,10 @@ class ListaController extends Controller
 
         // Obtém o ID do usuário da sessão
         $userID = $_SESSION[SESSAO_USUARIO_ID];
-        $group_id = $_GET['groupId'];
+        $group_Id = $_GET['groupId'];
 
         // Obtém todas as listas
-        $listas = $this->listaDao->getGroupLists($group_id);
+        $listas = $this->listaDao->getGroupLists($group_Id);
 
         // Cria um array de resposta contendo a mensagem de sucesso e os dados das listas
         $response = array(

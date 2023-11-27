@@ -37,6 +37,42 @@ class TarefaDAO
         return $this->mapTarefas($result);
     }
 
+    public function searchTarefas($id_usuario, $idtb_listas, $searchQuery)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM tb_tarefas WHERE (nome_tarefa LIKE :searchTerm OR descricao LIKE :searchTerm) AND idtb_listas = :idtb_listas AND id_usuario = :id_usuario";
+        $stm = $conn->prepare($sql);
+
+        $searchTerm = "%" . $searchQuery . "%";
+        $stm->bindValue(":searchTerm", $searchTerm);
+        $stm->bindValue(":idtb_listas", $idtb_listas);
+        $stm->bindValue(":id_usuario", $id_usuario);
+
+        $stm->execute();
+        $result = $stm->fetchAll();
+
+        return $this->mapTarefas($result);
+    }
+
+    public function searchTarefasGrupo($id_grupo, $idtb_listas, $searchQuery)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "SELECT * FROM tb_tarefas WHERE (nome_tarefa LIKE :searchTerm OR descricao LIKE :searchTerm) AND idtb_listas = :idtb_listas AND id_grupo = :id_grupo";
+        $stm = $conn->prepare($sql);
+
+        $searchTerm = "%" . $searchQuery . "%";
+        $stm->bindValue(":searchTerm", $searchTerm);
+        $stm->bindValue(":idtb_listas", $idtb_listas);
+        $stm->bindValue(":id_grupo", $id_grupo);
+
+        $stm->execute();
+        $result = $stm->fetchAll();
+
+        return $this->mapTarefas($result);
+    }
+
     public function findAllTarefas($idUsuario)
     {
         $conn = Connection::getConn();

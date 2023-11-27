@@ -34,7 +34,7 @@ class TarefaController extends Controller
     {
         $dados["id"] = 0;
         $this->loadView("home/form.php", $dados, "", "");
-    }
+    }  
 
     protected function list()
     {
@@ -53,6 +53,7 @@ class TarefaController extends Controller
         $rule = $requestData['rule'];
         $listID = $requestData['listID'];
         $groupID = $requestData['groupID'];
+        $searchQuery = $requestData['searchQuery'];
 
         if ($rule === 'priority') {
             $query_rule = 'prioridade';
@@ -64,11 +65,19 @@ class TarefaController extends Controller
 
         if($groupID == null)
         {
-            $tarefas = $this->tarefaDao->listTarefas($userID, $listID, $query_rule);
+            if (empty($searchQuery)) {
+                $tarefas = $this->tarefaDao->listTarefas($userID, $listID, $query_rule);
+            } else {
+                $tarefas = $this->tarefaDao->searchTarefas($userID, $listID, $searchQuery);
+            }
         }
         else
         {
-            $tarefas = $this->tarefaDao->listTarefasGrupo($groupID, $listID, $query_rule);
+            if (empty($searchQuery)) {
+                $tarefas = $this->tarefaDao->listTarefasGrupo($groupID, $listID, $query_rule);
+            } else {
+                $tarefas = $this->tarefaDao->searchTarefasGrupo($groupID, $listID, $searchQuery);
+            }
         }
 
         // Cria um array de resposta contendo a mensagem de sucesso e os dados das tarefas

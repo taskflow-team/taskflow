@@ -9,7 +9,7 @@ import { openEditModal } from "./taskModal.js";
 const completedBtn = document.querySelector('#completedTasks');
 const incompletedBtn = document.querySelector('#incompletedTasks');
 const subFilter = document.querySelector('#subFilter');
-const searchBtn = document.querySelector('#searchBtn');
+const searchBox = document.querySelector('#taskNameSearch');
 const taskList = document.querySelector('#taskList');
 const userData = document.querySelector('#userData');
 
@@ -56,7 +56,7 @@ function updateUserData(user) {
 }
 
 // Função para obter a lista de tarefas atualizada do servidor
-async function fetchTaskList() {
+async function fetchTaskList(searchTerm = '') {
     let dataPrioritySelector = document.querySelector('#subFilter');
     let selectedRule = dataPrioritySelector.selectedIndex;
     let rule = '';
@@ -77,7 +77,8 @@ async function fetchTaskList() {
         body: JSON.stringify({
             rule: rule,
             listID: LIST_ID,
-            groupID: GROUP_ID
+            groupID: GROUP_ID,
+            searchQuery: searchTerm
         })
     };
 
@@ -285,33 +286,12 @@ function filterTasks(filter){
 completedBtn.addEventListener('click', handleTasksVisibility);
 incompletedBtn.addEventListener('click', handleTasksVisibility);
 
-function searchByName(){
-    let currentTasks = document.querySelectorAll('.task');
-    let nameForSearch = document.querySelector('#taskNameSearch').value;
-
-    if(nameForSearch == ''){
-        if(nameForSearch == '' && completedBtn.classList.contains('button-active')){
-            filterTasks('completed');
-        } else if(nameForSearch == '' && incompletedBtn.classList.contains('button-active')){
-            filterTasks('incompleted');
-        } else {
-            filterTasks();
-        }
-    } else {
-        currentTasks.forEach(task => {
-            let taskName = task.firstChild.children[1].children[0].innerText;
-
-            if(taskName.includes(nameForSearch)){
-                task.style.display = 'block';
-            } else {
-                task.style.display = 'none';
-            }
-
-        });
-    }
+async function handleSearch() {
+    const searchTerm = searchBox.value.trim();
+    await fetchTaskList(searchTerm);
 }
 
-searchBtn.addEventListener('click', searchByName);
+searchBox.addEventListener('input', handleSearch);
 
 export {
     fetchTaskList,
