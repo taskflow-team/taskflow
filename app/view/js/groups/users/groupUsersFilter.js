@@ -64,7 +64,7 @@ function updateUsersSidebar(users) {
     completedTasksCell.innerText = 'Completed Tasks';
 
     const userEmeraldsCell = document.createElement('th');
-    userEmeraldsCell.innerText = 'Emeralds';
+    userEmeraldsCell.innerText = IS_ADMIN == 1 ? 'Emeralds' : '';
 
     const adminFunctions = document.createElement('th');
     adminFunctions.innerText = IS_ADMIN == 1 ? 'Admin Functions' : '';
