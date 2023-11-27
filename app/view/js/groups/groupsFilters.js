@@ -82,10 +82,30 @@ function updateGroups(groups) {
             const deleteIcon = document.createElement('i');
             deleteIcon.className = 'fa fa-trash';
 
+            const copyBtn = document.createElement('button');
+            copyBtn.id = 'copyBtn';
+            copyBtn.className = 'btn btn-info';
+            copyBtn.dataset.id = id_grupo;
+            copyBtn.addEventListener('click', event => {
+                event.stopPropagation();
+                const textToCopy = `Que tal participar do meu grupo no TaskFlow? ✅\n\nMeu código: ${codigo_convite}`;
+            
+                navigator.clipboard.writeText(textToCopy).then(() => {
+                    alert('Group code copied to clipboard!');
+                }).catch(err => {
+                    console.error('Could not copy text: ', err);
+                });
+            });
+
+            const copyIcon = document.createElement('i');
+            copyIcon.className = 'fa-solid fa-clipboard';
+            
             deleteBtn.appendChild(deleteIcon);
+            copyBtn.appendChild(copyIcon);
 
             functions.appendChild(renameBtn);
             functions.appendChild(deleteBtn);
+            functions.appendChild(copyBtn);
 
             groupCard.appendChild(invitationCode);
             groupCard.appendChild(adminElement);
