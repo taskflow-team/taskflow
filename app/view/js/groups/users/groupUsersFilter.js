@@ -1,4 +1,5 @@
 import notificate from "../../notification.js";
+import setLevel from "../../levels.js";
 
 async function fetchGroupUsers(groupId){
     try {
@@ -91,15 +92,15 @@ function updateUsersSidebar(users) {
         roleCol.className = 'user-role-col';
 
         const levelCol = document.createElement('td');
-        // levelCol.innerText = user.nivel;
+        levelCol.innerText = setLevel(user.nivel);
         levelCol.className = 'user-level-col';
 
         const completedTasksCol = document.createElement('td');
-        // completedTasksCol.innerText = user.pontos;
+        completedTasksCol.innerText = user.tarefas_concluidas;
         completedTasksCol.className = 'completed-tasks-col';
 
         const emeraldsCol = document.createElement('td');
-        emeraldsCol.innerText = user.pontos;
+        emeraldsCol.innerText = IS_ADMIN == 1 ? user.pontos : '';
         emeraldsCol.className = 'user-emeralds-col';
 
         userRow.appendChild(userNameCol);
