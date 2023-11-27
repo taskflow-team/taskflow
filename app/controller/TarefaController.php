@@ -52,8 +52,8 @@ class TarefaController extends Controller
 
         $rule = $requestData['rule'];
         $listID = $requestData['listID'];
-        $groupID = $requestData['groupID'];
-        $searchQuery = $requestData['searchQuery'];
+        $groupID = isset($requestData['groupID']) ? $requestData['groupID'] : null;
+        $searchQuery = isset($requestData['searchQuery']) ? $requestData['searchQuery'] : '';
 
         if ($rule === 'priority') {
             $query_rule = 'prioridade';
@@ -68,7 +68,7 @@ class TarefaController extends Controller
             if (empty($searchQuery)) {
                 $tarefas = $this->tarefaDao->listTarefas($userID, $listID, $query_rule);
             } else {
-                $tarefas = $this->tarefaDao->searchTarefas($userID, $listID, $searchQuery);
+                $tarefas = $this->tarefaDao->searchTarefas($userID, $listID, $searchQuery, $query_rule);
             }
         }
         else
@@ -76,7 +76,7 @@ class TarefaController extends Controller
             if (empty($searchQuery)) {
                 $tarefas = $this->tarefaDao->listTarefasGrupo($groupID, $listID, $query_rule);
             } else {
-                $tarefas = $this->tarefaDao->searchTarefasGrupo($groupID, $listID, $searchQuery);
+                $tarefas = $this->tarefaDao->searchTarefasGrupo($groupID, $listID, $searchQuery, $query_rule);
             }
         }
 
