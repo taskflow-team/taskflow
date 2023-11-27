@@ -57,6 +57,10 @@ function updateUserData(user) {
 
 // Função para obter a lista de tarefas atualizada do servidor
 async function fetchTaskList(searchTerm = '') {
+    if (typeof searchTerm !== 'string') {
+        searchTerm = '';
+    }
+
     let dataPrioritySelector = document.querySelector('#subFilter');
     let selectedRule = dataPrioritySelector.selectedIndex;
     let rule = '';

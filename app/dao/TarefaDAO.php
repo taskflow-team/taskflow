@@ -37,17 +37,18 @@ class TarefaDAO
         return $this->mapTarefas($result);
     }
 
-    public function searchTarefas($id_usuario, $idtb_listas, $searchQuery)
+    public function searchTarefas($id_usuario, $idtb_listas, $searchQuery, $rule)
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM tb_tarefas WHERE (nome_tarefa LIKE :searchTerm OR descricao LIKE :searchTerm) AND idtb_listas = :idtb_listas AND id_usuario = :id_usuario";
+        $sql = "SELECT * FROM tb_tarefas WHERE (nome_tarefa LIKE :searchTerm OR descricao LIKE :searchTerm) AND idtb_listas = :idtb_listas AND id_usuario = :id_usuario ORDER BY :rule DESC";
         $stm = $conn->prepare($sql);
 
         $searchTerm = "%" . $searchQuery . "%";
         $stm->bindValue(":searchTerm", $searchTerm);
         $stm->bindValue(":idtb_listas", $idtb_listas);
         $stm->bindValue(":id_usuario", $id_usuario);
+        $stm->bindValue(":rule", $rule);
 
         $stm->execute();
         $result = $stm->fetchAll();
@@ -55,17 +56,18 @@ class TarefaDAO
         return $this->mapTarefas($result);
     }
 
-    public function searchTarefasGrupo($id_grupo, $idtb_listas, $searchQuery)
+    public function searchTarefasGrupo($id_grupo, $idtb_listas, $searchQuery, $rule)
     {
         $conn = Connection::getConn();
 
-        $sql = "SELECT * FROM tb_tarefas WHERE (nome_tarefa LIKE :searchTerm OR descricao LIKE :searchTerm) AND idtb_listas = :idtb_listas AND id_grupo = :id_grupo";
+        $sql = "SELECT * FROM tb_tarefas WHERE (nome_tarefa LIKE :searchTerm OR descricao LIKE :searchTerm) AND idtb_listas = :idtb_listas AND id_grupo = :id_grupo ORDER BY :rule DESC";
         $stm = $conn->prepare($sql);
 
         $searchTerm = "%" . $searchQuery . "%";
         $stm->bindValue(":searchTerm", $searchTerm);
         $stm->bindValue(":idtb_listas", $idtb_listas);
         $stm->bindValue(":id_grupo", $id_grupo);
+        $stm->bindValue(":rule", $rule);
 
         $stm->execute();
         $result = $stm->fetchAll();
