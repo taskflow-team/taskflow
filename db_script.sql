@@ -11,9 +11,12 @@ CREATE TABLE tb_usuarios (
 );
 
 -- Insere alguns dados iniciais na tabela de usuários
-INSERT INTO tb_usuarios (nome_usuario, login, email, senha) VALUES ('Sr. Administrador', 'admin', 'admin@admin', 'admin');
-INSERT INTO tb_usuarios (nome_usuario, login, email, senha) VALUES ('Sr. Root', 'root','root@root', 'root');
-    
+INSERT INTO tb_usuarios (nome_usuario, login, email, senha) VALUES ('Renato Farias', 'renato', 'renato@email.com', 'renato');
+INSERT INTO tb_usuarios (nome_usuario, login, email, senha) VALUES ('Thiago Chan Ortega', 'thiago','thiago@email.com', 'thiago');
+INSERT INTO tb_usuarios (nome_usuario, login, email, senha) VALUES ('Vitória Sales', 'vitoria','vitoria@email.com', 'vitoria');
+INSERT INTO tb_usuarios (nome_usuario, login, email, senha) VALUES ('Guilherme Rodrigues', 'guilherme','guilherme@email.com', 'guilherme');
+INSERT INTO tb_usuarios (nome_usuario, login, email, senha) VALUES ('Caroline Almeida', 'caroline','caroline@email.com', 'caroline');
+
 -- Cria a tabela de grupos
 CREATE TABLE tb_grupos (
     idtb_grupos INT PRIMARY KEY AUTO_INCREMENT,
@@ -31,11 +34,11 @@ CREATE TABLE tb_listas (
     FOREIGN KEY (idtb_usuario) REFERENCES tb_usuarios (id_usuario)
 );
 
-INSERT INTO tb_listas (nome, idtb_usuario) VALUES ('Lista 01', 1);
-INSERT INTO tb_listas (nome, idtb_usuario) VALUES ('Lista 02', 1);
+INSERT INTO tb_listas (nome, idtb_usuario) VALUES ('Tarefas da Faculdade', 1);
+INSERT INTO tb_listas (nome, idtb_usuario) VALUES ('Tarefas do Trabalho', 1);
 
-INSERT INTO tb_listas (nome, idtb_usuario) VALUES ('Lista 01', 2);
-INSERT INTO tb_listas (nome, idtb_usuario) VALUES ('Lista 02', 2);
+INSERT INTO tb_listas (nome, idtb_usuario) VALUES ('Tarefas do dia a dia', 2);
+INSERT INTO tb_listas (nome, idtb_usuario) VALUES ('Lista do Mercado', 2);
 
 -- Cria a tabela de tarefas
 CREATE TABLE tb_tarefas (
@@ -63,8 +66,8 @@ CREATE TABLE tb_grupos_usuarios (
     pontos INT,
     PRIMARY KEY (id_grupos_usuarios),
     FOREIGN KEY (id_grupo) REFERENCES tb_grupos (idtb_grupos),
-    FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario), 
-    CONSTRAINT uc_grupos_usuarios UNIQUE (id_usuario, id_grupo) 
+    FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario),
+    CONSTRAINT uc_grupos_usuarios UNIQUE (id_usuario, id_grupo)
 );
 
 -- Adiciona a chave estrangeira referenciando a tabela tb_listas
@@ -74,8 +77,8 @@ ALTER TABLE tb_tarefas ADD FOREIGN KEY (idtb_listas) REFERENCES tb_listas (idtb_
 ALTER TABLE tb_tarefas ADD CONSTRAINT fk_usuarios FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario);
 
 -- Insere alguns dados iniciais na tabela de tarefas
-INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, id_usuario, idtb_listas) VALUES ('Tarefa 1', 'Descrição da tarefa 1', 1, 1, 150, 1, 1);
-INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, id_usuario, idtb_listas) VALUES ('Tarefa 2', 'Descrição da tarefa 2', 2, 2, 50, 1, 1);
+INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, id_usuario, idtb_listas) VALUES ('Finalizar atividade', 'Entragar via google classroom', 1, 1, 150, 1, 1);
+INSERT INTO tb_tarefas (nome_tarefa, descricao, dificuldade, prioridade, valor_pontos, id_usuario, idtb_listas) VALUES ('Afazeres', 'Preciso finalizar meus afazeres', 2, 2, 50, 1, 1);
 
 CREATE TABLE tb_rewards (
     id_reward INT AUTO_INCREMENT PRIMARY KEY,
@@ -89,6 +92,6 @@ CREATE TABLE tb_rewards (
     FOREIGN KEY (id_group) REFERENCES tb_grupos (idtb_grupos)
 );
 
-INSERT INTO tb_rewards (reward_name, reward_cost, id_user, reward_unities, claimed_times) VALUES ('Sorvete', 50, 1, 5, 2);
-INSERT INTO tb_rewards (reward_name, reward_cost, id_user, reward_unities, claimed_times) VALUES ('Maconha', 150, 1, 6, 2);
+INSERT INTO tb_rewards (reward_name, reward_cost, id_user, reward_unities, claimed_times) VALUES ('Um Sorvete', 50, 1, 5, 2);
+INSERT INTO tb_rewards (reward_name, reward_cost, id_user, reward_unities, claimed_times) VALUES ('Passeio ao ar livre', 150, 1, 6, 2);
 
