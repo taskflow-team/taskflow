@@ -7,7 +7,8 @@ CREATE TABLE tb_usuarios (
     tarefas_concluidas DECIMAL(5),
     login VARCHAR(45) NOT NULL UNIQUE,
     email VARCHAR(45) NOT NULL UNIQUE,
-    senha VARCHAR(45) NOT NULL
+    senha VARCHAR(45) NOT NULL,
+    foto_perfil VARCHAR(255)
 );
 
 -- Insere alguns dados iniciais na tabela de usuários

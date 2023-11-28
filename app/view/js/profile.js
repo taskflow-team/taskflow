@@ -8,24 +8,58 @@ const emailInput = document.querySelector('#user-email');
 const passwordInput = document.querySelector('#user-password');
 const userForm = document.querySelector('#frmEditUsuario');
 const idHolder = document.querySelector('#userId');
+const profilePicture = document.getElementById('profile-picture');
+const imageUploadInput = document.getElementById('profile-image-upload');
 
-// Async requests
-function getUserData(){
-    $.ajax({
-        type: "GET",
-        url: "UsuarioController.php?action=getUserData",
-        success: (response) => {
-            if(!response.ok || response.status == 400){
-                notificate("error", "Error", "There was an error while getting user data");
-                return;
+profilePicture.addEventListener('click', () => {
+    imageUploadInput.click();
+});
+
+imageUploadInput.addEventListener('change', handleImageUpload);
+
+async function handleImageUpload() {
+    const file = imageUploadInput.files[0];
+    if (file && file.type === "image/png") {
+        const formData = new FormData();
+        formData.append('profileImage', file);
+        formData.append('userId', idHolder.value);
+
+        try {
+            const response = await fetch("UsuarioController.php?action=uploadProfileImage", {
+                method: "POST",
+                body: formData,
+            });
+
+            const responseData = await response.json();
+
+            if (responseData.ok) {
+                profilePicture.src = responseData.imageUrl;
+                notificate('success', 'Success', 'Profile image updated successfully');
+            } else {
+                notificate('error', 'Error', responseData.message);
             }
-
-            updateUserData(response.user);
-        },
-        error: (xhr, status, error) => {
-            notificate('error', 'Error', error);
+        } catch (error) {
+            notificate('error', 'Error', error.message);
         }
-    });
+    } else {
+        notificate('error', 'Error', 'Please upload a valid PNG image.');
+    }
+}
+
+async function getUserData() {
+    try {
+        const response = await fetch("UsuarioController.php?action=getUserData");
+        const responseData = await response.json();
+
+        if (!responseData.ok || response.status === 400) {
+            notificate("error", "Error", "There was an error while getting user data");
+            return;
+        }
+
+        updateUserData(responseData.user);
+    } catch (error) {
+        notificate('error', 'Error', error.message);
+    }
 }
 
 getUserData();
@@ -38,33 +72,35 @@ function updateUserData(user){
     emailInput.setAttribute('value', user.email);
     passwordInput.setAttribute('value', user.senha);
     idHolder.setAttribute('value', user.id);
+    profilePicture.src = "../view/assets/img/" + user.foto_perfil;
 }
 
-function editUser(event){
+async function editUser(event) {
     event.preventDefault();
     let rawFormContent = new FormData(userForm);
     const formData = Object.fromEntries(rawFormContent);
 
-    $.ajax({
-        type: "POST",
-        url: "UsuarioController.php?action=edit",
-        contentType: "application/json", // Set the content type to JSON
-        dataType: "json", // Expect JSON response
-        data: JSON.stringify({ formData }), // Send the data as JSON string
-        success: (response) => {
-            if (!response.ok || response.status == 400) {
-                notificate("error", "Error", "There was an error while updating the user");
-                return;
-            }
+    try {
+        const response = await fetch("UsuarioController.php?action=edit", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ formData })
+        });
 
-            notificate('success', 'Success', 'The user was updated successfully');
+        const responseData = await response.json();
 
-            getUserData();
-        },
-        error: (xhr, status, error) => {
-            notificate('error', 'Error', error);
+        if (!responseData.ok || response.status === 400) {
+            notificate("error", "Error", "There was an error while updating the user");
+            return;
         }
-    });
+
+        notificate('success', 'Success', 'The user was updated successfully');
+        getUserData();
+    } catch (error) {
+        notificate('error', 'Error', error.message);
+    }
 }
 
 userForm.addEventListener('submit', editUser);

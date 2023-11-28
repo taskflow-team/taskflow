@@ -90,8 +90,8 @@ class UsuarioDAO
     {
         $conn = Connection::getConn();
 
-        $sql = "INSERT INTO tb_usuarios (nome_usuario, login, senha, email, nivel, pontos, tarefas_concluidas)" .
-            " VALUES (:nome, :login, :senha, :email, :nivel, :pontos, :tarefas_concluidas)";
+        $sql = "INSERT INTO tb_usuarios (nome_usuario, login, senha, email, nivel, pontos, tarefas_concluidas, foto_perfil)" .
+        " VALUES (:nome, :login, :senha, :email, :nivel, :pontos, :tarefas_concluidas, :foto_perfil)";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue("nome", $usuario->getNome());
@@ -101,6 +101,7 @@ class UsuarioDAO
         $stm->bindValue("nivel", $usuario->getNivel());
         $stm->bindValue("pontos", $usuario->getPontos());
         $stm->bindValue("tarefas_concluidas", $usuario->getTarefas_concluidas());
+        $stm->bindValue("foto_perfil", $usuario->getFotoPerfil());
         $stm->execute();
     }
 
@@ -112,10 +113,7 @@ class UsuarioDAO
         // Calcular o nivel com base nas tarefas concluidas
         $nivel = $this->calcularNivel($usuario->getTarefas_concluidas());
 
-        $sql = "UPDATE tb_usuarios SET email = :email," .
-            " senha = :senha," . " pontos = :pontos," . " tarefas_concluidas = :tarefas_concluidas," .
-            " nivel = :nivel" .
-            " WHERE id_usuario = :id";
+        $sql = "UPDATE tb_usuarios SET email = :email, senha = :senha, pontos = :pontos, tarefas_concluidas = :tarefas_concluidas, nivel = :nivel, foto_perfil = :foto_perfil WHERE id_usuario = :id";
 
         $stm = $conn->prepare($sql);
         $stm->bindValue("senha", $usuario->getSenha());
@@ -124,6 +122,7 @@ class UsuarioDAO
         $stm->bindValue("pontos", $usuario->getPontos());
         $stm->bindValue("tarefas_concluidas", $usuario->getTarefas_concluidas());
         $stm->bindValue("nivel", $nivel);
+        $stm->bindValue("foto_perfil", $usuario->getFotoPerfil());
         $stm->execute();
     }
 
@@ -154,6 +153,18 @@ class UsuarioDAO
         $stm->execute();
     }
 
+    public function updateProfileImage($userId, $fileName)
+    {
+        $conn = Connection::getConn();
+
+        $sql = "UPDATE tb_usuarios SET foto_perfil = :foto_perfil WHERE id_usuario = :id";
+
+        $stm = $conn->prepare($sql);
+        $stm->bindValue(":foto_perfil", $fileName);
+        $stm->bindValue(":id", $userId, PDO::PARAM_INT);
+        $stm->execute();
+    }
+
     //Método para converter um registro da base de dados em um objeto Usuario
     private function mapUsuarios($result)
     {
@@ -168,6 +179,7 @@ class UsuarioDAO
             $usuario->setPontos($reg['pontos']);
             $usuario->setNivel($reg['nivel']);
             $usuario->setTarefas_concluidas($reg['tarefas_concluidas']);
+            $usuario->setFotoPerfil($reg['foto_perfil']);
             array_push($usuarios, $usuario);
         }
 

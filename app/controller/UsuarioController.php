@@ -22,6 +22,42 @@ class UsuarioController extends Controller
         $this->handleAction();
     }
 
+    protected function uploadProfileImage()
+    {
+        if (!$this->usuarioLogado()) {
+            exit;
+        }
+
+        if (isset($_FILES['profileImage']) && $_FILES['profileImage']['type'] === 'image/png') {
+            $userId = $_POST['userId'];
+            $fileName = "profile_" . $userId . ".png";
+            $filePath = __DIR__ . "/../view/assets/img/" . $fileName;
+
+            if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $filePath)) {
+                $this->usuarioDao->updateProfileImage($userId, $fileName);
+
+                $response = array(
+                    'ok' => true,
+                    'imageUrl' => $filePath
+                );
+            } else {
+                $response = array(
+                    'ok' => false,
+                    'message' => 'Failed to upload image.'
+                );
+            }
+        } else {
+            $response = array(
+                'ok' => false,
+                'message' => 'Invalid file or file type.'
+            );
+        }
+
+        ob_clean();
+        header('Content-Type: application/json');
+        echo json_encode($response);
+    }
+
     protected function create()
     {
         $dados["id"] = 0;
@@ -42,20 +78,39 @@ class UsuarioController extends Controller
         if (!$this->usuarioLogado()) {
             exit;
         }
-
+    
         $usuario = $this->findUsuarioById();
-
-        $response = array(
-            'ok' => true,
-            'message' => 'Success',
-            'user' => $usuario
-        );
-
-        // Limpa qualquer saída anterior antes de definir os cabeçalhos JSON
+    
+        if ($usuario) {
+            // Convert the Usuario object to an associative array
+            $userData = [
+                'id' => $usuario->getId(),
+                'nome' => $usuario->getNome(),
+                'login' => $usuario->getLogin(),
+                'senha' => $usuario->getSenha(),
+                'email' => $usuario->getEmail(),
+                'pontos' => $usuario->getPontos(),
+                'nivel' => $usuario->getNivel(),
+                'tarefas_concluidas' => $usuario->getTarefas_concluidas(),
+                'foto_perfil' => $usuario->getFotoPerfil() 
+            ];
+    
+            $response = [
+                'ok' => true,
+                'message' => 'Success',
+                'user' => $userData
+            ];
+        } else {
+            $response = [
+                'ok' => false,
+                'message' => 'User not found'
+            ];
+        }
+    
         ob_clean();
         header('Content-Type: application/json');
         echo json_encode($response);
-    }
+    }    
 
     protected function edit()
     {
