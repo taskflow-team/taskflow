@@ -38,6 +38,7 @@ async function handleImageUpload() {
             } else {
                 notificate('error', 'Error', responseData.message);
             }
+            getUserData();
         } catch (error) {
             notificate('error', 'Error', error.message);
         }
@@ -105,7 +106,6 @@ async function editUser(event) {
 
 userForm.addEventListener('submit', editUser);
 
-// View functions
 const btnEmail = document.querySelector('#btnEmail');
 const btnPassword = document.querySelector('#btnPassword');
 const btnShowPassword = document.querySelector('.eyeIcon');
