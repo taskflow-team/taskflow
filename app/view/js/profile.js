@@ -77,7 +77,7 @@ function updateUserData(user){
     idHolder.setAttribute('value', user.id);
 
     const defaultProfilePic = '../view/assets/img/profile.png'; 
-    profilePicture.src = user.foto_perfil || defaultProfilePic;
+    profilePicture.src = '../view/assets/img/' + user.foto_perfil || defaultProfilePic;
 }
 
 async function editUser(event) {
