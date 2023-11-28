@@ -30,7 +30,7 @@ if(IS_ADMIN == 1)
                     formData: formData,
                     userID: userID,
                     groupID: groupConfirmation,
-                    listID: LIST_ID 
+                    listID: LIST_ID
                 })
             };
 
