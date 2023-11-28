@@ -1,4 +1,7 @@
 function setLevel(userLevel){
+    const levelHolder = document.createElement('span');
+    
+
     switch (parseInt(userLevel)) {
         case 0:
             return 'Novice';

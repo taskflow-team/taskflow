@@ -59,10 +59,10 @@ function updateUsersSidebar(users) {
     userRoleCell.innerText = 'Role';
 
     const levelCell = document.createElement('th');
-    levelCell.innerText = 'Level';
+    levelCell.innerText = 'Level (Global)';
 
     const completedTasksCell = document.createElement('th');
-    completedTasksCell.innerText = 'Completed Tasks';
+    completedTasksCell.innerText = 'Completed Tasks (Global)';
 
     const userEmeraldsCell = document.createElement('th');
     userEmeraldsCell.innerText = IS_ADMIN == 1 ? 'Emeralds' : '';
