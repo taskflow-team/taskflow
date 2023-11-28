@@ -13,6 +13,7 @@ class Usuario implements JsonSerializable
     private $pontos;
     private $nivel;
     private $tarefas_concluidas;
+    private $foto_perfil;
 
     #[\ReturnTypeWillChange]
     public function jsonSerialize()
@@ -186,6 +187,23 @@ class Usuario implements JsonSerializable
     {
         $this->email = $email;
 
+        return $this;
+    }
+
+    /**
+     * Get the value of foto_perfil
+     */
+    public function getFotoPerfil() {
+        return $this->foto_perfil;
+    }
+
+    /**
+     * Set the value of foto_perfil
+     *
+     * @return  self
+     */
+    public function setFotoPerfil($foto_perfil) {
+        $this->foto_perfil = $foto_perfil;
         return $this;
     }
 }
