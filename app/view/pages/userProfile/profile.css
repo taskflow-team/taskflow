@@ -33,6 +33,7 @@
 
 .avatar-section img:hover {
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 .input-group {
@@ -96,4 +97,29 @@ input.dark-input:focus {
 
 #btnSubmit:hover {
     background-color: #349745;
+}
+
+.user-level-holder{
+    height: 100px;
+    margin: 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-level-holder img{
+    position: absolute;
+    top: -40px;
+    left: -40px;
+    z-index: 10;
+}
+
+.prog-bar{
+    width: 80%;
+    height: 40px;
+}
+
+.prog-bar span{
+    top: 4%;
+    left: 45%;
 }
