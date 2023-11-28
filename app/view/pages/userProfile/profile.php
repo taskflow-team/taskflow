@@ -18,6 +18,7 @@ require_once(__DIR__ . "/../../components/sideBar/sidebar.php");
                     <img src="" alt="" id='emblem-holder' >
                     <div class="inner-prog-bar"></div>
                     <span id='remaining-tasks' ></span>
+                    <p id='level-name'></p>
                 </div>
             </div>
         </div>

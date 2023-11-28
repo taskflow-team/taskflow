@@ -6,6 +6,7 @@ const loginHolder = document.querySelector('#user-login');
 const emblemHolder = document.querySelector('#emblem-holder');
 const innerProgBar = document.querySelector('.inner-prog-bar');
 const remainingTasks = document.querySelector('#remaining-tasks');
+const levelName = document.querySelector('#level-name');
 const emailInput = document.querySelector('#user-email');
 const passwordInput = document.querySelector('#user-password');
 const userForm = document.querySelector('#frmEditUsuario');
@@ -75,8 +76,10 @@ function updateUserData(user){
     nameHolder.innerText = user.nome;
     loginHolder.innerText = user.login;
     emblemHolder.setAttribute('src', userLevel.icon);
-    emblemHolder.setAttribute('alt', userLevel.name)
+    emblemHolder.setAttribute('alt', userLevel.name);
+    emblemHolder.setAttribute('title', userLevel.name);
     innerProgBar.style.width = userLevel.percentageBar + '%';
+    levelName.innerText = userLevel.name;
     remainingTasks.innerText = userLevel.remainingTasks;
     emailInput.setAttribute('value', user.email);
     passwordInput.setAttribute('value', user.senha);

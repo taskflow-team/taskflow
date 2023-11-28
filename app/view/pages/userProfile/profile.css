@@ -123,3 +123,10 @@ input.dark-input:focus {
     top: 4%;
     left: 45%;
 }
+.prog-bar p{
+    position: absolute;
+    top: -35px;
+    left: 60px;
+    font-size: 20px;
+    font-weight: 600;
+}
