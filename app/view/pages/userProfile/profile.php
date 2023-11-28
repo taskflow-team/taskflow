@@ -10,7 +10,7 @@ require_once(__DIR__ . "/../../components/sideBar/sidebar.php");
     <div class="profile-holder">
         <div class="avatar-section">
             <img id="profile-picture" src="../view/assets/img/profile.png" alt="profile picture">
-            <input type="file" id="profile-image-upload" accept="image/png" style="display: none;">
+            <input type="file" id="profile-image-upload" accept="image/png, image/jpeg, image/gif" style="display: none;">
             <h1 id="user-name"></h1>
             <h2 id="user-login"></h2>
             <h2 id="user-nivel"></h2>
