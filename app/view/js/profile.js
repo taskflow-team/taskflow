@@ -76,7 +76,7 @@ function updateUserData(user){
     passwordInput.setAttribute('value', user.senha);
     idHolder.setAttribute('value', user.id);
 
-    const defaultProfilePic = '../view/assets/img/profile.png'; 
+    const defaultProfilePic = '../view/assets/img/profile.png';
     profilePicture.src = '../view/assets/img/' + user.foto_perfil || defaultProfilePic;
 }
 

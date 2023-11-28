@@ -70,7 +70,6 @@ CREATE TABLE tb_grupos_usuarios (
     FOREIGN KEY (id_usuario) REFERENCES tb_usuarios (id_usuario),
     CONSTRAINT uc_grupos_usuarios UNIQUE (id_usuario, id_grupo)
 );
-
 -- Adiciona a chave estrangeira referenciando a tabela tb_listas
 ALTER TABLE tb_tarefas ADD FOREIGN KEY (idtb_listas) REFERENCES tb_listas (idtb_listas);
 
