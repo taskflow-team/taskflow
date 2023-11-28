@@ -1,11 +1,21 @@
-function setLevel(userLevel){
-    if(userLevel ==  null){
+function calculatePercentage(partial, total){
+    let percentage = (partial / total) * 100;
+    percentage = percentage.toFixed(2);
+
+    return percentage;
+}
+
+function setLevel(userLevel, completedTasks){
+    if(userLevel ==  null  || completedTasks == null){
         userLevel = 0;
+        completedTasks = 0;
     }
 
     var level = {
         name: '',
         icon: `/taskflow/app/view/assets/levels/${userLevel}.png`,
+        percentageBar: 0,
+        ramainingTasks: ''
     };
 
     switch (parseInt(userLevel)) {
@@ -30,6 +40,23 @@ function setLevel(userLevel){
         default:
             level.name = 'Novice';
             break;
+    }
+
+    if (completedTasks < 20) {
+        level.percentageBar = calculatePercentage(completedTasks, 20);
+        level.remainingTasks = `${completedTasks}/20`;
+    } else if (completedTasks < 40) {
+        level.percentageBar = calculatePercentage(completedTasks, 40);
+        level.remainingTasks = `${completedTasks}/40`;
+    } else if (completedTasks < 80) {
+        level.percentageBar = calculatePercentage(completedTasks, 80);
+        level.remainingTasks = `${completedTasks}/80`;
+    } else if (completedTasks < 160) {
+        level.percentageBar = calculatePercentage(completedTasks, 160);
+        level.remainingTasks = `${completedTasks}/160`;
+    } else if (completedTasks < 240) {
+        level.percentageBar = calculatePercentage(completedTasks, 240);
+        level.remainingTasks = `${completedTasks}/240`;
     }
 
     return level;

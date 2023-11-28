@@ -91,7 +91,7 @@ function updateUsersSidebar(users) {
         roleCol.innerText = user.administrador == 1 ? 'admin' : 'member';
         roleCol.className = 'user-role-col';
 
-        const level = setLevel(user.nivel);
+        const level = setLevel(user.nivel, user.tarefas_concluidas);
 
         const levelIcon = document.createElement('img');
         levelIcon.setAttribute('src', level.icon);
@@ -104,8 +104,22 @@ function updateUsersSidebar(users) {
         levelCol.className = 'user-level-col';
 
         const completedTasksCol = document.createElement('td');
-        completedTasksCol.innerText = user.tarefas_concluidas;
+        // completedTasksCol.innerText = user.tarefas_concluidas;
         completedTasksCol.className = 'completed-tasks-col';
+
+        const ProgBar = document.createElement('div');
+        ProgBar.className = 'prog-bar';
+
+        const innerProgBar = document.createElement('div');
+        innerProgBar.className = 'inner-prog-bar';
+        innerProgBar.style.width =  level.percentageBar + '%';
+
+        const progBarNumber = document.createElement('span');
+        progBarNumber.innerText = level.remainingTasks;
+
+        ProgBar.appendChild(innerProgBar);
+        ProgBar.appendChild(progBarNumber);
+        completedTasksCol.appendChild(ProgBar);
 
         const emeraldsCol = document.createElement('td');
         emeraldsCol.innerText = IS_ADMIN == 1 ? user.pontos : '';
