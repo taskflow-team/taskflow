@@ -91,8 +91,16 @@ function updateUsersSidebar(users) {
         roleCol.innerText = user.administrador == 1 ? 'admin' : 'member';
         roleCol.className = 'user-role-col';
 
+        const level = setLevel(user.nivel);
+
+        const levelIcon = document.createElement('img');
+        levelIcon.setAttribute('src', level.icon);
+        levelIcon.setAttribute('alt', level.name);
+        levelIcon.className = 'group-level-icon';
+
         const levelCol = document.createElement('td');
-        levelCol.innerText = setLevel(user.nivel);
+        levelCol.innerText = level.name;
+        levelCol.appendChild(levelIcon);
         levelCol.className = 'user-level-col';
 
         const completedTasksCol = document.createElement('td');

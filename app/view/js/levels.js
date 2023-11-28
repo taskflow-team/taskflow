@@ -1,30 +1,38 @@
 function setLevel(userLevel){
-    const levelHolder = document.createElement('span');
-    
+    if(userLevel ==  null){
+        userLevel = 0;
+    }
+
+    var level = {
+        name: '',
+        icon: `/taskflow/app/view/assets/levels/${userLevel}.png`,
+    };
 
     switch (parseInt(userLevel)) {
         case 0:
-            return 'Novice';
+            level.name = 'Novice';
             break;
         case 1:
-            return 'Apprentice';
+            level.name = 'Apprentice';
             break;
         case 2:
-            return 'Journeyman';
+            level.name = 'Journeyman';
             break;
         case 3:
-            return 'Expert';
+            level.name = 'Expert';
             break;
         case 4:
-            return 'Master';
+            level.name = 'Master';
             break;
         case 5:
-            return 'Emerald Knight';
+            level.name = 'Emerald Knight';
             break;
         default:
-            return 'Novice';
+            level.name = 'Novice';
             break;
     }
+
+    return level;
 }
 
 export default setLevel;

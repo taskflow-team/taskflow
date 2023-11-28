@@ -139,3 +139,15 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.user-level-col{
+    width: 210px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.group-level-icon{
+    max-width: 45px;
+    height: 45px;
+}
