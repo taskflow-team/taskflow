@@ -59,10 +59,10 @@ function updateUsersSidebar(users) {
     userRoleCell.innerText = 'Role';
 
     const levelCell = document.createElement('th');
-    levelCell.innerText = 'Level';
+    levelCell.innerText = 'Level (Global)';
 
     const completedTasksCell = document.createElement('th');
-    completedTasksCell.innerText = 'Completed Tasks';
+    completedTasksCell.innerText = 'Completed Tasks (Global)';
 
     const userEmeraldsCell = document.createElement('th');
     userEmeraldsCell.innerText = IS_ADMIN == 1 ? 'Emeralds' : '';
@@ -91,13 +91,35 @@ function updateUsersSidebar(users) {
         roleCol.innerText = user.administrador == 1 ? 'admin' : 'member';
         roleCol.className = 'user-role-col';
 
+        const level = setLevel(user.nivel, user.tarefas_concluidas);
+
+        const levelIcon = document.createElement('img');
+        levelIcon.setAttribute('src', level.icon);
+        levelIcon.setAttribute('alt', level.name);
+        levelIcon.className = 'group-level-icon';
+
         const levelCol = document.createElement('td');
-        levelCol.innerText = setLevel(user.nivel);
+        levelCol.innerText = level.name;
+        levelCol.appendChild(levelIcon);
         levelCol.className = 'user-level-col';
 
         const completedTasksCol = document.createElement('td');
-        completedTasksCol.innerText = user.tarefas_concluidas;
+        // completedTasksCol.innerText = user.tarefas_concluidas;
         completedTasksCol.className = 'completed-tasks-col';
+
+        const ProgBar = document.createElement('div');
+        ProgBar.className = 'prog-bar';
+
+        const innerProgBar = document.createElement('div');
+        innerProgBar.className = 'inner-prog-bar';
+        innerProgBar.style.width =  level.percentageBar + '%';
+
+        const progBarNumber = document.createElement('span');
+        progBarNumber.innerText = level.remainingTasks;
+
+        ProgBar.appendChild(innerProgBar);
+        ProgBar.appendChild(progBarNumber);
+        completedTasksCol.appendChild(ProgBar);
 
         const emeraldsCol = document.createElement('td');
         emeraldsCol.innerText = IS_ADMIN == 1 ? user.pontos : '';
