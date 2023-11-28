@@ -19,7 +19,9 @@ imageUploadInput.addEventListener('change', handleImageUpload);
 
 async function handleImageUpload() {
     const file = imageUploadInput.files[0];
-    if (file && file.type === "image/png") {
+    const validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+
+    if (file && validImageTypes.includes(file.type)) {
         const formData = new FormData();
         formData.append('profileImage', file);
         formData.append('userId', idHolder.value);
@@ -43,7 +45,7 @@ async function handleImageUpload() {
             notificate('error', 'Error', error.message);
         }
     } else {
-        notificate('error', 'Error', 'Please upload a valid PNG image.');
+        notificate('error', 'Error', 'Please upload a valid image file (JPEG, PNG, or GIF).');
     }
 }
 

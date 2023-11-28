@@ -28,11 +28,15 @@ class UsuarioController extends Controller
             exit;
         }
 
-        if (isset($_FILES['profileImage']) && $_FILES['profileImage']['type'] === 'image/png') {
+        $validImageTypes = ['image/jpeg', 'image/png', 'image/gif'];
+        $fileType = $_FILES['profileImage']['type'];
+    
+        if (isset($_FILES['profileImage']) && in_array($fileType, $validImageTypes)) {
             $userId = $_POST['userId'];
-            $fileName = "profile_" . $userId . ".png";
+            $fileExtension = strtolower(pathinfo($_FILES['profileImage']['name'], PATHINFO_EXTENSION));
+            $fileName = "profile_" . $userId . "." . $fileExtension;
             $filePath = __DIR__ . "/../view/assets/img/" . $fileName;
-
+    
             if (move_uploaded_file($_FILES['profileImage']['tmp_name'], $filePath)) {
                 $this->usuarioDao->updateProfileImage($userId, $fileName);
 
