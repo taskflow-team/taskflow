@@ -11,14 +11,15 @@ require_once(__DIR__ . "/../../components/sideBar/sidebar.php");
         <div class="avatar-section">
             <img id="profile-picture" src="../view/assets/img/profile.png" alt="profile picture">
             <input type="file" id="profile-image-upload" accept="image/png, image/jpeg, image/gif" style="display: none;">
-            <h1 id="user-name"></h1>
-            <h2 id="user-login"></h2>
+            <h1 id="user-name" title='Your complete name'></h1>
+            <h2 id="user-login" title='Your login'></h2>
             <div class='user-level-holder' >
                 <div class='prog-bar' >
                     <img src="" alt="" id='emblem-holder' title='Complete more tasks to level up'>
                     <div class="inner-prog-bar"></div>
                     <span id='remaining-tasks' ></span>
                     <p id='level-name'></p>
+                    <p id='info'>Your completed tasks</p>
                 </div>
             </div>
         </div>

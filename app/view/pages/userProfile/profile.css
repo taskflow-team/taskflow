@@ -139,10 +139,17 @@ input.dark-input:focus {
     left: 45%;
 }
 
-.prog-bar p{
+.prog-bar #level-name{
     position: absolute;
     top: -35px;
     left: 60px;
     font-size: 20px;
     font-weight: 600;
+}
+
+.prog-bar #info{
+    position: absolute;
+    top: -30px;
+    right: 15px;
+    font-size: 14px;
 }
