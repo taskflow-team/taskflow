@@ -25,6 +25,19 @@ CREATE TABLE tb_grupos (
     nome VARCHAR(45)
 );
 
+-- Cria a tabela de notificações
+CREATE TABLE tb_notifications (
+    id_notification INT AUTO_INCREMENT PRIMARY KEY,
+    type VARCHAR(45) NOT NULL,
+    message TEXT NOT NULL,
+    date_created TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    id_user INT,
+    id_group INT,
+    is_read BOOLEAN DEFAULT false,
+    FOREIGN KEY (id_user) REFERENCES tb_usuarios (id_usuario),
+    FOREIGN KEY (id_group) REFERENCES tb_grupos (idtb_grupos)
+);
+
 -- Cria a tabela de listas
 CREATE TABLE tb_listas (
     idtb_listas INT PRIMARY KEY AUTO_INCREMENT,

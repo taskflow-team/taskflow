@@ -19,9 +19,9 @@ if (session_status() !== PHP_SESSION_ACTIVE)
 }
 
 $id_usuario = "(Sessão expirada)";
-if (isset($_SESSION[SESSAO_USUARIO_NOME]))
+if (isset($_SESSION[SESSAO_USUARIO_ID]))
 {
-    $id_usuario = $_SESSION[SESSAO_USUARIO_NOME];
+    $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 }
 ?>
 
