@@ -20,8 +20,8 @@ if (isset($_SESSION[SESSAO_USUARIO_NOME]))
 <!-- Exibir os grupos -->
 <div class="pseudo-body">
     <div class="buttons-group">
-        <button id="btn-create-group" class="btn btn-success" >Criar grupo</button>
-        <button id="btn-join-group" class="btn btn-success" >Entrar em um grupo</button>
+        <button id="btn-create-group" class="btn btn-success" >Create a Group</button>
+        <button id="btn-join-group" class="btn btn-success" >Join a Group</button>
     </div>
 
     <hr class="line" >
