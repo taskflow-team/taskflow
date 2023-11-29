@@ -8,6 +8,7 @@ require_once(__DIR__ . "/../model/Grupo.php");
 require_once(__DIR__ . "/../dao/GrupoDAO.php");
 require_once(__DIR__ . "/../service/GrupoService.php");
 require_once(__DIR__ . "/../dao/UsuarioDAO.php");
+require_once(__DIR__ . "/../dao/NotificacaoDAO.php");
 require_once(__DIR__ . "/Controller.php");
 
 class GrupoController extends Controller
@@ -15,12 +16,14 @@ class GrupoController extends Controller
     private GrupoDAO $grupoDao;
     private GrupoService $grupoService;
     private UsuarioDAO $usuarioDao;
+    private NotificacaoDAO $notificacaoDao;
 
     public function __construct()
     {
         $this->grupoDao = new GrupoDAO();
         $this->grupoService = new GrupoService();
         $this->usuarioDao = new UsuarioDAO();
+        $this->notificacaoDao = new NotificacaoDAO();
 
         $this->setActionDefault("create");
 
@@ -317,7 +320,14 @@ class GrupoController extends Controller
 
     protected function turnToAdmin() {
         $userId = $_GET['userId'];
+        $groupName = $_GET['groupName'];
         $this->grupoDao->turnUserToAdmin($userId);
+
+        $notification = new Notificacao();
+        $notification->setMessage("You have been made an administrator of the " . $groupName . " Group.");
+        $notification->setId_user($userId);
+        $notification->setType('admin_granted');
+        $this->notificacaoDao->insertNotification($notification);
 
         $response = array(
             'ok' => true,
@@ -330,7 +340,14 @@ class GrupoController extends Controller
 
     protected function removeAdmin() {
         $userId = $_GET['userId'];
+        $groupName = $_GET['groupName'];
         $this->grupoDao->removeUserFromAdmin($userId);
+
+        $notification = new Notificacao();
+        $notification->setMessage("You are not an administrator of the " . $groupName . " Group anymore.");
+        $notification->setId_user($userId);
+        $notification->setType('admin_removed');
+        $this->notificacaoDao->insertNotification($notification);
 
         $response = array(
             'ok' => true,
@@ -343,7 +360,14 @@ class GrupoController extends Controller
 
     protected function banUser() {
         $userId = $_GET['userId'];
+        $groupName = $_GET['groupName'];
         $this->grupoDao->banUserFromGroup($userId);
+
+        $notification = new Notificacao();
+        $notification->setMessage("You was banned from the " . $groupName . " Group.");
+        $notification->setId_user($userId);
+        $notification->setType('group_banned');
+        $this->notificacaoDao->insertNotification($notification);
 
         $response = array(
             'ok' => true,
