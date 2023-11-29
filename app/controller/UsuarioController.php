@@ -136,8 +136,8 @@ class UsuarioController extends Controller
 
         $formData = $requestData['formData'];
 
-        $usuario = new Usuario();
-        $usuario->setId($formData['id']);
+        $usuario = $this->usuarioDao->findById($formData['id']);
+        
         $usuario->setSenha($formData['senha']);
         $usuario->setEmail($formData['email']);
 
