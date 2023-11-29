@@ -1,9 +1,12 @@
 import notificate from './notification.js';
+import setLevel from './levels.js';
 
 const nameHolder = document.querySelector('#user-name');
 const loginHolder = document.querySelector('#user-login');
-const nivelHolder = document.querySelector('#user-nivel');
-const finishedTasksHolder = document.querySelector('#finished-tasks');
+const emblemHolder = document.querySelector('#emblem-holder');
+const innerProgBar = document.querySelector('.inner-prog-bar');
+const remainingTasks = document.querySelector('#remaining-tasks');
+const levelName = document.querySelector('#level-name');
 const emailInput = document.querySelector('#user-email');
 const passwordInput = document.querySelector('#user-password');
 const userForm = document.querySelector('#frmEditUsuario');
@@ -68,10 +71,15 @@ async function getUserData() {
 getUserData();
 
 function updateUserData(user){
+    const userLevel = setLevel(user.nivel, user.tarefas_concluidas);
+
     nameHolder.innerText = user.nome;
     loginHolder.innerText = user.login;
-    nivelHolder.innerText = user.nivel;
-    finishedTasksHolder.innerText = user.tarefas_concluidas;
+    emblemHolder.setAttribute('src', userLevel.icon);
+    emblemHolder.setAttribute('alt', userLevel.name);
+    innerProgBar.style.width = userLevel.percentageBar + '%';
+    levelName.innerText = userLevel.name;
+    remainingTasks.innerText = userLevel.remainingTasks;
     emailInput.setAttribute('value', user.email);
     passwordInput.setAttribute('value', user.senha);
     idHolder.setAttribute('value', user.id);

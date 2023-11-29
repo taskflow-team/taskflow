@@ -1,3 +1,12 @@
+@keyframes spin {
+    0%, 50% {
+        transform: rotate(0deg);
+    }
+    50%, 100% {
+        transform: rotate(360deg) scale(1.2);
+    }
+}
+
 .pseudo-body {
     display: flex;
     align-items: center;
@@ -33,6 +42,7 @@
 
 .avatar-section img:hover {
     transform: scale(1.1);
+    cursor: pointer;
 }
 
 .input-group {
@@ -96,4 +106,43 @@ input.dark-input:focus {
 
 #btnSubmit:hover {
     background-color: #349745;
+}
+
+.user-level-holder{
+    height: 100px;
+    margin: 40px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.user-level-holder img{
+    position: absolute;
+    top: -40px;
+    left: -40px;
+    z-index: 10;
+}
+
+.user-level-holder img:hover{
+    animation-name: spin;
+    animation-duration: 2500ms;
+    animation-timing-function: linear;
+}
+
+.prog-bar{
+    width: 80%;
+    height: 40px;
+}
+
+.prog-bar span{
+    top: 4%;
+    left: 45%;
+}
+
+.prog-bar p{
+    position: absolute;
+    top: -35px;
+    left: 60px;
+    font-size: 20px;
+    font-weight: 600;
 }

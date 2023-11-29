@@ -13,8 +13,14 @@ require_once(__DIR__ . "/../../components/sideBar/sidebar.php");
             <input type="file" id="profile-image-upload" accept="image/png, image/jpeg, image/gif" style="display: none;">
             <h1 id="user-name"></h1>
             <h2 id="user-login"></h2>
-            <h2 id="user-nivel"></h2>
-            <p id="finished-tasks"></p>
+            <div class='user-level-holder' >
+                <div class='prog-bar' >
+                    <img src="" alt="" id='emblem-holder' title='Complete more tasks to level up'>
+                    <div class="inner-prog-bar"></div>
+                    <span id='remaining-tasks' ></span>
+                    <p id='level-name'></p>
+                </div>
+            </div>
         </div>
 
         <form id="frmEditUsuario" method="POST" action="<?= BASEURL ?>/controller/UsuarioController.php?action=edit">
