@@ -22,6 +22,7 @@ function updateNotifications(notifications) {
     notificationsHolder.innerHTML = '';
 
     notifications.forEach((notification) => {
+        console.log(notification)
         const notificationCard = document.createElement('div');
         notificationCard.className = 'notification-card';
 

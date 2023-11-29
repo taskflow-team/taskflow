@@ -21,7 +21,7 @@ if (isset($_SESSION[SESSAO_USUARIO_ID]))
 <link rel="stylesheet" type="text/css" href="<?= BASEURL; ?>/view/pages/notification/notification.css">
 
 <div class="pseudo-body">
-    <h2 class="your-notifications" >Your Notifications</h2>
+    <h2 class="your-notifications" >Notifications</h2>
     <div class="notifications-holder">
     </div>
 </div>
