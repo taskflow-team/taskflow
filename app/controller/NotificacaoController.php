@@ -60,7 +60,37 @@ class NotificacaoController extends Controller
             ]);
         }
     }
+
+    protected function countUnread() {
+        $userId = $_GET['userId']; 
     
+        try {
+            $unreadCount = $this->notificacaoDao->countUnreadNotifications($userId);
+            echo json_encode(['ok' => true, 'unreadCount' => $unreadCount]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode(['ok' => false, 'error' => $e->getMessage()]);
+        }
+    }
+
+    protected function markAllAsRead() {
+        $userId = $_GET['userId'];
+    
+        try {
+            $this->notificacaoDao->updateAllNotificationsReadStatus($userId, 1); 
+    
+            echo json_encode([
+                "ok" => true,
+                "message" => "All notifications marked as read"
+            ]);
+        } catch (Exception $e) {
+            http_response_code(500);
+            echo json_encode([
+                "ok" => false,
+                "error" => $e->getMessage()
+            ]);
+        }
+    }
 }
 
 // Create an instance of the controller

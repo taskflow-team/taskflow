@@ -11,6 +11,16 @@ include_once(__DIR__ . "/../model/Notificacao.php");
 
 class NotificacaoDAO
 {
+    public function countUnreadNotifications($userId) {
+        $conn = Connection::getConn();
+        $sql = "SELECT COUNT(*) as unreadCount FROM tb_notifications WHERE id_user = :id_user AND is_read = 0";
+        $stm = $conn->prepare($sql);
+        $stm->bindValue(":id_user", $userId);
+        $stm->execute();
+        $result = $stm->fetch();
+        return $result['unreadCount'] ?? 0;
+    }
+
     // Método para listar as notificações de um usuário
     public function listNotifications($id_user)
     {
@@ -73,6 +83,14 @@ class NotificacaoDAO
         $stm->bindValue(1, $is_read);
         $stm->bindValue(2, $id_notification);
         $stm->execute();
+    }
+
+    public function updateAllNotificationsReadStatus($userId, $isRead)
+    {
+        $conn = Connection::getConn();
+        $sql = "UPDATE tb_notifications SET is_read = ? WHERE id_user = ?";
+        $stm = $conn->prepare($sql);
+        $stm->execute([$isRead, $userId]);
     }
 
     // Método para mapear os dados de Notificação para um array

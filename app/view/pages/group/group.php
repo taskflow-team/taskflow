@@ -1,5 +1,5 @@
 <?php
-// require_once(__DIR__ . "/../../../service/GrupoService.php");
+require_once(__DIR__ . "/../../../service/GrupoService.php");
 require_once(__DIR__ . "/../../components/htmlHead/htmlHead.php");
 require_once(__DIR__ . "/../../../dao/GrupoDAO.php");
 require_once(__DIR__ . "/../../components/sideBar/sidebar.php");
@@ -8,10 +8,17 @@ require_once(__DIR__ . "/../../components/sideBar/sidebar.php");
 $grupoDAO = new GrupoDAO();
 
 // Pegando o id do usuário
-$id_usuario = "(Sessão expirada)";
-if (isset($_SESSION[SESSAO_USUARIO_NOME]))
+session_status();
+if (session_status() !== PHP_SESSION_ACTIVE)
 {
-    $id_usuario = $_SESSION[SESSAO_USUARIO_NOME];
+    session_start();
+}
+
+// Pegando o id do usuário
+$id_usuario = "(Sessão expirada)";
+if (isset($_SESSION[SESSAO_USUARIO_ID]))
+{
+    $id_usuario = $_SESSION[SESSAO_USUARIO_ID];
 }
 ?>
 

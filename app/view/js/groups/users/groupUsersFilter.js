@@ -161,7 +161,7 @@ function updateUsersSidebar(users) {
 async function toggleUserAdminStatus(userId, isAdmin, button) {
     try {
         const action = isAdmin == 1 ? 'removeAdmin' : 'turnToAdmin';
-        const response = await fetch(BASE_URL + `/controller/GrupoController.php?action=${action}&userId=${userId}&groupName=${GROUP_NAME}`, {
+        const response = await fetch(BASE_URL + `/controller/GrupoController.php?action=${action}&userId=${userId}&groupName=${GROUP_NAME}&groupId=${GROUP_ID}`, {
             method: 'POST'
         });
         const responseData = await response.json();
@@ -183,7 +183,7 @@ async function toggleUserAdminStatus(userId, isAdmin, button) {
 
 async function banUserFromGroup(userId) {
     try {
-        const response = await fetch(BASE_URL + `/controller/GrupoController.php?action=banUser&userId=${userId}`, {
+        const response = await fetch(BASE_URL + `/controller/GrupoController.php?action=banUser&userId=${userId}&groupId=${GROUP_ID}`, {
             method: 'POST'
         });
         const responseData = await response.json();

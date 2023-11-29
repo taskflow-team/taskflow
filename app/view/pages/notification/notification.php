@@ -2,6 +2,7 @@
 require_once(__DIR__ . "/../../components/htmlHead/htmlHead.php");
 require_once(__DIR__ . "/../../../dao/NotificacaoDAO.php");
 require_once(__DIR__ . "/../../components/sideBar/sidebar.php");
+require_once(__DIR__ . "/../../../controller/AcessoController.php");
 
 $notificacaoDAO = new NotificacaoDAO();
 

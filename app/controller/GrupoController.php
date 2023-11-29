@@ -321,12 +321,16 @@ class GrupoController extends Controller
     protected function turnToAdmin() {
         $userId = $_GET['userId'];
         $groupName = $_GET['groupName'];
+        $groupId = $_GET['groupId'];
         $this->grupoDao->turnUserToAdmin($userId);
 
         $notification = new Notificacao();
         $notification->setMessage("You have been made an administrator of the " . $groupName . " Group.");
         $notification->setId_user($userId);
         $notification->setType('admin_granted');
+        $notification->setIs_read(0);
+        $notification->setId_group($groupId);
+        $notification->setDate_created(date("Y-m-d H:i:s"));
         $this->notificacaoDao->insertNotification($notification);
 
         $response = array(
@@ -341,12 +345,16 @@ class GrupoController extends Controller
     protected function removeAdmin() {
         $userId = $_GET['userId'];
         $groupName = $_GET['groupName'];
+        $groupId = $_GET['groupId'];
         $this->grupoDao->removeUserFromAdmin($userId);
 
         $notification = new Notificacao();
         $notification->setMessage("You are not an administrator of the " . $groupName . " Group anymore.");
         $notification->setId_user($userId);
         $notification->setType('admin_removed');
+        $notification->setIs_read(0);
+        $notification->setId_group($groupId);
+        $notification->setDate_created(date("Y-m-d H:i:s"));
         $this->notificacaoDao->insertNotification($notification);
 
         $response = array(
@@ -361,12 +369,16 @@ class GrupoController extends Controller
     protected function banUser() {
         $userId = $_GET['userId'];
         $groupName = $_GET['groupName'];
+        $groupId = $_GET['groupId'];
         $this->grupoDao->banUserFromGroup($userId);
 
         $notification = new Notificacao();
         $notification->setMessage("You was banned from the " . $groupName . " Group.");
         $notification->setId_user($userId);
         $notification->setType('group_banned');
+        $notification->setIs_read(0);
+        $notification->setId_group($groupId);
+        $notification->setDate_created(date("Y-m-d H:i:s"));
         $this->notificacaoDao->insertNotification($notification);
 
         $response = array(
