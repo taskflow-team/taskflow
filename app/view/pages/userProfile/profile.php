@@ -15,7 +15,7 @@ require_once(__DIR__ . "/../../components/sideBar/sidebar.php");
             <h2 id="user-login"></h2>
             <div class='user-level-holder' >
                 <div class='prog-bar' >
-                    <img src="" alt="" id='emblem-holder' >
+                    <img src="" alt="" id='emblem-holder' title='Complete more tasks to level up'>
                     <div class="inner-prog-bar"></div>
                     <span id='remaining-tasks' ></span>
                     <p id='level-name'></p>

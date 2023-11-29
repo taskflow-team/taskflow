@@ -77,7 +77,6 @@ function updateUserData(user){
     loginHolder.innerText = user.login;
     emblemHolder.setAttribute('src', userLevel.icon);
     emblemHolder.setAttribute('alt', userLevel.name);
-    emblemHolder.setAttribute('title', userLevel.name);
     innerProgBar.style.width = userLevel.percentageBar + '%';
     levelName.innerText = userLevel.name;
     remainingTasks.innerText = userLevel.remainingTasks;
