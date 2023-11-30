@@ -1,7 +1,10 @@
 .buttons-group{
+    padding: 35px 25px;
     display: flex;
     align-items: center;
     margin: 30px 0;
+    background-color: #1A1A1A;
+    border-radius: 10px;
 }
 
 .buttons-group button{
