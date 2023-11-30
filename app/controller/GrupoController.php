@@ -325,7 +325,7 @@ class GrupoController extends Controller
         $this->grupoDao->turnUserToAdmin($userId);
 
         $notification = new Notificacao();
-        $notification->setMessage("You were banned from the " . $groupName . " Group.");
+        $notification->setMessage("You are now admin at the group " . $groupName);
         $notification->setId_user($userId);
         $notification->setType('admin_granted');
         $notification->setIs_read(0);
@@ -349,7 +349,7 @@ class GrupoController extends Controller
         $this->grupoDao->removeUserFromAdmin($userId);
 
         $notification = new Notificacao();
-        $notification->setMessage("You were banned from the " . $groupName . " Group.");
+        $notification->setMessage("Your admin privileges have been removed in the " . $groupName);
         $notification->setId_user($userId);
         $notification->setType('admin_removed');
         $notification->setIs_read(0);
@@ -373,7 +373,7 @@ class GrupoController extends Controller
         $this->grupoDao->banUserFromGroup($userId);
 
         $notification = new Notificacao();
-        $notification->setMessage("You were banned from the " . $groupName . " Group.");
+        $notification->setMessage("You were banned from the " . $groupName);
         $notification->setId_user($userId);
         $notification->setType('group_banned');
         $notification->setIs_read(0);
