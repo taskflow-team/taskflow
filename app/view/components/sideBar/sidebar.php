@@ -46,7 +46,4 @@ if (isset($_SESSION[SESSAO_USUARIO_ID]))
 
 <input id="idUsuario" name="idUsuario" type="hidden" value="<?php echo $_SESSION[SESSAO_USUARIO_ID]; ?>" />
 
-<script>
-    const BASE_URL = '<?= BASEURL; ?>';
-</script>
 <script type="module" src="<?= BASEURL; ?>/view/js/notifications/notificationsSidebar.js"></script>
