@@ -55,4 +55,26 @@
 
 .group-functions button{
     margin-right: 20px;
+    border-radius: 20px;
+    background-color: transparent;
+}
+
+.group-functions button:hover{
+    color: #FFF !important;
+}
+
+.group-functions .btn-success{
+    color: #4DD167 !important;
+}
+
+.group-functions .btn-danger{
+    color: #c82333 !important;
+}
+
+.group-functions .btn-info{
+    color: #138496 !important;
+}
+
+.group-functions .btn-warning{
+    color: #e0a800 !important;
 }
