@@ -2,7 +2,7 @@
     padding-bottom: 30px;
     margin-top: 48px;
     margin-bottom: 0;
-    border-bottom: 2px solid #191919;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .notifications-holder {
@@ -17,7 +17,7 @@
     height: 100px;
     padding: 15px 30px;
     transition: transform 0.4s ease-in-out;
-    border-bottom: 2px solid #191919;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
     cursor: pointer;
     display: flex;
     transition: all 0.4s ease-in-out;
@@ -34,6 +34,7 @@
     justify-content: center;
     font-size: 26px;
     color: #4DD167;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .notification-card:hover{
