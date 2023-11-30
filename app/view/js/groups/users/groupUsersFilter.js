@@ -183,7 +183,7 @@ async function toggleUserAdminStatus(userId, isAdmin, button) {
 
 async function banUserFromGroup(userId) {
     try {
-        const response = await fetch(BASE_URL + `/controller/GrupoController.php?action=banUser&userId=${userId}&groupId=${GROUP_ID}`, {
+        const response = await fetch(BASE_URL + `/controller/GrupoController.php?action=banUser&userId=${userId}&groupId=${GROUP_ID}&groupName=${GROUP_NAME}`, {
             method: 'POST'
         });
         const responseData = await response.json();
