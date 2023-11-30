@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap');
 
 :root {
-    --primary-bg: #171717;
+    --primary-bg: #191919;
     --hover-bg: #40a855;
     --border-color: rgba(255, 255, 255, 0.1);
     --text-color: #FFFFFF;
@@ -51,7 +51,7 @@
     color: var(--text-color);
     display: block;
     padding: 10px 10px;
-    margin-bottom: 5px; 
+    margin-bottom: 5px;
     border-radius: 5px;
     transition: background 0.3s ease, padding 0.3s ease;
 }
@@ -59,7 +59,7 @@
 .sidebar a:hover {
     background: var(--hover-bg);
     text-decoration: none;
-    padding-left: 20px; 
+    padding-left: 20px;
 }
 
 .sidebar a img {

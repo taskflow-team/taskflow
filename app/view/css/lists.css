@@ -1,6 +1,6 @@
 .pseudo-body {
     padding: 15px 20px;
-    background-color: #262626;
+    background-color: #0f0f0f;
     margin-top: 50px;
     margin-left: -50px;
     margin-right: 50px;
@@ -14,11 +14,12 @@
 }
 
 .list-card {
-    background-color: #1A1A1A;
+    background-color: #191919;
     border-radius: 10px;
     padding: 15px;
     transition: transform 0.4s ease-in-out;
     cursor: pointer;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .list-card:hover {
@@ -69,7 +70,7 @@
 }
 
 .list-card .actions-div {
-    background-color: #1A1A1A;
+    background-color: #191919;
     margin-left: 25px;
     display: flex;
     align-items: center;
@@ -120,7 +121,7 @@
 
 .list-card .actions-div .confirm-btn:hover{
     background-color: #4DD167;
-    color: #171717;
+    color: #191919;
 }
 
 .list-card .actions-div .cancel-btn{
@@ -133,7 +134,7 @@
 
 .list-card .actions-div .cancel-btn:hover{
     background-color: #FF6161;
-    color: #171717;
+    color: #191919;
     border-top-right-radius: 10px;
     border-bottom-right-radius: 10px;
 }

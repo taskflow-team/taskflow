@@ -7,7 +7,7 @@
 }
 
 body{
-    background-color: #262626;
+    background-color: #0f0f0f;
 }
 
 .app-name{
@@ -25,14 +25,15 @@ body{
 }
 
 .dark-input, .dark-input:focus{
-    background-color: #171717;
+    background-color: #191919;
     border: none;
     border-radius: 8px;
     color: #FFFFFF;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .btn{
-    color: #171717;
+    color: #191919;
     font-weight: 600;
 }
 
@@ -81,7 +82,7 @@ body{
 .warning{
     background-color: #FFD361;
     border-color: #af8314;
-    color: #171717;
+    color: #191919;
 }
 
 @keyframes right-slide-in {
@@ -139,6 +140,7 @@ body{
     padding: 12px 20px;
     margin-top: 16px;
     background-color: #2D2D2D;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .modal button{

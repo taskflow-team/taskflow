@@ -23,7 +23,7 @@ function notificate(type, title, content){
         notification.className = 'notification error';
     } else if(type == 'warning') {
         notification.className = 'notification warning';
-        closeBtn.style.color = '#171717';
+        closeBtn.style.color = '#191919';
     }
 
     notification.appendChild(htmlTitle);

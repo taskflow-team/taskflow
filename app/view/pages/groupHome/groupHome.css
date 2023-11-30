@@ -27,7 +27,7 @@
 .navigation-bar button:hover{
     background-color: #4DD167;
     border-color: #4DD167;
-    color: #171717 !important;
+    color: #191919 !important;
 }
 
 .navigation-bar #btn-lists{
@@ -96,7 +96,7 @@
 }
 
 .group-reward{
-    background-color: #171717 !important;
+    background-color: #191919 !important;
 }
 
 .group-reward span{
@@ -113,8 +113,9 @@
 
 .members-table tr{
     height: 30px;
-    background-color: #171717;
+    background-color: #191919;
     font-size: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .members-table tr:nth-child(even) {
