@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@100;200;300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;600;700&display=swap');
 
 :root {
     --primary-bg: #191919;
@@ -39,6 +40,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-family: 'Cabin', sans-serif;
 }
 
 .sidebar nav {

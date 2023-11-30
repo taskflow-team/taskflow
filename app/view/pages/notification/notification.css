@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;600;700&display=swap');
+
 .page-title {
     padding-bottom: 30px;
     margin-top: 48px;
@@ -35,6 +37,7 @@
     font-size: 26px;
     color: #4DD167;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    font-family: 'Cabin', sans-serif;
 }
 
 .notification-card:hover{

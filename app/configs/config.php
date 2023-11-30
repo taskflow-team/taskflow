@@ -13,7 +13,7 @@ define('DB_PASSWORD', '');
 define('BASEURL', '/taskflow/app');
 
 //Nome do sistema
-define('APP_NAME', 'Taskflow');
+define('APP_NAME', 'TaskFlow');
 
 //Página inicial do sistema
 define('HOME_PAGE', BASEURL . '/controller/HomeController.php?action=home');
