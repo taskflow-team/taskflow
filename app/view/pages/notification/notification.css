@@ -15,15 +15,25 @@
 .notification-card {
     width: 100%;
     height: 100px;
-    padding: 15px 20px;
+    padding: 15px 30px;
     transition: transform 0.4s ease-in-out;
     border-bottom: 2px solid #171717;
     cursor: pointer;
     display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
     transition: all 0.4s ease-in-out;
+}
+
+.notification-card .notif-icon{
+    width: 50px;
+    height: 50px;
+    margin-right: 30px;
+    background-color: #171717;
+    border-radius: 25px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 26px;
+    color: #4DD167;
 }
 
 .notification-card:hover{

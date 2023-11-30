@@ -34,13 +34,31 @@ function updateNotifications(notifications) {
         const notificationCard = document.createElement('div');
         notificationCard.className = 'notification-card';
 
+        const innerHolder = document.createElement('div');
+        innerHolder.className = 'inner-notif-holder';
+
+        const notifIcon = document.createElement('div');
+        notifIcon.className = 'notif-icon';
+        notifIcon.innerText = 'T';
+
         const notificationContent = document.createElement('p');
         notificationContent.innerText = notification.message;
 
         const notificationDate = document.createElement('p');
-        notificationDate.innerText = notification.date_created;
 
-        notificationCard.appendChild(notificationContent);
+        const parsedDate = new Date(notification.date_created);
+        const day = String(parsedDate.getDate()).padStart(2, '0');
+        const month = String(parsedDate.getMonth() + 1).padStart(2, '0');
+        const year = parsedDate.getFullYear();
+        const formattedDate = `${day}/${month}/${year}`;
+
+        notificationDate.innerText = formattedDate;
+
+        innerHolder.appendChild(notificationContent);
+        innerHolder.appendChild(notificationDate);
+
+        notificationCard.appendChild(notifIcon);
+        notificationCard.appendChild(innerHolder);
 
         notificationsHolder.appendChild(notificationCard);
     });
