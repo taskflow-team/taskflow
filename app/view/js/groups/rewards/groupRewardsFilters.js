@@ -101,7 +101,7 @@ function updateRewards(rewards) {
         rewardCard.style.display = 'none';
     }
 
-    const rewardsHolder = document.querySelector('.rewards-holder');
+    const rewardsHolder = document.querySelector('.rewards-holder-group');
     rewardsHolder.innerHTML = '';
 
     rewards.forEach((reward) => {

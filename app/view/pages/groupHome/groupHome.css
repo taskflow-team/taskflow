@@ -87,8 +87,9 @@
     justify-content: space-between;
 }
 
-#rewards-holder{
+#rewards-holder-group{
     display: none;
+    gap: 28px;
 }
 
 #rewards-controls-holder{

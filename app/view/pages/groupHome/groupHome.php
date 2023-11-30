@@ -64,7 +64,7 @@ if (isset($_SESSION[SESSAO_USUARIO_ID]))
                 </table>
             </div>
 
-            <div id="rewards-holder" class="rewards-holder">
+            <div id="rewards-holder-group" class="rewards-holder-group">
             </div>
         </div>
     </div>
@@ -81,7 +81,7 @@ if (isset($_SESSION[SESSAO_USUARIO_ID]))
 
     document.getElementById('btn-lists').addEventListener('click', function() {
         document.getElementById('lists-holder').style.display = 'grid';
-        document.getElementById('rewards-holder').style.display = 'none';
+        document.getElementById('rewards-holder-group').style.display = 'none';
         document.getElementById('members').style.display = 'none';
         document.getElementById('rewards-controls-holder').style.display = 'none';
     });
@@ -89,14 +89,14 @@ if (isset($_SESSION[SESSAO_USUARIO_ID]))
     document.getElementById('btn-rewards').addEventListener('click', function() {
         document.getElementById('lists-holder').style.display = 'none';
         document.getElementById('members').style.display = 'none';
-        document.getElementById('rewards-holder').style.display = 'block';
-        document.getElementById('rewards-controls-holder').style.display = 'block';
+        document.getElementById('rewards-holder-group').style.display = 'flex';
+        document.getElementById('rewards-controls-holder').style.display = 'flex';
     });
 
     document.getElementById('btn-members').addEventListener('click', function() {
         document.getElementById('members').style.display = 'block';
         document.getElementById('lists-holder').style.display = 'none';
-        document.getElementById('rewards-holder').style.display = 'none';
+        document.getElementById('rewards-holder-group').style.display = 'none';
         document.getElementById('rewards-controls-holder').style.display = 'none';
     });
 </script>
