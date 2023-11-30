@@ -153,7 +153,9 @@ function updateRewards(rewards) {
         const claimBtn = document.createElement('button')
         claimBtn.id = 'claimBtn';
         claimBtn.innerText = 'Claim';
-        claimBtn.addEventListener('click', (event) => claimReward(event, points, reward));
+        claimBtn.addEventListener('click', (event) => {
+            window.confirm('Are you sure you want to claim this reward?') ? claimReward(points, reward) : null;
+        });
 
         functionsDiv.appendChild(claimBtn);
 
@@ -163,7 +165,9 @@ function updateRewards(rewards) {
             deleteBtn.id = 'deleteBtn';
             deleteBtn.dataset.id = id_reward;
             deleteBtn.innerText = 'Delete';
-            deleteBtn.addEventListener('click', deleteReward);
+            deleteBtn.addEventListener('click', (event) => {
+                window.confirm('Are you sure you want to delete this reward?') ? deleteReward(event) : null;
+            });
 
             functionsDiv.appendChild(deleteBtn);
         }

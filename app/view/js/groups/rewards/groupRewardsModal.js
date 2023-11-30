@@ -71,11 +71,15 @@ function rewardModal(userID, type, rewardId, rewardName, rewardCost){
     submitBtn.innerText = type == 'create' ? 'Create' : 'Rename';
 
     if(type == 'create'){
-        submitBtn.addEventListener('click', () => createReward(userID));
+        submitBtn.addEventListener('click', () => {
+            window.confirm('Are you sure you want to create this reward?') ? createReward(userID) : null;
+        });
     } else {
         inputName.value = rewardName;
         inputCost.value = rewardCost;
-        submitBtn.addEventListener('click', () => renameReward(rewardId));
+        submitBtn.addEventListener('click', () => {
+            window.confirm('Are you sure you want to rename this reward?') ? renameReward(rewardId) : null;
+        });
     }
 
     const closeIcon = document.createElement('i');

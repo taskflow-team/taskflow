@@ -2,7 +2,7 @@ import { fetchRewards, updateUserData } from "./rewardsFilters.js";
 import { closeModal } from "./rewardsModal.js";
 import notificate from "../notification.js";
 
-async function createReward(userID){
+async function createReward(userID) {
     let rewardName = document.querySelector('#reward-name-input').value;
     let rewardCost = document.querySelector('#reward-cost-input').value;
     let rewardUnities = document.querySelector('#reward-unities-input').value;
@@ -35,7 +35,7 @@ async function createReward(userID){
     }
 }
 
-async function renameReward(rewardID){
+async function renameReward(rewardID) {
     let rewardName = document.querySelector('#reward-name-input').value;
 
     try {
@@ -65,105 +65,59 @@ async function renameReward(rewardID){
     }
 }
 
-async function deleteReward(event){
+async function deleteReward(event) {
     const deleteBtn = event.target;
     const rewardID = deleteBtn.dataset.id;
 
-    deleteBtn.style.padding = '0';
+    try {
+        const response = await fetch(`RewardController.php?action=delete&rewardID=${rewardID}`, {
+            method: "DELETE",
+        });
 
-    deleteBtn.innerText = '';
-
-    let confirmBtn = document.createElement('span');
-    confirmBtn.innerText = 'Confirm';
-    confirmBtn.className = 'confirm-btn';
-    confirmBtn.addEventListener('click', async() => {
-        deleteBtn.innerHtml = '';
-        deleteBtn.innerText = '';
-        console.log(rewardID);
-        try {
-            const response = await fetch(`RewardController.php?action=delete&rewardID=${rewardID}`, {
-                method: "DELETE",
-            });
-
-            if (!response.ok) {
-                throw new Error('The request to the server has failed');
-            }
-
-            // Atualiza a tela com as recompensas atuais
-            fetchRewards();
-
-        } catch (error) {
-            notificate('error', 'Error', error.message);
+        if (!response.ok) {
+            throw new Error('The request to the server has failed');
         }
-    })
 
-    let cancelBtn = document.createElement('span');
-    cancelBtn.innerText = 'Cancel';
-    cancelBtn.className = 'cancel-btn';
+        fetchRewards();
 
-    deleteBtn.appendChild(confirmBtn);
-    deleteBtn.appendChild(cancelBtn);
-
-    cancelBtn.addEventListener('click', () => {
-        deleteBtn.innerHtml = '';
-        deleteBtn.innerText = 'Delete';
-        deleteBtn.style.padding = '0 25px 10px 25px';
-    });
+    } catch (error) {
+        notificate('error', 'Error', error.message);
+    }
 }
 
-async function claimReward(event, user, reward){
-    const element = event.target;
-
-    if(reward.reward_cost > user.pontos){
+async function claimReward(user, reward) {
+    if (reward.reward_cost > user.pontos) {
         notificate('warning', 'Warning', "You don't have enough emeralds, please complete more tasks");
         return;
     }
 
-    let confirmBtn = document.createElement('span');
-    confirmBtn.innerText = 'Confirm';
-    confirmBtn.className = 'confirm-btn';
-    confirmBtn.addEventListener('click', async() => {
-        try {
-            const reqConfigs = {
-                method: "POST",
-                headers: {
-                    'Content-type': 'application/json'
-                },
-                body: JSON.stringify({
-                    userID: user.id,
-                    rewardID: reward.id_reward
-                })
-            };
+    try {
+        const reqConfigs = {
+            method: "POST",
+            headers: {
+                'Content-type': 'application/json'
+            },
+            body: JSON.stringify({
+                userID: user.id,
+                rewardID: reward.id_reward
+            })
+        };
 
-            const response = await fetch('RewardController.php?action=claimReward', reqConfigs);
-            const responseData = await response.json();
+        const response = await fetch('RewardController.php?action=claimReward', reqConfigs);
+        const responseData = await response.json();
 
-            if (!response.ok || response.status == 404 || !responseData.ok) {
-                notificate(
-                    'error',
-                    'Erro',
-                    responseData.error
-                );
-            }
-
-            updateUserData();
-        } catch (error) {
-            notificate('error', 'Error', error.message);
+        if (!response.ok || response.status == 404 || !responseData.ok) {
+            notificate(
+                'error',
+                'Erro',
+                responseData.error
+            );
         }
-    })
 
-    let cancelBtn = document.createElement('span');
-    cancelBtn.innerText = 'Cancel';
-    cancelBtn.className = 'cancel-btn';
-    cancelBtn.addEventListener('click', () => {
-        element.innerHtml = '';
-        element.innerText = 'Claim';
-    });
-
-    element.innerText = '';
-    element.innerHtml = '';
-    element.appendChild(confirmBtn);
-    element.appendChild(cancelBtn);
+        updateUserData();
+    } catch (error) {
+        notificate('error', 'Error', error.message);
+    }
 }
 
 
