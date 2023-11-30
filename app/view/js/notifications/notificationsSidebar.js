@@ -6,7 +6,6 @@ async function checkUnreadNotifications() {
         const data = await response.json();
 
         if (data.ok && data.unreadCount > 0) {
-            // document.getElementById('unreadNotificationsCount').innerText = data.unreadCount;
             const notifHolder = document.querySelector('.nav-icon-holder');
 
             const notifCounter = document.createElement('span');
@@ -23,3 +22,7 @@ async function checkUnreadNotifications() {
 
 checkUnreadNotifications();
 setInterval(checkUnreadNotifications, 5000);
+
+export {
+    checkUnreadNotifications
+}

@@ -1,4 +1,5 @@
 import notificate from "../notification.js";
+import { checkUnreadNotifications } from "./notificationsSidebar.js";
 
 const notificationsHolder = document.querySelector('.notifications-holder');
 
@@ -12,6 +13,8 @@ async function markNotificationsAsRead() {
 
 async function fetchNotifications() {
     await markNotificationsAsRead();
+    await checkUnreadNotifications();
+
     try {
         const response = await fetch(`NotificacaoController.php?action=list&userId=${USER}`);
         const responseData = await response.json();

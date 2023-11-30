@@ -93,5 +93,4 @@ class NotificacaoController extends Controller
     }
 }
 
-// Create an instance of the controller
 $notificationCont = new NotificacaoController();
