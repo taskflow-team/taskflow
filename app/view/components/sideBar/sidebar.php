@@ -29,9 +29,12 @@ if (isset($_SESSION[SESSAO_USUARIO_ID]))
             <img class="icon" src="<?= BASEURL . '/view/assets/icons/groups.png'?>" alt="groups icon">
             Groups
         </a>
-        <a href="<?= BASEURL . '/controller/NotificacaoController.php?action=create'?>">
-            <img class="icon" src="<?= BASEURL . '/view/assets/icons/notification.png'?>" alt="notification icon">
-            Notifications <span id="unreadNotificationsCount"></span>
+        <a href="<?= BASEURL . '/controller/NotificacaoController.php?action=create'?>" class="notif-link" >
+            <div class='nav-icon-holder'>
+                <img class="icon" src="<?= BASEURL . '/view/assets/icons/notification.png'?>" alt="notification icon">
+                <!-- <span id="unreadNotificationsCount"></span> -->
+            </div>
+            <span>Notifications</span>
         </a>
         <a href="<?= BASEURL . '/controller/UsuarioController.php?action=showProfile'?>">
             <img class="icon" src="<?= BASEURL . '/view/assets/icons/profile.png'?>" alt="profile icon">

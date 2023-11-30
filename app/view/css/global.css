@@ -201,6 +201,31 @@ body{
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
 }
 
+.notif-link{
+    display: flex !important;
+    align-items: center !important;
+}
+
+.notif-link span{
+    margin-left: 5px;
+}
+
+.nav-icon-holder{
+    width: fit-content;
+    position: relative;
+}
+
+#unreadNotificationsCount{
+    padding: 2px 7px;
+    margin-left: 5px;
+    background-color: #f64242;
+    font-size: 10px;
+    border-radius: 15px;
+    position: absolute;
+    top: -5px;
+    right: 0;
+}
+
 @keyframes scale-out {
     from {
         transform: scale(1);

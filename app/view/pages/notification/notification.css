@@ -1,6 +1,8 @@
-.your-notifications {
-    margin-bottom: 30px;
+.page-title {
+    padding-bottom: 30px;
     margin-top: 48px;
+    margin-bottom: 0;
+    border-bottom: 2px solid #171717;
 }
 
 .notifications-holder {
@@ -13,16 +15,19 @@
 .notification-card {
     width: 100%;
     height: 100px;
-    padding: 15px 0;
-    margin: 30px 0;
+    padding: 15px 20px;
     transition: transform 0.4s ease-in-out;
-    border-top: 2px solid #171717;
     border-bottom: 2px solid #171717;
     cursor: pointer;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     justify-content: space-between;
+    transition: all 0.4s ease-in-out;
+}
+
+.notification-card:hover{
+    background-color: #171717;
 }
 
 .notification-card p {

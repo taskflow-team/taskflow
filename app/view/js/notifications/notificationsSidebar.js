@@ -6,10 +6,16 @@ async function checkUnreadNotifications() {
         const data = await response.json();
 
         if (data.ok && data.unreadCount > 0) {
-            document.getElementById('unreadNotificationsCount').innerText = data.unreadCount;
-        } else {
-            document.getElementById('unreadNotificationsCount').innerText = '';
+            // document.getElementById('unreadNotificationsCount').innerText = data.unreadCount;
+            const notifHolder = document.querySelector('.nav-icon-holder');
+
+            const notifCounter = document.createElement('span');
+            notifCounter.id = 'unreadNotificationsCount';
+            notifCounter.innerText = data.unreadCount;
+
+            notifHolder.appendChild(notifCounter);
         }
+
     } catch (error) {
         console.error('Error fetching unread notifications:', error);
     }
