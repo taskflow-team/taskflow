@@ -39,6 +39,9 @@ if (isset($_SESSION[SESSAO_USUARIO_ID]))
     </div>
 </div>
 
+<script>
+    const BASE_URL = '<?= BASEURL; ?>';
+</script>
 <script type="module" src="<?= BASEURL; ?>/view/js/groups/groupsModal.js"></script>
 <script type="module" src="<?= BASEURL; ?>/view/js/groups/groupsFunctions.js"></script>
 <script type="module" src="<?= BASEURL; ?>/view/js/groups/groupsFilters.js"></script>

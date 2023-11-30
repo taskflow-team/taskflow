@@ -29,5 +29,6 @@ if (isset($_SESSION[SESSAO_USUARIO_ID]))
 
 <script>
     const USER = '<?= $id_usuario; ?>';
+    const BASE_URL = '<?= BASEURL; ?>';
 </script>
 <script type="module" src="<?= BASEURL; ?>/view/js/notifications/notificationsFunctions.js"></script>
