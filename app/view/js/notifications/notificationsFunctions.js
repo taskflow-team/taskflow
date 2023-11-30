@@ -43,8 +43,10 @@ function updateNotifications(notifications) {
 
         const notificationContent = document.createElement('p');
         notificationContent.innerText = notification.message;
+        notificationContent.className = 'notif-message';
 
         const notificationDate = document.createElement('p');
+        notificationDate.className = 'notif-date';
 
         const parsedDate = new Date(notification.date_created);
         const day = String(parsedDate.getDate()).padStart(2, '0');

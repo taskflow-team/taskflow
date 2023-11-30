@@ -40,7 +40,12 @@
     background-color: #191919;
 }
 
-.notification-card p {
-    font-size: 16px;
+.notif-message{
+    font-size: 18px;
     color: #FFF;
+}
+
+.notif-date{
+    font-size: 14px !important;
+    color: #4DD167 !important;
 }
