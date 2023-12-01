@@ -5,14 +5,20 @@ async function checkUnreadNotifications() {
         const response = await fetch(BASE_URL + '/controller/NotificacaoController.php?action=countUnread&userId=' + userId);
         const data = await response.json();
 
+        const notifHolder = document.querySelector('.nav-icon-holder');
+        let notifCounter = document.getElementById('unreadNotificationsCount');
+
         if (data.ok && data.unreadCount > 0) {
-            const notifHolder = document.querySelector('.nav-icon-holder');
-
-            const notifCounter = document.createElement('span');
-            notifCounter.id = 'unreadNotificationsCount';
+            if (!notifCounter) {
+                notifCounter = document.createElement('span');
+                notifCounter.id = 'unreadNotificationsCount';
+                notifHolder.appendChild(notifCounter);
+            }
             notifCounter.innerText = data.unreadCount;
-
-            notifHolder.appendChild(notifCounter);
+        } else {
+            if (notifCounter) {
+                notifCounter.remove();
+            }
         }
 
     } catch (error) {

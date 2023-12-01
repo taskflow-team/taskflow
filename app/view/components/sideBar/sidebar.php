@@ -32,7 +32,6 @@ if (isset($_SESSION[SESSAO_USUARIO_ID]))
         <a href="<?= BASEURL . '/controller/NotificacaoController.php?action=create'?>" class="notif-link" >
             <div class='nav-icon-holder'>
                 <img class="icon" src="<?= BASEURL . '/view/assets/icons/notification.png'?>" alt="notification icon">
-                <!-- <span id="unreadNotificationsCount"></span> -->
             </div>
             <span>Notifications</span>
         </a>
