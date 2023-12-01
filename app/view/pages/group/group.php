@@ -27,13 +27,11 @@ if (isset($_SESSION[SESSAO_USUARIO_ID]))
 <!-- Exibir os grupos -->
 <div class="pseudo-body">
     <div class="buttons-group">
+        <h2 class="your-groups" >Your Groups</h2>
         <button id="btn-create-group" class="btn btn-success" >Create a Group +</button>
         <button id="btn-join-group" class="btn btn-success" >Join a Group</button>
     </div>
 
-    <!-- <hr class="line" > -->
-
-    <h2 class="your-groups" >Your Groups</h2>
     <div class="groups-holder">
 
     </div>
