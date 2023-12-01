@@ -259,6 +259,7 @@ class TarefaController extends Controller
         $notification->setId_user($userId);
         $notification->setType('level_up');
         $notification->setIs_read(0);
+        $notification->setDate_created(date("Y-m-d H:i:s"));
 
         $this->notificacaoDao->insertNotification($notification);
     }
