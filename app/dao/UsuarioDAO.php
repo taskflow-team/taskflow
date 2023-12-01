@@ -127,15 +127,12 @@ class UsuarioDAO
     }
 
     // Método para calcular o nivel com base nas tarefas concluidas
-    private function calcularNivel($completedTasks)
+    public function calcularNivel($completedTasks)
     {
-        // Define a base value for exponential growth
         $baseValue = 10;
 
-        // Calculate nivel with exponential growth
         $nivel = floor(log($completedTasks / $baseValue, 2));
 
-        // Ensure nivel is at least 0
         $nivel = max(0, $nivel);
 
         return $nivel;

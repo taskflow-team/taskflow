@@ -8,6 +8,7 @@ require_once(__DIR__ . "/../model/Tarefa.php");
 require_once(__DIR__ . "/../dao/TarefaDAO.php");
 require_once(__DIR__ . "/../dao/UsuarioDAO.php");
 require_once(__DIR__ . "/../dao/GrupoDAO.php");
+require_once(__DIR__ . "/../dao/NotificacaoDAO.php");
 require_once(__DIR__ . "/../service/TarefaService.php");
 require_once(__DIR__ . "/Controller.php");
 
@@ -17,13 +18,17 @@ class TarefaController extends Controller
 
     private TarefaDAO $tarefaDao;
     private TarefaService $tarefaService;
+    private UsuarioDAO $usuarioDao;
+    private GrupoDAO $grupoDao;
+    private NotificacaoDAO $notificacaoDao;
 
     public function __construct()
     {
         $this->tarefaDao = new TarefaDAO();
         $this->tarefaService = new TarefaService();
         $this->usuarioDao = new UsuarioDAO();
-        $this->GrupoDao = new GrupoDAO();
+        $this->grupoDao = new GrupoDAO();
+        $this->notificacaoDao = new NotificacaoDAO();
 
         $this->setActionDefault("list");
 
@@ -201,6 +206,8 @@ class TarefaController extends Controller
             $this->tarefaDao->updateTarefa($tarefa);
     
             $taskPoints = $tarefa->getValor_pontos();
+            $user = $this->usuarioDao->findById($userId);
+            $oldLevel = $this->usuarioDao->calcularNivel($user->getTarefas_concluidas());
     
             if ($groupID == null) {   
                 $user = $this->usuarioDao->findById($userId);
@@ -212,13 +219,18 @@ class TarefaController extends Controller
     
                 $this->usuarioDao->update($user);
             } else {
-                $groupUserPoints = $this->GrupoDao->getGroupUserPoints($groupID, $userId);
+                $groupUserPoints = $this->grupoDao->getGroupUserPoints($groupID, $userId);
                 $newPoints = $taskCompleted ? ($groupUserPoints + $taskPoints) : ($groupUserPoints - $taskPoints);
-                $this->GrupoDao->updateGroupUserPoints($groupID, $userId, $newPoints);
+                $this->grupoDao->updateGroupUserPoints($groupID, $userId, $newPoints);
     
                 $user = $this->usuarioDao->findById($userId);
                 $user->setTarefas_concluidas($taskCompleted ? ($user->getTarefas_concluidas() + 1) : ($user->getTarefas_concluidas() - 1));
                 $this->usuarioDao->update($user);
+            }
+
+            $newLevel = $this->usuarioDao->calcularNivel($user->getTarefas_concluidas());;
+            if ($newLevel > $oldLevel) {
+                $this->createLevelUpNotification($userId, $newLevel);
             }
     
             $response = array(
@@ -238,6 +250,17 @@ class TarefaController extends Controller
             echo json_encode($response);
             exit;
         }
+    }
+
+    private function createLevelUpNotification($userId, $newLevel)
+    {
+        $notification = new Notificacao();
+        $notification->setMessage("Congratulations! You've reached level " . $newLevel . "!");
+        $notification->setId_user($userId);
+        $notification->setType('level_up');
+        $notification->setIs_read(0);
+
+        $this->notificacaoDao->insertNotification($notification);
     }
 
     protected function save()

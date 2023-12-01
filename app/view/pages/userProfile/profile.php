@@ -44,5 +44,8 @@ require_once(__DIR__ . "/../../components/sideBar/sidebar.php");
     </div>
 </div>
 
+<script>
+    const BASE_URL = '<?= BASEURL; ?>';
+</script>
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script type="module" src="../view/js/profile.js"></script>
