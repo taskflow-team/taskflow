@@ -118,11 +118,11 @@ input.dark-input:focus {
 }
 
 .user-level-holder img{
-    width: 100px;
-    height: 100px;
+    width: 90px;
+    height: 90px;
     position: absolute;
-    top: -40px;
-    left: -40px;
+    top: -32px;
+    left: -32px;
     z-index: 10;
 }
 

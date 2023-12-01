@@ -40,7 +40,7 @@ class GrupoController extends Controller
     {
         // Obter os dados JSON brutos do corpo da requisição
         $jsonString = file_get_contents('php://input');
-        $requestData = json_decode($jsonString, true); 
+        $requestData = json_decode($jsonString, true);
 
         $groupName = $requestData['groupName'];
         $groupCode = $requestData['groupCode'];
@@ -51,7 +51,7 @@ class GrupoController extends Controller
         $grupo->setNome($groupName);
         $grupo->setCodigo_convite($groupCode);
         $grupo->setId_usuario($userID);
-        
+
         $erros = $this->grupoService->validarDados($grupo);
         if (empty($erros)) {
             try {
@@ -196,11 +196,11 @@ class GrupoController extends Controller
         // Obter os dados JSON brutos do corpo da requisição
         $jsonString = file_get_contents('php://input');
         $requestData = json_decode($jsonString, true); // Converter JSON para um array associativo
-    
+
         $groupCode = $requestData['groupCode'];
         $userID = $requestData['userID'];
         $isAdministrator = $requestData['isAdministrator'];
-    
+
         try {
             // Check if the user is already a member of the group
             if ($this->grupoDao->isUserMemberOfGroup($groupCode, $userID)) {
@@ -208,35 +208,35 @@ class GrupoController extends Controller
                     'ok' => false,
                     'message' => 'You are already a member of this group'
                 );
-    
+
                 header('Content-Type: application/json');
                 echo json_encode($response);
                 exit;
             }
-    
+
             // Validate groupCode
             $group = $this->grupoDao->findGroupByCode($groupCode);
-    
+
             if (!$group) {
                 $response = array(
                     'ok' => false,
                     'message' => 'Group not found'
                 );
-    
+
                 header('Content-Type: application/json');
                 echo json_encode($response);
                 exit;
             }
-    
+
             $result = $this->grupoDao->joinGroup($group->getId_grupo(), $userID, $isAdministrator);
-    
+
             if ($result) {
                 // Successfully joined the group
                 $response = array(
                     'ok' => true,
                     'message' => 'Successfully joined the group'
                 );
-    
+
                 header('Content-Type: application/json');
                 echo json_encode($response);
                 exit;
@@ -246,7 +246,7 @@ class GrupoController extends Controller
                     'ok' => false,
                     'message' => 'Failed to join the group'
                 );
-    
+
                 header('Content-Type: application/json');
                 echo json_encode($response);
                 exit;
@@ -258,16 +258,16 @@ class GrupoController extends Controller
                 'message' => 'An error occurred during the request',
                 'error' => $e->getMessage() // Use the error message from the exception
             );
-    
+
             // Send the response as JSON
             http_response_code(400);
             header('Content-Type: application/json');
             echo json_encode($response);
             exit;
         }
-    }    
-    
-   
+    }
+
+
 
     protected function delete()
     {
@@ -291,7 +291,7 @@ class GrupoController extends Controller
         exit;
     }
 
-    public function getUserGroupPoints() 
+    public function getUserGroupPoints()
     {
         if (!$this->usuarioLogado()) {
             exit;
@@ -299,10 +299,10 @@ class GrupoController extends Controller
 
         $userId = $_SESSION[SESSAO_USUARIO_ID];
         $groupId = $_GET['groupId'];
-    
+
         try {
             $points = $this->grupoDao->getGroupUserPoints($groupId, $userId);
-    
+
             $response = array(
                 'ok' => true,
                 'points' => $points
@@ -313,7 +313,7 @@ class GrupoController extends Controller
                 'error' => $e->getMessage()
             );
         }
-    
+
         header('Content-Type: application/json');
         echo json_encode($response);
     }
@@ -325,7 +325,7 @@ class GrupoController extends Controller
         $this->grupoDao->turnUserToAdmin($userId);
 
         $notification = new Notificacao();
-        $notification->setMessage("You are now admin at the group " . $groupName);
+        $notification->setMessage("You are now admin at the group " . $groupName . ".");
         $notification->setId_user($userId);
         $notification->setType('admin_granted');
         $notification->setIs_read(0);
@@ -349,7 +349,7 @@ class GrupoController extends Controller
         $this->grupoDao->removeUserFromAdmin($userId);
 
         $notification = new Notificacao();
-        $notification->setMessage("Your admin privileges have been removed in the " . $groupName);
+        $notification->setMessage("Your admin privileges have been removed in the " . $groupName . ".");
         $notification->setId_user($userId);
         $notification->setType('admin_removed');
         $notification->setIs_read(0);
@@ -430,19 +430,19 @@ class GrupoController extends Controller
     protected function listGroupUsers()
     {
         if (!$this->usuarioLogado()) {
-            exit; 
+            exit;
         }
-    
-        $groupId = $_GET['groupId']; 
-    
+
+        $groupId = $_GET['groupId'];
+
         try {
             $usersInfo = $this->grupoDao->getUsersInGroup($groupId);
-    
+
             $response = [
                 'ok' => true,
                 'data' => $usersInfo
             ];
-    
+
             header('Content-Type: application/json');
             echo json_encode($response);
         } catch (PDOException $e) {
@@ -451,12 +451,12 @@ class GrupoController extends Controller
                 'message' => 'An error occurred',
                 'error' => $e->getMessage()
             ];
-    
+
             http_response_code(500);
             header('Content-Type: application/json');
             echo json_encode($response);
         }
-    }    
+    }
 
     protected function requestTest()
     {
